@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "src/router.ts"
+to: "src/router/index.ts"
 after: routes
 ---
     {

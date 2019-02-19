@@ -1,7 +1,7 @@
 environment:
   matrix:
     - nodejs_version: '10'
-    - nodejs_version: '0'
+    - nodejs_version: '9'
     - nodejs_version: '8'
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -16,7 +16,7 @@ shallow_clone: true
 test_script:
   - node --version
   - yarn --version
-  - yarn test:win32
+  - yarn test:unit
   - yarn hygen
   - yarn hygen init self
 cache:
