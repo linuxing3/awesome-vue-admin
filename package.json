@@ -2,18 +2,26 @@
   "name": "awesome-vue-admin",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "new": "hygen new",
+    "prompt": "hygen generator",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@vuex-orm/core": "^0.31.4",
     "vue": "^2.5.22",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.1",
+    "vuex-orm-lowdb": "^0.3.1",
+    "vuex-pathify": "^1.1.3",
+    "vuex-persist": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "^23.1.4",
@@ -30,6 +38,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "hygen": "^2.1.2",
+    "normalizr": "^3.3.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "ts-jest": "^23.0.0",
