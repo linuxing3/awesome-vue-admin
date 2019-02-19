@@ -1,23 +1,48 @@
+image: 
+  - Visual Studio 2017
+
+platform:
+  - x86
+
 environment:
   matrix:
     - nodejs_version: '10'
-    - nodejs_version: '9'
-    - nodejs_version: '8'
+  GH_TOKEN:
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+  ACCESS_TOKEN:
+    secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install --global npm@latest
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
   - npm install -g yarn
+
 matrix:
   fast_finish: true
-build: off
+
 shallow_clone: true
+
 test_script:
   - node --version
   - yarn --version
   - yarn test:unit
-  - yarn hygen
-  - yarn hygen init self
+
 cache:
+  - node_modules
+  - "%LOCALAPPDATA%\\Yarn"
+  - '%USERPROFILE%\.electron'
   - '%APPDATA%\npm-cache'
+
+test_script:
+  - yarn test:unit
+
+build_script:
+  - yarn electron:build
+
+skip_tags: true
+
+artifacts:
+  - path: dist_electron\*.exe
+    name: bin

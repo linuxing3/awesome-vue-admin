@@ -1,5 +1,9 @@
 .DS_Store
+dist
+**/dist
+
 node_modules
+**/node_modules
 /dist
 
 # local env files
@@ -19,3 +23,6 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+#Electron-builder output
+/dist_electron

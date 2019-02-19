@@ -9,7 +9,7 @@ module.exports = {
     '@vue/typescript'
   ],
   rules: {
-    'no-console':'off',
+    'no-console': 'off',
     'no-debugger': 'off'
   },
   parserOptions: {

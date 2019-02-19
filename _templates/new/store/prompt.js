@@ -5,7 +5,7 @@ module.exports = [
     message: 'Name (Like [user]):',
     validate (value) {
       if (!value.length) {
-        return 'Router must have a name, better capitalized.'
+        return 'Vuex ORM models must have a name, better capitalized.'
       }
     }
   }

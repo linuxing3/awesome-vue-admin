@@ -1,6 +1,22 @@
 ---
-inject: true
-to: "src/store/plugins/index.ts"
-after: default
+to: "src/store/mudules/<%= name %>.ts"
 ---
-  ormPlugin
+import { make } from 'vuex-pathify'
+import { Module } from 'vuex'
+
+const state = {}
+
+const mutations = {
+  ...make.mutations(state)
+}
+
+const actions = {
+  ...make.actions(state)
+}
+
+const UserModule: Module<any, any> = {
+  namespaced: true,
+  state,
+  actions,
+  mutations
+};
