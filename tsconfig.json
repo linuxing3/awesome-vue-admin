@@ -6,18 +6,24 @@
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
-    "strictPropertyInitialization": false,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
+    "strictNullChecks": false,
     "allowUnreachableCode": false,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "noEmitOnError": true,
+    "strictFunctionTypes": false,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "webpack",
+      "webpack-env"
     ],
     "paths": {
       "@/*": [

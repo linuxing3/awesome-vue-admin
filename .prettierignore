@@ -1,0 +1,6 @@
+dist
+vendor
+utils/scaffolds
+out
+build
+node_modules

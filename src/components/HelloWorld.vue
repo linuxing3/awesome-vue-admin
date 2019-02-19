@@ -1,7 +1,7 @@
 <template>
- <v-layout>
-   <v-flex>{{msg}}</v-flex>
- </v-layout>
+  <v-layout>
+    <v-flex>{{msg}}</v-flex>
+  </v-layout>
 </template>
 
 <script lang="ts">

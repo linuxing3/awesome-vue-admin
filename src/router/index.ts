@@ -1,30 +1,33 @@
-import Vue from 'vue'
-import Router, { Route, RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
+/* eslint-disable */
+import Vue from "vue";
+import Router, { RouteConfig } from "vue-router";
 
-Vue.use(Router)
+import path from "./path";
 
-const routes: RouteConfig[] = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () =>
-      import(/* webpackChunkName: "router" */ `@/views/About.vue`)
-  }
-]
+Vue.use(Router);
 
-// route level code-splitting
-// this generates a separate chunk (about.[hash].js) for this route
-// which is lazy-loaded when the route is visited.
-export function loadView (ViewName: string) {
-  return import(/* webpackChunkName: "router" */ `${ViewName}`)
-}
+/**
+ * 动态路由
+ */
+let requiredRoute: RequireContext = require.context(".", false, /\.ts$/);
 
-export default new Router({
-  routes
-})
+requiredRoute.keys().forEach(key => {
+  if (key === "./index.ts" || key === "./path.ts") return;
+  path.push(requiredRoute(key).default || requiredRoute(key));
+});
+
+const router = new Router({
+  routes: path as RouteConfig[],
+});
+
+// router gards
+router.beforeEach((to: any, from: any, next: any) => {
+  console.log("Going From " + from.path + " to " + to.path);
+  next();
+});
+
+router.afterEach((to: any, from: any) => {
+  console.log("Arrived " + to.path + " from " + from.path);
+});
+
+export default router;

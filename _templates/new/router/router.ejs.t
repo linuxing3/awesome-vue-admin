@@ -4,11 +4,12 @@ to: "src/router/index.ts"
 after: routes
 ---
 <%
-const routeName = name
-const routePath = name
+const routeName = name.toLowerCase()
+const routePath = name.toLowerCase()
 const viewName = h.capitalize(name)
-%>    {
-      path: '<%= routePath %>',
-      name: '<%= routeName %>',
-      component: loadView('@/views', '<%= viewName %>')
-    },
+%>  {
+    path: '/<%= routePath %>',
+    name: '<%= routeName %>',
+    component: () =>
+      import(/* webpackChunkName: "router" */ `@/views/<%= viewName %>.vue`)
+  },

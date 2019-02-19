@@ -1,0 +1,29 @@
+{
+  "user": [
+    {
+      "$id": 1,
+      "_id": 1,
+      "protocolId": "2",
+      "name": "Xing Wenjuxxx",
+      "etnia": "han",
+      "birthday": "1978-09-16",
+      "gender": "male",
+      "position": "Political Consellor",
+      "academicBackground": "Master",
+      "foreignLanguage": "Spanish",
+      "politicalRole": "CPC",
+      "rank": "Directorial",
+      "promotionDate": "2017-1-1",
+      "outRole": "Political Consellor",
+      "innerRole": "Member of CPC Committee",
+      "chargeOf": "Second",
+      "sendingEntity_id": 1,
+      "fromEntity_id": 1,
+      "sendingEntity": null,
+      "fromEntity": null,
+      "arrivingDate": "2016-4-9",
+      "leavingDate": "2020-4-9",
+      "memo": "No"
+    }
+  ]
+}
