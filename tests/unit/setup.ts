@@ -6,12 +6,9 @@ import Vue from 'vue'
 import fs from 'fs'
 import path from 'path'
 
-// NOTE add plugins in test
-// import plugins from "@/store/plugins";
-
-// ===
-// Utility functions
-// ===
+/**
+ * 工具函数
+ */
 
 // https://vue-test-utils.vuejs.org/
 import vueTestUtils, { createLocalVue } from '@vue/test-utils'
@@ -24,18 +21,15 @@ _.mixin({
   )
 })
 
-// ===
-// Configure Vue
-// ===
-
-// Don't warn about not using the production build of Vue, as
-// we care more about the quality of errors than performance
-// for tests.
+/**
+ * 配置Vue
+ */
 Vue.config.productionTip = false
 
-// ===
-// Register global components
-// ===
+
+/**
+ * 注册全局组件
+ */
 
 const globalComponentFiles = fs
   .readdirSync(path.join(__dirname, '../../src/components'))
@@ -49,9 +43,9 @@ for (let fileName of globalComponentFiles) {
   }
 }
 
-// ===
-// Patch all components with a global mixin
-// ===
+/**
+ * 在所有组件中混入[风格]对象
+ */
 
 Vue.mixin({
   created () {
@@ -61,34 +55,39 @@ Vue.mixin({
   }
 })
 
-// ===
-// Mock window properties not handled by jsdom
-// ===
+/**
+ * 模拟localstorage，解决jsdom中没有对象的问题
+ */
 
 Object.defineProperty(window, 'localStorage', {
-  value: (function () {
+  value: (function() {
     let store = {}
     return {
-      getItem: function (key) {
+      getItem: function(key) {
         return store[key] || null
       },
-      setItem: function (key, value) {
+      setItem: function(key, value) {
         store[key] = value.toString()
       },
-      clear: function () {
+      clear: function() {
         store = {}
       }
     }
   })()
 })
 
-// ===
-// Global helpers
-// ===
+/**
+ * 全局帮助函数，包括
+ * mount
+ * shallowMount
+ * shallowMountView
+ * mountView
+ * createComponentMocks
+ * createVuexModule
+ * createFullComponent
+ */
 
-// https://vue-test-utils.vuejs.org/api/#mount
 ;(global as any).mount = vueTestUtils.mount
-// Object.defineProperty((global as any), "mount", vueTestUtils.mount);
 
 // https://vue-test-utils.vuejs.org/api/#shallowmount
 ;(global as any).shallowMount = vueTestUtils.shallowMount
@@ -184,6 +183,9 @@ Object.defineProperty(window, 'localStorage', {
 
   return returnOptions
 }
+/**
+ * Vuex模块测试函数
+ */
 ;(global as any).createVuexModule = (vuexModule: Module<{}, {}>, options = {}) => {
   const localVue = createLocalVue()
   localVue.use(Vuex)
@@ -195,12 +197,18 @@ Object.defineProperty(window, 'localStorage', {
   returnOptions['store'] = store
   return returnOptions
 }
+/**
+ * Vuetify组件库测试函数
+ */
 ;(global as any).createVuetifyComponent = () => {
   const localVue = createLocalVue()
   localVue.use(Vuetify)
   const returnOptions = { localVue }
   return returnOptions
 }
+/**
+ * 路由测试函数
+ */
 ;(global as any).createVueRouter = (path: RouteConfig[]) => {
   const localVue = createLocalVue()
   localVue.use(VueRouter)
@@ -209,6 +217,10 @@ Object.defineProperty(window, 'localStorage', {
   returnOptions['router'] = router
   return returnOptions
 }
+/**
+ * 全功能组件函数
+ * 包括vuex/router/vuetify
+ */
 ;(global as any).createFullComponent = (
   vuexModule: Module<{}, {}>,
   path: RouteConfig[],
@@ -216,17 +228,17 @@ Object.defineProperty(window, 'localStorage', {
   routerOptions = {}
 ) => {
   const localVue = createLocalVue()
-  // use plugins
+  // 启用插件
   localVue.use(Vuetify)
   localVue.use(Vuex)
   localVue.use(VueRouter)
   const returnOptions = { localVue }
-  // inject store
+  // 注入store
   const store: Store<{}> = new Store({
     ...cloneDeep(vuexModule),
     ...vuexOptions
   })
-  // inject router
+  // 注入router
   const router = new VueRouter({
     routes: path as RouteConfig[],
     ...routerOptions

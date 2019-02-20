@@ -3262,6 +3262,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+cross-env@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.2.0.tgz#6ecd4c015d5773e614039ee529076669b9d126f2"
+  integrity sha512-jtdNFfFW1hB7sMhr/H6rW1Z45LFqyI431m3qU6bFXcQ3Eh7LtBuG3h74o7ohHZ3crrRkkqHlo4jYHFPcjroANg==
+  dependencies:
+    cross-spawn "^6.0.5"
+    is-windows "^1.0.0"
+
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"
@@ -6322,7 +6330,7 @@ is-whitespace@^0.3.0:
   resolved "https://registry.yarnpkg.com/is-whitespace/-/is-whitespace-0.3.0.tgz#1639ecb1be036aec69a54cbb401cfbed7114ab7f"
   integrity sha1-Fjnssb4DauxppUy7QBz77XEUq38=
 
-is-windows@^1.0.2:
+is-windows@^1.0.0, is-windows@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
   integrity sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==
@@ -11378,10 +11386,10 @@ vuex-class@^0.3.1:
   resolved "https://registry.yarnpkg.com/vuex-class/-/vuex-class-0.3.1.tgz#3c0b946bcff4cf2be1904de5b0cab1a3dd5c41d5"
   integrity sha512-d7Hc+ItQx6p9E/2mEWiyrvyEuo7Uj0mq4VNImd7dmxTelnkhOavKPMEG1Xdypug2RlPEYv0920IOa3hdVZ+4AA==
 
-vuex-orm-lowdb@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/vuex-orm-lowdb/-/vuex-orm-lowdb-0.3.1.tgz#61c59e63ede36d433162c10b93174b67183e517d"
-  integrity sha512-qME1HJcRdRl+3CIE47AXJn4ERE/WrAEpob/nVA2Is4kvS8clURGnj5QPWp3jGfA+TrF/flgALl7pLZTBvvBQfQ==
+vuex-orm-lowdb@0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/vuex-orm-lowdb/-/vuex-orm-lowdb-0.2.7.tgz#205e154675c938f8e59b9cbd4f7fc336689a662f"
+  integrity sha512-OUCz7Ya4jCA/E8sUSleB2PQS5CFNIYcEyZOmu/zNFrz/nZ4L+wumLljHsRJFAsDn3uGbmLQ8aQe9WdXi6Q+E6Q==
   dependencies:
     "@babel/preset-env" "^7.0.0"
     "@vuex-orm/core" "^0.29.0"

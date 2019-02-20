@@ -1,6 +1,12 @@
 
 const mainMenu = [
   {
+    title: '开始使用',
+    name: 'home',
+    group: 'apps',
+    icon: 'notes'
+  },
+  {
     title: '单位管理',
     name: 'entity',
     group: 'apps',
@@ -47,12 +53,6 @@ const mainMenu = [
     group: 'apps',
     icon: 'store',
     name: 'database'
-  },
-  {
-    title: '用户手册',
-    name: 'manual',
-    group: 'apps',
-    icon: 'notes'
   }
 ]
 

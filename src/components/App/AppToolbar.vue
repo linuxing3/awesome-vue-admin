@@ -36,7 +36,7 @@
           large
           flat
           slot="activator">
-          <v-icon>perm_identity</v-icon>
+        <v-icon>perm_identity</v-icon>
       </v-btn>
       <v-list class="pa-0">
         <v-list-tile
