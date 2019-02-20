@@ -21,5 +21,5 @@ import <%= fileName %>Table from '@/components/<%= fileName %>/<%= fileName %>Ta
     <%= fileName %>Table
   }
 })
-export default class Home extends Vue {}
+export default class <%= fileName %> extends Vue {}
 </script>
