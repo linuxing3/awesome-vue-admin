@@ -20,16 +20,16 @@
               dark>
             <v-card-title class="pb-0">
               <router-link
-                class="white--text"
-                :to="'/' + item.name">
+                  class="white--text"
+                  :to="'/' + item.name">
                 <h2>{{ $t(item.name) || capitalize }}</h2>
               </router-link>
               <v-spacer></v-spacer>
             </v-card-title>
             <v-card-actions>
               <v-btn
-                @click="go(item)"
-                icon>
+                  @click="go(item)"
+                  icon>
                 <v-icon>{{item.icon}}</v-icon>
               </v-btn>
               <v-btn
@@ -67,8 +67,8 @@ export default {
     computeAvatarMan4: () => join(process.env.BASE_URL, 'avatar/man_4.jpg')
   },
   methods: {
-    go(menuItem) {
-      this.$router.push({name: menuItem.name})
+    go (menuItem) {
+      this.$router.push({ name: menuItem.name })
     }
   }
 }

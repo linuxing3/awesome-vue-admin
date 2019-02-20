@@ -26,7 +26,6 @@ _.mixin({
  */
 Vue.config.productionTip = false
 
-
 /**
  * 注册全局组件
  */
@@ -60,16 +59,16 @@ Vue.mixin({
  */
 
 Object.defineProperty(window, 'localStorage', {
-  value: (function() {
+  value: (function () {
     let store = {}
     return {
-      getItem: function(key) {
+      getItem: function (key) {
         return store[key] || null
       },
-      setItem: function(key, value) {
+      setItem: function (key, value) {
         store[key] = value.toString()
       },
-      clear: function() {
+      clear: function () {
         store = {}
       }
     }
