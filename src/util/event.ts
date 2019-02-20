@@ -66,7 +66,7 @@ const events: Event[] = [
   {
     name: 'APP_ACCOUNTSETTING',
     callback: function (e: any) {
-      this.$router.push({ path: '/account-form' })
+      this.$router.push({ path: '/account' })
     }
   },
   {

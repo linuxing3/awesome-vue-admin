@@ -19,6 +19,13 @@ export default {
 
 <template>
   <v-card>
+    <v-card-title>
+      登录
+    </v-card-title>
+    <v-card-actions>
+      <v-btn flat>登录</v-btn>
+      <v-btn flat>取消</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 <style scoped>
