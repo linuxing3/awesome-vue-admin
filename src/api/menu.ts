@@ -4,51 +4,55 @@ const mainMenu = [
     title: '单位管理',
     name: 'entity',
     group: 'apps',
-    icon: 'fas fa-building'
+    icon: 'account_balance'
   },
   {
     title: '活动管理',
     name: 'activity',
     group: 'apps',
-    icon: 'fas fa-calendar'
+    icon: 'event'
   },
   {
     title: '本馆人员',
     name: 'user',
-    component: 'user'
+    group: 'apps',
+    icon: 'face'
   },
   {
     title: '个人简历',
     name: 'resummee',
-    component: 'resummee'
+    group: 'apps',
+    icon: 'toc'
   },
   {
     title: '年终考核',
     name: 'evaluation',
-    component: 'evaluation'
+    group: 'apps',
+    icon: 'feedback'
   },
   {
     title: '党员管理',
     name: 'militant',
-    component: 'militant'
+    group: 'apps',
+    icon: 'label'
   },
   {
     title: '文函处理',
     name: 'document',
     group: 'apps',
-    icon: 'fas fa-book'
+    icon: 'archive'
   },
   {
     title: '导入导出',
     group: 'apps',
-    icon: 'fas fa-file-export',
+    icon: 'store',
     name: 'database'
   },
   {
     title: '用户手册',
     name: 'manual',
     group: 'apps',
-    icon: 'fas fa-book-open'
+    icon: 'notes'
   }
 ]
 

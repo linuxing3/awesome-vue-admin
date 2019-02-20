@@ -11,10 +11,6 @@
     <v-toolbar
         color="primary darken-1"
         dark>
-      <img
-          :src="computeLogo"
-          height="48"
-          alt="admin">
       <v-toolbar-title class="ml-0 pl-3">
         <span class="hidden-sm-and-down">综合管理系统</span>
       </v-toolbar-title>

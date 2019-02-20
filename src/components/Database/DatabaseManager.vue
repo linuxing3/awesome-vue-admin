@@ -6,7 +6,6 @@
       <v-layout
           wrap
           row>
-
         <v-flex class="mt-15">
           <div class="mt-15">
             <h1 class="heading">

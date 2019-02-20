@@ -36,11 +36,7 @@
           large
           flat
           slot="activator">
-        <v-avatar size="30px">
-          <img
-              :src="computeAvatar"
-              alt="Xing Wenju"/>
-        </v-avatar>
+          <v-icon>perm_identity</v-icon>
       </v-btn>
       <v-list class="pa-0">
         <v-list-tile
