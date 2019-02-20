@@ -23,7 +23,7 @@ export default {
         card
         prominent
         extended
-        color="primary"
+        :color='editing ? "warning": "primary"'
         dark="">
       <v-toolbar-title class="headline">{{editing ? "你在进行编辑更新" : "你在添加模式"}}</v-toolbar-title>
       <v-spacer></v-spacer>

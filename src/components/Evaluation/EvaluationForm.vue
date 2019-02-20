@@ -25,7 +25,7 @@ export default {
         card
         prominent
         extended
-        color="primary"
+        :color='editing ? "warning": "primary"'
         dark="">
       <v-toolbar-title class="heading">填写考核评语</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -108,8 +108,8 @@ export default {
     <v-card-actions class="pb-3">
       <v-spacer></v-spacer>
       <v-btn
-          @click="saveItem(model)"
-          color="primary">保存</v-btn>
+          :color='editing ? "warning": "primary"'
+          @click="saveItem(model)">保存</v-btn>
       <v-btn
           flat
           @click="exportItem(model)">导出数据</v-btn>

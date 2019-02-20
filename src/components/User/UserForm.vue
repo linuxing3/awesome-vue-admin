@@ -23,7 +23,7 @@ export default {
         card
         prominent
         extended
-        color='primary'
+        :color='editing ? "warning": "primary"'
         dark=''>
       <v-toolbar-title class='headline'>
         {{editing ? '你在进行编辑更新' : '你在添加模式'}}
@@ -56,7 +56,7 @@ export default {
       <v-spacer></v-spacer>
       <v-btn
           :color='editing ? "warning": "primary"'
-          @click='saveItem'>{{editing ? '更新': '添加'}}</v-btn>
+          @click='saveItem(model)'>{{editing ? '更新': '添加'}}</v-btn>
       <v-btn
           flat
           @click.native='exportItem(model)'>导出数据</v-btn>

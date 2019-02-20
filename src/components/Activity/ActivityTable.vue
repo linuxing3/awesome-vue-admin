@@ -86,7 +86,7 @@ export default {
   methods: {
     editItem (item) {
       this.$emit('SET_EDITING', item)
-      window.activityForm.$emit('SET_EDITING', item)
+      window.ActivityForm.$emit('SET_EDITING', item)
     }
   }
 }

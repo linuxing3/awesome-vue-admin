@@ -6,7 +6,8 @@ import { pathExistsSync, mkdirpSync } from 'fs-extra'
 import { remote, app } from 'electron'
 
 import VuexORM, { Database } from '@vuex-orm/core'
-import VuexORMLowdbPlugin from 'vuex-orm-lowdb'
+// import VuexORMLowdbPlugin from 'vuex-orm-lowdb'
+import localForagePlugin from 'vuex-orm-localforage'
 
 // 获取模型和模块
 import models from '@/models'
@@ -39,7 +40,8 @@ export const database = registerDatabase(models, modules)
 /**
  * 载入Lowdb插件
  */
-VuexORM.use(VuexORMLowdbPlugin, { database, dbPath })
+// VuexORM.use(VuexORMLowdbPlugin, { database, dbPath })
+VuexORM.use(localForagePlugin, { database })
 
 /**
  * 安装localForage ORM databse

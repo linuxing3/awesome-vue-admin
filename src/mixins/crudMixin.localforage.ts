@@ -67,7 +67,7 @@ export default {
      */
     async fetch () {
       // Clear Current State
-      // this.$store.commit('SET_DATA', {})
+      this.$store.commit('SET_DATA', {})
       if (this.Model.$fetch !== undefined) {
         await this.Model.$fetch()
       } else {
@@ -110,7 +110,7 @@ export default {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.setEditing(item)
       // ORM插件方法
-      this.Model.$delete(this.model._id)
+      this.Model.$delete(this.model)
       // ORM默认方法
       // this.Model.delete(this.model._id);
       this.reset()

@@ -1064,6 +1064,11 @@
   resolved "https://registry.yarnpkg.com/@vue/web-component-wrapper/-/web-component-wrapper-1.2.0.tgz#bb0e46f1585a7e289b4ee6067dcc5a6ae62f1dd1"
   integrity sha512-Xn/+vdm9CjuC9p3Ae+lTClNutrVhsXpzxvoTXXtoys6kVRX9FkueSUAqSWAyZntmVLlR4DosBV4pH8y5Z/HbUw==
 
+"@vuex-orm/core@^0.26.4":
+  version "0.26.4"
+  resolved "https://registry.yarnpkg.com/@vuex-orm/core/-/core-0.26.4.tgz#02b4454fc5a71f24c7f81ec9315329695a74bf2a"
+  integrity sha512-CgLbaTFypLfdW4K4PAALCENYAaEWSErP03zDQdy3cIq28vO/j3gC4f/PkaKMCp0L7OthrCVoEK6RrkCQiJJBcA==
+
 "@vuex-orm/core@^0.29.0":
   version "0.29.0"
   resolved "https://registry.yarnpkg.com/@vuex-orm/core/-/core-0.29.0.tgz#394aa7815c5f49be14be613a1a349283cfa78346"
@@ -7094,7 +7099,7 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lie@~3.1.0:
+lie@3.1.1, lie@~3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/lie/-/lie-3.1.1.tgz#9a436b2cc7746ca59de7a41fa469b3efb76bd87e"
   integrity sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=
@@ -7153,6 +7158,13 @@ loader-utils@^1.0.2, loader-utils@^1.1.0:
     big.js "^5.2.2"
     emojis-list "^2.0.0"
     json5 "^1.0.1"
+
+localforage@^1.7.2:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.7.3.tgz#0082b3ca9734679e1bd534995bdd3b24cf10f204"
+  integrity sha512-1TulyYfc4udS7ECSBT2vwJksWbkwwTX8BzeUIiq8Y07Riy7bDAAnxDaPU/tWyOVmQAcWJIEIFP9lPfBGqVoPgQ==
+  dependencies:
+    lie "3.1.1"
 
 locate-path@^2.0.0:
   version "2.0.0"
@@ -11386,10 +11398,20 @@ vuex-class@^0.3.1:
   resolved "https://registry.yarnpkg.com/vuex-class/-/vuex-class-0.3.1.tgz#3c0b946bcff4cf2be1904de5b0cab1a3dd5c41d5"
   integrity sha512-d7Hc+ItQx6p9E/2mEWiyrvyEuo7Uj0mq4VNImd7dmxTelnkhOavKPMEG1Xdypug2RlPEYv0920IOa3hdVZ+4AA==
 
-vuex-orm-lowdb@0.2.7:
-  version "0.2.7"
-  resolved "https://registry.yarnpkg.com/vuex-orm-lowdb/-/vuex-orm-lowdb-0.2.7.tgz#205e154675c938f8e59b9cbd4f7fc336689a662f"
-  integrity sha512-OUCz7Ya4jCA/E8sUSleB2PQS5CFNIYcEyZOmu/zNFrz/nZ4L+wumLljHsRJFAsDn3uGbmLQ8aQe9WdXi6Q+E6Q==
+vuex-orm-localforage@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/vuex-orm-localforage/-/vuex-orm-localforage-0.1.4.tgz#2b9636adb7b053604f83d1e7b26a30b8b81ac1d3"
+  integrity sha512-Puut5dfIFu5w/lMbxKhERfXTH2BZTjSahfuVhx91EMiCDhc0CDL0eQSfZWFRhoTPnQHYVOTDBpcLAYC9ZO3gDg==
+  dependencies:
+    "@babel/preset-env" "^7.0.0"
+    "@vuex-orm/core" "^0.26.4"
+    localforage "^1.7.2"
+    lodash "^4.17.11"
+
+vuex-orm-lowdb@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/vuex-orm-lowdb/-/vuex-orm-lowdb-0.3.4.tgz#1684db2322aae192a2e4069fb57eb28e51f89398"
+  integrity sha512-cr5cV/CmU3b1/fOsCqouBO0vsol6t/Sr6sdFSpEqnYulUCC2mJ3XM9wEXo8FeqXRbrsPTiPXC/P8IuHGqMRRGw==
   dependencies:
     "@babel/preset-env" "^7.0.0"
     "@vuex-orm/core" "^0.29.0"

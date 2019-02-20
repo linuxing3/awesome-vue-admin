@@ -21,7 +21,7 @@ export default {
         card
         prominent
         extended
-        color="primary"
+        :color='editing ? "warning": "primary"'
         dark="">
       <v-toolbar-title class="headline">
         {{editing ? "你在进行编辑更新" : "你在添加模式"}}
@@ -50,8 +50,14 @@ export default {
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-          color="primary"
+          :color='editing ? "warning": "primary"'
           @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
+      <v-btn
+          flat
+          @click.native="exportItem(model)">导出数据</v-btn>
+      <v-btn
+          flat
+          @click.native="mergeWordApp">合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>

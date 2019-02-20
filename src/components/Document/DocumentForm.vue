@@ -35,7 +35,7 @@ export default {
         card
         prominent
         extended
-        color="primary"
+        :color='editing ? "warning": "primary"'
         dark="">
       <v-toolbar-title class="headline">请输入文函信息</v-toolbar-title>
       <v-spacer></v-spacer>
