@@ -24,7 +24,7 @@ const mainMenu = [
   },
   {
     title: '年终考核',
-    name: 'Evaluation',
+    name: 'evaluation',
     component: 'evaluation'
   },
   {
