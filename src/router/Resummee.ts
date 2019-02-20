@@ -4,6 +4,5 @@ export default {
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
-    /* webpackMode: "lazy" */
-      `@/views/Resummee.vue`)
+    /* webpackMode: "lazy" */ `@/views/Resummee.vue`)
 }

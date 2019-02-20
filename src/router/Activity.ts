@@ -1,6 +1,6 @@
 export default {
   path: '/activity',
-  name: 'Activity',
+  name: 'activity',
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */

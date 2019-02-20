@@ -3,5 +3,6 @@ export default {
   name: 'notification',
   meta: { breadcrumb: true },
   component: () =>
-        import(/* webpackChunkName: "router" */ `@/views/Notification.vue`)
+    import(/* webpackChunkName: "routes" */
+    /* webpackMode: "lazy" */ `@/views/Notification.vue`)
 }

@@ -2,5 +2,6 @@ export default {
   path: '/account',
   name: 'account',
   component: () =>
-        import(/* webpackChunkName: "router" */ `@/views/Account.vue`)
+    import(/* webpackChunkName: "routes" */
+    /* webpackMode: "lazy" */ `@/views/Account.vue`)
 }
