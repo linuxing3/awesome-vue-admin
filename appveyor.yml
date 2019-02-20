@@ -35,9 +35,6 @@ cache:
   - '%USERPROFILE%\.electron'
   - '%APPDATA%\npm-cache'
 
-test_script:
-  - yarn test:unit
-
 build_script:
   - yarn electron:build
 
