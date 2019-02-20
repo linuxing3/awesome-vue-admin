@@ -1,9 +1,9 @@
 export default {
-  path: '/activity-timeline',
+  path: '/activity',
   name: 'Activity',
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Activity/ActivityTimeline.vue`)
+      `@/views/Activity.vue`)
 }

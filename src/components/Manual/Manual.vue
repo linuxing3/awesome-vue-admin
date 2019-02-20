@@ -23,7 +23,7 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                  @click="$router.push('/users/user-table')"
+                  @click="$router.push('/user')"
                   flat
                   small>试一下</v-btn>
             </v-card-actions>
@@ -43,7 +43,7 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                  @click="$router.push('/document-table')"
+                  @click="$router.push('/document')"
                   flat
                   small>试一下</v-btn>
             </v-card-actions>
@@ -63,7 +63,7 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                  @click="$router.push('/entity-table')"
+                  @click="$router.push('/entity')"
                   flat
                   small>试一下</v-btn>
             </v-card-actions>
@@ -95,7 +95,7 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
-                  @click="$router.push('/users/user-table')"
+                  @click="$router.push('/user')"
                   flat
                   small>深入了解</v-btn>
             </v-card-actions>
@@ -127,7 +127,7 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
-                  @click="$router.push('/document-table')"
+                  @click="$router.push('/document')"
                   flat
                   small>深入了解</v-btn>
             </v-card-actions>
@@ -160,7 +160,7 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-btn
-                  @click="$router.push('/users/militant')"
+                  @click="$router.push('/militant')"
                   flat
                   small>深入了解</v-btn>
             </v-card-actions>
@@ -192,7 +192,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
-                      @click="$router.push('/database-manager')"
+                      @click="$router.push('/database')"
                       flat
                       small>深入了解</v-btn>
                 </v-card-actions>
@@ -210,7 +210,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
-                      @click="$router.push('/database-manager')"
+                      @click="$router.push('/database')"
                       flat
                       small>开始导出</v-btn>
                 </v-card-actions>
@@ -228,7 +228,7 @@
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
-                      @click="$router.push('/database-manager')"
+                      @click="$router.push('/database')"
                       flat
                       small>深入了解</v-btn>
                 </v-card-actions>
@@ -245,7 +245,7 @@
 import { join } from 'path'
 
 export default {
-  data() {
+  data () {
     return {
       show: true,
       cardText: '请查看手册, 了解具体使用方法'

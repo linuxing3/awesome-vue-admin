@@ -3,7 +3,7 @@ import { BaseModel } from './BaseModel'
 export default class Activity extends BaseModel {
   static entity = 'activity'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       applicant: this.string('John'),

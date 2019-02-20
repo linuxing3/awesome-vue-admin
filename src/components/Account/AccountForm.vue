@@ -11,16 +11,16 @@ import AwesomeLowdb from '@/api/lowdb'
 const accountDb = new AwesomeLowdb('account')
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'account'
     }
   },
   mixins: [crudMixin, exportMixin],
-  created() {
+  created () {
     window.AccountForm = this
   },
-  async mounted() {
+  async mounted () {
     this.model = accountDb.find('account', { hash: this.cached[0].hash })
   },
   computed: {
@@ -28,7 +28,7 @@ export default {
     computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
   },
   methods: {
-    saveAccount(item) {
+    saveAccount (item) {
       accountDb.update('account', item)
     }
   }

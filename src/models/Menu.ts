@@ -13,7 +13,7 @@ export interface IMenu {
 export default class Menu extends BaseModel {
   static entity = 'menu'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       title: this.string('title'),

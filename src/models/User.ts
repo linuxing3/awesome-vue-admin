@@ -4,7 +4,7 @@ import Entity from './Entity'
 export default class User extends BaseModel {
   static entity = 'user'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       protocolId: this.string('2'),

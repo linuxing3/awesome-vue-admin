@@ -3,7 +3,7 @@ import Resummee from '@/models/Resummee'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 export default {
-  data() {
+  data () {
     return {
       editing: false,
       model: {},
@@ -11,7 +11,7 @@ export default {
     }
   },
   mixins: [crudMixin, exportMixin],
-  created() {
+  created () {
     window.ResummeeForm = this
   }
 }

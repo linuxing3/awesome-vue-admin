@@ -7,24 +7,24 @@
         :color="selectedColor"
         outline
         close
-    >{{ item }}</v-chip>
+      >{{ item }}</v-chip>
   </v-flex>
 </template>
 <script>
 import { entities } from '@/api/globals'
 export default {
-  data() {
+  data () {
     return {
       entities: [],
       selectedColor: 'primary'
     }
   },
   methods: {
-    select(item) {
+    select (item) {
       window.dbApp.$emit('SELECT_MODEL', item)
     }
   },
-  created() {
+  created () {
     this.entities = entities
   }
 }

@@ -14,7 +14,7 @@ export interface IEvaluation {
 export default class Evaluation extends BaseModel {
   static entity = 'evaluation'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('secretary'),

@@ -25,7 +25,7 @@
               name="applicant"
               :label="$t('applicant')"
               v-model="model['applicant']"
-          ></v-text-field>
+            ></v-text-field>
         </v-flex>
         <v-flex
             sm6
@@ -49,7 +49,7 @@
                 v-model="model['occurenceDate']"
                 append-icon="event"
                 readonly
-            ></v-text-field>
+              ></v-text-field>
             <v-date-picker
                 v-model="model['occurenceDate']"
                 no-title
@@ -73,7 +73,7 @@
               name="content"
               :label="$t('content')"
               v-model="model['content']"
-          ></v-text-field>
+            ></v-text-field>
         </v-flex>
         <v-flex
             sm4
@@ -97,7 +97,7 @@
                 v-model="model['currentDate']"
                 append-icon="event"
                 readonly
-            ></v-text-field>
+              ></v-text-field>
             <v-date-picker
                 v-model="model['currentDate']"
                 no-title
@@ -135,7 +135,7 @@
                 v-model="model['startTime']"
                 append-icon="access_time"
                 readonly
-            ></v-text-field>
+              ></v-text-field>
             <v-time-picker v-model="model['startTime']">
               <v-spacer></v-spacer>
               <v-btn
@@ -170,7 +170,7 @@
                 v-model="model['endTime']"
                 append-icon="access_time"
                 readonly
-            ></v-text-field>
+              ></v-text-field>
             <v-time-picker v-model="model['endTime']">
               <v-spacer></v-spacer>
               <v-btn
@@ -206,7 +206,7 @@
                 v-model="model['reportDate']"
                 append-icon="event"
                 readonly
-            ></v-text-field>
+              ></v-text-field>
             <v-date-picker
                 v-model="model['reportDate']"
                 no-title
@@ -230,7 +230,7 @@
               name="reportContent"
               :label="$t('reportContent')"
               v-model="model['reportContent']"
-          ></v-text-field>
+            ></v-text-field>
         </v-flex>
         <v-flex
             sm6
@@ -254,7 +254,7 @@
                 v-model="model['instructionDate']"
                 append-icon="event"
                 readonly
-            ></v-text-field>
+              ></v-text-field>
             <v-date-picker
                 v-model="model['instructionDate']"
                 no-title
@@ -278,7 +278,7 @@
               name="instruction"
               :label="$t('instruction')"
               v-model="model['instruction']"
-          ></v-text-field>
+            ></v-text-field>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -297,26 +297,26 @@
   </v-card>
 </template>
 <script lang="js">
-import Activity from "@/models/Activity";
-import crudMixin from "@/mixins/crudMixin";
-import exportMixin from "@/mixins/exportMixin";
+import Activity from '@/models/Activity'
+import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 export default {
-  data() {
+  data () {
     return {
       editing: false,
       model: {},
-      modelName: "activity",
+      modelName: 'activity',
       occurenceDateMenu: false,
       currentDateMenu: false,
       reportDateMenu: false,
       instructionDateMenu: false,
       startTimeMenu: false,
-      endTimeMenu: false,
+      endTimeMenu: false
     }
   },
   mixins: [crudMixin, exportMixin],
-  created() {
-    window.ActivityForm = this;
-  },
+  created () {
+    window.ActivityForm = this
+  }
 }
 </script>

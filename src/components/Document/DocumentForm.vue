@@ -9,7 +9,7 @@ import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
-  data() {
+  data () {
     return {
       editing: false,
       model: {},
@@ -18,7 +18,7 @@ export default {
     }
   },
   mixins: [crudMixin, exportMixin],
-  created() {
+  created () {
     window.DocumentForm = this
   },
   computed: {
@@ -73,7 +73,7 @@ export default {
                   v-model="model['startDate']"
                   append-icon="event"
                   readonly
-              ></v-text-field>
+                ></v-text-field>
               <v-date-picker
                   v-model="model['startDate']"
                   no-title

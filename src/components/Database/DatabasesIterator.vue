@@ -25,12 +25,12 @@
 <script>
 import { entities } from '@/api/globals'
 export default {
-  data() {
+  data () {
     return {
       entities: []
     }
   },
-  created() {
+  created () {
     this.entities = entities
   }
 }

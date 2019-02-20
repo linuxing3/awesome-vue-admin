@@ -2,7 +2,7 @@ import { BaseModel } from './BaseModel'
 export default class Contact extends BaseModel {
   static entity = 'contact'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('John'),

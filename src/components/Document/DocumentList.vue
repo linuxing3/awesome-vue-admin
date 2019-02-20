@@ -9,17 +9,17 @@ export default {
   components: {
     DocumentForm
   },
-  data() {
+  data () {
     return {
       modelName: 'document'
     }
   },
   mixins: [exportMixin, crudMixin],
-  created() {
+  created () {
     window.DocumentList = this
   },
   methods: {
-    editItem(item) {
+    editItem (item) {
       this.$emit('SET_EDITING', item)
       window.DocumentForm.$emit('SET_EDITING', item)
     }

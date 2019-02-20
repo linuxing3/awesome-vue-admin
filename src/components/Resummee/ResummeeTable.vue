@@ -9,7 +9,7 @@ export default {
   components: {
     ResummeeForm
   },
-  data() {
+  data () {
     return {
       editing: false,
       modelName: 'resummee'
@@ -17,15 +17,15 @@ export default {
   },
   mixins: [exportMixin, crudMixin],
   computed: {
-    headers() {
+    headers () {
       return this.Model.nonRelationFields()
     }
   },
-  created() {
+  created () {
     window.ResummeeTable = this
   },
   methods: {
-    editItem(item) {
+    editItem (item) {
       this.$emit('SET_EDITING', item)
       window.ResummeeForm.$emit('SET_EDITING', item)
     }

@@ -89,10 +89,10 @@
 
 <script>
 import { join } from 'path'
-import Account from '@/api/models/Account'
+import Account from '@/models/Account'
 import crudMixin from '@/mixins/crudMixin'
 export default {
-  data() {
+  data () {
     return {
       modelName: 'account'
     }
@@ -100,7 +100,7 @@ export default {
   mixins: [crudMixin],
   computed: {
     computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
-    currentUser: function() {
+    currentUser: function () {
       return this.items[0]
     }
   }

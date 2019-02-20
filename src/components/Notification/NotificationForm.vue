@@ -1,40 +1,18 @@
 <script>
 import Notification from '@/models/Notification'
+
+import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
+
 export default {
-  data() {
+  data () {
     return {
-      editing: false,
-      model: {}
+      modelName: 'notification'
     }
   },
-  created() {
-    this.model = new Notification()
-    this.$on('SET_EDITING', item => {
-      this.editing = true
-      this.model = item
-    })
+  mixins: [ crudMixin, exportMixin ],
+  created () {
     window.NotificationForm = this
-  },
-  computed: {
-    fields: () => Notification.fieldsKeys()
-  },
-  methods: {
-    reset() {
-      this.editing = false
-      this.model = new Notification()
-    },
-    saveItem() {
-      if (!this.editing) {
-        Notification.insert({
-          data: this.model
-        })
-        this.model = new Notification()
-      } else {
-        Notification.update(this.model)
-        this.editing = false
-        this.model = new Notification()
-      }
-    }
   }
 }
 </script>
@@ -42,36 +20,51 @@ export default {
 <template>
   <v-card>
     <v-toolbar
-        color="primary"
-        dark="">
-      <v-toolbar-title class="headline">
-        输入新消息
+        card
+        prominent
+        extended
+        color='primary'
+        dark=''>
+      <v-toolbar-title class='headline'>
+        {{editing ? '你在进行编辑更新' : '你在添加模式'}}
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn
+          icon
+          @click='reset'>
+        <v-icon>close</v-icon>
+      </v-btn>
     </v-toolbar>
     <v-card-text>
       <v-form>
         <v-layout wrap>
           <v-flex
-              v-for="field in fields"
-              :key="field"
-              lg12
-              sm12>
+              v-for='field in fields'
+              :key='field'
+              lg6
+              sm6>
             <v-text-field
-                v-model="model[field]"
-                :name="field"
-                :label=" $t !== undefined ? $t(field) : field">
+                v-model='model[field]'
+                :name='field'
+                :label='tryT(field) '>
             </v-text-field>
           </v-flex>
         </v-layout>
       </v-form>
     </v-card-text>
-    <v-card-actions class="pb-3">
+    <v-card-actions class='pb-3'>
       <v-spacer></v-spacer>
       <v-btn
-          :color="editing ? 'warning' : 'primary'"
-          @click="saveItem">{{editing ? "更新": "添加"}}</v-btn>
+          :color='editing ? "warning": "primary"'
+          @click='saveItem'>{{editing ? '更新': '添加'}}</v-btn>
+      <v-btn
+          flat
+          @click.native='exportItem(model)'>导出数据</v-btn>
+      <v-btn
+          flat
+          @click.native='mergeWordApp'>合并打印</v-btn>
     </v-card-actions>
   </v-card>
 </template>
-<style lang="scss" module>
+<style scoped>
 </style>

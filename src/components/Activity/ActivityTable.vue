@@ -61,32 +61,32 @@
   </v-card>
 </template>
 <script lang="js">
-import Activity from "@/models/Activity";
-import ActivityForm from "./ActivityForm";
-import ActivityTimeline from "./ActivityTimeline";
+import Activity from '@/models/Activity'
+import ActivityForm from './ActivityForm'
+import ActivityTimeline from './ActivityTimeline'
 
-import exportMixin from "@/mixins/exportMixin";
-import crudMixin from "@/mixins/crudMixin";
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
     ActivityForm,
     ActivityTimeline
   },
-  data() {
+  data () {
     return {
       editing: false,
-      modelName: "activity"
+      modelName: 'activity'
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  created() {
-    window.ActivityTable = this;
+  created () {
+    window.ActivityTable = this
   },
   methods: {
-    editItem(item) {
-      this.$emit("SET_EDITING", item);
-      window.activityForm.$emit("SET_EDITING", item)
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
+      window.activityForm.$emit('SET_EDITING', item)
     }
   }
 }

@@ -3,7 +3,7 @@ import Evaluation from '@/models/Evaluation'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 export default {
-  data() {
+  data () {
     return {
       valid: true,
       startDateMenu: false,
@@ -13,7 +13,7 @@ export default {
     }
   },
   mixins: [crudMixin, exportMixin],
-  created() {
+  created () {
     window.EvaluationForm = this
   }
 }
@@ -74,7 +74,7 @@ export default {
                   v-model="model.date"
                   append-icon="event"
                   readonly
-              ></v-text-field>
+                ></v-text-field>
               <v-date-picker
                   v-model="model.date"
                   no-title

@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     ...call('database/*'),
-    updateDocPath() {
+    updateDocPath () {
       this.$store.set('database/export@docPath', this.docPath)
       window.getApp.$emit('DOCPATH_CHANGED')
     }

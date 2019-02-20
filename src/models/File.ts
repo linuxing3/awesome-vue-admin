@@ -2,7 +2,7 @@ import { BaseModel } from './BaseModel'
 export default class File extends BaseModel {
   static entity = 'file'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       uuid: this.string('a32c4aec-54de-4ff4-b165-8571ae805598'),

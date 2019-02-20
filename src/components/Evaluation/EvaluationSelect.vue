@@ -2,19 +2,19 @@
 import { map, pick } from 'lodash/fp'
 import Evaluation from '@/models/Evaluation'
 export default {
-  data() {
+  data () {
     return {
       model: { _id: 1, label: 'Select Evaluation' }
     }
   },
-  created() {
+  created () {
     window.EvaluationSelect = this
   },
   computed: {
     evaluations: () => map(pick(['_id', 'text']), Evaluation.all())
   },
   methods: {
-    change() {
+    change () {
       this.$emit('Evaluation_CHANGED', this.model._id)
     }
   }

@@ -1,9 +1,9 @@
 export default {
-  path: '/users/evaluation',
-  name: 'users/evaluation',
+  path: '/evaluation',
+  name: 'evaluation',
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Evaluation/EvaluationForm.vue`)
+      `@/views/Evaluation.vue`)
 }

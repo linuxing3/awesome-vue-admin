@@ -17,7 +17,7 @@ import { keys, pullAll } from 'lodash'
 export class BaseModel extends Model {
   static primaryKey = '_id'
 
-  static fieldsKeys(): string[] {
+  static fieldsKeys (): string[] {
     return keys(this.fields())
   }
 
@@ -25,7 +25,7 @@ export class BaseModel extends Model {
    * 获取所有的关系型字段
    * @returns {Array<string>} all relations of the model
    */
-  static relationFields(): string[] {
+  static relationFields (): string[] {
     return this.fieldsKeys().reduce((list: string[], field: string) => {
       let fieldAttribute: Attribute = this.fields()[field]
       if (this.isFieldRelation(fieldAttribute)) {
@@ -40,7 +40,7 @@ export class BaseModel extends Model {
    * 非关系型字段，同isFieldAttribute
    * @returns {Array<string>} fields which value are not BelongsTo
    */
-  static nonRelationFields(): string[] {
+  static nonRelationFields (): string[] {
     return pullAll(this.fieldsKeys(), this.relationFields())
   }
 
@@ -48,15 +48,15 @@ export class BaseModel extends Model {
    * 关系型数据键值中包括_id的
    */
 
-  static relationFieldsWithId(): string[] {
+  static relationFieldsWithId (): string[] {
     return this.relationFields().filter(r => r.match(/.*_id/))
   }
   // 关系型数据键值中不包括_id的
-  static nonRelationFieldsNoId(): string[] {
+  static nonRelationFieldsNoId (): string[] {
     return this.relationFields().filter(r => !r.match(/.*_id/))
   }
 
-  static count(): number {
+  static count (): number {
     return this.query().count()
   }
 
@@ -66,7 +66,7 @@ export class BaseModel extends Model {
    * @param {Attribute | undefined} field
    * @returns {boolean}
    */
-  static isFieldNumber(field: Attribute): boolean {
+  static isFieldNumber (field: Attribute): boolean {
     if (!field) return false
     return field instanceof Number || field instanceof Increment
   }
@@ -76,7 +76,7 @@ export class BaseModel extends Model {
    * @param {Attribute} field
    * @returns {boolean}
    */
-  static isFieldAttribute(field: Attribute): boolean {
+  static isFieldAttribute (field: Attribute): boolean {
     return (
       field instanceof Increment ||
       field instanceof Attr ||
@@ -90,7 +90,7 @@ export class BaseModel extends Model {
    * @param {Attribute} field
    * @returns {boolean}
    */
-  static isFieldRelation(field: Attribute): boolean {
+  static isFieldRelation (field: Attribute): boolean {
     return (
       field instanceof BelongsTo ||
       field instanceof HasOne ||

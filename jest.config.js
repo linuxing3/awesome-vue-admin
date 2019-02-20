@@ -1,4 +1,8 @@
 module.exports = {
+  setupFiles: [
+    '<rootDir>/tests/unit/setup.ts',
+    '<rootDir>/tests/unit/store-setup.ts'
+  ],
   moduleFileExtensions: [
     'js',
     'jsx',

@@ -12,7 +12,7 @@ export interface IResummee {
 export default class Resummee extends BaseModel {
   static entity = 'resummee'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('Nodoby'),

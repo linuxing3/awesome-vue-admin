@@ -12,7 +12,7 @@ export interface IMilitant {
 export default class Militant extends BaseModel {
   static entity = 'militant'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('Li'),

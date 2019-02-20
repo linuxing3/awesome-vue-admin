@@ -1,8 +1,6 @@
 export default {
-  path: '/account-form',
-  name: 'Account',
+  path: '/account',
+  name: 'account',
   component: () =>
-    import(/* webpackChunkName: "routes" */
-    /* webpackMode: "lazy" */
-    `@/components/Account/AccountForm.vue`)
+        import(/* webpackChunkName: "router" */ `@/views/Account.vue`)
 }

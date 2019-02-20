@@ -1,9 +1,9 @@
 export default {
-  path: '/entity-table',
-  name: 'Entity',
+  path: '/entity',
+  name: 'entity',
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Entity/EntityTable.vue`)
+      `@/views/Entity.vue`)
 }

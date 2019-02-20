@@ -3,7 +3,7 @@ import { BaseModel } from './BaseModel'
 export default class Account extends BaseModel {
   static entity = 'account'
 
-  static fields() {
+  static fields () {
     return {
       _id: Model.increment(),
       name: Model.string('embajadachina'),

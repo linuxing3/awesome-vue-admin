@@ -7,7 +7,7 @@ export interface IGeneric {
 export default class Generic extends BaseModel {
   static entity = 'generic'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('name')

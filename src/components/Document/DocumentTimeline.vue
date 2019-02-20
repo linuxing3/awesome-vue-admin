@@ -5,17 +5,17 @@ import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'document'
     }
   },
   mixins: [exportMixin, crudMixin],
-  created() {
+  created () {
     window.DocumentTimeline = this
   },
   methods: {
-    editItem(item) {
+    editItem (item) {
       this.$emit('SET_EDITING', item)
       window.DocumentForm.$emit('SET_EDITING', item)
     }
@@ -36,7 +36,7 @@ export default {
             slot="opposite"
             :class="`headline font-weight-bold white--text`"
             v-text="item.occurenceDate"
-        ></span>
+          ></span>
         <div class="py-3">
           <h2 :class="`headline font-weight-light mb-3 white--text`">{{ item.content }}</h2>
           <div>

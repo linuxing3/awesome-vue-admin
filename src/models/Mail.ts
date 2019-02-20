@@ -2,7 +2,7 @@ import { BaseModel } from './BaseModel'
 export default class Mail extends BaseModel {
   static entity = 'mail'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       uuid: this.string('bb428c03-1bc6-4f3d-9d5e-268ec44eebc3'),

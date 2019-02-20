@@ -3,7 +3,7 @@ import { BaseModel } from './BaseModel'
 export default class Trending extends BaseModel {
   static entity = 'trending'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       subheading: this.string('Sales'),

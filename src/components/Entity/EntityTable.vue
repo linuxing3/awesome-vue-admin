@@ -13,7 +13,7 @@ export default {
     EntityIterator,
     EntityList
   },
-  data() {
+  data () {
     return {
       editing: false,
       modelName: 'entity'
@@ -21,15 +21,15 @@ export default {
   },
   mixins: [crudMixin, exportMixin],
   computed: {
-    headers() {
+    headers () {
       return this.Model.nonRelationFields()
     }
   },
-  created() {
+  created () {
     window.EntityTable = this
   },
   methods: {
-    editItem(item) {
+    editItem (item) {
       this.$emit('SET_EDITING', item)
       window.EntityForm.$emit('SET_EDITING', item)
     }
@@ -52,7 +52,7 @@ export default {
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header"
-            >{{ $t !== undefined ? $t(header) : header }}</th>
+              >{{ $t !== undefined ? $t(header) : header }}</th>
           </tr>
         </template>
         <template
@@ -63,7 +63,7 @@ export default {
               :key="header"
               :autocomplete="props.item[header]"
               v-for="header in headers"
-          >{{ props.item[header] }}</td>
+            >{{ props.item[header] }}</td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon

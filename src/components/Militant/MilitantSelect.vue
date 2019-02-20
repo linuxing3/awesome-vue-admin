@@ -2,19 +2,19 @@
 import { map, pick } from 'lodash/fp'
 import Militant from '@/models/Militant'
 export default {
-  data() {
+  data () {
     return {
       model: { _id: 1, label: 'Select Militant' }
     }
   },
-  created() {
+  created () {
     window.MilitantSelect = this
   },
   computed: {
     militants: () => map(pick(['_id', 'text']), Militant.all())
   },
   methods: {
-    change() {
+    change () {
       this.$emit('Militant_CHANGED', this.model._id)
     }
   }

@@ -6,9 +6,9 @@ export default {
     DocumentForm,
     DocumentTable
   },
-  data() {},
+  data () {},
   computed: {},
-  created() {
+  created () {
     window.DocumentApp = this
   },
   methods: {}

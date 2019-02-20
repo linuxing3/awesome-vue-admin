@@ -10,7 +10,7 @@ export interface IApp {
 export default class App extends BaseModel {
   static entity = 'app'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('coder'),

@@ -2,7 +2,7 @@ import { BaseModel } from './BaseModel'
 export default class Entity extends BaseModel {
   static entity = 'entity'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       name: this.string('CEVE'),

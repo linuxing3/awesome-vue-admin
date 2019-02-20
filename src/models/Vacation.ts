@@ -4,7 +4,7 @@ import User from './User'
 export default class Vacation extends BaseModel {
   static entity = 'vacation'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       applicant: this.string('applicant'),

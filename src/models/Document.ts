@@ -5,7 +5,7 @@ import Entity from './Entity'
 export default class Document extends BaseModel {
   static entity = 'document'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       type: this.string('XXX'),

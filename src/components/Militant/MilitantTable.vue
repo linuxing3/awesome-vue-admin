@@ -7,26 +7,26 @@ export default {
   components: {
     MilitantForm
   },
-  data() {
+  data () {
     return {
       editing: false,
       modelName: 'militant'
     }
   },
   computed: {
-    headers() {
+    headers () {
       return this.Model.nonRelationFields()
     }
   },
   mixins: [exportMixin, crudMixin],
-  created() {
+  created () {
     window.MilitantTable = this
   },
   methods: {
-    deleteItem(item) {
+    deleteItem (item) {
       Militant.delete(item._id)
     },
-    editItem(item) {
+    editItem (item) {
       window.MilitantForm.$emit('SET_EDITING', item)
     }
   }

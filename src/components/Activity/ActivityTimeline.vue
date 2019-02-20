@@ -9,18 +9,18 @@ export default {
   components: {
     ActivityForm
   },
-  data() {
+  data () {
     return {
       editing: false,
       modelName: 'activity'
     }
   },
   mixins: [exportMixin, crudMixin],
-  created() {
+  created () {
     window.ActivityTimeline = this
   },
   methods: {
-    editItem(item) {
+    editItem (item) {
       this.$emit('SET_EDITING', item)
       window.ActivityForm.$emit('SET_EDITING', item)
     }
@@ -44,7 +44,7 @@ export default {
           <span
               :class="`headline font-weight-bold blue--text`"
               v-text="item.occurenceDate"
-          ></span>
+            ></span>
           <v-card
               color="indigo"
               dark

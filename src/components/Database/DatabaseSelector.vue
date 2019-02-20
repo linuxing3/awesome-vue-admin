@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     ...call('database/*'),
-    updateDataPath() {
+    updateDataPath () {
       this.$store.set('database/export@dataPath', this.dataPath)
     }
   },

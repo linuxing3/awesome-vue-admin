@@ -3,7 +3,7 @@ import { BaseModel } from './BaseModel'
 export default class Social extends BaseModel {
   static entity = 'social'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       title: this.string('100+'),

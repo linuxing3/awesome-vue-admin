@@ -1,20 +1,22 @@
 <script>
 import { map, pick } from 'lodash/fp'
-import Notification from '@/models/Notification'
+
+import Notification from '@/Notification'
+
 export default {
-  data() {
+  data () {
     return {
-      model: { _id: 1, label: 'Select Notification' }
+      model: { '_id': 1, label: 'Select Notification' }
     }
   },
-  created() {
+  created () {
     window.NotificationSelect = this
   },
   computed: {
     notifications: () => map(pick(['_id', 'text']), Notification.all())
   },
   methods: {
-    change() {
+    change () {
       this.$emit('Notification_CHANGED', this.model._id)
     }
   }
@@ -22,13 +24,13 @@ export default {
 </script>
 <template>
   <v-select
-      :items="notifications"
-      item-text="text"
-      item-value="_id"
-      v-model="model._id"
-      :label="model.label"
-      class="white--text"
-      @change="change"
+      :items='notifications'
+      item-text='text'
+      item-value='_id'
+      v-model='model._id'
+      :label='model.label'
+      class='white--text'
+      @change='change'
     >
   </v-select>
 </template>

@@ -6,7 +6,7 @@ export default {
   components: {
     EntityForm
   },
-  data() {
+  data () {
     return {
       editing: false
     }
@@ -20,14 +20,14 @@ export default {
     headers: () => Entity.fieldsKeys()
   },
   mixins: [exportMixin],
-  created() {
+  created () {
     window.EntityList = this
   },
   methods: {
-    deleteItem(item) {
+    deleteItem (item) {
       Entity.delete(item._id)
     },
-    editItem(item) {
+    editItem (item) {
       window.EntityForm.$emit('SET_EDITING', item)
     }
   }

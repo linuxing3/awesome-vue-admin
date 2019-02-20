@@ -6,7 +6,7 @@ export default {
   components: {
     ActivityForm
   },
-  data() {
+  data () {
     return {
       editing: false
     }
@@ -20,14 +20,14 @@ export default {
     headers: () => Activity.fieldsKeys()
   },
   mixins: [exportMixin],
-  created() {
+  created () {
     window.ActivityIterator = this
   },
   methods: {
-    deleteItem(item) {
+    deleteItem (item) {
       Activity.delete(item._id)
     },
-    editItem(item) {
+    editItem (item) {
       window.ActivityForm.$emit('SET_EDITING', item)
     }
   }

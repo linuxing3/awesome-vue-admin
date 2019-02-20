@@ -11,7 +11,7 @@ export interface INotification {
 export default class Notification extends BaseModel {
   static entity = 'notification'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       title: this.string('New message from Michael'),

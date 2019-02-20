@@ -2,19 +2,19 @@
 import { map, pick } from 'lodash/fp'
 import Resummee from '@/models/Resummee'
 export default {
-  data() {
+  data () {
     return {
       model: { _id: 1, label: 'Select Resummee' }
     }
   },
-  created() {
+  created () {
     window.ResummeeSelect = this
   },
   computed: {
     resummees: () => map(pick(['_id', 'text']), Resummee.all())
   },
   methods: {
-    change() {
+    change () {
       this.$emit('Resummee_CHANGED', this.model._id)
     }
   }

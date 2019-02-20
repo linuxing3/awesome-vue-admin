@@ -52,7 +52,7 @@
                           :key="option"
                           :label="`${option}已有数据`"
                           :value="option"
-                      ></v-radio>
+                        ></v-radio>
                     </v-radio-group>
                   </v-flex>
                   <v-flex>
@@ -88,7 +88,7 @@
                             :key="option"
                             :label="`${option}第一行标题`"
                             :value=" option === '外译中' ? false : true "
-                        ></v-radio>
+                          ></v-radio>
                       </v-radio-group>
                     </v-flex>
                   </div>
@@ -124,7 +124,7 @@
                       :key="option"
                       :label="`保留${option}`"
                       :value=" option === '字符' ? true : false "
-                  ></v-radio>
+                    ></v-radio>
                 </v-radio-group>
                 <v-divider></v-divider>
                 <!-- 选择是否合并到Word -->
@@ -164,7 +164,7 @@
                             :key="option"
                             :label="`${option}第一行标题`"
                             :value=" option === '外译中' ? false : true "
-                        ></v-radio>
+                          ></v-radio>
                       </v-radio-group>
                     </v-flex>
                   </div>
@@ -217,7 +217,7 @@ export default {
     DatabaseChips
   },
   mixins: [exportMixin],
-  data() {
+  data () {
     return {
       // entity file name/ csv file name / modelname
       modelName: 'user',
@@ -230,7 +230,7 @@ export default {
       changeHeaderGroup: false
     }
   },
-  created() {
+  created () {
     this.findDocuments()
     this.$on('SELECT_MODEL', modelName => {
       this.modelName = modelName
@@ -239,7 +239,7 @@ export default {
   },
   computed: {
     // models instance for vuex/orm
-    Model: function() {
+    Model: function () {
       return models[`${this.modelName}`]
     },
     // entity name list
@@ -247,16 +247,16 @@ export default {
     cardImage: () => join(process.env.BASE_URL, 'bg/17.jpg')
   },
   methods: {
-    findDocuments() {
+    findDocuments () {
       log.suc('Template Directory is: ' + this.templateDir)
       this.templateDocs.forEach(t => log.suc(t))
     },
-    getImportFile(e) {
+    getImportFile (e) {
       // 从选择控件获取文件对象
       this.importDatasource = e.target.files[0]
       console.log(this.importDatasource)
     },
-    exportEntities() {
+    exportEntities () {
       let data = this.Model.query()
         .withAll()
         .get()
@@ -264,7 +264,7 @@ export default {
       // 导出csv文件, 并更改列标题和对应键
       this.exportItem(data)
     },
-    resetEntities() {
+    resetEntities () {
       // 删除文件中的数据
       let { entityDb, modelName } = this
       if (entityDb === undefined || modelName === undefined) return

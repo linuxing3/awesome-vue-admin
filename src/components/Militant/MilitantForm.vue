@@ -3,13 +3,13 @@ import Militant from '@/models/Militant'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 export default {
-  data() {
+  data () {
     return {
       modelName: 'militant'
     }
   },
   mixins: [crudMixin, exportMixin],
-  created() {
+  created () {
     window.MilitantForm = this
   }
 }

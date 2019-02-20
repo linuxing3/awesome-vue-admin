@@ -1,9 +1,9 @@
 export default {
-  path: '/document-table',
-  name: 'Document',
+  path: '/document',
+  name: 'document',
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/components/Document/DocumentTable.vue`)
+      `@/views/Document.vue`)
 }
