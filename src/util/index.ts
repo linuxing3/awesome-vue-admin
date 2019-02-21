@@ -3,6 +3,7 @@ import { curry, pipe, map, keys } from 'lodash/fp'
 import { head, tail, mapKeys, findKey, mapValues } from 'lodash'
 import Papa from 'papaparse/papaparse.js'
 import fs from 'fs'
+import { resolve, join } from 'path';
 const stringify = require('csv-stringify')
 
 /**
@@ -38,21 +39,61 @@ export const log = {
  * @param {String} ext  文件扩展名
  * @return {Array} 无扩展名的文件名数组
  */
-export function getFilesByExtentionInDir ({ path = '', ext = '' }): string[] {
-  let files = fs.readdirSync(path, 'utf8')
+export function getFilesByExtentionInDir ({ path , ext }): string[] {
+  let files = filterByExt({ 
+    files: fs.readdirSync(path, 'utf8'),
+    ext
+  })
   return files.reduce((res: string[], file) => {
-    // FIXME extension name issue
-    const match = newFunction()
-    const replace = new RegExp(`.${ext}`)
-    if (file.match(match)) {
-      res.push(file.replace(replace, ''))
+    // Show MetaInfo
+    let realPath = resolve(join(path, file))
+    // let fileStatsInfo = getFileMeta(realPath)
+    let shortFileName = fileShortName( file )
+    let fileMetaInfo = {
+      // ...fileStatsInfo,
+      ...{ realPath },
+      ...{ shortFileName }
     }
+    console.table(fileMetaInfo)
+    res.push(shortFileName)
     return res
   }, [])
+}
 
-  function newFunction () {
-    return new RegExp(`.*${ext}$`)
+export function filterByExt({ files = [], ext = '' }) {
+  // FIXED extension name issue
+  return files.filter(file => {
+    let match = file.split('.').reverse()[0]
+    console.log(file)
+    return match === ext
+  })
+}
+
+export function deleteExtReg({ file, ext }) {
+  // FIXME extension name issue
+  function matchFn () {
+    let mathQuery = `w+\.${ext}$`
+    return new RegExp(mathQuery)
   }
+  let replaceQuery = `\.${ext}$`
+  const replace = new RegExp(replaceQuery)
+  if (file.match(matchFn)) {
+    console.log(file)
+    file.replace(replace, '')
+  }
+  return file
+}
+
+export function deleteExt({ file = '', ext }) {
+  // FIXME extension name issue
+  file = file.replace(/\.csv$/, '').replace(/\.doc$/, '')
+  return file
+}
+
+export function getFileMeta(path) {
+  let fileMetaInfo = fs.lstatSync(path)
+  console.table(fileMetaInfo)
+  return fileMetaInfo
 }
 
 const getFilesFp = curry(getFilesByExtentionInDir)

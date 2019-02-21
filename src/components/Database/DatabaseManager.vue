@@ -204,6 +204,7 @@ import { entities } from '@/api/globals'
 import models from '@/models'
 
 import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
 
 import DatabasesIterator from './DatabasesIterator.vue'
 import DatabaseChips from './DatabaseChips.vue'
@@ -215,12 +216,11 @@ export default {
     DatabasesIterator,
     DatabaseChips
   },
-  mixins: [exportMixin],
+  mixins: [crudMixin, exportMixin],
   data () {
     return {
-      // entity file name/ csv file name / modelname
       modelName: 'user',
-      importDatasource: {},
+      importFileMeta: {},
       // Switch between import/export/reset
       activeTab: 0,
       actionGroup: '导入',
@@ -230,49 +230,24 @@ export default {
     }
   },
   created () {
-    this.findDocuments()
     this.$on('SELECT_MODEL', modelName => {
       this.modelName = modelName
     })
     window.dbApp = this
   },
   computed: {
-    // models instance for vuex/orm
-    Model: function () {
-      return models[`${this.modelName}`]
-    },
     // entity name list
     entities: () => entities,
     cardImage: () => join(process.env.BASE_URL, 'bg/17.jpg')
   },
   methods: {
-    findDocuments () {
-      log.suc('Template Directory is: ' + this.templateDir)
-      this.templateDocs.forEach(t => log.suc(t))
-    },
-    getImportFile (e) {
-      // 从选择控件获取文件对象
-      this.importDatasource = e.target.files[0]
-      console.log(this.importDatasource)
-    },
-    exportEntities () {
-      let data = this.Model.query()
-        .withAll()
-        .get()
-
-      // 导出csv文件, 并更改列标题和对应键
-      this.exportItem(data)
+    async exportEntities () {
+      // 导出csv文件
+      this.exportItem(this.all)
     },
     resetEntities () {
-      // 删除文件中的数据
-      let { entityDb, modelName } = this
-      if (entityDb === undefined || modelName === undefined) return
-
-      entityDb.clear(modelName)
-      entityDb.dbInit([modelName])
-      // 删除物理文件
-      alert('如需删除物理文件，请手动删除：' + entityDb.adapter.source)
-      shell.showItemInFolder(entityDb.adapter.source)
+      // 删除数据
+      this.resetData(this.all)
     }
   }
 }

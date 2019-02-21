@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <AppToolbar></AppToolbar>
+    <!-- <AppToolbar></AppToolbar> -->
     <v-content>
       <v-container>
         <slot></slot>

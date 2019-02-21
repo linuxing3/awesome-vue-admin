@@ -12,4 +12,5 @@ requireComponent.keys().forEach(fileName => {
     camelCase(fileName.replace(/^\.\//, '').replace(/\.w+$/, ''))
   )
   Vue.component(componentName, componentConfig.default || componentConfig)
+  console.log('GlobalRegistered ' + componentName)
 })

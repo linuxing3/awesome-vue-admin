@@ -1,10 +1,22 @@
 <template>
   <v-card>
-    <v-responsive v-show="false">
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        icon
+        class="pink"
+        dark
+        @click="showTimeline = !showTimeline"
+      >
+        <v-icon v-if="showTimeline">list</v-icon>
+        <v-icon v-if="!showTimeline">timeline</v-icon>
+      </v-btn>
+    </v-card-actions>
+    <v-responsive v-show="showTimeline">
       <ActivityTimeline>
       </ActivityTimeline>
     </v-responsive>
-    <v-responsive>
+    <v-responsive v-show="!showTimeline">
       <v-data-table
           :headers="headers"
           :items="all"
@@ -63,7 +75,7 @@
 <script lang="js">
 import Activity from '@/models/Activity'
 import ActivityForm from './ActivityForm'
-import ActivityTimeline from './ActivityTimeline'
+// import ActivityTimeline from './ActivityTimeline'
 
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
@@ -71,12 +83,13 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   components: {
     ActivityForm,
-    ActivityTimeline
+    ActivityTimeline: () => import('./ActivityTimeline')
   },
   data () {
     return {
       editing: false,
-      modelName: 'activity'
+      modelName: 'activity',
+      showTimeline: false
     }
   },
   mixins: [ exportMixin, crudMixin ],

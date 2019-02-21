@@ -20,7 +20,7 @@ const router = new Router({
   routes: path as RouteConfig[],
 });
 
-// router gards
+// router guards
 router.beforeEach((to: any, from: any, next: any) => {
   console.log("Going From " + from.path + " to " + to.path);
   next();

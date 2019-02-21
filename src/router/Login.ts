@@ -1,7 +1,10 @@
 export default {
   path: '/login',
   name: 'login',
-  meta: { breadcrumb: true },
+  meta: {
+    public: true
+  },
   component: () =>
-        import(/* webpackChunkName: "router" */ `@/views/Login.vue`)
+    import(/* webpackChunkName: "routes" */
+    /* webpackMode: "lazy" */ `@/views/Login.vue`)
 }

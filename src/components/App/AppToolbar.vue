@@ -22,7 +22,7 @@
 
     <v-btn
         icon
-        @click="$router.push('/')">
+        @click="$router.push('/home')">
       <v-icon>home</v-icon>
     </v-btn>
 

@@ -1,5 +1,39 @@
+<script>
+import { join } from 'path'
+import { get, sync, call } from 'vuex-pathify'
+
+import Account from '@/models/Account'
+
+import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
+
+export default {
+  data () {
+    return {
+      modelName: 'account'
+    }
+  },
+  mixins: [crudMixin, exportMixin],
+  created () {
+    window.AccountForm = this
+  },
+  async created () {
+    this.model = await Account.query().where('hash', this.cached[0].hash)[0]
+  },
+  computed: {
+    cached: get('entities/account/cached'),
+    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+  },
+  methods: {
+    saveAccount (item) {
+      accountDb.update('account', item)
+    }
+  }
+}
+</script>
+
 <template>
-  <v-card>
+  <v-card class="account-profile ma-5">
     <v-img
         :src="computeImgePath"
         height="390">
@@ -7,102 +41,72 @@
           column
           class="media ma-0">
         <v-card-title>
-          <v-btn
-              dark
-              icon>
-            <v-icon>chevron_left</v-icon>
-          </v-btn>
           <v-spacer></v-spacer>
           <v-btn
               dark
               icon
-              class="mr-3">
+              class="mr-3"
+              @click="editing = !editing"
+            >
             <v-icon>edit</v-icon>
-          </v-btn>
-          <v-btn
-              dark
-              icon>
-            <v-icon>more_vert</v-icon>
           </v-btn>
         </v-card-title>
         <v-spacer></v-spacer>
         <v-card-title class="white--text pl-5 pt-5">
-          <div class="display-1 pl-5 pt-5">{{currentUser.username}}</div>
+          <div class="display-1 pl-5 pt-5">{{model.name}}</div>
         </v-card-title>
       </v-layout>
     </v-img>
-    <v-list
-        two-line
-        class="pa-0">
-      <v-list-tile href="#">
-        <v-list-tile-action>
-          <v-icon color="indigo">phone</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-          <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
-          <v-icon>chat</v-icon>
-        </v-list-tile-action>
-      </v-list-tile>
-      <v-list-tile href="#">
-        <v-list-tile-action></v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>(323) 555-6789</v-list-tile-title>
-          <v-list-tile-sub-title>Work</v-list-tile-sub-title>
-        </v-list-tile-content>
-        <v-list-tile-action>
-          <v-icon>chat</v-icon>
-        </v-list-tile-action>
-      </v-list-tile>
-      <v-divider inset></v-divider>
-      <v-list-tile href="#">
-        <v-list-tile-action>
-          <v-icon color="indigo">mail</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>aliconnors@example.com</v-list-tile-title>
-          <v-list-tile-sub-title>Personal</v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-list-tile href="#">
-        <v-list-tile-action></v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>ali_connors@example.com</v-list-tile-title>
-          <v-list-tile-sub-title>Work</v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-      <v-divider inset></v-divider>
-      <v-list-tile href="#">
-        <v-list-tile-action>
-          <v-icon color="indigo">location_on</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>1400 Main Street</v-list-tile-title>
-          <v-list-tile-sub-title>Orlando, FL 79938</v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
+    <v-card-text>
+      <v-form>
+        <v-layout wrap>
+          <v-flex
+              key="name"
+              lg12
+              md12
+              sm12>
+            <v-text-field
+                name="name"
+                v-model="model['name']"
+                :label="tryT('name')">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              key="email"
+              lg12
+              md12
+              sm12>
+            <v-text-field
+                name="email"
+                v-model="model['email']"
+                :label="tryT('email')">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              key="role"
+              lg12
+              md12
+              sm12>
+            <v-text-field
+                name="role"
+                v-model="model['role']"
+                :label="tryT('role')">
+            </v-text-field>
+          </v-flex>
+        </v-layout>
+      </v-form>
+    </v-card-text>
+    <v-card-actions class="pb-3">
+      <v-spacer></v-spacer>
+      <v-btn
+          v-if="editing"
+          color="primary"
+          @click="saveAccount(model)">更新</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
-<script>
-import { join } from 'path'
-import Account from '@/models/Account'
-import crudMixin from '@/mixins/crudMixin'
-export default {
-  data () {
-    return {
-      modelName: 'account'
-    }
-  },
-  mixins: [crudMixin],
-  computed: {
-    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
-    currentUser: function () {
-      return this.items[0]
-    }
-  }
-}
-</script>
+<style lang="stylus" scoped>
+.account-profile
+  font-size: 36px
+</style>
