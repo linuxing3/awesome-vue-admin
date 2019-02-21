@@ -41,7 +41,7 @@ const AccountActions = {
         signupData.hash = await bcrypt.hash(signupData.password, 10)
 
         // 2 save the password and hash in vuex and localforage
-        (Account as any).$create({ data: signupData })
+        await (Account as any).$create({ data: signupData })
         console.log('Saving account with hash password')
 
         // 3 check the password and hash
