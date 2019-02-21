@@ -92,6 +92,13 @@ declare var PRODUCTION: boolean
 
 declare type RequireContext = __WebpackModuleApi.RequireContext
 
+declare class Model {
+  /**
+   * Create a record, but persist to indexDB
+   */
+  static $create(this: any, payload: any): Promise<any>;
+}
+
 interface Window {
   store: any
   __INITIAL_STATE__: any
