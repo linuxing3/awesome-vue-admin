@@ -4,19 +4,19 @@ import { map, pick } from 'lodash/fp'
 import Login from '@/Login'
 
 export default {
-  data() {
+  data () {
     return {
       model: { '_id': 1, label: 'Select Login' }
     }
   },
-  created() {
+  created () {
     window.LoginSelect = this
   },
   computed: {
     logins: () => map(pick(['_id', 'text']), Login.all())
   },
   methods: {
-    change() {
+    change () {
       this.$emit('Login_CHANGED', this.model._id)
     }
   }

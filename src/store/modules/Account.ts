@@ -1,13 +1,7 @@
 import { ActionContext } from 'vuex'
 import { make } from 'vuex-pathify'
 import bcrypt from 'bcryptjs'
-
-import AwesomeLowdb from '@/api/lowdb'
-const DB: AwesomeLowdb = new AwesomeLowdb({
-  dbDir: 'data',
-  dbName: 'account',
-  isElectron: true
-})
+import Account from '@/models/Account'
 
 const state = {
   name: 'account',
@@ -37,7 +31,7 @@ const mutations: any = {
 const AccountActions = {
   async signup (ctx: ActionContext<any, any>, signupData) {
     // if exists, return
-    let authedAccount = DB.find(`${ctx.state.name}`, { name: signupData.name })
+    let authedAccount = Account.find({ name: signupData.name })
 
     if (authedAccount === undefined) {
       try {
@@ -46,10 +40,14 @@ const AccountActions = {
         // 1 hash the password
         signupData.hash = await bcrypt.hash(signupData.password, 10)
 
-        // 2 save the password and hash
-        DB.insert(`${ctx.state.name}`, signupData)
-        let createdAccount = DB.find(`${ctx.state.name}`, { name: signupData.name })
+        // 2 save the password and hash in vuex and localforage
+        Account.$create({ data: signupData })
+        console.log('Saving account with hash password')
+
+        // 3 check the password and hash
+        let createdAccount = Account.find({ name: signupData.name })
         console.log(createdAccount)
+
         let correctHash = (createdAccount as any).hash
 
         let valid = await bcrypt.compare(signupData.password, correctHash)

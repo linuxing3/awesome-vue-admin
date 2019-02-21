@@ -67,7 +67,6 @@ export default {
      */
     async fetch () {
       // Clear Current State
-      // this.$store.commit('SET_DATA', {})
       if (this.Model.$fetch !== undefined) {
         await this.Model.$fetch()
       } else {

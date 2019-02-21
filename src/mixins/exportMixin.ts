@@ -1,13 +1,13 @@
 import { join } from 'path'
 import { copyFileSync, pathExistsSync } from 'fs-extra'
 import { remote, shell } from 'electron'
-import AwesomeLowdb from '@/api/lowdb'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 
 export default {
   data () {
     return {
+      modelName: '',
       outputDocFile: 'template',
       needChangeCSVHeader: false,
       reverseTranslate: false,
@@ -16,15 +16,10 @@ export default {
     }
   },
   computed: {
-    keysDef: () => keysDef, // 翻译定义
-    entityDb: function () {
-      // 当前lowdb数据库
-      return new AwesomeLowdb({
-        dbDir: 'data',
-        dbName: this.modelName,
-        isElectron: true
-      })
+    Model (): Model {
+      return models[this.modelName]
     },
+    keysDef: () => keysDef, // 翻译定义
     templateDir: () => join(remote.app.getPath('home'), '/Documents/template'), // 用户模板目录
     userDataDir: () => join(remote.app.getPath('userData'), 'data'), // 用户数据目录
     // 获取模板目录下的doc文件
@@ -48,9 +43,6 @@ export default {
       return this.resolvePath(this.outputDocFile, 'doc')
     }
   },
-  mouted () {
-    this.loadItems()
-  },
   methods: {
     resolvePath (fileName, fileExt) {
       return join(this.templateDir, `${fileName}.${fileExt}`)
@@ -72,7 +64,7 @@ export default {
       console.log(`导入到${this.modelName}对应的lowdb数据文件...`)
       // 逐个插入数据到数据存储文件
       data.forEach(item => {
-        this.entityDb.insert(`${this.modelName}`, item)
+        this.Model.$create({ data: item })
       })
     },
     /**

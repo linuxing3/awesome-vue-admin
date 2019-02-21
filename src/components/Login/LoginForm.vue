@@ -5,13 +5,13 @@ import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'account'
     }
   },
   mixins: [ crudMixin, exportMixin ],
-  created() {
+  created () {
     window.LoginForm = this
   }
 }

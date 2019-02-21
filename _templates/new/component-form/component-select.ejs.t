@@ -8,19 +8,19 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 %><script>
 import { map, pick } from 'lodash/fp'
 
-import <%= modelName %> from '@/<%= modelName %>'
+import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
 
 export default {
   data() {
     return {
-      model: { '_id': 1, label: 'Select <%= modelName %>' }
+      model: {},
+      modelName: '<%= modelName.toLowerCase() %>'
     }
   },
+  mixins: [ crudMixin, exportMixin ],
   created() {
     window.<%= modelSelectName %> = this
-  },
-  computed: {
-    <%= modelArray %>: () => map(pick(['_id', 'text']), <%= modelName%>.all())
   },
   methods: {
     change() {
@@ -31,7 +31,7 @@ export default {
 </script>
 <template>
   <v-select
-      :items='<%= modelArray %>'
+      :items='items'
       item-text='text'
       item-value='_id'
       v-model='model._id'
