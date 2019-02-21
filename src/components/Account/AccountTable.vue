@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     cached: get('entities/account/cached'),
-    computeImgePath: () => join(process.env.BASE_URL, 'avatar/man_1.jpg')
+    computeImgePath: () => 'avatar/man_1.jpg'
   },
   methods: {
     saveAccount (item) {

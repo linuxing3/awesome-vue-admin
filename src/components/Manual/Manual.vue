@@ -57,14 +57,14 @@ export default {
     }
   },
   computed: {
-    computeBg1: () => join(process.env.BASE_URL, 'bg/1.jpg'),
-    computeBg2: () => join(process.env.BASE_URL, 'bg/2.jpg'),
-    computeBg3: () => join(process.env.BASE_URL, 'bg/3.jpg'),
-    computeBg4: () => join(process.env.BASE_URL, 'bg/4.jpg'),
-    computeBg5: () => join(process.env.BASE_URL, 'bg/5.jpg'),
-    computeBg6: () => join(process.env.BASE_URL, 'bg/6.jpg'),
-    computeBg10: () => join(process.env.BASE_URL, 'bg/10.jpg'),
-    computeAvatarMan4: () => join(process.env.BASE_URL, 'avatar/man_4.jpg')
+    computeBg1: () => 'bg/1.jpg',
+    computeBg2: () => 'bg/2.jpg',
+    computeBg3: () => 'bg/3.jpg',
+    computeBg4: () => 'bg/4.jpg',
+    computeBg5: () => 'bg/5.jpg',
+    computeBg6: () => 'bg/6.jpg',
+    computeBg10: () => 'bg/10.jpg',
+    computeAvatarMan4: () => 'avatar/man_4.jpg'
   },
   methods: {
     go (menuItem) {
