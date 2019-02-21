@@ -31,7 +31,7 @@ const mutations: any = {
 const AccountActions = {
   async signup (ctx: ActionContext<any, any>, signupData) {
     // if exists, return
-    let authedAccount = Account.find({ name: signupData.name })
+    let authedAccount = Account.query().where('name', signupData.name).get()[0]
 
     if (authedAccount === undefined) {
       try {
@@ -41,11 +41,11 @@ const AccountActions = {
         signupData.hash = await bcrypt.hash(signupData.password, 10)
 
         // 2 save the password and hash in vuex and localforage
-        Account.$create({ data: signupData })
+        (Account as any).$create({ data: signupData })
         console.log('Saving account with hash password')
 
         // 3 check the password and hash
-        let createdAccount = Account.find({ name: signupData.name })
+        let createdAccount = Account.query().where('name', signupData.name).get()[0]
         console.log(createdAccount)
 
         let correctHash = (createdAccount as any).hash

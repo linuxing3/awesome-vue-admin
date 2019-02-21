@@ -4,6 +4,9 @@ import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 
+import { Model } from '@vuex-orm/core'
+import models from '@/models'
+
 export default {
   data () {
     return {
