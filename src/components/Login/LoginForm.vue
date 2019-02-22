@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { mapValues } from 'lodash'
 import { get, sync, call } from 'vuex-pathify'
 import { join } from 'path'
 
@@ -123,6 +124,7 @@ export default {
         setTimeout(() => {
           if (this.loggedIn) {
             this.$router.push('/home')
+            this.$emit('APP_LOGIN_SUCCESS')
           } else {
             this.loading = false
             this.$emit('APP_LOGIN_DATA_INVALID')
@@ -134,9 +136,7 @@ export default {
       }
     },
     logout () {
-      this.model.name = ''
-      this.model.password = ''
-      this.model.email = ''
+      mapValues(this.model, (o) => '')
       setTimeout(() => {
         this.clearCache()
         this.$router.push('/login')

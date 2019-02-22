@@ -39,9 +39,13 @@ const AccountActions = {
   // 创建初始化用户
   async init (ctx: ActionContext<any, any>) {
     let { name, password, email, role } = ctx.state.defaultAccount
+
     console.log('检查默认账户是否存在')
-    let accounts = Account.query().get()
-    if (accounts === undefined || accounts.length === 0) {
+    await (Account as any).$fetch()
+    let accounts = ctx.state.data
+
+    if (accounts === undefined) {
+      console.log('默认账户不存在')
       let hash = await bcrypt.hash(password, 10)
 
       let accountInfo = {
@@ -55,6 +59,7 @@ const AccountActions = {
       await (Account as any).$create({ data: accountInfo })
       console.log('创建默认账户')
     }
+    console.log('存在默认账户')
   },
   // 注册用户
   async signup (ctx: ActionContext<any, any>, signupData) {
@@ -68,11 +73,11 @@ const AccountActions = {
         console.log('该用户不存在，正在创建!')
 
         // 1 加密密码
-        let newHash = await bcrypt.hash(signupData.password, 10)
+        let hash = await bcrypt.hash(signupData.password, 10)
 
         let accountInfo = {
           ...signupData,
-          hash: newHash
+          hash
         }
 
         // 2 保存用户名和加密密码
@@ -92,7 +97,7 @@ const AccountActions = {
       let valid = await bcrypt.compare(password, hash)
       if (valid) {
         console.log('密码验证通过')
-        ctx.dispatch('signin', authedAccount)
+        ctx.dispatch('setLoginStatus', authedAccount)
       } else {
         console.log('无效密码')
         ctx.commit('SET_LOGGED_IN', false)
@@ -100,7 +105,7 @@ const AccountActions = {
     }
   },
   // 设置登录状态
-  async signin (ctx: ActionContext<any, any>, authData) {
+  async setLoginStatus (ctx: ActionContext<any, any>, authData) {
     // 登录状态为真
     ctx.commit('SET_LOGGED_IN', true)
     // 缓存用户数据

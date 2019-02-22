@@ -133,12 +133,13 @@ export default {
           <v-flex
               lg12
               sm12>
-            <v-text-field
+            <v-textarea
                 v-model="model['text']"
                 name="text"
                 key="text"
+                multi-line
                 :label=" $t !== undefined ? $t('text') : 'text'">
-            </v-text-field>
+            </v-textarea>
           </v-flex>
           <v-flex
               lg12
@@ -151,14 +152,48 @@ export default {
             </v-text-field>
           </v-flex>
           <v-flex
-              v-for="relationField in relationFieldsWithId"
-              v-if="relationField !== 'author_id'"
-              :key="relationField"
               lg6
               sm6>
             <v-select
-                v-model="model[relationField]"
-                :label=" $t(relationField) "
+                v-model="model['sendingEntity_id']"
+                key="sendingEntity_id"
+                :label=" $t('sendingEntity_id') "
+                :items="selectEntities"
+                item-text="name"
+                item-value="_id">
+            </v-select>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-select
+                v-model="model['fromEntity_id']"
+                key="fromEntity_id"
+                :label=" $t('fromEntity_id') "
+                :items="selectEntities"
+                item-text="name"
+                item-value="_id">
+            </v-select>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-select
+                v-model="model['toEntity_id']"
+                key="toEntity_id"
+                :label=" $t('toEntity_id') "
+                :items="selectEntities"
+                item-text="name"
+                item-value="_id">
+            </v-select>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-select
+                v-model="model['copyEntity_id']"
+                key="copyEntity_id"
+                :label=" $t('copyEntity_id') "
                 :items="selectEntities"
                 item-text="name"
                 item-value="_id">
