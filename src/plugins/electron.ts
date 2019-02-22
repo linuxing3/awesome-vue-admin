@@ -1,15 +1,15 @@
 import Vue, { VueConstructor } from 'vue'
+import { join } from 'path'
 import { remote, shell } from 'electron'
 import { pathExistsSync, mkdirpSync } from 'fs-extra'
 
 export interface VueElectronPlugin {
   install: Function
-  version: string
 }
 
-if (windows && window.$app === 'undefined') {
-  window.$app = remote.app
-  window.$shell = shell
+if ((window as any).$app === 'undefined') {
+  (window as any).$app = remote.app
+  (window as any).$shell = shell
 }
 
 const VueElectron: VueElectronPlugin = {
@@ -22,8 +22,7 @@ const VueElectron: VueElectronPlugin = {
 
     Vue.prototype.$app = remote.app
     Vue.prototype.$shell = shell
-  },
-  version: env.process.__VUE_ELECTRON_VERSION__
+  }
 }
 
 export default VueElectron
