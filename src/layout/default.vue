@@ -64,8 +64,8 @@
     </template>
     <!-- 显示状态信息 -->
     <SnackBar
-      :snackbar="snackbar"
-    ></SnackBar>
+        :snackbar="snackbar"
+      ></SnackBar>
   </div>
 </template>
 <script>

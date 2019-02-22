@@ -37,11 +37,11 @@ const mutations: any = {
 
 const AccountActions = {
   // 创建初始化用户
-  async init(ctx: ActionContext<any, any>) {
+  async init (ctx: ActionContext<any, any>) {
     let { name, password, email, role } = ctx.state.defaultAccount
     console.log('检查默认账户是否存在')
     let accounts = Account.query().get()
-    if (accounts === undefined || accounts.length === 0 ) {
+    if (accounts === undefined || accounts.length === 0) {
       let hash = await bcrypt.hash(password, 10)
 
       let accountInfo = {
@@ -52,7 +52,7 @@ const AccountActions = {
         hash
       }
 
-      await (Account as any).$create({data: accountInfo})
+      await (Account as any).$create({ data: accountInfo })
       console.log('创建默认账户')
     }
   },
@@ -79,7 +79,6 @@ const AccountActions = {
 
         // 3 使用创建后账户，再次尝试登录
         ctx.dispatch('signup', accountInfo)
-
       } catch (e) {
         throw new Error('添加新账户失败!')
       }

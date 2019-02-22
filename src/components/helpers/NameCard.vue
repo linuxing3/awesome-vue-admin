@@ -120,24 +120,24 @@ export default {
   data: () => ({}),
 
   computed: {
-    computeCardLayout() {
+    computeCardLayout () {
       return this.mini ? 'row' : 'column'
     },
-    computeTextAlgin() {
+    computeTextAlgin () {
       return this.mini ? 'text-sm-right' : 'text-sm-center'
     },
-    computeAvatarSize() {
+    computeAvatarSize () {
       return this.mini ? '48' : '96'
     },
-    showAvatar() {
+    showAvatar () {
       return this.avatar !== null && this.avatar.src
     },
 
-    showBottomNav() {
+    showBottomNav () {
       return this.mini === false && this.bottomNav
     },
 
-    showTopNav() {
+    showTopNav () {
       return this.mini === false && this.topNav
     }
   },

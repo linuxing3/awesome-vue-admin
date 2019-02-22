@@ -3,7 +3,7 @@ import { curry, pipe, map, keys } from 'lodash/fp'
 import { head, tail, mapKeys, findKey, mapValues } from 'lodash'
 import Papa from 'papaparse/papaparse.js'
 import fs from 'fs'
-import { resolve, join } from 'path';
+import { resolve, join } from 'path'
 const stringify = require('csv-stringify')
 
 /**
@@ -39,8 +39,8 @@ export const log = {
  * @param {String} ext  文件扩展名
  * @return {Array} 无扩展名的文件名数组
  */
-export function getFilesByExtentionInDir ({ path , ext }): string[] {
-  let files = filterByExt({ 
+export function getFilesByExtentionInDir ({ path, ext }): string[] {
+  let files = filterByExt({
     files: fs.readdirSync(path, 'utf8'),
     ext
   })
@@ -48,7 +48,7 @@ export function getFilesByExtentionInDir ({ path , ext }): string[] {
     // Show MetaInfo
     let realPath = resolve(join(path, file))
     // let fileStatsInfo = getFileMeta(realPath)
-    let shortFileName = fileShortName( file )
+    let shortFileName = fileShortName(file)
     let fileMetaInfo = {
       // ...fileStatsInfo,
       ...{ realPath },
@@ -60,7 +60,7 @@ export function getFilesByExtentionInDir ({ path , ext }): string[] {
   }, [])
 }
 
-export function filterByExt({ files = [], ext = '' }) {
+export function filterByExt ({ files = [], ext = '' }) {
   // FIXED extension name issue
   return files.filter(file => {
     let match = file.split('.').reverse()[0]
@@ -69,13 +69,13 @@ export function filterByExt({ files = [], ext = '' }) {
   })
 }
 
-export function deleteExtReg({ file, ext }) {
+export function deleteExtReg ({ file, ext }) {
   // FIXME extension name issue
   function matchFn () {
-    let mathQuery = `w+\.${ext}$`
+    let mathQuery = `w+.${ext}$`
     return new RegExp(mathQuery)
   }
-  let replaceQuery = `\.${ext}$`
+  let replaceQuery = `.${ext}$`
   const replace = new RegExp(replaceQuery)
   if (file.match(matchFn)) {
     console.log(file)
@@ -84,13 +84,13 @@ export function deleteExtReg({ file, ext }) {
   return file
 }
 
-export function deleteExt({ file = '', ext }) {
+export function deleteExt ({ file = '', ext }) {
   // FIXME extension name issue
   file = file.replace(/\.csv$/, '').replace(/\.doc$/, '')
   return file
 }
 
-export function getFileMeta(path) {
+export function getFileMeta (path) {
   let fileMetaInfo = fs.lstatSync(path)
   console.table(fileMetaInfo)
   return fileMetaInfo

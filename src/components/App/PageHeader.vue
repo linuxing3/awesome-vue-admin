@@ -19,8 +19,8 @@
     <div class="page-header-right">
       <v-btn icon>
         <v-icon
-          @click="$router.push($route.path)"
-          class="text--secondary">refresh</v-icon>
+            @click="$router.push($route.path)"
+            class="text--secondary">refresh</v-icon>
       </v-btn>
     </div>
   </v-layout>

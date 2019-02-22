@@ -35,7 +35,7 @@ function createWindow () {
   return win
 }
 
-function registerShortcuts(win: BrowserWindow) {
+function registerShortcuts (win: BrowserWindow) {
   globalShortcut.register('CommandOrControl+X', () => {
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   })
@@ -73,7 +73,6 @@ app.on('ready', async () => {
 
   let mainWin = createWindow()
   registerShortcuts(mainWin)
-
 })
 
 // Exit cleanly on request from parent process in development mode.

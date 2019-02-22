@@ -1,11 +1,11 @@
 <template>
   <v-card
-    class="elevation-1 pa-3 mt-5">
+      class="elevation-1 pa-3 mt-5">
     <v-card-text>
       <div class="layout column align-center">
         <v-avatar
-          size="256"
-        >
+            size="256"
+          >
           <img
               src="avatar/man_1.jpg"
               alt="Admin Panel"
@@ -19,51 +19,51 @@
 
     <v-responsive class="loginPanel">
       <v-text-field
-        class="ml-5 mr-5"
-        v-model="model.name"
-        label="姓名"
-        type="text"
-        data-vv-name="model.name"
-        prepend-icon="contacts"
-        required
-      ></v-text-field>
+          class="ml-5 mr-5"
+          v-model="model.name"
+          label="姓名"
+          type="text"
+          data-vv-name="model.name"
+          prepend-icon="contacts"
+          required
+        ></v-text-field>
       <v-text-field
-        class="ml-5 mr-5"
-        v-model="model.password"
-        label="密码"
-        type="password"
-        data-vv-name="model.password"
-        prepend-icon="lock"
-        required
-      ></v-text-field>
+          class="ml-5 mr-5"
+          v-model="model.password"
+          label="密码"
+          type="password"
+          data-vv-name="model.password"
+          prepend-icon="lock"
+          required
+        ></v-text-field>
       <v-text-field
-        class="ml-5 mr-5"
-        v-model="model.email"
-        label="电子邮件"
-        type="email"
-        data-vv-name="model.email"
-        prepend-icon="email"
-      ></v-text-field>
+          class="ml-5 mr-5"
+          v-model="model.email"
+          label="电子邮件"
+          type="email"
+          data-vv-name="model.email"
+          prepend-icon="email"
+        ></v-text-field>
     </v-responsive>
 
     <v-card-actions>
       <v-spacer />
       <v-btn
-        class="ml-3 mr-3"
-        color="primary"
-        @click="login"
-        :loading="loading">Login</v-btn>
+          class="ml-3 mr-3"
+          color="primary"
+          @click="login"
+          :loading="loading">Login</v-btn>
       <v-btn
-        class="ml-3 mr-5"
-        flat
-        @click="logout">Logout</v-btn>
+          class="ml-3 mr-5"
+          flat
+          @click="logout">Logout</v-btn>
     </v-card-actions>
 
     <v-responsive>
       <!-- 显示状态信息 -->
       <SnackBar
-        :snackbar="snackbar"
-      >:(
+          :snackbar="snackbar"
+        >:(
       </SnackBar>
     </v-responsive>
   </v-card>
@@ -112,7 +112,7 @@ export default {
   methods: {
     signup: call('entities/account/signup'),
     init: call('entities/account/init'),
-    async login() {
+    async login () {
       if (this.model.name !== '' && this.model.password !== '') {
         // 注册
         await this.signup(this.model)
@@ -132,7 +132,7 @@ export default {
         this.$emit('APP_LOGIN_FAILED')
       }
     },
-    logout() {
+    logout () {
       this.model.name = ''
       this.model.password = ''
       this.model.email = ''

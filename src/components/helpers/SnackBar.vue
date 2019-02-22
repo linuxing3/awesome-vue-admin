@@ -1,10 +1,10 @@
 <template>
   <v-snackbar
-    :timeout="3000"
-    bottom
-    right
-    :color="snackbar.color"
-    v-model="snackbar.show"
+      :timeout="3000"
+      bottom
+      right
+      :color="snackbar.color"
+      v-model="snackbar.show"
     >
     {{ snackbar.text }}
     <slot></slot>
@@ -23,11 +23,7 @@ export default {
   props: {
     snackbar: {
       type: Object,
-      default: {
-        color: '',
-        show: false,
-        text: ''
-      }
+      default: null
     }
   }
 }

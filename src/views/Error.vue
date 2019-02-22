@@ -1,15 +1,15 @@
 <template>
   <simple-layout>
-      <div class="text-md-center">
-        <h1>404</h1>
-        <h2 class="my-3 headline ">Sorry, unkonw error</h2>
-        <div>
-          <v-btn
-              color="primary"
-              @click="goHome">Go Home</v-btn>
-        </div>
+    <div class="text-md-center">
+      <h1>404</h1>
+      <h2 class="my-3 headline ">Sorry, unkonw error</h2>
+      <div>
+        <v-btn
+            color="primary"
+            @click="goHome">Go Home</v-btn>
       </div>
-  </simple-layout>    
+    </div>
+  </simple-layout>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
     SimpleLayout
   },
   methods: {
-    goHome() {
+    goHome () {
       this.$router.push({ path: '/home' })
     }
   }

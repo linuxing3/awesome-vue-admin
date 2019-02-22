@@ -14,13 +14,11 @@ export default {
     }
   },
   mixins: [crudMixin, exportMixin],
-  created () {
-    window.AccountForm = this
-  },
   async created () {
     let authedAccounts = await Account.query().where('hash', this.cached[0].hash).get()
     console.table(authedAccounts)
-    this.model =  authedAccounts[0]
+    this.model = authedAccounts[0]
+    window.AccountForm = this
   },
   computed: {
     cached: get('entities/account/cached'),

@@ -3,11 +3,11 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        icon
-        class="pink"
-        dark
-        @click="showTimeline = !showTimeline"
-      >
+          icon
+          class="pink"
+          dark
+          @click="showTimeline = !showTimeline"
+        >
         <v-icon v-if="showTimeline">list</v-icon>
         <v-icon v-if="!showTimeline">timeline</v-icon>
       </v-btn>

@@ -19,7 +19,7 @@ export default [
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-      `@/views/NotFound.vue`)
+        `@/views/NotFound.vue`)
   },
   {
     path: '/403',
@@ -30,7 +30,7 @@ export default [
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-      `@/views/Deny.vue`)
+        `@/views/Deny.vue`)
   },
   {
     path: '/500',
@@ -41,6 +41,6 @@ export default [
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-      `@/views/Error.vue`)
+        `@/views/Error.vue`)
   }
 ]
