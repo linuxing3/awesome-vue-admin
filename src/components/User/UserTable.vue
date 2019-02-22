@@ -11,7 +11,6 @@ export default {
   },
   data () {
     return {
-      search: '',
       selected: [],
       modelName: 'user'
     }
@@ -31,21 +30,20 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title>
+    <v-card-title v-show='true'>
       <v-spacer></v-spacer>
       <v-text-field
-        v-model='search'
-        append-icon='search'
-        label="Search"
-        single-line
-      ></v-text-field>
+          v-model='filter.search'
+          append-icon='search'
+          label="查询姓名，注意区分大小写"
+          single-line
+        ></v-text-field>
     </v-card-title>
     <v-responsive>
       <v-data-table
           v-model='selected'
           :headers='headers'
           :items='items'
-          item-key='name'
           select-all
           class='elevation-0'
         >
@@ -71,10 +69,10 @@ export default {
             slot-scope='props'>
           <td class='justify-center layout px-0'>
             <v-checkbox
-              v-show='false'
-              v-model="props.selected"
-              primary
-              hide-details>
+                v-show='false'
+                v-model="props.selected"
+                primary
+                hide-details>
             </v-checkbox>
             <v-btn
                 icon
@@ -98,11 +96,11 @@ export default {
           </td>
         </template>
         <v-alert
-          slot='no-results'
-          :value='true'
-          color='error'
-          icon='warning'
-        >Your search for {{search}} found no results</v-alert>
+            v-show='items.length === 0'
+            :value='true'
+            color='error'
+            icon='warning'
+          >no results</v-alert>
       </v-data-table>
     </v-responsive>
     <v-responsive>

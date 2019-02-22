@@ -35,7 +35,7 @@ export default {
     <v-card-text>
       <v-timeline>
         <v-timeline-item
-            v-for="(item, i) in all"
+            v-for="(item, i) in items"
             color="primary"
             icon="star"
             :key="i"

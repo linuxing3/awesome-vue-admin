@@ -2,10 +2,16 @@
   <v-card>
     <v-card-actions>
       <v-spacer></v-spacer>
+      <v-text-field
+          v-model='filter.search'
+          append-icon='search'
+          label="查询姓名，注意区分大小写"
+          single-line
+        ></v-text-field>
       <v-btn
-          icon
-          class="pink"
           dark
+          icon
+          class="pink ml-5 mr-5"
           @click="showTimeline = !showTimeline"
         >
         <v-icon v-if="showTimeline">list</v-icon>
@@ -19,7 +25,7 @@
     <v-responsive v-show="!showTimeline">
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0">
         <template
             slot="headers"

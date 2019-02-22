@@ -38,7 +38,7 @@ export default {
     <v-responsive>
       <v-data-table
           :headers="headers"
-          :items="all"
+          :items="items"
           class="elevation-0"
         >
         <template

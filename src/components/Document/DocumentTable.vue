@@ -29,6 +29,15 @@ export default {
 
 <template>
   <v-card>
+    <v-card-title v-show='true'>
+      <v-spacer></v-spacer>
+      <v-text-field
+          v-model='filter.search'
+          append-icon='search'
+          label="查询姓名，注意区分大小写"
+          single-line
+        ></v-text-field>
+    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"

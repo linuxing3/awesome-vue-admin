@@ -100,23 +100,21 @@ const getFilesFp = curry(getFilesByExtentionInDir)
 
 /**
  * 返回过滤并排序后的数组items
- * @filterKey: 过滤器，用来模糊查询一个数组中的每个对象的每个字段
+ * @search: 过滤器，用来糊查询一个数组中的每个对象的每个字段
  *  1. 对数组items，使用filter方法，获取每一个item
  *  2. 对每一个item，使用Object.keys方法，获取键值组成的数组
  *  3. 对键值数组，使用some方法，迭代每个键名
- *  4. 对每个键名，代入到item对象，获取每个键值。
+ *  4. 对每个代入到item对象，获取每个键值。
  *  5. 对每一个键值，使用indexOf方法，根据filterkey返回符合条件的数据
  *
  * @sortKey:   用来排序的排序器
  */
-export const baseFilter = (sortKey: string) => (filterKey: string) => (
-  items: any[]
-): any[] => {
-  var filter = filterKey && filterKey.toLowerCase()
+export const baseFilter = ({ sort, search }, items = []): any[] => {
+  var filter = search && search.toLowerCase()
   var order = 1
   var data = items
   data = lazyFilter(filter)(data)
-  data = lazySorter(sortKey)(order)(data)
+  data = lazySorter(sort)(order)(data)
   return data
 }
 
