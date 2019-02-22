@@ -8,9 +8,7 @@ const requireComponent = require.context(
 
 requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)
-  const componentName = upperFirst(
-    camelCase(fileName.replace(/^\.\//, '').replace(/\.w+$/, ''))
-  )
+  const componentName = upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
   Vue.component(componentName, componentConfig.default || componentConfig)
   console.log('GlobalRegistered ' + componentName)
 })

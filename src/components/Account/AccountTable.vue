@@ -18,7 +18,9 @@ export default {
     window.AccountForm = this
   },
   async created () {
-    this.model = await Account.query().where('hash', this.cached[0].hash)[0]
+    let authedAccounts = await Account.query().where('hash', this.cached[0].hash).get()
+    console.table(authedAccounts)
+    this.model =  authedAccounts[0]
   },
   computed: {
     cached: get('entities/account/cached'),
@@ -72,6 +74,17 @@ export default {
             </v-text-field>
           </v-flex>
           <v-flex
+              key="password"
+              lg12
+              md12
+              sm12>
+            <v-text-field
+                name="password"
+                v-model="model['password']"
+                :label="tryT('password')">
+            </v-text-field>
+          </v-flex>
+          <v-flex
               key="email"
               lg12
               md12
@@ -99,7 +112,6 @@ export default {
     <v-card-actions class="pb-3">
       <v-spacer></v-spacer>
       <v-btn
-          v-if="editing"
           color="primary"
           @click="saveAccount(model)">更新</v-btn>
     </v-card-actions>

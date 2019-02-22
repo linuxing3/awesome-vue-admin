@@ -43,7 +43,6 @@
         type="email"
         data-vv-name="model.email"
         prepend-icon="email"
-        required
       ></v-text-field>
     </v-responsive>
 
@@ -59,6 +58,14 @@
         flat
         @click="logout">Logout</v-btn>
     </v-card-actions>
+
+    <v-responsive>
+      <!-- 显示状态信息 -->
+      <SnackBar
+        :snackbar="snackbar"
+      >:(
+      </SnackBar>
+    </v-responsive>
   </v-card>
 </template>
 
@@ -67,6 +74,7 @@ import { get, sync, call } from 'vuex-pathify'
 import { join } from 'path'
 
 import Account from '@/models/Account'
+import AppEvents from '@/util/event'
 
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
@@ -77,41 +85,51 @@ export default {
       modelName: 'account',
       loading: false,
       model: {
-        name: 'embajadachina',
-        password: 'embajadachina',
-        email: 'embajachina@gmail.com',
+        name: '',
+        password: '',
+        email: '',
         hash: '',
-        role: 'manager'
+        role: ''
       },
+      snackbar: {
+        show: false,
+        text: '',
+        color: ''
+      }
     }
   },
   computed: {
-    computeAvatar: () => join(process.env.BASE_URL, 'avatar/man_1.jpg'),
-    currentItem: sync('entities/account/currentItem'),
     loggedIn: sync('entities/account/loggedIn')
   },
   mixins: [ crudMixin, exportMixin ],
-  created () {
+  async created () {
+    await this.init()
+    AppEvents.forEach(item => {
+      this.$on(item.name, item.callback)
+    })
     window.LoginForm = this
   },
   methods: {
     signup: call('entities/account/signup'),
+    init: call('entities/account/init'),
     async login() {
-      // account/signin/signup
-      if ((this.model.name !== '' && this.model.password !== '') || this.model.email !== '') {
+      if (this.model.name !== '' && this.model.password !== '') {
+        // 注册
         await this.signup(this.model)
+        // 过渡
         this.loading = true
+        // 跳转页面
         setTimeout(() => {
           if (this.loggedIn) {
             this.$router.push('/home')
           } else {
             this.loading = false
-            window.getApp.$emit('APP_LOGIN_DATA_INVALID')
+            this.$emit('APP_LOGIN_DATA_INVALID')
           }
         }, 1000)
       } else {
         this.loading = false
-        window.getApp.$emit('APP_LOGIN_FAILED')
+        this.$emit('APP_LOGIN_FAILED')
       }
     },
     logout() {

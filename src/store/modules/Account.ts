@@ -7,6 +7,13 @@ const state = {
   name: 'account',
   items: [],
   cached: [],
+  defaultAccount: {
+    name: 'admin',
+    password: 'admin123',
+    email: 'admin@mfa.gov.cn',
+    hash: '',
+    role: 'manager'
+  },
   currentItem: {},
   loggedIn: false,
   filter: {
@@ -29,53 +36,69 @@ const mutations: any = {
 }
 
 const AccountActions = {
+  // 创建初始化用户
+  async init(ctx: ActionContext<any, any>) {
+    let { name, password, email, role } = ctx.state.defaultAccount
+    console.log('检查默认账户是否存在')
+    let accounts = Account.query().get()
+    if (accounts === undefined || accounts.length === 0 ) {
+      let hash = await bcrypt.hash(password, 10)
+
+      let accountInfo = {
+        name,
+        password,
+        email,
+        role,
+        hash
+      }
+
+      await (Account as any).$create({data: accountInfo})
+      console.log('创建默认账户')
+    }
+  },
+  // 注册用户
   async signup (ctx: ActionContext<any, any>, signupData) {
-    // if exists, return
+    // 按姓名查找账户
     let authedAccount = Account.query().where('name', signupData.name).get()[0]
 
     if (authedAccount === undefined) {
       try {
-        console.log('Account Does not Exists, creating!')
+        console.log('该用户不存在，正在创建!')
 
-        // 1 hash the password
-        signupData.hash = await bcrypt.hash(signupData.password, 10)
+        // 1 加密密码
+        let newHash = await bcrypt.hash(signupData.password, 10)
 
-        // 2 save the password and hash in vuex and localforage
-        await (Account as any).$create({ data: signupData })
-        console.log('Saving account with hash password')
-
-        // 3 check the password and hash
-        let createdAccount = Account.query().where('name', signupData.name).get()[0]
-        console.log(createdAccount)
-
-        let correctHash = (createdAccount as any).hash
-
-        let valid = await bcrypt.compare(signupData.password, correctHash)
-        if (valid) {
-          console.log('Valid password')
-          ctx.dispatch('signin', createdAccount)
-        } else {
-          console.log('Invalid password')
-          ctx.commit('SET_LOGGED_IN', false)
-          return
+        let accountInfo = {
+          ...signupData,
+          hash: newHash
         }
+
+        // 2 保存用户名和加密密码
+        await (Account as any).$create({ data: accountInfo })
+        console.log('保存用户名和加密密码')
+
+        // 3 使用创建后账户，再次尝试登录
+        ctx.dispatch('signup', accountInfo)
+
       } catch (e) {
-        throw new Error('Failed to add new account!')
+        throw new Error('添加新账户失败!')
       }
     } else {
-      console.log('Account Exists, go ahead to login!')
-      // Check account hash and password are correct
-      let authHash = (authedAccount as any).hash
-      let valid = await bcrypt.compare(signupData.password, authHash)
+      console.log('账户已注册，请登录')
+      // 检查用户名和密码
+      let { hash } = authedAccount as any
+      let password = signupData.password
+      let valid = await bcrypt.compare(password, hash)
       if (valid) {
-        console.log('Valid password')
+        console.log('密码验证通过')
         ctx.dispatch('signin', authedAccount)
       } else {
-        console.log('Invalid password')
+        console.log('无效密码')
         ctx.commit('SET_LOGGED_IN', false)
       }
     }
   },
+  // 设置登录状态
   async signin (ctx: ActionContext<any, any>, authData) {
     // 登录状态为真
     ctx.commit('SET_LOGGED_IN', true)

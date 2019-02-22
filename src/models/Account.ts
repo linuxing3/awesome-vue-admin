@@ -6,9 +6,9 @@ export default class Account extends BaseModel {
   static fields () {
     return {
       _id: Model.increment(),
-      name: Model.string('embajadachina'),
-      email: Model.string('embajadachina@gmail.com'),
-      password: Model.string('embajadachina'),
+      name: Model.string(''),
+      email: Model.string(''),
+      password: Model.string(''),
       hash: Model.string(''),
       role: Model.string('')
     }
