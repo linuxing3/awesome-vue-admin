@@ -112,6 +112,7 @@ export default {
   methods: {
     signup: call('entities/account/signup'),
     init: call('entities/account/init'),
+    clearCache: call('entities/account/clearCache'),
     async login () {
       if (this.model.name !== '' && this.model.password !== '') {
         // 注册
@@ -137,6 +138,7 @@ export default {
       this.model.password = ''
       this.model.email = ''
       setTimeout(() => {
+        this.clearCache()
         this.$router.push('/login')
       }, 1000)
     }
