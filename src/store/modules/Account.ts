@@ -37,7 +37,7 @@ const mutations: any = {
 
 const AccountActions = {
   // 创建初始化用户
-  async init(ctx: ActionContext<any, any>) {
+  async init (ctx: ActionContext<any, any>) {
     let { name, password, email, role } = ctx.state.defaultAccount
     console.log('检查默认账户是否存在')
     let accounts = Account.query().get()
@@ -57,7 +57,7 @@ const AccountActions = {
     }
   },
   // 注册用户
-  async signup(ctx: ActionContext<any, any>, signupData) {
+  async signup (ctx: ActionContext<any, any>, signupData) {
     // 按姓名查找账户
     let authedAccount = Account.query()
       .where('name', signupData.name)
@@ -100,7 +100,7 @@ const AccountActions = {
     }
   },
   // 设置登录状态
-  async signin(ctx: ActionContext<any, any>, authData) {
+  async signin (ctx: ActionContext<any, any>, authData) {
     // 登录状态为真
     ctx.commit('SET_LOGGED_IN', true)
     // 缓存用户数据
@@ -114,7 +114,7 @@ const AccountActions = {
     })
   },
   // Logs out the current user.
-  clearCache({ commit }) {
+  clearCache ({ commit }) {
     // 登录状态为真
     commit('SET_LOGGED_IN', false)
     // 缓存用户数据

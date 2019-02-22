@@ -99,7 +99,15 @@ declare class Model {
   static $create(this: any, payload: any): Promise<any>;
 }
 
-interface Window {
-  store: any
-  __INITIAL_STATE__: any
+declare global {
+  /**
+   * index Signiture to allow any property
+   */
+  [propName: string]: any
+  interface Window {
+    $app: any
+    $shell: any
+    store: any
+    __INITIAL_STATE__: any
+  }
 }
