@@ -45,9 +45,3 @@
     })
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-  "js": ["https://use.fontawesome.com/releases/v5.0.6/js/all.js"]
-  }
-</codepen-resources>

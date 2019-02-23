@@ -13,9 +13,3 @@
     <v-icon>fas fa-circle-notch fa-spin</v-icon>
   </v-layout>
 </template>
-
-<codepen-resources lang="json">
-  {
-    "css": ["https://use.fontawesome.com/releases/v5.1.0/css/all.css"]
-  }
-</codepen-resources>
