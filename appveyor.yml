@@ -36,6 +36,7 @@ cache:
   - '%APPDATA%\npm-cache'
 
 build_script:
+  - yarn lint
   - yarn electron:build
 
 skip_tags: true
