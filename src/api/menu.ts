@@ -81,6 +81,13 @@ const mainMenu = [
     icon: 'store',
     name: 'database',
     color: 'black'
+  },
+  {
+    title: '演示场',
+    group: 'apps',
+    icon: 'star',
+    name: 'play',
+    color: 'black'
   }
 ]
 

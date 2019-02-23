@@ -42,5 +42,16 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
         `@/views/Error.vue`)
+  },
+  {
+    path: '/play',
+    meta: {
+      public: true
+    },
+    name: 'play',
+    component: () =>
+      import(/* webpackChunkName: "routes" */
+      /* webpackMode: "lazy" */
+        `@/views/Play.vue`)
   }
 ]
