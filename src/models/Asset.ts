@@ -1,4 +1,4 @@
-import { BaseModel} from "./BaseModel";
+import { BaseModel } from './BaseModel'
 
 export interface IAsset {
    _id: string;
@@ -12,18 +12,18 @@ export interface IAsset {
 }
 
 export default class Asset extends BaseModel {
-  static entity = "asset";
+  static entity = 'asset';
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
-      name: this.string("none"),
-      brand: this.string("brand"),
-      unit: this.string("unit"),
-      quantity: this.string("quantity"),
-      price: this.string("price"),
-      total: this.string("total"),
-      note: this.string("note")
-    };
+      name: this.string('none'),
+      brand: this.string('brand'),
+      unit: this.string('unit'),
+      quantity: this.string('quantity'),
+      price: this.string('price'),
+      total: this.string('total'),
+      note: this.string('note')
+    }
   }
 }

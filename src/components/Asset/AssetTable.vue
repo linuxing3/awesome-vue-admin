@@ -5,18 +5,18 @@ import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'asset'
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  created() {
+  created () {
     window.AssetTable = this
   },
   methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.AssetForm.$emit('SET_EDITING', item)
     }
   }

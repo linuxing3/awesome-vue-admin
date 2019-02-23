@@ -32,8 +32,8 @@
             slot-scope="props">
           <tr>
             <th
-              class='text-xs-left'
-              key='action'>
+                class='text-xs-left'
+                key='action'>
               {{ $t('action') }}
             </th>
             <th

@@ -1,7 +1,7 @@
 <template>
   <v-dialog
-    v-model='dialog'
-  >
+      v-model='dialog'
+    >
     <v-card
         class="elevation-1 pa-3 mt-5">
       <v-card-text>
@@ -33,6 +33,7 @@
             :loading="loading">Export</v-btn>
         <v-btn
             class="ml-3 mr-5"
+            @click="$emit('TOGGLE')"
             flat>Cancel</v-btn>
       </v-card-actions>
     </v-card>
@@ -47,12 +48,20 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   props: {
     item: {},
-    modelName: 'user',
-    dialog: true,
+    modelName: user
+  },
+  data: () => ({
+    dialog: false
+  }),
+  created () {
+    this.$on('TOGGLE', () => {
+      this.dialog = !this.dialog
+    })
+    window.ExportDialog = this
   },
   mixins: [ crudMixin, exportMixin ],
   methods: {
-    exportToWord() {
+    exportToWord () {
       this.changeCSVHeader()
       this.copyModelNameCSV()
       shell.openItem(this.modelTemplate)

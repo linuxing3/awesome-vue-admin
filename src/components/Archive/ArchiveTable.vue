@@ -5,18 +5,18 @@ import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'archive'
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  created() {
+  created () {
     window.ArchiveTable = this
   },
   methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.ArchiveForm.$emit('SET_EDITING', item)
     }
   }

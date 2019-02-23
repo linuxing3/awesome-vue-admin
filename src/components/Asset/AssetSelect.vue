@@ -5,18 +5,18 @@ import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
-  data() {
+  data () {
     return {
       model: {},
       modelName: 'asset'
     }
   },
   mixins: [ crudMixin, exportMixin ],
-  created() {
+  created () {
     window.AssetSelect = this
   },
   methods: {
-    change() {
+    change () {
       this.$emit('Asset_CHANGED', this.model._id)
     }
   }

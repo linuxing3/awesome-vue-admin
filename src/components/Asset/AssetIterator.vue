@@ -9,21 +9,21 @@ export default {
   components: {
     AssetForm
   },
-  data() {
+  data () {
     return {
       modelName: 'asset'
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  created() {
+  created () {
     window.AssetIterator = this
   },
   methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.AssetForm.$emit('SET_EDITING', item)
     }
-  },
+  }
 }
 </script>
 

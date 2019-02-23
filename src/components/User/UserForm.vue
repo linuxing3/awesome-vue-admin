@@ -23,8 +23,8 @@ export default {
     selectUsers: () => map(pick(['_id', 'name']), User.all())
   },
   methods: {
-    openExportDialog(item) {
-      console.log('Open dialog')
+    openExportDialog (item) {
+      window.ExportDialog.$emit('TOGGLE')
     }
   }
 }
@@ -101,7 +101,9 @@ export default {
           flat
           @click.native='mergeWordApp'>合并打印</v-btn>
     </v-card-actions>
-    <!-- <ExportDialog :dialog="dialog" :item="model" :modelName="modelName" ></ExportDialog> -->
+    <ExportDialog
+        :item="model"
+        :modelName="modelName" ></ExportDialog>
   </v-card>
 </template>
 <style scoped>
