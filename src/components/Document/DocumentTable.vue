@@ -1,14 +1,10 @@
 <script>
 import Document from '@/models/Document'
-import DocumentForm from './DocumentForm'
 
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
-  components: {
-    DocumentForm
-  },
   data () {
     return {
       modelName: 'document'
@@ -87,9 +83,6 @@ export default {
           </td>
         </template>
       </v-data-table>
-    </v-responsive>
-    <v-responsive>
-      <DocumentForm></DocumentForm>
     </v-responsive>
   </v-card>
 </template>

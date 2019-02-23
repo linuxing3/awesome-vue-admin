@@ -66,6 +66,7 @@
     <SnackBar
         :snackbar="snackbar"
       ></SnackBar>
+
   </div>
 </template>
 <script>

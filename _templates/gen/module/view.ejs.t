@@ -1,8 +1,8 @@
 ---
-to: "src/views/<%= h.capitalize(name) %>.vue"
+to: "src/views/<%= h.capitalize(model) %>.vue"
 ---
 <%
-  const fileName = h.capitalize(name)
+  const fileName = h.capitalize(model)
 %><template>
   <DefaultLayout>
     <<%= fileName %>Table></<%= fileName %>Table>

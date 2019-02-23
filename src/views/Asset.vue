@@ -1,7 +1,7 @@
 <template>
   <DefaultLayout>
-    <UserTable></UserTable>
-    <UserForm></UserForm>
+    <AssetTable></AssetTable>
+    <AssetForm></AssetForm>
   </DefaultLayout>
 </template>
 
@@ -9,15 +9,15 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DefaultLayout from '@/layout/default.vue'
 
-import UserTable from '@/components/User/UserTable.vue'
-import UserForm from '@/components/User/UserForm.vue'
+import AssetTable from '@/components/Asset/AssetTable.vue'
+import AssetForm from '@/components/Asset/AssetForm.vue'
 
 @Component({
   components: {
     DefaultLayout,
-    UserTable,
-    UserForm
+    AssetTable,
+    AssetForm
   }
 })
-export default class User extends Vue {}
+export default class Asset extends Vue {}
 </script>

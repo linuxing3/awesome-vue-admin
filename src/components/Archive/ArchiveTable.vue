@@ -1,12 +1,5 @@
----
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.vue'
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import <%= modelName %> from '@/models/<%= modelName %>'
+<script>
+import Archive from '@/models/Archive'
 
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
@@ -14,17 +7,17 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data() {
     return {
-      modelName: '<%= modelName.toLowerCase() %>'
+      modelName: 'archive'
     }
   },
   mixins: [ exportMixin, crudMixin ],
   created() {
-    window.<%= modelTableName %> = this
+    window.ArchiveTable = this
   },
   methods: {
     editItem(item) {
       this.$emit('SET_EDITING', item);
-      window.<%= modelFormName %>.$emit('SET_EDITING', item)
+      window.ArchiveForm.$emit('SET_EDITING', item)
     }
   }
 }

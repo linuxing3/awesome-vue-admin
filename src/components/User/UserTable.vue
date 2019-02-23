@@ -1,14 +1,8 @@
 <script>
-import User from '@/models/User'
-import UserForm from './UserForm'
-
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
-  components: {
-    UserForm
-  },
   data () {
     return {
       selected: [],
@@ -44,7 +38,6 @@ export default {
           v-model='selected'
           :headers='headers'
           :items='items'
-          select-all
           class='elevation-0'
         >
         <template
@@ -68,12 +61,6 @@ export default {
             slot='items'
             slot-scope='props'>
           <td class='justify-center layout px-0'>
-            <v-checkbox
-                v-show='false'
-                v-model="props.selected"
-                primary
-                hide-details>
-            </v-checkbox>
             <v-btn
                 icon
                 class='mx-0'
@@ -95,16 +82,7 @@ export default {
             {{ props.item[header] }}
           </td>
         </template>
-        <v-alert
-            v-show='items.length === 0'
-            :value='true'
-            color='error'
-            icon='warning'
-          >no results</v-alert>
       </v-data-table>
-    </v-responsive>
-    <v-responsive>
-      <UserForm></UserForm>
     </v-responsive>
   </v-card>
 </template>

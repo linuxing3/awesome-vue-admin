@@ -22,6 +22,10 @@ export default {
     },
     // 数据对象的实例数组，包含有关系的其他数据
     all (): any[] {
+      return this.Model.query().get()
+    },
+    // 数据对象的实例数组，包含有关系的其他数据
+    witAll (): any[] {
       return this.Model.query()
         .withAll()
         .get()

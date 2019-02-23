@@ -9,7 +9,8 @@ const EntityName = h.inflection.singularize(model).toLowerCase()
 export interface I<%= ModelName %> {
    _id: string;
    <%= fieldName %>: <%= fieldType %>;
-   <% fieldNames.split(",").map(field => { %><%= field %>: string;<% }) %>
+   <% fieldNames.split(",").map(field => { %><%= field %>: string;
+   <% }) %>
 }
 
 export default class <%= ModelName %> extends BaseModel {

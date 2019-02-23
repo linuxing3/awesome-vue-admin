@@ -20,7 +20,16 @@
       <v-layout wrap>
         <v-flex
             sm6
-            lg6>
+            lg2>
+          <v-text-field
+              name="_id"
+              :label="$t('_id')"
+              v-model="model['_id']"
+            ></v-text-field>
+        </v-flex>
+        <v-flex
+            sm6
+            lg3>
           <v-text-field
               name="applicant"
               :label="$t('applicant')"
@@ -29,7 +38,7 @@
         </v-flex>
         <v-flex
             sm6
-            lg6>
+            lg3>
           <v-menu
               class="pr-2"
               ref="occurenceDate"
@@ -69,11 +78,14 @@
         <v-flex
             sm12
             lg12>
-          <v-text-field
+          <v-textarea
+              outline
+              multi-line
+              auto-grow
               name="content"
               :label="$t('content')"
               v-model="model['content']"
-            ></v-text-field>
+            ></v-textarea>
         </v-flex>
         <v-flex
             sm4
@@ -226,11 +238,13 @@
         <v-flex
             sm12
             lg12>
-          <v-text-field
+          <v-textarea
+              outline
+              multi-line
               name="reportContent"
               :label="$t('reportContent')"
               v-model="model['reportContent']"
-            ></v-text-field>
+            ></v-textarea>
         </v-flex>
         <v-flex
             sm6
@@ -274,11 +288,14 @@
         <v-flex
             sm12
             lg12>
-          <v-text-field
+          <v-textarea
+              outline
+              multi-line
+              auto-grow
               name="instruction"
               :label="$t('instruction')"
               v-model="model['instruction']"
-            ></v-text-field>
+            ></v-textarea>
         </v-flex>
       </v-layout>
     </v-card-text>

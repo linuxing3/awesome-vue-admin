@@ -102,6 +102,9 @@ export default {
      * 导出数据函数
      */
     exportItem (item) {
+      this.exportCSV(item)
+    },
+    exportCSV (item) {
       console.log(`导出${this.modelName}.csv文件...`)
       GenerateCSV({
         data: item,
@@ -110,6 +113,7 @@ export default {
         needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
         onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
       })
+      console.log(`导出${this.modelName}.csv文件成功`)
     },
     /**
      * 导出文件修改标题函数

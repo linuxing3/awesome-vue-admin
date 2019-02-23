@@ -23,7 +23,7 @@ export default class Evaluation extends BaseModel {
       date: this.string('2019-1-1'),
       level: this.string('Good'),
       proposal: this.string('Promotion'),
-      chief: this.string('chief')
+      manager: this.string('manager')
     }
   }
 }

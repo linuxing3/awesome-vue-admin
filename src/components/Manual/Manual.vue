@@ -1,7 +1,7 @@
 <template>
   <div id="pageCard">
     <v-container
-        grid-list-xl
+        grid-list-lg
         fluid>
       <v-layout
           row
@@ -18,20 +18,21 @@
           <v-card
               :color="item.color || 'indigo'"
               dark>
-            <v-card-title class="pb-0">
-              <router-link
-                  class="white--text"
-                  :to="'/' + item.name">
-                <h2>{{ $t(item.name) || capitalize }}</h2>
-              </router-link>
-              <v-spacer></v-spacer>
-            </v-card-title>
-            <v-card-actions>
+            <v-card-title>
               <v-btn
                   @click="go(item)"
                   icon>
                 <v-icon>{{item.icon}}</v-icon>
               </v-btn>
+              <router-link
+                  class="white--text"
+                  :to="'/' + item.name">
+                <h2>{{ $t('entity.'+ item.name) }}</h2>
+              </router-link>
+              <v-spacer></v-spacer>
+            </v-card-title>
+            <v-card-actions>
+              <v-spacer></v-spacer>
               <v-btn
                   @click="go(item)"
                   flat
@@ -46,14 +47,14 @@
 
 <script>
 import { join } from 'path'
-import items from '@/api/menu'
+import { menuItems } from '@/api/menu'
 
 export default {
   data () {
     return {
       show: true,
       cardText: '请查看手册, 了解具体使用方法',
-      items: items
+      items: menuItems
     }
   },
   computed: {
@@ -73,9 +74,3 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scoped>
-  .mt-45
-    margin-top: -45px
-  .mt-56
-    margin-top: -56px
-</style>

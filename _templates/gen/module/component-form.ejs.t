@@ -1,31 +1,25 @@
-<script>
-import { map, pick, pullAll } from 'lodash/fp'
-import User from '@/models/User'
-
-import Entity from '@/models/Entity'
+---
+to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue'
+---
+<%
+  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
+  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+%><script>
+import <%= modelName %> from '@/models/<%= modelName %>'
 
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
-  data () {
+  data() {
     return {
-      dialog: false,
-      modelName: 'user'
+      modelName: '<%= modelName.toLowerCase() %>'
     }
   },
   mixins: [ crudMixin, exportMixin ],
-  created () {
-    window.UserForm = this
-  },
-  computed: {
-    selectEntities: () => map(pick(['_id', 'name']), Entity.all()),
-    selectUsers: () => map(pick(['_id', 'name']), User.all())
-  },
-  methods: {
-    openExportDialog(item) {
-      console.log('Open dialog')
-    }
+  created() {
+    window.<%= modelFormName %> = this
   }
 }
 </script>
@@ -52,8 +46,8 @@ export default {
       <v-form>
         <v-layout wrap>
           <v-flex
-              v-for='field in nonRelationFields'
-              :key="field"
+              v-for='field in fields'
+              :key='field'
               lg6
               sm6>
             <v-text-field
@@ -61,30 +55,6 @@ export default {
                 :name='field'
                 :label='tryT(field) '>
             </v-text-field>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['sendingEntity_id']"
-                key="sendingEntity_id"
-                :label=" $t('sendingEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['fromEntity_id']"
-                key="fromEntity_id"
-                :label=" $t('fromEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
           </v-flex>
         </v-layout>
       </v-form>
@@ -101,7 +71,6 @@ export default {
           flat
           @click.native='mergeWordApp'>合并打印</v-btn>
     </v-card-actions>
-    <!-- <ExportDialog :dialog="dialog" :item="model" :modelName="modelName" ></ExportDialog> -->
   </v-card>
 </template>
 <style scoped>

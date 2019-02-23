@@ -32,6 +32,11 @@
             slot-scope="props">
           <tr>
             <th
+              class='text-xs-left'
+              key='action'>
+              {{ $t('action') }}
+            </th>
+            <th
                 v-for="header in props.headers"
                 class="text-xs-left"
                 :key="header">
@@ -42,14 +47,6 @@
         <template
             slot="items"
             slot-scope="props">
-          <td
-              class="text-xs-left"
-              :key="header"
-              :autocomplete="props.item[header]"
-              v-for="header in headers"
-            >
-            {{ props.item[header] }}
-          </td>
           <td class="justify-center layout px-0">
             <v-btn
                 icon
@@ -63,32 +60,28 @@
                 @click="deleteItem(props.item);">
               <v-icon color="pink">delete</v-icon>
             </v-btn>
-            <v-btn
-                icon
-                class="mx-0"
-                @click="exportItem(props.item);">
-              <v-icon color="pink">fas fa-print</v-icon>
-            </v-btn>
+          </td>
+          <td
+              class="text-xs-left"
+              :key="header"
+              :autocomplete="props.item[header]"
+              v-for="header in headers"
+            >
+            {{ props.item[header] }}
           </td>
         </template>
       </v-data-table>
-    </v-responsive>
-    <v-responsive>
-      <ActivityForm></ActivityForm>
     </v-responsive>
   </v-card>
 </template>
 <script lang="js">
 import Activity from '@/models/Activity'
-import ActivityForm from './ActivityForm'
-// import ActivityTimeline from './ActivityTimeline'
 
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
-    ActivityForm,
     ActivityTimeline: () => import('./ActivityTimeline')
   },
   data () {
