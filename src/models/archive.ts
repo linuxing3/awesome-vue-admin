@@ -1,5 +1,4 @@
 import { BaseModel } from './BaseModel'
-import Document from './Document'
 import User from './User'
 import Entity from './Entity'
 
