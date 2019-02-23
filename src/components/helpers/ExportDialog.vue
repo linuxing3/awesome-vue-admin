@@ -47,8 +47,14 @@ import exportMixin from '@/mixins/exportMixin'
 
 export default {
   props: {
-    item: {},
-    modelName: user
+    item: {
+      type: Object,
+      default: {}
+    },
+    modelName: {
+      type: String,
+      default: ''
+    }
   },
   data: () => ({
     dialog: false
