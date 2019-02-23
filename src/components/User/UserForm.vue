@@ -10,7 +10,6 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      dialog: false,
       modelName: 'user'
     }
   },
