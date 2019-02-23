@@ -6,9 +6,9 @@
           <v-card>
             <v-card-text>
               <v-pagination
-                v-model="page"
-                :length="15"
-              ></v-pagination>
+                  v-model="page"
+                  :length="15"
+                ></v-pagination>
             </v-card-text>
           </v-card>
         </v-flex>
@@ -18,11 +18,11 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        page: 1
-      }
+export default {
+  data () {
+    return {
+      page: 1
     }
   }
+}
 </script>

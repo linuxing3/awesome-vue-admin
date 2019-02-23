@@ -1,11 +1,13 @@
 <template>
   <div>
     <v-text-field
-      v-model="gradient"
-      label="Gradient"
-    ></v-text-field>
+        v-model="gradient"
+        label="Gradient"
+      ></v-text-field>
 
-    <v-jumbotron :gradient="gradient" dark>
+    <v-jumbotron
+        :gradient="gradient"
+        dark>
       <v-container fill-height>
         <v-layout align-center>
           <v-flex text-xs-center>
@@ -18,9 +20,9 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      gradient: 'to top, #7B1FA2, #E1BEE7'
-    })
-  }
+export default {
+  data: () => ({
+    gradient: 'to top, #7B1FA2, #E1BEE7'
+  })
+}
 </script>

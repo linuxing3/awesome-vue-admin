@@ -1,13 +1,23 @@
 <template>
   <v-container fluid>
-    <v-slider v-model="width" min="200" max="500" step="1"></v-slider>
+    <v-slider
+        v-model="width"
+        min="200"
+        max="500"
+        step="1"></v-slider>
     <v-navigation-drawer
-      :width="width"
-      :value="true"
-      stateless
-    >
-      <v-img :aspect-ratio="16/9" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
-        <v-layout pa-2 column fill-height class="lightbox white--text">
+        :width="width"
+        :value="true"
+        stateless
+      >
+      <v-img
+          :aspect-ratio="16/9"
+          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+        <v-layout
+            pa-2
+            column
+            fill-height
+            class="lightbox white--text">
           <v-spacer></v-spacer>
           <v-flex shrink>
             <div class="subheading">Jonathan Lee</div>
@@ -18,8 +28,13 @@
 
       <v-list>
         <template v-for="(item, i) in items">
-          <v-divider v-if="item.divider" :key="i"></v-divider>
-          <v-list-tile v-else :key="item.title" @click>
+          <v-divider
+              v-if="item.divider"
+              :key="i"></v-divider>
+          <v-list-tile
+              v-else
+              :key="item.title"
+              @click>
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -32,21 +47,21 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      width: 300,
-      items: [
-        { icon: 'inbox', title: 'Inbox' },
-        { icon: 'star', title: 'Starred' },
-        { icon: 'send', title: 'Sent mail' },
-        { icon: 'drafts', title: 'Drafts' },
-        { divider: true },
-        { icon: 'mail', title: 'All mail' },
-        { icon: 'delete', title: 'Trash' },
-        { icon: 'error', title: 'Spam' }
-      ]
-    })
-  }
+export default {
+  data: () => ({
+    width: 300,
+    items: [
+      { icon: 'inbox', title: 'Inbox' },
+      { icon: 'star', title: 'Starred' },
+      { icon: 'send', title: 'Sent mail' },
+      { icon: 'drafts', title: 'Drafts' },
+      { divider: true },
+      { icon: 'mail', title: 'All mail' },
+      { icon: 'delete', title: 'Trash' },
+      { icon: 'error', title: 'Spam' }
+    ]
+  })
+}
 </script>
 
 <style scoped>

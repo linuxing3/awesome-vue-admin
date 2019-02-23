@@ -1,10 +1,10 @@
 <template>
   <v-card
-    color="grey lighten-4"
-    flat
-    height="200px"
-    tile
-  >
+      color="grey lighten-4"
+      flat
+      height="200px"
+      tile
+    >
     <v-toolbar dense>
       <v-toolbar-side-icon></v-toolbar-side-icon>
 

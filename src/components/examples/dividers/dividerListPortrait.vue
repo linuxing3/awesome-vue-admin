@@ -1,21 +1,29 @@
 <template>
   <v-layout justify-center>
-    <v-flex xs12 sm8>
+    <v-flex
+        xs12
+        sm8>
       <v-card>
         <v-card-title class="cyan darken-1">
           <span class="headline white--text">Sarah Mcbeal</span>
 
           <v-spacer></v-spacer>
 
-          <v-btn dark icon>
+          <v-btn
+              dark
+              icon>
             <v-icon>chevron_left</v-icon>
           </v-btn>
 
-          <v-btn dark icon>
+          <v-btn
+              dark
+              icon>
             <v-icon>edit</v-icon>
           </v-btn>
 
-          <v-btn dark icon>
+          <v-btn
+              dark
+              icon>
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-card-title>
@@ -77,9 +85,9 @@
         </v-list>
 
         <v-img
-          src="https://picsum.photos/700?image=996"
-          height="200px"
-        ></v-img>
+            src="https://picsum.photos/700?image=996"
+            height="200px"
+          ></v-img>
       </v-card>
     </v-flex>
   </v-layout>

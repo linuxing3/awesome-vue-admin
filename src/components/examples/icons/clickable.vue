@@ -1,11 +1,11 @@
 <template>
   <v-card>
     <v-toolbar
-      card
-      color="pink"
-      dark
-      dense
-    >
+        card
+        color="pink"
+        dark
+        dense
+      >
       <v-toolbar-title class="body-2">Upcoming Changes</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
@@ -15,9 +15,9 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-icon
-        large
-        @click="next"
-      >
+          large
+          @click="next"
+        >
         mdi-chevron-right
       </v-icon>
     </v-card-actions>
@@ -25,13 +25,11 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      next () {
-        alert('You clicked next!')
-      }
+export default {
+  methods: {
+    next () {
+      alert('You clicked next!')
     }
   }
+}
 </script>
-
-

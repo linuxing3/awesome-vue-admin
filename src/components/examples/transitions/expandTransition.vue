@@ -2,14 +2,16 @@
   <div class="text-xs-center">
     <v-layout justify-space-around>
       <v-btn
-        dark
-        color="primary"
-        @click="expand = !expand"
-      >Expand Transition</v-btn>
+          dark
+          color="primary"
+          @click="expand = !expand"
+        >Expand Transition</v-btn>
 
       <v-flex shrink>
         <v-expand-x-transition>
-          <div v-show="expand" style="white-space: nowrap">
+          <div
+              v-show="expand"
+              style="white-space: nowrap">
             <v-btn flat>
               <v-icon>star_border</v-icon>
             </v-btn>
@@ -40,9 +42,9 @@
   </div>
 </template>
 <script>
-  export default {
-    data: () => ({
-      expand: false
-    })
-  }
+export default {
+  data: () => ({
+    expand: false
+  })
+}
 </script>

@@ -1,16 +1,16 @@
 <template>
   <v-container
-    id="input-usage"
-    grid-list-xl
-    fluid
-  >
+      id="input-usage"
+      grid-list-xl
+      fluid
+    >
     <v-layout wrap>
       <v-flex xs12>
         <v-input
-          :messages="['Messages']"
-          append-icon="close"
-          prepend-icon="phone"
-        >
+            :messages="['Messages']"
+            append-icon="close"
+            prepend-icon="phone"
+          >
           Default Slot
         </v-input>
       </v-flex>
@@ -19,17 +19,17 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        text: ''
-      }
-    },
-    methods: {
-      appendIconCallback () {},
-      prependIconCallback () {}
+export default {
+  data () {
+    return {
+      text: ''
     }
+  },
+  methods: {
+    appendIconCallback () {},
+    prependIconCallback () {}
   }
+}
 </script>
 
 <style>

@@ -12,12 +12,14 @@
 
     <v-divider></v-divider>
 
-    <v-list dense class="pt-0">
+    <v-list
+        dense
+        class="pt-0">
       <v-list-tile
-        v-for="item in items"
-        :key="item.title"
-        @click=""
-      >
+          v-for="item in items"
+          :key="item.title"
+          @click=""
+        >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
@@ -31,15 +33,15 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
-      }
+export default {
+  data () {
+    return {
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+        { title: 'About', icon: 'question_answer' }
+      ],
+      right: null
     }
   }
+}
 </script>

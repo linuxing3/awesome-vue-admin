@@ -2,19 +2,19 @@
   <div class="text-xs-center">
     <v-bottom-sheet inset>
       <v-btn
-        slot="activator"
-        color="red"
-        dark
-      >
+          slot="activator"
+          color="red"
+          dark
+        >
         Show player
       </v-btn>
 
       <v-card tile>
         <v-progress-linear
-          :value="50"
-          class="my-0"
-          height="3"
-        ></v-progress-linear>
+            :value="50"
+            class="my-0"
+            height="3"
+          ></v-progress-linear>
 
         <v-list>
           <v-list-tile>

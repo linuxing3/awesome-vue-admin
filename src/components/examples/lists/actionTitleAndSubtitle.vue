@@ -1,8 +1,13 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+        xs12
+        sm6
+        offset-sm3>
       <v-card>
-        <v-toolbar color="purple" dark>
+        <v-toolbar
+            color="purple"
+            dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Settings</v-toolbar-title>
@@ -15,9 +20,9 @@
         </v-toolbar>
 
         <v-list
-          subheader
-          three-line
-        >
+            subheader
+            three-line
+          >
           <v-subheader>User Controls</v-subheader>
 
           <v-list-tile>
@@ -38,15 +43,15 @@
         <v-divider></v-divider>
 
         <v-list
-          subheader
-          three-line
-        >
+            subheader
+            three-line
+          >
           <v-subheader>General</v-subheader>
           <v-list-tile @click="">
             <v-list-tile-action>
               <v-checkbox
-                v-model="notifications"
-              ></v-checkbox>
+                  v-model="notifications"
+                ></v-checkbox>
             </v-list-tile-action>
 
             <v-list-tile-content @click.prevent="notifications = !notifications">
@@ -58,8 +63,8 @@
           <v-list-tile @click="">
             <v-list-tile-action>
               <v-checkbox
-                v-model="sound"
-              ></v-checkbox>
+                  v-model="sound"
+                ></v-checkbox>
             </v-list-tile-action>
 
             <v-list-tile-content @click.prevent="sound = !sound">
@@ -71,8 +76,8 @@
           <v-list-tile @click="">
             <v-list-tile-action>
               <v-checkbox
-                v-model="widgets"
-              ></v-checkbox>
+                  v-model="widgets"
+                ></v-checkbox>
             </v-list-tile-action>
 
             <v-list-tile-content @click.prevent="widgets = !widgets">
@@ -87,13 +92,13 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        notifications: false,
-        sound: true,
-        widgets: false
-      }
+export default {
+  data () {
+    return {
+      notifications: false,
+      sound: true,
+      widgets: false
     }
   }
+}
 </script>

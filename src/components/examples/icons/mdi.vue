@@ -13,5 +13,3 @@
     <v-icon>mdi-mouse</v-icon>
   </v-layout>
 </template>
-
-

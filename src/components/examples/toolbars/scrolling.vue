@@ -1,15 +1,15 @@
 <template>
   <div
-    class="hide-overflow"
-    style="position: relative;"
-  >
-    <v-toolbar
-      absolute
-      color="teal lighten-3"
-      dark
-      scroll-off-screen
-      scroll-target="#scrolling-techniques"
+      class="hide-overflow"
+      style="position: relative;"
     >
+    <v-toolbar
+        absolute
+        color="teal lighten-3"
+        dark
+        scroll-off-screen
+        scroll-target="#scrolling-techniques"
+      >
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>
@@ -29,10 +29,10 @@
       </v-btn>
     </v-toolbar>
     <div
-      id="scrolling-techniques"
-      class="scroll-y"
-      style="max-height: 600px;"
-    >
+        id="scrolling-techniques"
+        class="scroll-y"
+        style="max-height: 600px;"
+      >
       <v-container style="height: 1000px;"></v-container>
     </div>
   </div>

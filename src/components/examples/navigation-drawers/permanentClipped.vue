@@ -1,15 +1,15 @@
 <template>
   <v-navigation-drawer
-    class="blue lighten-3"
-    dark
-    permanent
-  >
+      class="blue lighten-3"
+      dark
+      permanent
+    >
     <v-list>
       <v-list-tile
-        v-for="item in items"
-        :key="item.title"
-        @click=""
-      >
+          v-for="item in items"
+          :key="item.title"
+          @click=""
+        >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-tile-action>
@@ -23,15 +23,15 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Dashboard', icon: 'dashboard' },
-          { title: 'Account', icon: 'account_box' },
-          { title: 'Admin', icon: 'gavel' }
-        ]
-      }
+export default {
+  data () {
+    return {
+      items: [
+        { title: 'Dashboard', icon: 'dashboard' },
+        { title: 'Account', icon: 'account_box' },
+        { title: 'Admin', icon: 'gavel' }
+      ]
     }
   }
+}
 </script>

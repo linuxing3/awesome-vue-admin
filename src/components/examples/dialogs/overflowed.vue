@@ -1,7 +1,14 @@
 <template>
-  <v-layout row justify-center>
-    <v-dialog v-model="dialog" width="600px">
-      <v-btn slot="activator" color="primary" dark>Open Dialog</v-btn>
+  <v-layout
+      row
+      justify-center>
+    <v-dialog
+        v-model="dialog"
+        width="600px">
+      <v-btn
+          slot="activator"
+          color="primary"
+          dark>Open Dialog</v-btn>
       <v-card>
         <v-card-title>
           <span class="headline">Use Google's location service?</span>
@@ -19,8 +26,14 @@
           +</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat="flat" @click="dialog = false">Disagree</v-btn>
-          <v-btn color="green darken-1" flat="flat" @click="dialog = false">Agree</v-btn>
+          <v-btn
+              color="green darken-1"
+              flat="flat"
+              @click="dialog = false">Disagree</v-btn>
+          <v-btn
+              color="green darken-1"
+              flat="flat"
+              @click="dialog = false">Agree</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,11 +41,11 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        dialog: false
-      }
+export default {
+  data () {
+    return {
+      dialog: false
     }
   }
+}
 </script>

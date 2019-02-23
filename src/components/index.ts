@@ -24,14 +24,14 @@ requireComponent.keys().forEach(fileName => {
 const examples = {}
 const requireExamples = require.context(
   '@/components/examples', true, /\.vue$/
-  )
-  
+)
+
 requireExamples.keys().forEach(fileName => {
   const componentExample = requireExamples(fileName)
   const componentName = 'Example' + upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
   examples[componentName] = () => componentExample.default || componentExample
 })
-  
+
 export const exampleList = keys(examples)
 console.log('Lazy Registered Components:')
 console.table(exampleList)

@@ -14,7 +14,9 @@
       </v-stepper-header>
     </v-stepper>
 
-    <v-stepper alt-labels class="mt-5">
+    <v-stepper
+        alt-labels
+        class="mt-5">
       <v-stepper-header>
 
         <v-stepper-step step="1">Ad unit details</v-stepper-step>

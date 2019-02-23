@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-toolbar color="cyan" dark tabs>
+    <v-toolbar
+        color="cyan"
+        dark
+        tabs>
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-toolbar-title>Page title</v-toolbar-title>
@@ -16,21 +19,25 @@
       </v-btn>
 
       <v-tabs
-        slot="extension"
-        v-model="tab"
-        color="cyan"
-        align-with-title
-      >
+          slot="extension"
+          v-model="tab"
+          color="cyan"
+          align-with-title
+        >
         <v-tabs-slider color="yellow"></v-tabs-slider>
 
-        <v-tab v-for="item in items" :key="item">
+        <v-tab
+            v-for="item in items"
+            :key="item">
           {{ item }}
         </v-tab>
       </v-tabs>
     </v-toolbar>
 
     <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
+      <v-tab-item
+          v-for="item in items"
+          :key="item">
         <v-card flat>
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
@@ -40,15 +47,15 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        tab: null,
-        items: [
-          'web', 'shopping', 'videos', 'images', 'news'
-        ],
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-      }
+export default {
+  data () {
+    return {
+      tab: null,
+      items: [
+        'web', 'shopping', 'videos', 'images', 'news'
+      ],
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
   }
+}
 </script>

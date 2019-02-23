@@ -1,10 +1,12 @@
 <template>
   <v-card
-    color="grey lighten-4"
-    flat
-    height="200px"
-  >
-    <v-toolbar color="grey darken-1" dark>
+      color="grey lighten-4"
+      flat
+      height="200px"
+    >
+    <v-toolbar
+        color="grey darken-1"
+        dark>
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <v-menu :nudge-width="100">
@@ -15,10 +17,10 @@
 
         <v-list>
           <v-list-tile
-            v-for="item in items"
-            :key="item"
-            @click=""
-          >
+              v-for="item in items"
+              :key="item"
+              @click=""
+            >
             <v-list-tile-title v-text="item"></v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -42,11 +44,11 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      items: [
-        'All', 'Family', 'Friends', 'Coworkers'
-      ]
-    })
-  }
+export default {
+  data: () => ({
+    items: [
+      'All', 'Family', 'Friends', 'Coworkers'
+    ]
+  })
+}
 </script>

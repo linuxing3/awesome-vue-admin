@@ -1,14 +1,21 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+        xs12
+        sm6
+        offset-sm3>
       <v-card>
-        <v-toolbar color="teal" dark>
+        <v-toolbar
+            color="teal"
+            dark>
           <v-toolbar-side-icon></v-toolbar-side-icon>
 
           <v-toolbar-title>Settings</v-toolbar-title>
         </v-toolbar>
 
-        <v-list two-line subheader>
+        <v-list
+            two-line
+            subheader>
           <v-subheader>General</v-subheader>
 
           <v-list-tile avatar>
@@ -29,9 +36,9 @@
         <v-divider></v-divider>
 
         <v-list
-          subheader
-          two-line
-        >
+            subheader
+            two-line
+          >
           <v-subheader>Hangout notifications</v-subheader>
 
           <v-list-tile @click="">
@@ -84,14 +91,14 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        notifications: false,
-        sound: false,
-        video: false,
-        invites: false
-      }
+export default {
+  data () {
+    return {
+      notifications: false,
+      sound: false,
+      video: false,
+      invites: false
     }
   }
+}
 </script>

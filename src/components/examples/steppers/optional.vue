@@ -17,9 +17,13 @@
       </v-stepper-header>
     </v-stepper>
 
-    <v-stepper value="2" class="mt-5">
+    <v-stepper
+        value="2"
+        class="mt-5">
       <v-stepper-header>
-        <v-stepper-step step="1" complete>Select campaign settings</v-stepper-step>
+        <v-stepper-step
+            step="1"
+            complete>Select campaign settings</v-stepper-step>
 
         <v-divider></v-divider>
 

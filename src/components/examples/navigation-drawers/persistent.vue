@@ -1,11 +1,13 @@
 <template>
   <v-card height="350px">
     <v-navigation-drawer
-      v-model="drawer"
-      permanent
-      absolute
-    >
-      <v-toolbar flat class="transparent">
+        v-model="drawer"
+        permanent
+        absolute
+      >
+      <v-toolbar
+          flat
+          class="transparent">
         <v-list class="pa-0">
           <v-list-tile avatar>
             <v-list-tile-avatar>
@@ -19,14 +21,16 @@
         </v-list>
       </v-toolbar>
 
-      <v-list class="pt-0" dense>
+      <v-list
+          class="pt-0"
+          dense>
         <v-divider></v-divider>
 
         <v-list-tile
-          v-for="item in items"
-          :key="item.title"
-          @click=""
-        >
+            v-for="item in items"
+            :key="item.title"
+            @click=""
+          >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -41,16 +45,16 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        drawer: true,
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
-      }
+export default {
+  data () {
+    return {
+      drawer: true,
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+        { title: 'About', icon: 'question_answer' }
+      ],
+      right: null
     }
   }
+}
 </script>

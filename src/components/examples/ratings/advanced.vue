@@ -1,41 +1,51 @@
 <template>
   <v-card
-    class="mx-auto hide-overflow"
-    style="max-width: 600px;"
-  >
+      class="mx-auto hide-overflow"
+      style="max-width: 600px;"
+    >
     <v-layout>
-      <v-flex xs6 d-flex>
+      <v-flex
+          xs6
+          d-flex>
         <v-img
-          src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"
-        ></v-img>
+            src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"
+          ></v-img>
       </v-flex>
       <v-flex xs6>
         <v-container
-          grid-list-md
-          pa-0
-          pl-2
-          style="margin: -4px 0"
-        >
+            grid-list-md
+            pa-0
+            pl-2
+            style="margin: -4px 0"
+          >
           <v-layout wrap>
-            <v-flex xs7 d-flex>
+            <v-flex
+                xs7
+                d-flex>
               <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"
-              ></v-img>
+                  src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"
+                ></v-img>
             </v-flex>
-            <v-flex xs5 d-flex>
+            <v-flex
+                xs5
+                d-flex>
               <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"
-              ></v-img>
+                  src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"
+                ></v-img>
             </v-flex>
-            <v-flex xs5 d-flex>
+            <v-flex
+                xs5
+                d-flex>
               <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"
-              ></v-img>
+                  src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"
+                ></v-img>
             </v-flex>
-            <v-flex xs7 d-flex>
+            <v-flex
+                xs7
+                d-flex>
               <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"
-              ></v-img>
+                  src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"
+                ></v-img>
             </v-flex>
           </v-layout>
         </v-container>
@@ -48,9 +58,9 @@
       </div>
       <v-spacer></v-spacer>
       <v-dialog
-        v-model="dialog"
-        width="400"
-      >
+          v-model="dialog"
+          width="400"
+        >
         <v-icon slot="activator">
           mdi-share-variant
         </v-icon>
@@ -59,10 +69,10 @@
             <span class="title font-weight-bold">Share</span>
             <v-spacer></v-spacer>
             <v-btn
-              class="mx-0"
-              icon
-              @click="dialog = false"
-            >
+                class="mx-0"
+                icon
+                @click="dialog = false"
+              >
               <v-icon>mdi-close-circle-outline</v-icon>
             </v-btn>
           </v-card-title>
@@ -87,13 +97,13 @@
             </v-list-tile>
           </v-list>
           <v-text-field
-            ref="link"
-            :label="copied ? 'Link copied' : 'Click to copy link'"
-            class="pa-3"
-            readonly
-            value="https://g.co/kgs/nkrK43"
-            @click="copy"
-          ></v-text-field>
+              ref="link"
+              :label="copied ? 'Link copied' : 'Click to copy link'"
+              class="pa-3"
+              readonly
+              value="https://g.co/kgs/nkrK43"
+              @click="copy"
+            ></v-text-field>
         </v-card>
       </v-dialog>
     </v-card-title>
@@ -102,16 +112,16 @@
       <span class="pl-2 grey--text text--darken-2 font-weight-light caption">16,544 reviews</span>
       <v-spacer></v-spacer>
       <v-rating
-        v-model="rating"
-        length="10"
-        readonly
-      >
+          v-model="rating"
+          length="10"
+          readonly
+        >
         <v-icon
-          slot="item"
-          slot-scope="props"
-          :color="props.isFilled ? 'purple darken-4' : ''"
-          v-text="`mdi-numeric-${props.index}-box`"
-        ></v-icon>
+            slot="item"
+            slot-scope="props"
+            :color="props.isFilled ? 'purple darken-4' : ''"
+            v-text="`mdi-numeric-${props.index}-box`"
+          ></v-icon>
       </v-rating>
     </v-card-actions>
     <div class="pa-3 pt-0 caption">
@@ -121,22 +131,20 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      copied: false,
-      dialog: false,
-      rating: 10
-    }),
+export default {
+  data: () => ({
+    copied: false,
+    dialog: false,
+    rating: 10
+  }),
 
-    methods: {
-      copy () {
-        const markup = this.$refs.link
-        markup.focus()
-        document.execCommand('selectAll', false, null)
-        this.copied = document.execCommand('copy')
-      }
+  methods: {
+    copy () {
+      const markup = this.$refs.link
+      markup.focus()
+      document.execCommand('selectAll', false, null)
+      this.copied = document.execCommand('copy')
     }
   }
+}
 </script>
-
-

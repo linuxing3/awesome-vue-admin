@@ -1,5 +1,7 @@
 <template>
-  <v-jumbotron color="primary" dark>
+  <v-jumbotron
+      color="primary"
+      dark>
     <v-container fill-height>
       <v-layout align-center>
         <v-flex text-xs-center>

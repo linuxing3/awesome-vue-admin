@@ -11,6 +11,8 @@ module.exports = {
     'no-empty': 'warn',
     'no-trailing-spaces': 'warn',
     'vue/no-use-v-if-with-v-for': 'off',
+    'vue/valid-v-on': 'off',
+    'vue/require-valid-default-prop': 'off',
     'vue/no-unused-components': 'off',
     'vue/html-indent': [
       'warn',

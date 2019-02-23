@@ -1,10 +1,10 @@
 <template>
   <v-timeline>
     <v-timeline-item
-      v-for="n in 4"
-      :key="n"
-      large
-    >
+        v-for="n in 4"
+        :key="n"
+        large
+      >
       <v-avatar slot="icon">
         <img src="http://i.pravatar.cc/64">
       </v-avatar>

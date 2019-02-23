@@ -3,28 +3,28 @@
     <v-flex>
       <v-sheet height="400">
         <v-calendar
-          color="primary"
-          type="day"
-        >
-          <template
-            slot="dayHeader"
-            slot-scope="{ present }"
+            color="primary"
+            type="day"
           >
-            <div
-              v-if="present"
-              class="text-xs-center"
+          <template
+              slot="dayHeader"
+              slot-scope="{ present }"
             >
+            <div
+                v-if="present"
+                class="text-xs-center"
+              >
               Today
             </div>
           </template>
 
           <template
-            slot="interval"
-            slot-scope="{ hour }"
-          >
-            <div
-              class="text-xs-center"
+              slot="interval"
+              slot-scope="{ hour }"
             >
+            <div
+                class="text-xs-center"
+              >
               {{ hour }} o'clock
             </div>
           </template>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({})
-  }
+export default {
+  data: () => ({})
+}
 </script>

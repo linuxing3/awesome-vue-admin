@@ -1,17 +1,19 @@
 <template>
   <v-navigation-drawer
-    color="transparent"
-    floating
-    light
-    permanent
-  >
+      color="transparent"
+      floating
+      light
+      permanent
+    >
     <v-card class="ma-3">
-      <v-list dense class="py-0">
+      <v-list
+          dense
+          class="py-0">
         <v-list-tile
-          v-for="item in items"
-          :key="item.title"
-          @click=""
-        >
+            v-for="item in items"
+            :key="item.title"
+            @click=""
+          >
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -26,16 +28,16 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        drawer: null,
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
-      }
+export default {
+  data () {
+    return {
+      drawer: null,
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+        { title: 'About', icon: 'question_answer' }
+      ],
+      right: null
     }
   }
+}
 </script>

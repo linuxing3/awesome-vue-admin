@@ -1,11 +1,11 @@
 <template>
   <v-timeline>
     <v-timeline-item
-      v-for="n in 4"
-      :key="n"
-      color="red lighten-2"
-      large
-    >
+        v-for="n in 4"
+        :key="n"
+        color="red lighten-2"
+        large
+      >
       <span slot="opposite">Tus eu perfecto</span>
       <v-card class="elevation-2">
         <v-card-title class="headline">Lorem ipsum</v-card-title>

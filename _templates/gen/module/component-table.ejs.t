@@ -6,8 +6,6 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
 %><script>
-import <%= modelName %> from '@/models/<%= modelName %>'
-
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
@@ -40,9 +38,16 @@ export default {
           label="模糊查询，不区分大小写"
           single-line
         ></v-text-field>
+      <v-btn
+          icon
+          class='pl-5 pr-5'
+          @click='exportItem(items)'>
+        <v-icon color='teal'>star</v-icon>
+      </v-btn>
     </v-card-title>
     <v-responsive>
       <v-data-table
+          v-model='selected'
           :headers='headers'
           :items='items'
           class='elevation-0'

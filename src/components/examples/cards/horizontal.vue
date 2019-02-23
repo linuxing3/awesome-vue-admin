@@ -1,13 +1,13 @@
 <template>
   <div
-    id="e3"
-    style="max-width: 400px; margin: auto;"
-    class="grey lighten-3"
-  >
-    <v-toolbar
-      color="pink"
-      dark
+      id="e3"
+      style="max-width: 400px; margin: auto;"
+      class="grey lighten-3"
     >
+    <v-toolbar
+        color="pink"
+        dark
+      >
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>My Music</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -18,12 +18,16 @@
 
     <v-card>
       <v-container
-        fluid
-        grid-list-lg
-      >
-        <v-layout row wrap>
+          fluid
+          grid-list-lg
+        >
+        <v-layout
+            row
+            wrap>
           <v-flex xs12>
-            <v-card color="blue-grey darken-2" class="white--text">
+            <v-card
+                color="blue-grey darken-2"
+                class="white--text">
               <v-card-title primary-title>
                 <div>
                   <div class="headline">Unlimited music now</div>
@@ -31,20 +35,24 @@
                 </div>
               </v-card-title>
               <v-card-actions>
-                <v-btn flat dark>Listen now</v-btn>
+                <v-btn
+                    flat
+                    dark>Listen now</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
 
           <v-flex xs12>
-            <v-card color="cyan darken-2" class="white--text">
+            <v-card
+                color="cyan darken-2"
+                class="white--text">
               <v-layout>
                 <v-flex xs5>
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
-                    height="125px"
-                    contain
-                  ></v-img>
+                      src="https://cdn.vuetifyjs.com/images/cards/foster.jpg"
+                      height="125px"
+                      contain
+                    ></v-img>
                 </v-flex>
                 <v-flex xs7>
                   <v-card-title primary-title>
@@ -70,7 +78,9 @@
           </v-flex>
 
           <v-flex xs12>
-            <v-card color="purple" class="white--text">
+            <v-card
+                color="purple"
+                class="white--text">
               <v-layout row>
                 <v-flex xs7>
                   <v-card-title primary-title>
@@ -83,10 +93,10 @@
                 </v-flex>
                 <v-flex xs5>
                   <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
-                    height="125px"
-                    contain
-                  ></v-img>
+                      src="https://cdn.vuetifyjs.com/images/cards/halcyon.png"
+                      height="125px"
+                      contain
+                    ></v-img>
                 </v-flex>
               </v-layout>
               <v-divider light></v-divider>

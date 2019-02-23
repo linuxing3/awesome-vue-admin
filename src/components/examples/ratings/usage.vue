@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      rating: 3
-    })
-  }
+export default {
+  data: () => ({
+    rating: 3
+  })
+}
 </script>

@@ -1,13 +1,13 @@
 <template>
   <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      xs12
-      sm6
-      offset-sm3
+      row
+      wrap
     >
+    <v-flex
+        xs12
+        sm6
+        offset-sm3
+      >
       <v-card color="grey darken-1">
         <v-card-title>
           <span class="headline white--text pl-3">Portrait View</span>
@@ -15,21 +15,21 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            dark
-            icon
-          >
+              dark
+              icon
+            >
             <v-icon>chevron_left</v-icon>
           </v-btn>
           <v-btn
-            dark
-            icon
-          >
+              dark
+              icon
+            >
             <v-icon>edit</v-icon>
           </v-btn>
           <v-btn
-            dark
-            icon
-          >
+              dark
+              icon
+            >
             <v-icon>more_vert</v-icon>
           </v-btn>
         </v-card-title>
@@ -91,9 +91,9 @@
         </v-list>
 
         <v-img
-          src="https://picsum.photos/250/300?image=1027"
-          height="200px"
-        ></v-img>
+            src="https://picsum.photos/250/300?image=1027"
+            height="200px"
+          ></v-img>
       </v-card>
     </v-flex>
   </v-layout>

@@ -3,37 +3,37 @@
     <v-flex>
       <v-sheet height="500">
         <v-calendar
-          :now="today"
-          :value="today"
-          color="primary"
-        >
-          <template
-            slot="day"
-            slot-scope="{ date }"
+            :now="today"
+            :value="today"
+            color="primary"
           >
+          <template
+              slot="day"
+              slot-scope="{ date }"
+            >
             <template v-for="event in eventsMap[date]">
               <v-menu
-                :key="event.title"
-                v-model="event.open"
-                full-width
-                offset-x
-              >
-                <div
-                  v-if="!event.time"
-                  slot="activator"
-                  v-ripple
-                  class="my-event"
-                  v-html="event.title"
-                ></div>
-                <v-card
-                  color="grey lighten-4"
-                  min-width="350px"
-                  flat
+                  :key="event.title"
+                  v-model="event.open"
+                  full-width
+                  offset-x
                 >
-                  <v-toolbar
-                    color="primary"
-                    dark
+                <div
+                    v-if="!event.time"
+                    slot="activator"
+                    v-ripple
+                    class="my-event"
+                    v-html="event.title"
+                  ></div>
+                <v-card
+                    color="grey lighten-4"
+                    min-width="350px"
+                    flat
                   >
+                  <v-toolbar
+                      color="primary"
+                      dark
+                    >
                     <v-btn icon>
                       <v-icon>edit</v-icon>
                     </v-btn>
@@ -51,9 +51,9 @@
                   </v-card-title>
                   <v-card-actions>
                     <v-btn
-                      flat
-                      color="secondary"
-                    >
+                        flat
+                        color="secondary"
+                      >
                       Cancel
                     </v-btn>
                   </v-card-actions>
@@ -68,74 +68,74 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      today: '2019-01-08',
-      events: [
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2018-12-30',
-          open: false
-        },
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2018-12-31',
-          open: false
-        },
-        {
-          title: 'Vacation',
-          details: 'Going to the beach!',
-          date: '2019-01-01',
-          open: false
-        },
-        {
-          title: 'Meeting',
-          details: 'Spending time on how we do not have enough time',
-          date: '2019-01-07',
-          open: false
-        },
-        {
-          title: '30th Birthday',
-          details: 'Celebrate responsibly',
-          date: '2019-01-03',
-          open: false
-        },
-        {
-          title: 'New Year',
-          details: 'Eat chocolate until you pass out',
-          date: '2019-01-01',
-          open: false
-        },
-        {
-          title: 'Conference',
-          details: 'Mute myself the whole time and wonder why I am on this call',
-          date: '2019-01-21',
-          open: false
-        },
-        {
-          title: 'Hackathon',
-          details: 'Code like there is no tommorrow',
-          date: '2019-02-01',
-          open: false
-        }
-      ]
-    }),
-    computed: {
-      // convert the list of events into a map of lists keyed by date
-      eventsMap () {
-        const map = {}
-        this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
-        return map
+export default {
+  data: () => ({
+    today: '2019-01-08',
+    events: [
+      {
+        title: 'Vacation',
+        details: 'Going to the beach!',
+        date: '2018-12-30',
+        open: false
+      },
+      {
+        title: 'Vacation',
+        details: 'Going to the beach!',
+        date: '2018-12-31',
+        open: false
+      },
+      {
+        title: 'Vacation',
+        details: 'Going to the beach!',
+        date: '2019-01-01',
+        open: false
+      },
+      {
+        title: 'Meeting',
+        details: 'Spending time on how we do not have enough time',
+        date: '2019-01-07',
+        open: false
+      },
+      {
+        title: '30th Birthday',
+        details: 'Celebrate responsibly',
+        date: '2019-01-03',
+        open: false
+      },
+      {
+        title: 'New Year',
+        details: 'Eat chocolate until you pass out',
+        date: '2019-01-01',
+        open: false
+      },
+      {
+        title: 'Conference',
+        details: 'Mute myself the whole time and wonder why I am on this call',
+        date: '2019-01-21',
+        open: false
+      },
+      {
+        title: 'Hackathon',
+        details: 'Code like there is no tommorrow',
+        date: '2019-02-01',
+        open: false
       }
-    },
-    methods: {
-      open (event) {
-        alert(event.title)
-      }
+    ]
+  }),
+  computed: {
+    // convert the list of events into a map of lists keyed by date
+    eventsMap () {
+      const map = {}
+      this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
+      return map
+    }
+  },
+  methods: {
+    open (event) {
+      alert(event.title)
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

@@ -1,29 +1,29 @@
 <template>
   <v-card
-    class="mx-auto"
-    style="max-width: 500px;"
-  >
-    <v-system-bar
-      color="deep-purple darken-4"
-      dark
+      class="mx-auto"
+      style="max-width: 500px;"
     >
+    <v-system-bar
+        color="deep-purple darken-4"
+        dark
+      >
       <v-spacer></v-spacer>
       <v-icon small>mdi-square</v-icon>
       <v-icon
-        class="ml-1"
-        small
-      >mdi-circle</v-icon>
+          class="ml-1"
+          small
+        >mdi-circle</v-icon>
       <v-icon
-        class="ml-1"
-        small
-      >mdi-triangle</v-icon>
+          class="ml-1"
+          small
+        >mdi-triangle</v-icon>
     </v-system-bar>
     <v-toolbar
-      color="deep-purple accent-4"
-      cards
-      dark
-      flat
-    >
+        color="deep-purple accent-4"
+        cards
+        dark
+        flat
+      >
       <v-btn icon>
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
@@ -37,79 +37,83 @@
       </v-btn>
     </v-toolbar>
     <v-form
-      ref="form"
-      v-model="form"
-      class="pa-3 pt-4"
-    >
-      <v-text-field
-        v-model="password"
-        :rules="[rules.password, rules.length(6)]"
-        box
-        color="deep-purple"
-        counter="6"
-        label="Password"
-        style="min-height: 96px"
-        type="password"
-      ></v-text-field>
-      <v-text-field
-        v-model="phone"
-        box
-        color="deep-purple"
-        label="Phone number"
-        mask="phone"
-      ></v-text-field>
-      <v-text-field
-        v-model="email"
-        :rules="[rules.email]"
-        box
-        color="deep-purple"
-        label="Email address"
-        type="email"
-      ></v-text-field>
-      <v-textarea
-        v-model="bio"
-        auto-grow
-        box
-        color="deep-purple"
-        label="Bio"
-        rows="1"
-      ></v-textarea>
-      <v-checkbox
-        v-model="agreement"
-        :rules="[rules.required]"
-        color="deep-purple"
+        ref="form"
+        v-model="form"
+        class="pa-3 pt-4"
       >
+      <v-text-field
+          v-model="password"
+          :rules="[rules.password, rules.length(6)]"
+          box
+          color="deep-purple"
+          counter="6"
+          label="Password"
+          style="min-height: 96px"
+          type="password"
+        ></v-text-field>
+      <v-text-field
+          v-model="phone"
+          box
+          color="deep-purple"
+          label="Phone number"
+          mask="phone"
+        ></v-text-field>
+      <v-text-field
+          v-model="email"
+          :rules="[rules.email]"
+          box
+          color="deep-purple"
+          label="Email address"
+          type="email"
+        ></v-text-field>
+      <v-textarea
+          v-model="bio"
+          auto-grow
+          box
+          color="deep-purple"
+          label="Bio"
+          rows="1"
+        ></v-textarea>
+      <v-checkbox
+          v-model="agreement"
+          :rules="[rules.required]"
+          color="deep-purple"
+        >
         <template slot="label">
           I agree to the&nbsp;
-          <a href="#" @click.stop.prevent="dialog = true">Terms of Service</a>
+          <a
+              href="#"
+              @click.stop.prevent="dialog = true">Terms of Service</a>
           &nbsp;and&nbsp;
-          <a href="#" @click.stop.prevent="dialog = true">Privacy Policy</a>*
+          <a
+              href="#"
+              @click.stop.prevent="dialog = true">Privacy Policy</a>*
         </template>
       </v-checkbox>
     </v-form>
     <v-divider></v-divider>
     <v-card-actions>
       <v-btn
-        flat
-        @click="$refs.form.reset()"
-      >
+          flat
+          @click="$refs.form.reset()"
+        >
         Clear
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="!form"
-        :loading="isLoading"
-        class="white--text"
-        color="deep-purple accent-4"
-        depressed
-      >Submit</v-btn>
+          :disabled="!form"
+          :loading="isLoading"
+          class="white--text"
+          color="deep-purple accent-4"
+          depressed
+        >Submit</v-btn>
     </v-card-actions>
     <v-dialog
-      v-model="dialog"
-      absolute
-      max-width="400"
-      persistent
-    >
+        v-model="dialog"
+        absolute
+        max-width="400"
+        persistent
+      >
       <v-card>
         <v-card-title class="headline grey lighten-3">Legal</v-card-title>
         <v-card-text>
@@ -118,17 +122,17 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn
-            flat
-            @click="agreement = false, dialog = false"
-          >
+              flat
+              @click="agreement = false, dialog = false"
+            >
             No
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            class="white--text"
-            color="deep-purple accent-4"
-            @click="agreement = true, dialog = false"
-          >
+              class="white--text"
+              color="deep-purple accent-4"
+              @click="agreement = true, dialog = false"
+            >
             Yes
           </v-btn>
         </v-card-actions>
@@ -138,25 +142,23 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      agreement: false,
-      bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
-      dialog: false,
-      email: undefined,
-      form: false,
-      isLoading: false,
-      password: undefined,
-      phone: undefined,
-      rules: {
-        email: v => (v || '').match(/@/) || 'Please enter a valid email',
-        length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
-        password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
+export default {
+  data: () => ({
+    agreement: false,
+    bio: 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts',
+    dialog: false,
+    email: undefined,
+    form: false,
+    isLoading: false,
+    password: undefined,
+    phone: undefined,
+    rules: {
+      email: v => (v || '').match(/@/) || 'Please enter a valid email',
+      length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+      password: v => (v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) ||
           'Password must contain an upper case letter, a numeric character, and a special character',
-        required: v => !!v || 'This field is required'
-      }
-    })
-  }
+      required: v => !!v || 'This field is required'
+    }
+  })
+}
 </script>
-
-

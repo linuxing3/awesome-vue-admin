@@ -8,7 +8,10 @@
     &nbsp;&nbsp;
 
     <v-badge color="green">
-      <v-icon slot="badge" dark small>list</v-icon>
+      <v-icon
+          slot="badge"
+          dark
+          small>list</v-icon>
       <span>Lists</span>
     </v-badge>
   </div>

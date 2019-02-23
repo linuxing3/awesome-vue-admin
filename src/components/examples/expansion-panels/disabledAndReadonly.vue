@@ -2,21 +2,21 @@
   <div>
     <div class="d-flex">
       <v-checkbox
-        v-model="disabled"
-        label="Disabled"
-      ></v-checkbox>
+          v-model="disabled"
+          label="Disabled"
+        ></v-checkbox>
       <v-checkbox
-        v-model="readonly"
-        label="Readonly"
-      ></v-checkbox>
+          v-model="readonly"
+          label="Readonly"
+        ></v-checkbox>
     </div>
 
     <v-expansion-panel
-      v-model="panel"
-      :disabled="disabled"
-      :readonly="readonly"
-      expand
-    >
+        v-model="panel"
+        :disabled="disabled"
+        :readonly="readonly"
+        expand
+      >
       <v-expansion-panel-content disabled>
         <template slot="header">Disabled</template>
         <v-card>
@@ -46,11 +46,11 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      panel: [true, true, false],
-      disabled: false,
-      readonly: false
-    })
-  }
+export default {
+  data: () => ({
+    panel: [true, true, false],
+    disabled: false,
+    readonly: false
+  })
+}
 </script>

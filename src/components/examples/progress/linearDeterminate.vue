@@ -3,11 +3,11 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        valueDeterminate: 50
-      }
+export default {
+  data () {
+    return {
+      valueDeterminate: 50
     }
   }
+}
 </script>

@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
-    <v-layout justify-space-around class="mb-2">
+    <v-layout
+        justify-space-around
+        class="mb-2">
       <span class="group pa-2">
         <v-icon>home</v-icon>
         <v-icon>event</v-icon>
@@ -14,7 +16,9 @@
       </span>
     </v-layout>
 
-    <v-layout justify-space-around class="mb-2">
+    <v-layout
+        justify-space-around
+        class="mb-2">
       <span class="group pa-2">
         <v-icon medium>home</v-icon>
         <v-icon medium>event</v-icon>
@@ -22,13 +26,21 @@
       </span>
 
       <span class="group pa-2 teal">
-        <v-icon medium dark>folder_open</v-icon>
-        <v-icon medium dark>widgets</v-icon>
-        <v-icon medium dark>gavel</v-icon>
+        <v-icon
+            medium
+            dark>folder_open</v-icon>
+        <v-icon
+            medium
+            dark>widgets</v-icon>
+        <v-icon
+            medium
+            dark>gavel</v-icon>
       </span>
     </v-layout>
 
-    <v-layout justify-space-around class="mb-2">
+    <v-layout
+        justify-space-around
+        class="mb-2">
       <span class="group pa-2">
         <v-icon large>home</v-icon>
         <v-icon large>event</v-icon>
@@ -36,9 +48,15 @@
       </span>
 
       <span class="group pa-2 teal">
-        <v-icon large dark>folder_open</v-icon>
-        <v-icon large dark>widgets</v-icon>
-        <v-icon large dark>gavel</v-icon>
+        <v-icon
+            large
+            dark>folder_open</v-icon>
+        <v-icon
+            large
+            dark>widgets</v-icon>
+        <v-icon
+            large
+            dark>gavel</v-icon>
       </span>
     </v-layout>
 
@@ -50,9 +68,15 @@
       </span>
 
       <span class="group pa-2 teal">
-        <v-icon x-large dark>folder_open</v-icon>
-        <v-icon x-large dark>widgets</v-icon>
-        <v-icon x-large dark>gavel</v-icon>
+        <v-icon
+            x-large
+            dark>folder_open</v-icon>
+        <v-icon
+            x-large
+            dark>widgets</v-icon>
+        <v-icon
+            x-large
+            dark>gavel</v-icon>
       </span>
     </v-layout>
   </v-container>

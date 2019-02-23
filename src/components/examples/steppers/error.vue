@@ -5,7 +5,9 @@
 
       <v-divider></v-divider>
 
-      <v-stepper-step :rules="[() => false]" step="2">
+      <v-stepper-step
+          :rules="[() => false]"
+          step="2">
         Ad templates
         <small>Alert message</small>
       </v-stepper-step>

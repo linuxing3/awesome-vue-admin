@@ -1,27 +1,37 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    <v-flex
+        xs12
+        sm6
+        offset-sm3>
       <v-card>
         <v-img
-          src="https://cdn.vuetifyjs.com/images/lists/ali.png"
-          height="300px"
-        >
-          <v-layout
-            column
-            fill-height
+            src="https://cdn.vuetifyjs.com/images/lists/ali.png"
+            height="300px"
           >
+          <v-layout
+              column
+              fill-height
+            >
             <v-card-title>
-              <v-btn dark icon>
+              <v-btn
+                  dark
+                  icon>
                 <v-icon>chevron_left</v-icon>
               </v-btn>
 
               <v-spacer></v-spacer>
 
-              <v-btn dark icon class="mr-3">
+              <v-btn
+                  dark
+                  icon
+                  class="mr-3">
                 <v-icon>edit</v-icon>
               </v-btn>
 
-              <v-btn dark icon>
+              <v-btn
+                  dark
+                  icon>
                 <v-icon>more_vert</v-icon>
               </v-btn>
             </v-card-title>

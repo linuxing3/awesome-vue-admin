@@ -1,6 +1,10 @@
 <template>
   <div id="lateral">
-    <v-toolbar dark tabs flat color="indigo">
+    <v-toolbar
+        dark
+        tabs
+        flat
+        color="indigo">
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -11,11 +15,11 @@
         <v-icon>more_vert</v-icon>
       </v-btn>
       <v-tabs
-        slot="extension"
-        v-model="tabs"
-        align-with-title
-        color="transparent"
-      >
+          slot="extension"
+          v-model="tabs"
+          align-with-title
+          color="transparent"
+        >
         <v-tab href="#one">Item One</v-tab>
         <v-tab href="#two">Item Two</v-tab>
         <v-tab href="#three">Item Three</v-tab>
@@ -24,25 +28,27 @@
     </v-toolbar>
     <v-tabs-items v-model="tabs">
       <v-tab-item
-        v-for="content in ['one', 'two', 'three']"
-        :key="content"
-        :value="content"
-      >
-        <v-card height="200px" flat>
+          v-for="content in ['one', 'two', 'three']"
+          :key="content"
+          :value="content"
+        >
+        <v-card
+            height="200px"
+            flat>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
     <v-fab-transition>
       <v-btn
-        :key="activeFab.icon"
-        v-model="fab"
-        :color="activeFab.color"
-        dark
-        fab
-        fixed
-        bottom
-        left
-      >
+          :key="activeFab.icon"
+          v-model="fab"
+          :color="activeFab.color"
+          dark
+          fab
+          fixed
+          bottom
+          left
+        >
         <v-icon>{{ activeFab.icon }}</v-icon>
         <v-icon>close</v-icon>
       </v-btn>
@@ -51,24 +57,24 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      fab: false,
-      hidden: false,
-      tabs: null
-    }),
+export default {
+  data: () => ({
+    fab: false,
+    hidden: false,
+    tabs: null
+  }),
 
-    computed: {
-      activeFab () {
-        switch (this.tabs) {
-          case 'one': return { 'color': 'indigo', icon: 'share' }
-          case 'two': return { 'color': 'red', icon: 'edit' }
-          case 'three': return { 'color': 'green', icon: 'keyboard_arrow_up' }
-          default: return {}
-        }
+  computed: {
+    activeFab () {
+      switch (this.tabs) {
+        case 'one': return { 'color': 'indigo', icon: 'share' }
+        case 'two': return { 'color': 'red', icon: 'edit' }
+        case 'three': return { 'color': 'green', icon: 'keyboard_arrow_up' }
+        default: return {}
       }
     }
   }
+}
 </script>
 
 <style>

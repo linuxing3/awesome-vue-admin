@@ -1,22 +1,22 @@
 <template>
   <v-card
-    class="pa-5"
-    color="indigo"
-    flat
-  >
+      class="pa-5"
+      color="indigo"
+      flat
+    >
     <v-card class="d-inline-block elevation-12">
       <v-navigation-drawer
-        floating
-        permanent
-        stateless
-        value="true"
-      >
+          floating
+          permanent
+          stateless
+          value="true"
+        >
         <v-list dense>
           <v-list-tile
-            v-for="item in items"
-            :key="item.title"
-            @click=""
-          >
+              v-for="item in items"
+              :key="item.title"
+              @click=""
+            >
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -32,15 +32,15 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
-      }
+export default {
+  data () {
+    return {
+      items: [
+        { title: 'Home', icon: 'dashboard' },
+        { title: 'About', icon: 'question_answer' }
+      ],
+      right: null
     }
   }
+}
 </script>

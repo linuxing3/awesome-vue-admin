@@ -1,15 +1,15 @@
 <template>
   <v-combobox
-    v-model="model"
-    :items="items"
-    :search-input.sync="search"
-    hide-selected
-    hint="Maximum of 5 tags"
-    label="Add some tags"
-    multiple
-    persistent-hint
-    small-chips
-  >
+      v-model="model"
+      :items="items"
+      :search-input.sync="search"
+      hide-selected
+      hint="Maximum of 5 tags"
+      label="Add some tags"
+      multiple
+      persistent-hint
+      small-chips
+    >
     <template slot="no-data">
       <v-list-tile>
         <v-list-tile-content>
@@ -23,19 +23,19 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      items: ['Gaming', 'Programming', 'Vue', 'Vuetify'],
-      model: ['Vuetify'],
-      search: null
-    }),
+export default {
+  data: () => ({
+    items: ['Gaming', 'Programming', 'Vue', 'Vuetify'],
+    model: ['Vuetify'],
+    search: null
+  }),
 
-    watch: {
-      model (val) {
-        if (val.length > 5) {
-          this.$nextTick(() => this.model.pop())
-        }
+  watch: {
+    model (val) {
+      if (val.length > 5) {
+        this.$nextTick(() => this.model.pop())
       }
     }
   }
+}
 </script>

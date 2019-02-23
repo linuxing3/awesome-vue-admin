@@ -1,15 +1,15 @@
 <template>
   <v-toolbar
-    color="purple"
-    dark
-  >
+      color="purple"
+      dark
+    >
     <v-toolbar-title>Title</v-toolbar-title>
 
     <v-divider
-      class="mx-3"
-      inset
-      vertical
-    ></v-divider>
+        class="mx-3"
+        inset
+        vertical
+      ></v-divider>
 
     <span class="subheading">My Home</span>
 

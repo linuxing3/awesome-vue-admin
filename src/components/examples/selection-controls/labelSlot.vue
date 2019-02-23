@@ -4,7 +4,11 @@
       <div slot="label">
         I agree that
         <v-tooltip bottom>
-          <a slot="activator" target="_blank" href="http://vuetifyjs.com" @click.stop>Vuetify</a>
+          <a
+              slot="activator"
+              target="_blank"
+              href="http://vuetifyjs.com"
+              @click.stop>Vuetify</a>
           Opens in new window
         </v-tooltip>
         is awesome
@@ -23,20 +27,24 @@
 
     <v-switch v-model="switchMe">
       <template slot="label">
-        Turn on the progress: <v-progress-circular :indeterminate="switchMe" :value="0" size="24" class="ml-2"></v-progress-circular>
+        Turn on the progress: <v-progress-circular
+            :indeterminate="switchMe"
+            :value="0"
+            size="24"
+            class="ml-2"></v-progress-circular>
       </template>
     </v-switch>
   </v-container>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        checkbox: false,
-        radios: 'Duckduckgo',
-        switchMe: false
-      }
+export default {
+  data () {
+    return {
+      checkbox: false,
+      radios: 'Duckduckgo',
+      switchMe: false
     }
   }
+}
 </script>

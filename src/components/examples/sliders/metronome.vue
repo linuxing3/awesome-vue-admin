@@ -1,12 +1,12 @@
 <template>
   <v-card
-    class="mx-auto"
-    max-width="600"
-  >
-    <v-toolbar
-      card
-      dense
+      class="mx-auto"
+      max-width="600"
     >
+    <v-toolbar
+        card
+        dense
+      >
       <v-toolbar-title>
         <span class="subheading">METRONOME</span>
       </v-toolbar-title>
@@ -18,35 +18,35 @@
 
     <v-card-text>
       <v-layout
-        justify-space-between
-        mb-3
-      >
+          justify-space-between
+          mb-3
+        >
         <v-flex text-xs-left>
           <span
-            class="display-3 font-weight-light"
-            v-text="bpm"
-          ></span>
+              class="display-3 font-weight-light"
+              v-text="bpm"
+            ></span>
           <span class="subheading font-weight-light mr-1">BPM</span>
           <v-fade-transition>
             <v-avatar
-              v-if="isPlaying"
-              :color="color"
-              :style="{
-                animationDuration: animationDuration
-              }"
-              class="mb-1 v-avatar--metronome"
-              size="12"
-            ></v-avatar>
+                v-if="isPlaying"
+                :color="color"
+                :style="{
+                  animationDuration: animationDuration
+                }"
+                class="mb-1 v-avatar--metronome"
+                size="12"
+              ></v-avatar>
           </v-fade-transition>
         </v-flex>
         <v-flex text-xs-right>
           <v-btn
-            :color="color"
-            dark
-            depressed
-            fab
-            @click="toggle"
-          >
+              :color="color"
+              dark
+              depressed
+              fab
+              @click="toggle"
+            >
             <v-icon large>
               {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
             </v-icon>
@@ -55,25 +55,25 @@
       </v-layout>
 
       <v-slider
-        v-model="bpm"
-        :color="color"
-        always-dirty
-        min="40"
-        max="218"
-      >
-        <v-icon
-          slot="prepend"
+          v-model="bpm"
           :color="color"
-          @click="decrement"
+          always-dirty
+          min="40"
+          max="218"
         >
+        <v-icon
+            slot="prepend"
+            :color="color"
+            @click="decrement"
+          >
           mdi-minus
         </v-icon>
 
         <v-icon
-          slot="append"
-          :color="color"
-          @click="increment"
-        >
+            slot="append"
+            :color="color"
+            @click="increment"
+          >
           mdi-plus
         </v-icon>
       </v-slider>
@@ -82,38 +82,38 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      bpm: 40,
-      interval: null,
-      isPlaying: false
-    }),
+export default {
+  data: () => ({
+    bpm: 40,
+    interval: null,
+    isPlaying: false
+  }),
 
-    computed: {
-      color () {
-        if (this.bpm < 100) return 'indigo'
-        if (this.bpm < 125) return 'teal'
-        if (this.bpm < 140) return 'green'
-        if (this.bpm < 175) return 'orange'
-        return 'red'
-      },
-      animationDuration () {
-        return `${60 / this.bpm}s`
-      }
+  computed: {
+    color () {
+      if (this.bpm < 100) return 'indigo'
+      if (this.bpm < 125) return 'teal'
+      if (this.bpm < 140) return 'green'
+      if (this.bpm < 175) return 'orange'
+      return 'red'
     },
+    animationDuration () {
+      return `${60 / this.bpm}s`
+    }
+  },
 
-    methods: {
-      decrement () {
-        this.bpm--
-      },
-      increment () {
-        this.bpm++
-      },
-      toggle () {
-        this.isPlaying = !this.isPlaying
-      }
+  methods: {
+    decrement () {
+      this.bpm--
+    },
+    increment () {
+      this.bpm++
+    },
+    toggle () {
+      this.isPlaying = !this.isPlaying
     }
   }
+}
 </script>
 
 <style>
@@ -133,5 +133,3 @@
     animation-direction: alternate;
   }
 </style>
-
-

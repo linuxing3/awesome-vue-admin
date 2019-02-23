@@ -1,12 +1,14 @@
 <template>
   <v-toolbar
-    color="primary"
-    dark
-    extended
-  >
+      color="primary"
+      dark
+      extended
+    >
     <v-toolbar-side-icon></v-toolbar-side-icon>
 
-    <v-toolbar-title slot="extension" class="white--text">Title</v-toolbar-title>
+    <v-toolbar-title
+        slot="extension"
+        class="white--text">Title</v-toolbar-title>
 
     <v-spacer></v-spacer>
 

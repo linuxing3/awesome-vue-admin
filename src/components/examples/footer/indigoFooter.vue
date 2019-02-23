@@ -1,20 +1,20 @@
 <template>
   <v-footer
-    dark
-    height="auto"
-  >
-    <v-card
-      flat
-      tile
-      class="indigo lighten-1 white--text text-xs-center"
+      dark
+      height="auto"
     >
+    <v-card
+        flat
+        tile
+        class="indigo lighten-1 white--text text-xs-center"
+      >
       <v-card-text>
         <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-3 white--text"
-          icon
-        >
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-3 white--text"
+            icon
+          >
           <v-icon size="24px">{{ icon }}</v-icon>
         </v-btn>
       </v-card-text>
@@ -33,15 +33,15 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      icons: [
-        'fab fa-facebook',
-        'fab fa-twitter',
-        'fab fa-google-plus',
-        'fab fa-linkedin',
-        'fab fa-instagram'
-      ]
-    })
-  }
+export default {
+  data: () => ({
+    icons: [
+      'fab fa-facebook',
+      'fab fa-twitter',
+      'fab fa-google-plus',
+      'fab fa-linkedin',
+      'fab fa-instagram'
+    ]
+  })
+}
 </script>
