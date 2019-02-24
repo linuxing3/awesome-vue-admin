@@ -15,38 +15,38 @@
 
 <script>
 // Import Vue FilePond
-import vueFilePond from 'vue-filepond';
+import vueFilePond from 'vue-filepond'
 
 // Import FilePond styles
-import 'filepond/dist/filepond.min.css';
+import 'filepond/dist/filepond.min.css'
 
 // Import FilePond plugins
 // Please note that you need to install these plugins separately
 
 // Import image preview plugin styles
-import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'
 
 // Import image preview and file type validation plugins
-import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
-import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type'
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 
 // Create component
-const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
+const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview)
 
 export default {
   name: 'file-pond',
-  data: function() {
-      return { myFiles: ['cat.jpeg'] };
+  data: function () {
+    return { myFiles: ['cat.jpeg'] }
   },
   methods: {
-      handleFilePondInit: function() {
-          console.log('FilePond has initialized');
+    handleFilePondInit: function () {
+      console.log('FilePond has initialized')
 
-          // FilePond instance methods are available on `this.$refs.pond`
-      }
+      // FilePond instance methods are available on `this.$refs.pond`
+    }
   },
   components: {
-      FilePond
+    FilePond
   }
-};
+}
 </script>

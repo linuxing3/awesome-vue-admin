@@ -3,17 +3,18 @@ import { copyFileSync, pathExistsSync } from 'fs-extra'
 import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
-import XLSX from 'xlsx';
+import XLSX from 'xlsx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
 
 export default {
-  data () {
+  data() {
     return {
       modelName: '',
       importFileMeta: {},
       outputDocFile: 'template',
+      workbook: null,
       needChangeCSVHeader: false,
       keepOriginalHeader: true,
       reverseTranslate: false,
@@ -22,42 +23,42 @@ export default {
     }
   },
   computed: {
-    Model (): Model {
+    Model(): Model {
       return models[this.modelName]
     },
     keysDef: () => keysDef, // 翻译定义
     templateDir: () => join(remote.app.getPath('home'), '/Documents/template'), // 用户模板目录
     userDataDir: () => join(remote.app.getPath('userData'), 'data'), // 用户数据目录
     // 获取模板目录下的doc文件
-    templateDocs: function () {
+    templateDocs: function() {
       return getFilesByExtentionInDir({ path: this.templateDir, ext: 'doc' })
     },
     // 获取模板目录下的当前模型对应csv文件
-    modelDatasource: function () {
+    modelDatasource: function() {
       return this.resolvePath(this.modelName, 'csv')
     },
     // 获取模板目录下的默认csv文件
-    defaultDatasource: function () {
+    defaultDatasource: function() {
       return this.resolvePath('db', 'csv')
     },
     // 获取模板目录下默认Word模板
-    defaultTemplate: function () {
+    defaultTemplate: function() {
       return this.resolvePath('template', 'doc')
     },
     // 获取模板目录下自选Word模板
-    modelTemplate: function () {
+    modelTemplate: function() {
       return this.resolvePath(this.outputDocFile, 'doc')
     }
   },
   methods: {
-    resolvePath (fileName, fileExt) {
+    resolvePath(fileName, fileExt) {
       return join(this.templateDir, `${fileName}.${fileExt}`)
     },
     /**
      * 获取导入文件信息
      * @param e 事件
      */
-    getImportFile (e) {
+    getImportFile(e) {
       // 从选择控件获取文件对象
       this.importFileMeta = e.target.files[0]
       // 检查导入文件名和本地模块是否一致
@@ -71,16 +72,16 @@ export default {
     /**
      * 导入数据函数
      */
-    async importItem () {
+    async importItem() {
       console.log(`导入${this.modelName}.csv文件...`)
-      let data: any [] = await ImportCSV({
+      let data: any[] = await ImportCSV({
         file: this.importFileMeta,
         keysDef: this.keysDef
       })
       console.table(data)
       if (data.length) this.persistData(data)
     },
-    persistData (data) {
+    persistData(data) {
       if (!Array.isArray(data)) return
       if (this.modelName === '') return
       try {
@@ -93,7 +94,7 @@ export default {
         throw new Error(error)
       }
     },
-    resetData (data) {
+    resetData(data) {
       if (!Array.isArray(data)) return
       try {
         console.log(`删除${this.modelName}全部数据`)
@@ -112,10 +113,10 @@ export default {
     /**
      * 导出数据函数
      */
-    exportItem (item) {
+    exportItem(item) {
       this.exportCSV(item)
     },
-    exportCSV (item) {
+    exportCSV(item) {
       console.log(`导出到${this.modelDatasource}文件...`)
       try {
         GenerateCSV({
@@ -134,7 +135,7 @@ export default {
     /**
      * 导出文件修改标题函数
      */
-    changeCSVHeader () {
+    changeCSVHeader() {
       console.log(`更新${this.modelDatasource}文件的列标题...`)
       if (pathExistsSync(this.modelDatasource)) {
         try {
@@ -152,7 +153,7 @@ export default {
     /**
      * 导出文件备份函数
      */
-    copyModelNameCSV () {
+    copyModelNameCSV() {
       console.log('备份为db.csv文件...')
       if (pathExistsSync(this.modelDatasource)) {
         try {
@@ -165,7 +166,7 @@ export default {
     /**
      * 导出文件打印合并函数
      */
-    mergeWordApp () {
+    mergeWordApp() {
       this.changeCSVHeader()
       this.copyModelNameCSV()
       if (pathExistsSync(this.modelTemplate)) {
@@ -174,50 +175,59 @@ export default {
       } else {
         throw new Error('无法找到Word模板文件，请查看手册。')
       }
-    }
+    },
     /**
      * 打开Excel文件
      */
-    openExcelFile() {
+    readExcelFile() {
       /* show a file-open dialog and read the first selected file */
       const o = remote.dialog.showOpenDialog({ properties: ['openFile'] })
       this.importFileMeta = o[0]
-      let workbook = XLSX.readFile(this.importFileMeta)
+      this.workbook = XLSX.readFile(this.importFileMeta)
       console.log('打开了Excel文件')
-      return workbook
-      /* DO SOMETHING WITH workbook HERE */
+    },
+    writeExcelFile({ workbook, filename, options }) {
+      /* show a file-open dialog and read the first selected file */
+      if(filename ==='') filename = this.importFileMeta.path
+      if(workbook === undefined) workbook = this.workbook
+      XLSX.writeFile(workbook, filename, options)
     },
     createNewWorksheet({ wb, sheetName, data }) {
-      const ws_name = sheetName || "SheetJS"
-      /* make worksheet */
-      const ws_data = data || [
-        [ "S", "h", "e", "e", "t", "J", "S" ],
-        [  1 ,  2 ,  3 ,  4 ,  5 ]
-      ]
-      const ws = XLSX.utils.aoa_to_sheet(ws_data)
-      
+      if (!Array.isArray(data)) data = [data]
+      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
       /* Add the worksheet to the workbook */
-      XLSX.utils.book_append_sheet(wb, ws, ws_name)
-    }
+      XLSX.utils.book_append_sheet(wb, ws, sheetName)
+    },
+    saveExcelAs(ws: XLSX.WorkSheet, type = 'csv') {
+      let output
+      if (type === 'csv') {
+        output = XLSX.utils.sheet_to_csv(ws, {
+          FS: ',',
+          blankrows: false
+        })
+      }
+      return output
+    },
     /**
-     *  
+     *
      */
     async handleDrop(e) {
       e.stopPropagation()
       e.preventDefault()
-      const rABS = true; 
+      const reader = (window as any).reader
+      let rABS = true
       let files = e.dataTransfer.files
-
-      this.importFileMeta  = files[0]
+      this.importFileMeta = files[0]
       reader.onload = async function(e) {
         let data = e.target.result
-        if(!rABS) data = new Uint8Array(data)
-        let workbook = XLSX.read(data, {type: rABS ? 'binary' : 'array'})
+        if (!rABS) data = new Uint8Array(data)
+        let workbook = XLSX.read(data, { type: rABS ? 'binary' : 'array' })
         console.log('打开了Excel文件')
         /* DO SOMETHING WITH workbook HERE */
         return workbook
       }
-      if(rABS) reader.readAsBinaryString(f); else reader.readAsArrayBuffer(f)
+      if (rABS) reader.readAsBinaryString(this.importFileMeta)
+      else reader.readAsArrayBuffer(this.importFileMeta)
     }
   }
 }

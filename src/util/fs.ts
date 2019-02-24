@@ -4,17 +4,16 @@ const exec = require('child_process').exec
 const mime = require('mime')
 
 export class FileManager {
-
   drives = []
   rootDir = ''
 
-  constructor(rootDir) {
+  constructor (rootDir) {
     this.rootDir = rootDir || '.'
     this.getFolders(this.rootDir)
   }
   /**
   * @examples
-  * 
+  *
   */
   getWindowsDrives () {
     if (process.platform !== 'win32') {
@@ -22,13 +21,13 @@ export class FileManager {
     }
 
     exec('wmic logicaldisk get name', (error, stdout) => {
-      if(error) throw new Error(error)
+      if (error) throw new Error(error)
       stdout.split('\r\r\n')
-          .filter(value => /[A-Za-z]:/.test(value))
-          .map(value => {
-            this.drives.push(value.trim())
-          })
-    });
+        .filter(value => /[A-Za-z]:/.test(value))
+        .map(value => {
+          this.drives.push(value.trim())
+        })
+    })
   }
 
   /**
@@ -40,7 +39,7 @@ export class FileManager {
   * @param {Number} recurseLevel - number of times to recurse folders
   * @returns {IterableIterator<String>}
   */
-  *walkFolders (folder, recurseLevel = 0) {
+  * walkFolders (folder, recurseLevel = 0) {
     try {
       const files = fs.readdirSync(folder)
 
@@ -51,8 +50,7 @@ export class FileManager {
           const isDirectory = stat.isDirectory()
           if (isDirectory && recurseLevel > 0) {
             yield * this.walkFolders(pathToFile, recurseLevel - 1)
-          }
-          else {
+          } else {
             yield {
               rootDir: folder,
               fileName: file,
@@ -60,8 +58,7 @@ export class FileManager {
               stat: stat
             }
           }
-        }
-        catch (err) {
+        } catch (err) {
           yield {
             rootDir: folder,
             fileName: file,
@@ -69,8 +66,7 @@ export class FileManager {
           }
         }
       }
-    }
-    catch (err) {
+    } catch (err) {
       yield {
         rootDir: folder,
         error: err
@@ -114,7 +110,6 @@ export class FileManager {
   }
 
   createNode (fileInfo) {
-
     let nodeKey = fileInfo.rootDir
 
     if (nodeKey.charAt(nodeKey.length - 1) !== path.sep) {
@@ -123,8 +118,7 @@ export class FileManager {
 
     if (fileInfo.fileName === path.sep) {
       fileInfo.fileName = nodeKey
-    }
-    else {
+    } else {
       nodeKey += fileInfo.fileName
     }
     // get file mime type

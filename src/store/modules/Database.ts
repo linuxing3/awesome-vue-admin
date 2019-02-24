@@ -15,17 +15,17 @@ const mutations: any = {
   ...make.mutations(state)
 }
 
-const actions: any = { 
-  clear({ commit }) {
-    // 
+const actions: any = {
+  clear ({ commit }) {
+    //
     commit('SET_MODELS', {})
-    // 
+    //
     commit('SET_CURRENT_MODEL', null)
   },
   /**
-   * 将数据的结构存储下来  
+   * 将数据的结构存储下来
    */
-  init({ commit }) {
+  init ({ commit }) {
     // 挂载所有对象模型到Vuex的Database状态树上
     commit('SET_MODELS', models)
     // 设置当前模型的名称
@@ -43,14 +43,14 @@ const actions: any = {
       })
     })
   },
-  ...make.actions(state) 
+  ...make.actions(state)
 }
 
-const getters: any = { 
-  Model(state) {
+const getters: any = {
+  Model (state) {
     return state.models[state.currentModel]
   },
-  ...make.getters(state) 
+  ...make.getters(state)
 }
 
 export default {

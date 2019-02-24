@@ -13,6 +13,7 @@ module.exports = {
     'vue/no-use-v-if-with-v-for': 'off',
     'vue/valid-v-on': 'off',
     'vue/require-valid-default-prop': 'off',
+    'vue/require-prop-type-constructor': 'off',
     'vue/no-unused-components': 'off',
     'vue/return-in-computed-property': 'off',
     'vue/html-indent': [

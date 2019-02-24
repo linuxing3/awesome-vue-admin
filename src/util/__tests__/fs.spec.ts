@@ -1,6 +1,6 @@
+import { FileManager } from '../fs'
 const path = require('path')
 const fs = require('fs')
-import { FileManager } from '../fs'
 
 describe('Testing fs', () => {
   it('testing windows drive', () => {
