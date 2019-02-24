@@ -1,12 +1,5 @@
----
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue'
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import <%= modelName %> from '@/models/<%= modelName %>'
+<script>
+import Dashboard from '@/models/Dashboard'
 
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
@@ -14,12 +7,12 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data() {
     return {
-      modelName: '<%= modelName.toLowerCase() %>'
+      modelName: 'dashboard'
     }
   },
   mixins: [ crudMixin, exportMixin ],
   created() {
-    window.<%= modelFormName %> = this
+    window.DashboardForm = this
   }
 }
 </script>

@@ -17,7 +17,7 @@ export default class <%= ModelName %> extends BaseModel {
   static fields() {
     return {
       _id: this.increment(),
-      name: this.string()
+      name: this.string('')
     };
   }
 }

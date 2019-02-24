@@ -1,4 +1,11 @@
-<template>
+---
+to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Iterator.vue'
+---
+<%
+  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelIteratorName = h.capitalize(h.inflection.singularize(model)) + 'Iterator'
+  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+%><template>
   <v-layout row wrap class="justify-center">
     <v-flex
       xs12
@@ -66,29 +73,29 @@
 </template>
 
 <script>
-import User from '@/models/User'
-import UserForm from './UserForm'
+import <%= modelName %> from '@/models/<%= modelName %>'
+import <%= modelFormName %> from './<%= modelFormName %>'
 
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
   components: {
-    UserForm
+    <%= modelFormName %>
   },
   data() {
     return {
-      modelName: 'user'
+      modelName: '<%= modelName.toLowerCase() %>'
     }
   },
   mixins: [ exportMixin, crudMixin ],
   created() {
-    window.UserIterator = this
+    window.<%= modelIteratorName %> = this
   },
   methods: {
     editItem(item) {
       this.$emit('SET_EDITING', item);
-      window.UserForm.$emit('SET_EDITING', item)
+      window.<%= modelFormName %>.$emit('SET_EDITING', item)
     }
   },
 }

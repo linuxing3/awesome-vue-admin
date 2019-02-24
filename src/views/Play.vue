@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <Manual />
+    <PlayComponent />
   </DefaultLayout>
 </template>
 
@@ -8,12 +8,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DefaultLayout from '@/layout/default.vue'
 
-import examples from '@/components'
+import PlayComponent from '@/components/User/UserDashboard.vue'
 
 @Component({
   components: {
     DefaultLayout,
-    ...examples
+    PlayComponent
   }
 })
 export default class Play extends Vue {}

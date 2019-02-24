@@ -78,6 +78,15 @@
         <v-flex
             sm12
             lg12>
+          <v-text-field
+              name="title"
+              :label="$t('title')"
+              v-model="model['title']"
+            ></v-text-field>
+        </v-flex>
+        <v-flex
+            sm12
+            lg12>
           <v-textarea
               outline
               multi-line
@@ -164,37 +173,10 @@
         <v-flex
             sm4
             lg4>
-          <v-menu
-              ref="endTime"
-              lazy
-              :close-on-content-click="false"
-              v-model="endTimeMenu"
-              transition="scale-transition"
-              offset-y
-              full-width
-              :nudge-bottom="-24"
-              max-width="290px"
-              :return-value.sync="model['endTime']"
-            >
-            <v-text-field
-                slot="activator"
-                :label="$t('endTime')"
-                v-model="model['endTime']"
-                append-icon="access_time"
-                readonly
-              ></v-text-field>
-            <v-time-picker v-model="model['endTime']">
-              <v-spacer></v-spacer>
-              <v-btn
-                  flat
-                  color="primary"
-                  @click="endTimeMenu = false">Cancel</v-btn>
-              <v-btn
-                  flat
-                  color="primary"
-                  @click="$refs.endTime.save(model['endTime'])">OK</v-btn>
-            </v-time-picker>
-          </v-menu>
+          <v-text-field
+              :label="$t('duration')"
+              v-model="model['duration']"
+            ></v-text-field>(分钟)
         </v-flex>
         <v-flex
             sm6

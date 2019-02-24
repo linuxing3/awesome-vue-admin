@@ -45,9 +45,6 @@ export default [
   },
   {
     path: '/play',
-    meta: {
-      public: true
-    },
     name: 'play',
     component: () =>
       import(/* webpackChunkName: "routes" */

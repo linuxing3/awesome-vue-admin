@@ -7,6 +7,20 @@ const mainMenu = [
     icon: 'notes',
     color: 'purple'
   },
+  {
+    title: '仪表盘',
+    group: 'apps',
+    icon: 'view_quilt',
+    name: 'dashboard',
+    color: 'black'
+  },
+  {
+    title: '日历任务',
+    name: 'calendar',
+    group: 'apps',
+    icon: 'today',
+    color: 'purple'
+  },
   { header: '文件' },
   {
     title: '文函处理',
@@ -18,12 +32,12 @@ const mainMenu = [
   {
     title: '档案管理',
     group: 'apps',
-    icon: 'star',
+    icon: 'folder',
     name: 'archive',
     color: 'black'
   },
   {
-    title: '活动管理',
+    title: '对外活动',
     name: 'activity',
     group: 'apps',
     icon: 'event',
@@ -70,7 +84,7 @@ const mainMenu = [
     title: '资产管理',
     name: 'asset',
     group: 'apps',
-    icon: 'account_balance',
+    icon: 'store',
     color: 'blue'
   },
   // injected
