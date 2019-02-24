@@ -5,7 +5,7 @@ export const Activity = {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-      `@/views/Activity.vue`)
+    `@/views/Activity.vue`)
 }
 
 export const ActivitIdRoute = {
@@ -15,7 +15,7 @@ export const ActivitIdRoute = {
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-      `@/views/Activity.vue`)
+    `@/views/Activity.vue`)
 }
 
 export default Activity
