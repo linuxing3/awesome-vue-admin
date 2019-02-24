@@ -109,7 +109,7 @@ export default {
       <!-- 导出单个，将item属性设置为model对象 -->
       <ExportDialog
           buttonText="导出/打印"
-          :item="model"
+          :item="[model]"
           :modelName="modelName"></ExportDialog>
       <ImportDialog
           buttonText="导入/整理"

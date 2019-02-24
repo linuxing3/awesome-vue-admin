@@ -9,7 +9,11 @@
         color="primary"
         dark>{{buttonText}}</v-btn>
     <v-card
-        class="elevation-1 pa-3 mt-5">
+        class="elevation-1 pa-3">
+      <v-card-title
+        class="primary"
+        dark
+      ><div class="title white--text">当前表名：{{modelName}}</div></v-card-title>
       <v-card-text>
         <h1 class="flex my-4 primary--text">{{title}}</h1>
         <div>
@@ -30,7 +34,7 @@
             class="ml-3 mr-3"
             color="primary"
             @click="importItem"
-            :loading="loading">{{ $t('import')}}数据</v-btn>
+            :loading="loading">{{ $t('import')}}</v-btn>
         <v-btn
             class="ml-3 mr-3"
             @click="$emit('TOGGLE')"

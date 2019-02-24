@@ -4,14 +4,18 @@
       width="50%"
     >
     <v-btn
-        class="ma-3"
+        class="ml-3 mr-3"
         slot="activator"
         color="primary"
         dark>{{buttonText}}</v-btn>
     <v-card
-        class="elevation-1 pa-3 mt-5">
+        class="elevation-1 pa-3">
+      <v-card-title
+        class="primary"
+        dark
+      ><div class="title white--text">当前表名：{{modelName}}</div></v-card-title>
       <v-card-text>
-        <h1 class="flex my-4 primary--text">{{title}}</h1>
+        <h1 class="my-4 primary--text">{{title}}</h1>
         <div>
           <p>{{msg}}</p>
           <p>{{step1}}</p>
@@ -69,8 +73,8 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   props: {
     item: {
-      type: Object,
-      default: {}
+      type: Object | Array,
+      default: []
     },
     modelName: {
       type: String,
@@ -83,7 +87,7 @@ export default {
   },
   data: () => ({
     dialog: false,
-    title: '导出打印重未如此方便！',
+    title: '导出打印从未如此方便！',
     msg: '使用Word或Wps可以方便地将数据导出到csv文件并合并打印, csv文件可以用Excel打开编辑, 也可以用Word合并打印',
     step1: '第一步: Wps中打开[工具]菜单, 选择[邮件合并工具栏]',
     step2: '第二步: 使用[邮件合并工具栏], 选择[数据源]按钮',

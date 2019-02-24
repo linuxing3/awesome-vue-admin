@@ -110,12 +110,14 @@ export default {
       <v-btn
           :color='editing ? "warning": "primary"'
           @click="saveItem(model)">保存</v-btn>
-      <v-btn
-          flat
-          @click="exportItem(model)">导出数据</v-btn>
-      <v-btn
-          flat
-          @click="mergeWordApp">合并打印</v-btn>
+      <!-- 导出单个，将item属性设置为model对象 -->
+      <ExportDialog
+          buttonText="导出/打印"
+          :item="[model]"
+          :modelName="modelName"></ExportDialog>
+      <ImportDialog
+          buttonText="导入/整理"
+          :modelName="modelName"></ImportDialog>
     </v-card-actions>
   </v-card>
 </template>

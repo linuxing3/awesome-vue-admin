@@ -1,7 +1,19 @@
 <template>
   <DefaultLayout>
-    <UserTable></UserTable>
-    <UserForm></UserForm>
+    <UserTable>
+      <!-- <v-dialog
+          slot='form-dialog'
+          v-model='dialog'
+          width="60%"
+        >
+        <v-btn
+            class="ma-3"
+            slot="activator">
+            添加
+          </v-btn>
+      </v-dialog> -->
+    </UserTable>
+    <UserForm class="pa-3"></UserForm>
   </DefaultLayout>
 </template>
 
@@ -19,5 +31,7 @@ import UserForm from '@/components/User/UserForm.vue'
     UserForm
   }
 })
-export default class User extends Vue {}
+export default class User extends Vue {
+  dialog = false
+}
 </script>

@@ -28,6 +28,7 @@ export default {
 <template>
   <v-card>
     <v-card-title v-show='true'>
+      <slot name="form-dialog" />
       <!-- 导出多个，将item属性设置为items数组 -->
       <ExportDialog
           buttonText="导出/打印"

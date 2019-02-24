@@ -35,6 +35,24 @@ export default {
 
 <template>
   <v-card>
+    <v-card-title v-show='true'>
+      <slot name="form-dialog" />
+      <!-- 导出多个，将item属性设置为items数组 -->
+      <ExportDialog
+          buttonText="导出/打印"
+          :item="items"
+          :modelName="modelName" ></ExportDialog>
+      <ImportDialog
+          buttonText="导入/整理"
+          :modelName="modelName"></ImportDialog>
+      <v-spacer></v-spacer>
+      <v-text-field
+          v-model='filter.search'
+          append-icon='search'
+          label="模糊查询，不分大小写"
+          single-line
+        ></v-text-field>
+    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"

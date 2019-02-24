@@ -12,28 +12,35 @@
         <v-flex
             v-for="(item,index) in items"
             :key="index"
-            lg4
+            lg2
             md4
             sm12>
           <v-card
               :color="item.color || 'indigo'"
               dark>
-            <v-card-title>
-              <v-btn
-                  @click="go(item)"
-                  icon>
-                <v-icon>{{item.icon}}</v-icon>
-              </v-btn>
+            <v-card-title
+              class="pt-5 pb-5 justify-content-center"
+            >
+              <v-avatar
+                size="64">
+                <v-btn
+                    width="64px"
+                    height="64px"
+                    @click="go(item)"
+                    icon>
+                  <v-icon>{{item.icon}}</v-icon>
+                </v-btn>
+              </v-avatar>
               <router-link
                   class="white--text"
                   :to="'/' + item.name">
                 <h2>{{ $t('entity.'+ item.name) }}</h2>
               </router-link>
-              <v-spacer></v-spacer>
             </v-card-title>
-            <v-card-actions>
+            <v-card-actions v-show="false">
               <v-spacer></v-spacer>
               <v-btn
+                  class="pr-5 pb-5"
                   @click="go(item)"
                   flat
                   small>开始使用</v-btn>

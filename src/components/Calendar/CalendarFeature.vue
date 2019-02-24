@@ -1,5 +1,6 @@
 <template>
   <v-layout
+      class="align-items-center pa-3"
       row
       wrap>
     <v-flex
@@ -9,7 +10,6 @@
       >
       <v-btn
           fab
-          outline
           small
           absolute
           left
@@ -22,7 +22,6 @@
       </v-btn>
       <v-btn
           fab
-          outline
           small
           absolute
           right

@@ -1,21 +1,11 @@
 <script>
-import Militant from '@/models/Militant'
-import MilitantForm from './MilitantForm'
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
+
 export default {
-  components: {
-    MilitantForm
-  },
   data () {
     return {
-      editing: false,
       modelName: 'militant'
-    }
-  },
-  computed: {
-    headers () {
-      return this.Model.nonRelationFields()
     }
   },
   mixins: [exportMixin, crudMixin],
@@ -23,10 +13,8 @@ export default {
     window.MilitantTable = this
   },
   methods: {
-    deleteItem (item) {
-      Militant.delete(item._id)
-    },
     editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.MilitantForm.$emit('SET_EDITING', item)
     }
   }
@@ -35,6 +23,24 @@ export default {
 
 <template>
   <v-card>
+    <v-card-title v-show='true'>
+      <slot name="form-dialog" />
+      <!-- 导出多个，将item属性设置为items数组 -->
+      <ExportDialog
+          buttonText="导出/打印"
+          :item="items"
+          :modelName="modelName" ></ExportDialog>
+      <ImportDialog
+          buttonText="导入/整理"
+          :modelName="modelName"></ImportDialog>
+      <v-spacer></v-spacer>
+      <v-text-field
+          v-model='filter.search'
+          append-icon='search'
+          label="模糊查询，不分大小写"
+          single-line
+        ></v-text-field>
+    </v-card-title>
     <v-responsive>
       <v-data-table
           :headers="headers"
@@ -90,13 +96,6 @@ export default {
           </td>
         </template>
       </v-data-table>
-
-    </v-responsive>
-    <v-responsive>
-      <MilitantForm></MilitantForm>
     </v-responsive>
   </v-card>
 </template>
-
-<style lang="scss" module>
-</style>

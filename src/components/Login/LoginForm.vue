@@ -52,11 +52,11 @@
           class="ml-3 mr-3"
           color="primary"
           @click="login"
-          :loading="loading">Login</v-btn>
+          :loading="loading">{{ $t('app.login') }}</v-btn>
       <v-btn
           class="ml-3 mr-5"
           flat
-          @click="logout">Logout</v-btn>
+          @click="logout">{{ $t('app.logout') }}</v-btn>
     </v-card-actions>
 
     <v-responsive>
