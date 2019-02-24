@@ -3,9 +3,15 @@
       class="hide-overflow ma-5"
       height="700"
     >
-    <slot name="project" v-if="activeBtn === 0"></slot>
-    <slot name="weekly" v-if="activeBtn === 1"></slot>
-    <slot name="list" v-if="activeBtn === 2"></slot>
+    <slot
+        name="project"
+        v-if="activeBtn === 0"></slot>
+    <slot
+        name="weekly"
+        v-if="activeBtn === 1"></slot>
+    <slot
+        name="list"
+        v-if="activeBtn === 2"></slot>
     <v-bottom-nav
         :active.sync="activeBtn"
         :value="showNav"

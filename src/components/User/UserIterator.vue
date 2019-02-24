@@ -1,12 +1,15 @@
 <template>
-  <v-layout row wrap class="justify-center">
+  <v-layout
+      row
+      wrap
+      class="justify-center">
     <v-flex
-      xs12
-      sm6
-      md6
-      lg6
-    >
-    <v-card flat>
+        xs12
+        sm6
+        md6
+        lg6
+      >
+      <v-card flat>
         <v-data-iterator
             :items="headers"
             content-tag="v-layout"
@@ -18,26 +21,26 @@
               slot="item"
               slot-scope="props"
             >
-              <v-list flat>
-                <v-list-tile>
-                  <v-text-field
+            <v-list flat>
+              <v-list-tile>
+                <v-text-field
                     outlined
                     :name="props.item"
                     :value="props.item"
                   ></v-text-field>
-                </v-list-tile>
-              </v-list>
+              </v-list-tile>
+            </v-list>
           </v-flex>
         </v-data-iterator>
       </v-card>
     </v-flex>
     <v-flex
-      xs12
-      sm6
-      md6
-      lg6
-    >
-    <v-card flat>
+        xs12
+        sm6
+        md6
+        lg6
+      >
+      <v-card flat>
         <v-data-iterator
             :items="headers"
             content-tag="v-layout"
@@ -49,15 +52,15 @@
               slot="item"
               slot-scope="props"
             >
-              <v-list flat>
-                <v-list-tile>
-                  <v-text-field
+            <v-list flat>
+              <v-list-tile>
+                <v-text-field
                     outlined
                     :name="props.item"
                     :value=" tryT(props.item) "
                   ></v-text-field>
-                </v-list-tile>
-              </v-list>
+              </v-list-tile>
+            </v-list>
           </v-flex>
         </v-data-iterator>
       </v-card>
@@ -76,20 +79,20 @@ export default {
   components: {
     UserForm
   },
-  data() {
+  data () {
     return {
       modelName: 'user'
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  created() {
+  created () {
     window.UserIterator = this
   },
   methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.UserForm.$emit('SET_EDITING', item)
     }
-  },
+  }
 }
 </script>

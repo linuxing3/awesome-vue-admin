@@ -10,7 +10,7 @@
           <div class="mt-15">
             <h1 class="heading red--text underline--text">
               <v-icon color="red">star</v-icon>
-               {{ modelName  }}
+              {{ modelName  }}
             </h1>
           </div>
           <div class="mt-15">

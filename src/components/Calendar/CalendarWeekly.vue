@@ -60,7 +60,7 @@ export default {
     today: '2019-02-23'
   }),
   computed: {
-    events() {
+    events () {
       return this.items
     },
     // convert the list of events into a map of lists keyed by date

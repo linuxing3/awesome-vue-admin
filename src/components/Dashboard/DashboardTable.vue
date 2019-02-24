@@ -12,7 +12,7 @@ const gradients = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'dashboard',
       gradient: gradients[4],
@@ -23,21 +23,21 @@ export default {
     }
   },
   computed: {
-    labels() {
+    labels () {
       return [...this.items.map(item => item['label'])]
     },
-    values() {
+    values () {
       return [...this.items.map(item => item['value'])]
       // return this.Model.query().where('label', this.label).get().count()
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  async created() {
+  async created () {
     console.table(this.items)
     window.DashboardTable = this
   },
   methods: {
-    loadMockData() {
+    loadMockData () {
       this.labels = [
         '12am',
         '3am',
@@ -59,8 +59,8 @@ export default {
         240
       ]
     },
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.DashboardForm.$emit('SET_EDITING', item)
     }
   }

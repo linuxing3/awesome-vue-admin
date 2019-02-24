@@ -12,7 +12,7 @@ const gradients = [
 ]
 
 export default {
-  data() {
+  data () {
     return {
       modelName: 'user',
       gradient: gradients[4],
@@ -23,21 +23,21 @@ export default {
     }
   },
   computed: {
-    labels() {
+    labels () {
       return [...this.items.map(item => item['name'])]
     },
-    values() {
+    values () {
       return [...this.items.map(item => item['_id'])]
     }
   },
   mixins: [ exportMixin, crudMixin ],
-  async created() {
+  async created () {
     console.table(this.items)
     window.UserTable = this
   },
   methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
       window.UserForm.$emit('SET_EDITING', item)
     }
   }

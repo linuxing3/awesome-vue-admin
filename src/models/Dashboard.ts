@@ -1,4 +1,4 @@
-import { BaseModel} from './BaseModel'
+import { BaseModel } from './BaseModel'
 
 export interface IDashboard {
    _id: string
@@ -9,11 +9,11 @@ export interface IDashboard {
 export default class Dashboard extends BaseModel {
   static entity = 'dashboard'
 
-  static fields() {
+  static fields () {
     return {
       _id: this.increment(),
       label: this.string('12am'),
       value: this.number(200)
-    };
+    }
   }
 }

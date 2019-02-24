@@ -14,6 +14,7 @@ export default {
       importFileMeta: {},
       outputDocFile: 'template',
       needChangeCSVHeader: false,
+      keepOriginalHeader: true,
       reverseTranslate: false,
       onlyKeepStringValue: true,
       needMergeWord: false
@@ -42,7 +43,7 @@ export default {
     defaultTemplate: function () {
       return this.resolvePath('template', 'doc')
     },
-    // 获取模板目录下指定的Word模板
+    // 获取模板目录下自选Word模板
     modelTemplate: function () {
       return this.resolvePath(this.outputDocFile, 'doc')
     }
@@ -61,7 +62,7 @@ export default {
       // 检查导入文件名和本地模块是否一致
       let fileName = this.importFileMeta.name.replace(/\.csv$/, '')
       if (fileName !== this.modelName) {
-        this.modelName = fileName
+        alert('导入文件名称不规范，建议命名为' + this.modelName)
       }
       console.table(this.importFileMeta)
       console.log(`导入表名: ${this.modelName}`)
@@ -71,32 +72,41 @@ export default {
      */
     async importItem () {
       console.log(`导入${this.modelName}.csv文件...`)
-      let data = await ImportCSV({
+      let data: any [] = await ImportCSV({
         file: this.importFileMeta,
         keysDef: this.keysDef
       })
       console.table(data)
-      this.persistData(data)
+      if (data.length) this.persistData(data)
     },
     persistData (data) {
       if (!Array.isArray(data)) return
-      console.log(`导入到${this.modelName}...`)
-      // 逐个插入数据到数据存储文件
-      data.forEach(item => {
-        this.Model.$create({ data: item })
-      })
+      if (this.modelName === '') return
+      try {
+        console.log(`保存${this.modelName}...`)
+        // 逐个插入数据到数据存储文件
+        data.forEach(item => {
+          this.Model.$create({ data: item })
+        })
+      } catch (error) {
+        throw new Error(error)
+      }
     },
     resetData (data) {
       if (!Array.isArray(data)) return
-      console.log(`导入到${this.modelName}...`)
-      let count = 0
-      // 逐个插入数据到数据存储文件
-      data.forEach(item => {
-        let id = item._id || item.id
-        this.Model.$delete(id)
-        count = count + 1
-      })
-      console.log(`共删除数据数: ${count}`)
+      try {
+        console.log(`删除${this.modelName}全部数据`)
+        let count = 0
+        // 逐个插入数据到数据存储文件
+        data.forEach(item => {
+          let id = item._id || item.id
+          this.Model.$delete(id)
+          count = count + 1
+        })
+        console.log(`共删除数据数: ${count}`)
+      } catch (error) {
+        throw new Error(error)
+      }
     },
     /**
      * 导出数据函数
@@ -105,27 +115,37 @@ export default {
       this.exportCSV(item)
     },
     exportCSV (item) {
-      console.log(`导出${this.modelName}.csv文件...`)
-      GenerateCSV({
-        data: item,
-        targetFilePath: this.modelDatasource,
-        keysDef: this.keysDef,
-        needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
-        onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
-      })
-      console.log(`导出${this.modelName}.csv文件成功`)
+      console.log(`导出到${this.modelDatasource}文件...`)
+      try {
+        GenerateCSV({
+          data: item,
+          targetFilePath: this.modelDatasource,
+          keysDef: this.keysDef,
+          needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
+          onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
+        })
+        console.log(`导出${this.modelDatasource}文件成功`)
+        shell.showItemInFolder(this.modelDatasource)
+      } catch (error) {
+        throw new Error(error)
+      }
     },
     /**
      * 导出文件修改标题函数
      */
     changeCSVHeader () {
-      console.log(`更新${this.modelDatasource}.csv文件的列标题...`)
+      console.log(`更新${this.modelDatasource}文件的列标题...`)
       if (pathExistsSync(this.modelDatasource)) {
-        changeHeaderOfCSV({
-          targetFilePath: this.modelDatasource,
-          keysDef: this.keysDef,
-          reverse: this.reverseTranslate
-        })
+        try {
+          changeHeaderOfCSV({
+            targetFilePath: this.modelDatasource,
+            keysDef: this.keysDef,
+            reverse: this.reverseTranslate,
+            keepOriginalHeader: this.keepOriginalHeader
+          })
+        } catch (error) {
+          throw new Error(error)
+        }
       }
     },
     /**
@@ -134,18 +154,25 @@ export default {
     copyModelNameCSV () {
       console.log('备份为db.csv文件...')
       if (pathExistsSync(this.modelDatasource)) {
-        copyFileSync(this.modelDatasource, this.defaultDatasource)
+        try {
+          copyFileSync(this.modelDatasource, this.defaultDatasource)
+        } catch (error) {
+          throw new Error(error)
+        }
       }
     },
     /**
      * 导出文件打印合并函数
      */
     mergeWordApp () {
-      alert('进行Word邮件合并...')
       this.changeCSVHeader()
       this.copyModelNameCSV()
-      shell.showItemInFolder(this.defaultDatasource)
-      shell.openItem(this.modelTemplate)
+      if (pathExistsSync(this.modelTemplate)) {
+        shell.showItemInFolder(this.modelTemplate)
+        // shell.openItem(this.modelTemplate)
+      } else {
+        throw new Error('无法找到Word模板文件，请查看手册。')
+      }
     }
   }
 }

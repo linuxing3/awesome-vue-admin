@@ -22,7 +22,7 @@ export default {
     selectUsers: () => map(pick(['_id', 'name']), User.all())
   },
   methods: {
-    openExportDialog (item) {
+    openExportDialog () {
       window.ExportDialog.$emit('TOGGLE')
     }
   }
@@ -65,6 +65,18 @@ export default {
               lg6
               sm6>
             <v-select
+                v-model="model['conyuge_id']"
+                key="conyuge_id"
+                :label=" $t('conyuge_id') "
+                :items="selectUsers"
+                item-text="name"
+                item-value="_id">
+            </v-select>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-select
                 v-model="model['sendingEntity_id']"
                 key="sendingEntity_id"
                 :label=" $t('sendingEntity_id') "
@@ -91,18 +103,18 @@ export default {
     <v-card-actions class='pb-3'>
       <v-spacer></v-spacer>
       <v-btn
+          class="ml-3 mr-3"
           :color='editing ? "warning": "primary"'
           @click='saveItem(model)'>{{editing ? '更新': '添加'}}</v-btn>
-      <v-btn
-          flat
-          @click.native='exportItem(model)'>导出数据</v-btn>
-      <v-btn
-          flat
-          @click.native='mergeWordApp'>合并打印</v-btn>
+      <!-- 导出单个，将item属性设置为model对象 -->
+      <ExportDialog
+          buttonText="导出/打印"
+          :item="model"
+          :modelName="modelName"></ExportDialog>
+      <ImportDialog
+          buttonText="导入/整理"
+          :modelName="modelName"></ImportDialog>
     </v-card-actions>
-    <ExportDialog
-        :item="model"
-        :modelName="modelName" ></ExportDialog>
   </v-card>
 </template>
 <style scoped>

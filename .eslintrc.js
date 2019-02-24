@@ -14,6 +14,7 @@ module.exports = {
     'vue/valid-v-on': 'off',
     'vue/require-valid-default-prop': 'off',
     'vue/no-unused-components': 'off',
+    'vue/return-in-computed-property': 'off',
     'vue/html-indent': [
       'warn',
       2,

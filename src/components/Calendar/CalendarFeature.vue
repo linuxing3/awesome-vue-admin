@@ -1,5 +1,7 @@
 <template>
-  <v-layout row wrap>
+  <v-layout
+      row
+      wrap>
     <v-flex
         sm12
         lg3
@@ -392,7 +394,7 @@ export default {
     ]
   }),
   computed: {
-    events() {
+    events () {
       return this.items
     },
     // convert the list of events into a map of lists keyed by date

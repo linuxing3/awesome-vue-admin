@@ -1,8 +1,8 @@
-export default  {
-    path: '/dashboard',
-    name: 'dashboard',
-    meta: { breadcrumb: true },
-    component: () =>
+export default {
+  path: '/dashboard',
+  name: 'dashboard',
+  meta: { breadcrumb: true },
+  component: () =>
         import(/* webpackChunkName: "routes" */
-    /* webpackMode: "lazy" */ `@/views/Dashboard.vue`)
+          /* webpackMode: "lazy" */ `@/views/Dashboard.vue`)
 }
