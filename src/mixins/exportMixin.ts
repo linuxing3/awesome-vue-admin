@@ -4,6 +4,7 @@ import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 import XLSX from 'xlsx'
+import Docx from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
@@ -15,6 +16,7 @@ export default {
       importFileMeta: {},
       outputDocFile: 'template',
       workbook: null,
+      document: null,
       needChangeCSVHeader: false,
       keepOriginalHeader: true,
       reverseTranslate: false,
@@ -115,6 +117,7 @@ export default {
      */
     exportItem(item) {
       this.exportCSV(item)
+      this.exportExcel(item)
     },
     exportCSV(item) {
       console.log(`导出到${this.modelDatasource}文件...`)
@@ -177,26 +180,47 @@ export default {
       }
     },
     /**
+     * 导出到Excel文件
+     */
+    exportExcel(item) {
+      /* show a file-open dialog and read the first selected file */
+      let workbook = this.workbook
+      let filename = this.importFileMeta.path
+      let data = Array.isArray(item) ? item : [item]
+      let sheetName = 'data'
+      try {
+        this.writeExcelFile({
+          workbook,
+          filename,
+          data,
+          sheetName
+        })
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+    /**
      * 打开Excel文件
      */
     readExcelFile() {
-      /* show a file-open dialog and read the first selected file */
-      const o = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-      this.importFileMeta = o[0]
-      this.workbook = XLSX.readFile(this.importFileMeta)
-      console.log('打开了Excel文件')
+      const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+      // 文件对象
+      this.importFileMeta = openedFiles[0]
+      // 电子表对象
+      try {
+        this.workbook = XLSX.readFile(this.importFileMeta)
+      } catch (error) {
+        throw new Error(error)
+      }
+      console.log('打开Excel文件，已读取数据')
     },
-    writeExcelFile({ workbook, filename, options }) {
-      /* show a file-open dialog and read the first selected file */
-      if(filename ==='') filename = this.importFileMeta.path
-      if(workbook === undefined) workbook = this.workbook
+    writeExcelFile({ workbook, filename, sheetName, data, options }) {
+      // 创建新的电子表格
+      const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
+      // 添加电子表格到文件中
+      XLSX.utils.book_append_sheet(workbook, worksheet, sheetName)
+      // 写入文件
       XLSX.writeFile(workbook, filename, options)
-    },
-    createNewWorksheet({ wb, sheetName, data }) {
-      if (!Array.isArray(data)) data = [data]
-      const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
-      /* Add the worksheet to the workbook */
-      XLSX.utils.book_append_sheet(wb, ws, sheetName)
     },
     saveExcelAs(ws: XLSX.WorkSheet, type = 'csv') {
       let output
@@ -228,6 +252,28 @@ export default {
       }
       if (rABS) reader.readAsBinaryString(this.importFileMeta)
       else reader.readAsArrayBuffer(this.importFileMeta)
+    },
+    /**
+     * 打开Docx文件
+     */
+    readDocxFile() {
+      const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+      // 文件对象
+      this.importFileMeta = openedFiles[0]
+      // 电子表对象
+      try {
+        this.document = new Docx.File({})
+      } catch (error) {
+        throw new Error(error)
+      }
+      console.log('打开Docx文件，已读取数据')
+    },
+    writeDocxFile({ document, filename, data, options }) {
+      // 创建新的文档或使用默认文档
+      let p = new Docx.Paragraph('Title')
+      // 添加段落到文件中
+      this.document.addParagraph(p)
+      // 写入文件
     }
   }
 }

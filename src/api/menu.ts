@@ -90,6 +90,13 @@ const mainMenu = [
   // injected
   { header: '系统' },
   {
+    title: '编辑器',
+    group: 'apps',
+    icon: 'edit',
+    name: 'editor',
+    color: 'green'
+  },
+  {
     title: '导入导出',
     group: 'apps',
     icon: 'store',
@@ -101,7 +108,7 @@ const mainMenu = [
     group: 'apps',
     icon: 'star',
     name: 'play',
-    color: 'black'
+    color: 'grey'
   }
 ]
 

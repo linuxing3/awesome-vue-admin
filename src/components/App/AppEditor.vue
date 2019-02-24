@@ -1,4 +1,7 @@
 <template>
+  <v-layout
+    class="ma-3"
+  >
   <quillEditor
       v-model="content"
       ref="quillEditor"
@@ -6,6 +9,7 @@
       @blur="onEditorBlur($event)"
       @focus="onEditorFocus($event)"
       @ready="onEditorReady($event)" />
+  </v-layout>
 </template>
 
 <script>
