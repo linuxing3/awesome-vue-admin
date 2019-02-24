@@ -50,28 +50,28 @@
               full-width
               :nudge-bottom="-22"
               max-width="290px"
-              :return-value.sync="model['occurenceDate']"
+              :return-value.sync="model['date']"
             >
             <v-text-field
                 slot="activator"
-                :label="$t('occurenceDate')"
-                v-model="model['occurenceDate']"
+                :label="$t('date')"
+                v-model="model['date']"
                 append-icon="event"
                 readonly
               ></v-text-field>
             <v-date-picker
-                v-model="model['occurenceDate']"
+                v-model="model['date']"
                 no-title
                 scrollable>
               <v-spacer></v-spacer>
               <v-btn
                   flat
                   color="primary"
-                  @click="occurenceDateMenu = false">Cancel</v-btn>
+                  @click="dateMenu = false">Cancel</v-btn>
               <v-btn
                   flat
                   color="primary"
-                  @click="$refs.occurenceDate.save(model['occurenceDate'])">OK</v-btn>
+                  @click="$refs.date.save(model['date'])">OK</v-btn>
             </v-date-picker>
           </v-menu>
         </v-flex>
@@ -139,34 +139,34 @@
             sm4
             lg4>
           <v-menu
-              ref="startTime"
+              ref="time"
               lazy
               :close-on-content-click="false"
-              v-model="startTimeMenu"
+              v-model="timeMenu"
               transition="scale-transition"
               offset-y
               full-width
               :nudge-bottom="-24"
               max-width="290px"
-              :return-value.sync="model['startTime']"
+              :return-value.sync="model['time']"
             >
             <v-text-field
                 slot="activator"
-                :label="$t('startTime')"
-                v-model="model['startTime']"
+                :label="$t('time')"
+                v-model="model['time']"
                 append-icon="access_time"
                 readonly
               ></v-text-field>
-            <v-time-picker v-model="model['startTime']">
+            <v-time-picker v-model="model['time']">
               <v-spacer></v-spacer>
               <v-btn
                   flat
                   color="primary"
-                  @click="startTimeMenu = false">Cancel</v-btn>
+                  @click="timeMenu = false">Cancel</v-btn>
               <v-btn
                   flat
                   color="primary"
-                  @click="$refs.startTime.save(model['startTime'])">OK</v-btn>
+                  @click="$refs.time.save(model['time'])">OK</v-btn>
             </v-time-picker>
           </v-menu>
         </v-flex>
@@ -307,12 +307,11 @@ export default {
       editing: false,
       model: {},
       modelName: 'activity',
-      occurenceDateMenu: false,
+      dateMenu: false,
       currentDateMenu: false,
       reportDateMenu: false,
       instructionDateMenu: false,
-      startTimeMenu: false,
-      endTimeMenu: false
+      timeMenu: false
     }
   },
   mixins: [crudMixin, exportMixin],

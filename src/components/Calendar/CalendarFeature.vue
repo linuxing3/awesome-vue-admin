@@ -38,16 +38,16 @@
       <v-select
           v-model="type"
           :items="typeOptions"
-          label="Type"
+          label="日历类型"
         ></v-select>
       <v-checkbox
           v-model="dark"
-          label="Dark"
+          label="深色"
         ></v-checkbox>
       <v-select
           v-model="color"
           :items="colorOptions"
-          label="Color"
+          label="颜色"
         ></v-select>
       <v-menu
           ref="startMenu"
@@ -64,7 +64,7 @@
         <v-text-field
             slot="activator"
             v-model="start"
-            label="Start Date"
+            label="开始日期"
             prepend-icon="event"
             readonly
           ></v-text-field>
@@ -106,7 +106,7 @@
         <v-text-field
             slot="activator"
             v-model="end"
-            label="End Date"
+            label="截止日期"
             prepend-icon="event"
             readonly
           ></v-text-field>
@@ -147,7 +147,7 @@
         <v-text-field
             slot="activator"
             v-model="now"
-            label="Today"
+            label="今天"
             prepend-icon="event"
             readonly
           ></v-text-field>
@@ -176,7 +176,7 @@
       <v-select
           v-model="weekdays"
           :items="weekdaysOptions"
-          label="Weekdays"
+          label="周末开始节点"
         ></v-select>
       <v-text-field
           v-if="type === 'custom-weekly'"
@@ -228,6 +228,7 @@
             :show-interval-label="showIntervalLabel"
             :color="color"
           >
+          <!-- 日期插槽 -->
           <template
               slot="day"
               slot-scope="{ date, day }"
@@ -238,11 +239,11 @@
                 <div
                     :class='day'
                     :key="event.title"
-                    @click="open(event)"
-                  >{{event.title}}</div>
+                  ><router-link to="/activity">{{event.title}}</router-link></div>
               </template>
             </div>
           </template>
+          <!-- 头插槽 -->
           <template
               slot="day-header"
               slot-scope="{ date }"
@@ -250,29 +251,28 @@
             <template v-for="event in eventsMap[date]">
               <!-- all day events don't have time -->
               <div
-                  v-if="!event.startTime"
+                  v-if="!event.time"
                   :key="event.title"
                   class="my-event"
                   @click="open(event)"
-                  v-html="event.title"
-                ></div>
+                ><router-link to="'/activity">{{event.title}}</router-link></div>
             </template>
           </template>
+          <!-- 体插槽 -->
           <template
               slot="day-body"
               slot-scope="{ date, timeToY, minutesToPixels }"
             >
-            slot
             <template v-for="event in eventsMap[date]">
               <!-- timed events -->
               <div
-                  v-if="event.startTime"
+                  v-if="event.time"
                   :key="event.title"
-                  :style="{ top: timeToY(event.startTime) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                  :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                   class="my-event with-time"
-                  @click="open(event)"
-                  v-html="event.title"
-                ></div>
+                >
+                <router-link to="/activity">{{event.title}}</router-link>
+              </div>
             </template>
           </template>
         </v-calendar>
@@ -333,63 +333,63 @@ export default {
     now: null,
     type: 'month',
     typeOptions: [
-      { text: 'Day', value: 'day' },
-      { text: '4 Day', value: '4day' },
-      { text: 'Week', value: 'week' },
-      { text: 'Month', value: 'month' },
-      { text: 'Custom Daily', value: 'custom-daily' },
-      { text: 'Custom Weekly', value: 'custom-weekly' }
+      { text: '天', value: 'day' },
+      { text: '4天', value: '4day' },
+      { text: '周', value: 'week' },
+      { text: '月', value: 'month' },
+      { text: '每日定制', value: 'custom-daily' },
+      { text: '每周定制', value: 'custom-weekly' }
     ],
     weekdays: weekdaysDefault,
     weekdaysOptions: [
-      { text: 'Sunday - Saturday', value: weekdaysDefault },
-      { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
-      { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
-      { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] }
+      { text: '周日开始一周', value: weekdaysDefault },
+      { text: '周一、三、五', value: [1, 3, 5] },
+      { text: '工作日', value: [1, 2, 3, 4, 5] },
+      { text: '全周', value: [1, 2, 3, 4, 5, 6, 0] }
     ],
     intervals: intervalsDefault,
     intervalsOptions: [
-      { text: 'Default', value: intervalsDefault },
-      { text: 'Workday', value: { first: 16, minutes: 30, count: 20, height: 40 } }
+      { text: '默认', value: intervalsDefault },
+      { text: '工作日', value: { first: 16, minutes: 30, count: 20, height: 40 } }
     ],
     maxDays: 7,
     maxDaysOptions: [
-      { text: '7 days', value: 7 },
-      { text: '5 days', value: 5 },
-      { text: '4 days', value: 4 },
-      { text: '3 days', value: 3 }
+      { text: '7天', value: 7 },
+      { text: '5天', value: 5 },
+      { text: '4天', value: 4 },
+      { text: '3天', value: 3 }
     ],
     styleInterval: 'default',
     styleIntervalOptions: [
-      { text: 'Default', value: 'default' },
-      { text: 'Workday', value: 'workday' },
-      { text: 'Past', value: 'past' }
+      { text: '默认', value: 'default' },
+      { text: '工作日', value: 'workday' },
+      { text: '过去', value: 'past' }
     ],
     color: 'primary',
     colorOptions: [
-      { text: 'Primary', value: 'primary' },
-      { text: 'Secondary', value: 'secondary' },
-      { text: 'Accent', value: 'accent' },
-      { text: 'Red', value: 'red' },
-      { text: 'Pink', value: 'pink' },
-      { text: 'Purple', value: 'purple' },
-      { text: 'Deep Purple', value: 'deep-purple' },
-      { text: 'Indigo', value: 'indigo' },
-      { text: 'Blue', value: 'blue' },
-      { text: 'Light Blue', value: 'light-blue' },
-      { text: 'Cyan', value: 'cyan' },
-      { text: 'Teal', value: 'teal' },
-      { text: 'Green', value: 'green' },
-      { text: 'Light Green', value: 'light-green' },
-      { text: 'Lime', value: 'lime' },
-      { text: 'Yellow', value: 'yellow' },
-      { text: 'Amber', value: 'amber' },
-      { text: 'Orange', value: 'orange' },
-      { text: 'Deep Orange', value: 'deep-orange' },
-      { text: 'Brown', value: 'brown' },
-      { text: 'Blue Gray', value: 'blue-gray' },
-      { text: 'Gray', value: 'gray' },
-      { text: 'Black', value: 'black' }
+      { text: '主色', value: 'primary' },
+      { text: '次色', value: 'secondary' },
+      { text: '强调', value: 'accent' },
+      { text: '红色', value: 'red' },
+      { text: '粉色', value: 'pink' },
+      { text: '紫色', value: 'purple' },
+      { text: '深紫', value: 'deep-purple' },
+      { text: '靛蓝', value: 'indigo' },
+      { text: '蓝色', value: 'blue' },
+      { text: '浅蓝', value: 'light-blue' },
+      { text: '褐色', value: 'cyan' },
+      { text: '铁色', value: 'teal' },
+      { text: '绿色', value: 'green' },
+      { text: '淡绿', value: 'light-green' },
+      { text: '柠檬', value: 'lime' },
+      { text: '黄色', value: 'yellow' },
+      { text: '安柏', value: 'amber' },
+      { text: '橘色', value: 'orange' },
+      { text: '深橘', value: 'deep-orange' },
+      { text: '棕色', value: 'brown' },
+      { text: '绿灰', value: 'blue-gray' },
+      { text: '灰色', value: 'gray' },
+      { text: '黑色', value: 'black' }
     ]
   }),
   computed: {
@@ -399,7 +399,7 @@ export default {
     // convert the list of events into a map of lists keyed by date
     eventsMap () {
       const map = {}
-      this.events.forEach(e => (map[e.occurenceDate] = map[e.date] || []).push(e))
+      this.events.forEach(event => (map[event.date] = map[event.date] || []).push(event))
       return map
     },
     intervalStyle () {

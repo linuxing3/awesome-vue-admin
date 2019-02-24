@@ -10,7 +10,7 @@ import { Model } from '@vuex-orm/core'
 import models from '@/models'
 
 export default {
-  data() {
+  data () {
     return {
       modelName: '',
       importFileMeta: {},
@@ -25,42 +25,42 @@ export default {
     }
   },
   computed: {
-    Model(): Model {
+    Model (): Model {
       return models[this.modelName]
     },
     keysDef: () => keysDef, // 翻译定义
     templateDir: () => join(remote.app.getPath('home'), '/Documents/template'), // 用户模板目录
     userDataDir: () => join(remote.app.getPath('userData'), 'data'), // 用户数据目录
     // 获取模板目录下的doc文件
-    templateDocs: function() {
+    templateDocs: function () {
       return getFilesByExtentionInDir({ path: this.templateDir, ext: 'doc' })
     },
     // 获取模板目录下的当前模型对应csv文件
-    modelDatasource: function() {
+    modelDatasource: function () {
       return this.resolvePath(this.modelName, 'csv')
     },
     // 获取模板目录下的默认csv文件
-    defaultDatasource: function() {
+    defaultDatasource: function () {
       return this.resolvePath('db', 'csv')
     },
     // 获取模板目录下默认Word模板
-    defaultTemplate: function() {
+    defaultTemplate: function () {
       return this.resolvePath('template', 'doc')
     },
     // 获取模板目录下自选Word模板
-    modelTemplate: function() {
+    modelTemplate: function () {
       return this.resolvePath(this.outputDocFile, 'doc')
     }
   },
   methods: {
-    resolvePath(fileName, fileExt) {
+    resolvePath (fileName, fileExt) {
       return join(this.templateDir, `${fileName}.${fileExt}`)
     },
     /**
      * 获取导入文件信息
      * @param e 事件
      */
-    getImportFile(e) {
+    getImportFile (e) {
       // 从选择控件获取文件对象
       this.importFileMeta = e.target.files[0]
       // 检查导入文件名和本地模块是否一致
@@ -74,7 +74,7 @@ export default {
     /**
      * 导入数据函数
      */
-    async importItem() {
+    async importItem () {
       console.log(`导入${this.modelName}.csv文件...`)
       let data: any[] = await ImportCSV({
         file: this.importFileMeta,
@@ -83,7 +83,7 @@ export default {
       console.table(data)
       if (data.length) this.persistData(data)
     },
-    persistData(data) {
+    persistData (data) {
       if (!Array.isArray(data)) return
       if (this.modelName === '') return
       try {
@@ -96,7 +96,7 @@ export default {
         throw new Error(error)
       }
     },
-    resetData(data) {
+    resetData (data) {
       if (!Array.isArray(data)) return
       try {
         console.log(`删除${this.modelName}全部数据`)
@@ -115,11 +115,11 @@ export default {
     /**
      * 导出数据函数
      */
-    exportItem(item) {
+    exportItem (item) {
       this.exportCSV(item)
       this.exportExcel(item)
     },
-    exportCSV(item) {
+    exportCSV (item) {
       console.log(`导出到${this.modelDatasource}文件...`)
       try {
         GenerateCSV({
@@ -138,7 +138,7 @@ export default {
     /**
      * 导出文件修改标题函数
      */
-    changeCSVHeader() {
+    changeCSVHeader () {
       console.log(`更新${this.modelDatasource}文件的列标题...`)
       if (pathExistsSync(this.modelDatasource)) {
         try {
@@ -156,7 +156,7 @@ export default {
     /**
      * 导出文件备份函数
      */
-    copyModelNameCSV() {
+    copyModelNameCSV () {
       console.log('备份为db.csv文件...')
       if (pathExistsSync(this.modelDatasource)) {
         try {
@@ -169,7 +169,7 @@ export default {
     /**
      * 导出文件打印合并函数
      */
-    mergeWordApp() {
+    mergeWordApp () {
       this.changeCSVHeader()
       this.copyModelNameCSV()
       if (pathExistsSync(this.modelTemplate)) {
@@ -182,7 +182,7 @@ export default {
     /**
      * 导出到Excel文件
      */
-    exportExcel(item) {
+    exportExcel (item) {
       /* show a file-open dialog and read the first selected file */
       let workbook = this.workbook
       let filename = this.importFileMeta.path
@@ -202,7 +202,7 @@ export default {
     /**
      * 打开Excel文件
      */
-    readExcelFile() {
+    readExcelFile () {
       const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
       // 文件对象
       this.importFileMeta = openedFiles[0]
@@ -214,7 +214,7 @@ export default {
       }
       console.log('打开Excel文件，已读取数据')
     },
-    writeExcelFile({ workbook, filename, sheetName, data, options }) {
+    writeExcelFile ({ workbook, filename, sheetName, data, options }) {
       // 创建新的电子表格
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
       // 添加电子表格到文件中
@@ -222,7 +222,7 @@ export default {
       // 写入文件
       XLSX.writeFile(workbook, filename, options)
     },
-    saveExcelAs(ws: XLSX.WorkSheet, type = 'csv') {
+    saveExcelAs (ws: XLSX.WorkSheet, type = 'csv') {
       let output
       if (type === 'csv') {
         output = XLSX.utils.sheet_to_csv(ws, {
@@ -235,14 +235,14 @@ export default {
     /**
      *
      */
-    async handleDrop(e) {
+    async handleDrop (e) {
       e.stopPropagation()
       e.preventDefault()
       const reader = (window as any).reader
       let rABS = true
       let files = e.dataTransfer.files
       this.importFileMeta = files[0]
-      reader.onload = async function(e) {
+      reader.onload = async function (e) {
         let data = e.target.result
         if (!rABS) data = new Uint8Array(data)
         let workbook = XLSX.read(data, { type: rABS ? 'binary' : 'array' })
@@ -256,7 +256,7 @@ export default {
     /**
      * 打开Docx文件
      */
-    readDocxFile() {
+    readDocxFile () {
       const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
       // 文件对象
       this.importFileMeta = openedFiles[0]
@@ -268,7 +268,7 @@ export default {
       }
       console.log('打开Docx文件，已读取数据')
     },
-    writeDocxFile({ document, filename, data, options }) {
+    writeDocxFile ({ document, filename, data, options }) {
       // 创建新的文档或使用默认文档
       let p = new Docx.Paragraph('Title')
       // 添加段落到文件中

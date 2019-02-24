@@ -19,5 +19,9 @@ import ActivityForm from '@/components/Activity/ActivityForm.vue'
     ActivityForm
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  get routeWithId () {
+    return $route
+  }
+}
 </script>

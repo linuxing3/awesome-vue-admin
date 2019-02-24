@@ -18,7 +18,7 @@
             <template v-for="event in eventsMap[date]">
               <!-- all day events don't have time -->
               <div
-                  v-if="!event.startTime"
+                  v-if="!event.time"
                   :key="event.title"
                   class="my-event"
                   @click="open(event)"
@@ -34,9 +34,9 @@
             <template v-for="event in eventsMap[date]">
               <!-- timed events -->
               <div
-                  v-if="event.startTime"
+                  v-if="event.time"
                   :key="event.title"
-                  :style="{ top: timeToY(event.startTime) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                  :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                   class="my-event with-time"
                   @click="open(event)"
                   v-html="event.title"
@@ -53,11 +53,31 @@
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
+import { formatDate, parseDate } from '@/util/moment'
+
 export default {
   mixins: [crudMixin, exportMixin],
   data: () => ({
     modelName: 'activity',
-    today: '2019-02-23'
+    today: '2019-02-23',
+    mockEvents: [
+      {
+        title: 'Weekly Meeting',
+        date: '2019-02-23',
+        time: '09:00',
+        duration: 45
+      },
+      {
+        title: 'Thomas\' Birthday',
+        date: '2019-02-23'
+      },
+      {
+        title: 'Mash Potatoes',
+        date: '2019-02-22',
+        time: '12:30',
+        duration: 180
+      }
+    ]
   }),
   computed: {
     events () {
@@ -66,7 +86,7 @@ export default {
     // convert the list of events into a map of lists keyed by date
     eventsMap () {
       const map = {}
-      this.events.forEach(e => (map[e.occurenceDate] = map[e.date] || []).push(e))
+      this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
       return map
     }
   },

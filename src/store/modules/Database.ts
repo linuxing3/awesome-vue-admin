@@ -1,5 +1,7 @@
 import { make } from 'vuex-pathify'
-import models, { Database } from '@/models'
+import models from '@/models'
+
+const Database = models['database']
 
 const state: any = {
   name: 'database',

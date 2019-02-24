@@ -1,5 +1,7 @@
 import Home from '@/views/Home.vue'
 
+import { ActivitIdRoute } from './Activity'
+
 export default [
   {
     name: 'home',
@@ -50,5 +52,6 @@ export default [
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
         `@/views/Play.vue`)
-  }
+  },
+  ActivitIdRoute
 ]

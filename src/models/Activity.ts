@@ -6,16 +6,16 @@ export default class Activity extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      applicant: this.string('John'),
-      occurenceDate: this.string('2019-2-23'),
+      date: this.string('2019-02-23'),
       title: this.string('title'),
-      content: this.string('Meeting'),
-      currentDate: this.string('2019-2-23'),
-      startTime: this.string('12:00'),
+      time: this.string('12:00'),
       duration: this.number(60),
-      reportDate: this.string('2019-2-23'),
+      applicant: this.string('John'),
+      content: this.string('Meeting'),
+      currentDate: this.string('2019-02-23'),
+      reportDate: this.string('2019-02-23'),
       reportContent: this.string('Discussion'),
-      instructionDate: this.string('2019-2-23'),
+      instructionDate: this.string('2019-02-23'),
       instruction: this.string('Read'),
       priority: this.string('HIGH')
     }
