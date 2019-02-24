@@ -3,6 +3,7 @@ import { copyFileSync, pathExistsSync } from 'fs-extra'
 import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
+import XLSX from 'xlsx';
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
@@ -173,6 +174,50 @@ export default {
       } else {
         throw new Error('无法找到Word模板文件，请查看手册。')
       }
+    }
+    /**
+     * 打开Excel文件
+     */
+    openExcelFile() {
+      /* show a file-open dialog and read the first selected file */
+      const o = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+      this.importFileMeta = o[0]
+      let workbook = XLSX.readFile(this.importFileMeta)
+      console.log('打开了Excel文件')
+      return workbook
+      /* DO SOMETHING WITH workbook HERE */
+    },
+    createNewWorksheet({ wb, sheetName, data }) {
+      const ws_name = sheetName || "SheetJS"
+      /* make worksheet */
+      const ws_data = data || [
+        [ "S", "h", "e", "e", "t", "J", "S" ],
+        [  1 ,  2 ,  3 ,  4 ,  5 ]
+      ]
+      const ws = XLSX.utils.aoa_to_sheet(ws_data)
+      
+      /* Add the worksheet to the workbook */
+      XLSX.utils.book_append_sheet(wb, ws, ws_name)
+    }
+    /**
+     *  
+     */
+    async handleDrop(e) {
+      e.stopPropagation()
+      e.preventDefault()
+      const rABS = true; 
+      let files = e.dataTransfer.files
+
+      this.importFileMeta  = files[0]
+      reader.onload = async function(e) {
+        let data = e.target.result
+        if(!rABS) data = new Uint8Array(data)
+        let workbook = XLSX.read(data, {type: rABS ? 'binary' : 'array'})
+        console.log('打开了Excel文件')
+        /* DO SOMETHING WITH workbook HERE */
+        return workbook
+      }
+      if(rABS) reader.readAsBinaryString(f); else reader.readAsArrayBuffer(f)
     }
   }
 }

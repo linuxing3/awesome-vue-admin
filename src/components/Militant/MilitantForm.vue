@@ -60,7 +60,7 @@ export default {
       <ImportDialog
           buttonText="导入/整理"
           :modelName="modelName"></ImportDialog>
-      </v-card-actions>
+    </v-card-actions>
   </v-card>
 </template>
 

@@ -11,9 +11,9 @@
     <v-card
         class="elevation-1 pa-3">
       <v-card-title
-        class="primary"
-        dark
-      ><div class="title white--text">当前表名：{{modelName}}</div></v-card-title>
+          class="primary"
+          dark
+        ><div class="title white--text">当前表名：{{modelName}}</div></v-card-title>
       <v-card-text>
         <h1 class="my-4 primary--text">{{title}}</h1>
         <div>

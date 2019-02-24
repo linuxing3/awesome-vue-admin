@@ -6,8 +6,9 @@ export default class Account extends BaseModel {
   static fields () {
     return {
       _id: Model.increment(),
-      name: Model.string('embajadachina'),
-      path: Model.string('embajadachina@gmail.com')
+      name: Model.string(''),
+      headers: Model.attr(['']),
+      path: Model.string('')
     }
   }
 }

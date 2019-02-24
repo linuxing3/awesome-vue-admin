@@ -33,8 +33,8 @@ export default {
     // 数据对象的实例数组
     items (): any[] {
       let { search, sort } = this.filter
-      if (search === '') return this.all
-      return baseFilter({ sort, search }, this.all)
+      if (search === '') return this.witAll
+      return baseFilter({ sort, search }, this.witAll)
       // return this.Model.query().where('name', this.filter.search).get()
     },
     // 数据键值的数组

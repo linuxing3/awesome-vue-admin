@@ -8,7 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DefaultLayout from '@/layout/default.vue'
 
-import PlayComponent from '@/components/User/UserDashboard.vue'
+import PlayComponent from '@/components/App/AppEditor.vue'
 
 @Component({
   components: {
@@ -16,5 +16,8 @@ import PlayComponent from '@/components/User/UserDashboard.vue'
     PlayComponent
   }
 })
-export default class Play extends Vue {}
+export default class Play extends Vue {
+  methods: {
+  }
+}
 </script>

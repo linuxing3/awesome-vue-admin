@@ -19,10 +19,10 @@
               :color="item.color || 'indigo'"
               dark>
             <v-card-title
-              class="pt-5 pb-5 justify-content-center"
-            >
+                class="pt-5 pb-5 justify-content-center"
+              >
               <v-avatar
-                size="64">
+                  size="64">
                 <v-btn
                     width="64px"
                     height="64px"

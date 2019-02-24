@@ -30,7 +30,7 @@ export default {
 
 <template>
   <v-card>
-    <v-card-title v-show='true'>
+    <v-card-title>
       <slot name="form-dialog" />
       <!-- 导出多个，将item属性设置为items数组 -->
       <ExportDialog

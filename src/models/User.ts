@@ -28,8 +28,8 @@ export default class User extends BaseModel {
       chargeOf: this.string('Second'),
       arrivingDate: this.string('2016-4-9'),
       rotatingDate: this.string('2020-4-9'),
-      conyuge_id: this.attr(1),
-      conyuge: this.belongsTo(User, 'conyuge_id'),
+      conyugeName: this.string(''),
+      conyugeEntity: this.string(''),
       memo: this.string('No')
     }
   }

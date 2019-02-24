@@ -10,7 +10,8 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      modelName: 'user'
+      modelName: 'user',
+      selectedUsers: []
     }
   },
   mixins: [ crudMixin, exportMixin ],
@@ -60,18 +61,6 @@ export default {
                 :name='field'
                 :label='tryT(field) '>
             </v-text-field>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['conyuge_id']"
-                key="conyuge_id"
-                :label=" $t('conyuge_id') "
-                :items="selectUsers"
-                item-text="name"
-                item-value="_id">
-            </v-select>
           </v-flex>
           <v-flex
               lg6
