@@ -51,7 +51,7 @@ export default [
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-        `@/views/Play.vue`)
+        `@/views/Dynamic.vue`)
   },
   editActivity
 ]
