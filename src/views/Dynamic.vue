@@ -2,7 +2,11 @@
   <DefaultLayout>
     <v-layout class="ma-3">
       <v-text-field
+          label="model"
           v-model="model"/>
+      <v-text-field
+          label="type"
+          v-model="type"/>
       <keep-living v-if="type === 'form'">
         <component :is="modelForm" />
       </keep-living>
