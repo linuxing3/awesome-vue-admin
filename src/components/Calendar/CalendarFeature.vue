@@ -270,8 +270,9 @@
                   :key="event.title"
                   :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
                   class="my-event with-time"
+                  @click="editActivity(event)"
                 >
-                <router-link to="/activity">{{event.title}}</router-link>
+                {{event.title}}
               </div>
             </template>
           </template>
@@ -419,6 +420,10 @@ export default {
   methods: {
     showIntervalLabel (interval) {
       return interval.minute === 0
+    },
+    editActivity (event) {
+      this.model = event
+      this.$router.push(this.editRoute)
     }
   }
 }

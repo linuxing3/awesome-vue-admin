@@ -4,6 +4,10 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+    // Try to persist database names
+    this.$store.dispatch('entities/database/init')
+  }
 }
 </script>
