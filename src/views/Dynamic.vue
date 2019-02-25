@@ -33,12 +33,12 @@ export default class Dynamic extends Vue {
 
   get modelForm () {
     let fileName = `@components/${this.modelName}/${this.modelName}Form.vue`
-    return import(/* webpackChunkName: "dynamic" */ filename)
+    return import(/* webpackChunkName: "dynamic" */ fileName)
   }
 
   get modelTable () {
     let fileName = `@components/${this.modelName}/${this.modelName}Table.vue`
-    return import(/* webpackChunkName: "dynamic" */ filename)
+    return import(/* webpackChunkName: "dynamic" */ fileName)
   }
 
   created () {
