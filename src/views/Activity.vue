@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <ActivityTable></ActivityTable>
+    <ActivityTable v-if="$route.path !== '/activity_id'"></ActivityTable>
     <ActivityForm></ActivityForm>
   </DefaultLayout>
 </template>
@@ -19,9 +19,5 @@ import ActivityForm from '@/components/Activity/ActivityForm.vue'
     ActivityForm
   }
 })
-export default class Home extends Vue {
-  get routeWithId() {
-    return this.$route
-  }
-}
+export default class Home extends Vue {}
 </script>

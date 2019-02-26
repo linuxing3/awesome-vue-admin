@@ -14,6 +14,7 @@ const mainMenu = [
     name: 'dashboard',
     color: 'black'
   },
+  { header: '文件' },
   {
     title: '日历任务',
     name: 'calendar',
@@ -21,7 +22,13 @@ const mainMenu = [
     icon: 'today',
     color: 'purple'
   },
-  { header: '文件' },
+  {
+    title: '对外活动',
+    name: 'activity',
+    group: 'apps',
+    icon: 'event',
+    color: 'grey'
+  },
   {
     title: '文函处理',
     name: 'document',
@@ -35,13 +42,6 @@ const mainMenu = [
     icon: 'folder',
     name: 'archive',
     color: 'black'
-  },
-  {
-    title: '对外活动',
-    name: 'activity',
-    group: 'apps',
-    icon: 'event',
-    color: 'grey'
   },
   { header: '人员' },
   {

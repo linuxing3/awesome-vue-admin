@@ -1,21 +1,21 @@
-export const Activity = {
+export const activity = {
   path: '/activity',
   name: 'activity',
   meta: { breadcrumb: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/views/Activity.vue`)
+      `@/views/Activity.vue`)
 }
 
-export const ActivitIdRoute = {
-  path: '/activity/:id',
-  name: 'activity-id',
-  meta: { breadcrumb: true },
+export const editActivity = {
+  path: '/activity_id',
+  name: 'activity_id',
+  meta: { breadcrumb: true, edit: true },
   component: () =>
     import(/* webpackChunkName: "routes" */
     /* webpackMode: "lazy" */
-    `@/views/Activity.vue`)
+      `@/views/Activity.vue`)
 }
 
-export default Activity
+export default activity

@@ -1,14 +1,10 @@
 <script>
 import Activity from '@/models/Activity'
-import ActivityForm from './ActivityForm'
 
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
 
 export default {
-  components: {
-    ActivityForm
-  },
   data () {
     return {
       editing: false,
@@ -71,9 +67,6 @@ export default {
         </v-timeline-item>
       </v-timeline>
     </v-card-text>
-    <v-card-actions>
-      <ActivityForm></ActivityForm>
-    </v-card-actions>
   </v-card>
 </template>
 

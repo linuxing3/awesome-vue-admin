@@ -15,7 +15,7 @@ let win
 protocol.registerStandardSchemes(['app'], { secure: true })
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600 })
+  win = new BrowserWindow({ width: 1024, height: 768 })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -36,7 +36,10 @@ function createWindow () {
 }
 
 function registerShortcuts (win: BrowserWindow) {
-  globalShortcut.register('CommandOrControl+X', () => {
+  globalShortcut.register('CommandOrControl+Shift+X', () => {
+    if (!process.env.IS_TEST) win.webContents.openDevTools()
+  })
+  globalShortcut.register('CommandOrControl+F11', () => {
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   })
 }

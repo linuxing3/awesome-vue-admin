@@ -12,7 +12,6 @@ import models from '@/models'
 export default {
   data () {
     return {
-      modelName: '',
       importFileMeta: {},
       outputDocFile: 'template',
       workbook: null,
@@ -129,6 +128,10 @@ export default {
           needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
           onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
         })
+
+        console.log(`翻译行标题${this.modelDatasource}`)
+        if(this.keepOriginalHeader) this.changeCSVHeader()
+        
         console.log(`导出${this.modelDatasource}文件成功`)
         shell.showItemInFolder(this.modelDatasource)
       } catch (error) {
@@ -146,7 +149,7 @@ export default {
             targetFilePath: this.modelDatasource,
             keysDef: this.keysDef,
             reverse: this.reverseTranslate,
-            keepOriginalHeader: this.keepOriginalHeader
+            keepOriginalHeader: true
           })
         } catch (error) {
           throw new Error(error)
@@ -170,7 +173,6 @@ export default {
      * 导出文件打印合并函数
      */
     mergeWordApp () {
-      this.changeCSVHeader()
       this.copyModelNameCSV()
       if (pathExistsSync(this.modelTemplate)) {
         shell.showItemInFolder(this.modelTemplate)

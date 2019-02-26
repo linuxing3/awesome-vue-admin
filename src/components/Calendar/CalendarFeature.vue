@@ -1,284 +1,304 @@
 <template>
-  <v-layout
-      class="align-items-center pa-3"
-      row
-      wrap>
-    <v-flex
-        sm12
-        lg3
-        class="pa-3 mb-3 feature-pane"
-      >
-      <v-btn
-          fab
-          small
-          absolute
-          left
-          color="primary"
-          @click="$refs.calendar.prev()"
-        >
-        <v-icon dark>
-          keyboard_arrow_left
-        </v-icon>
-      </v-btn>
-      <v-btn
-          fab
-          small
-          absolute
-          right
-          color="primary"
-          @click="$refs.calendar.next()"
-        >
-        <v-icon
-            dark
+  <v-card>
+    <v-card-text>
+      <v-layout
+          class="align-items-center pa-3"
+          row
+          wrap>
+        <v-btn
+            class="mt-5"
+            fab
+            large
+            absolute
+            right
+            top
+            color="red darken-2"
+            @click="$router.push('/activity')"
           >
-          keyboard_arrow_right
-        </v-icon>
-      </v-btn>
-      <br><br><br>
-      <v-select
-          v-model="type"
-          :items="typeOptions"
-          label="日历类型"
-        ></v-select>
-      <v-checkbox
-          v-model="dark"
-          label="深色"
-        ></v-checkbox>
-      <v-select
-          v-model="color"
-          :items="colorOptions"
-          label="颜色"
-        ></v-select>
-      <v-menu
-          ref="startMenu"
-          v-model="startMenu"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          :return-value.sync="start"
-          transition="scale-transition"
-          min-width="290px"
-          lazy
-          offset-y
-          full-width
-        >
-        <v-text-field
-            slot="activator"
-            v-model="start"
-            label="开始日期"
-            prepend-icon="event"
-            readonly
-          ></v-text-field>
-        <v-date-picker
-            v-model="start"
-            no-title
-            scrollable
+          <v-icon dark>
+            add
+          </v-icon>
+        </v-btn>
+        <v-flex
+            sm12
+            lg3
+            class="pa-3 mb-3 feature-pane"
           >
-          <v-spacer></v-spacer>
           <v-btn
-              flat
+              fab
+              small
+              absolute
+              left
               color="primary"
-              @click="startMenu = false"
+              @click="$refs.calendar.prev()"
             >
-            Cancel
+            <v-icon dark>
+              keyboard_arrow_left
+            </v-icon>
           </v-btn>
           <v-btn
-              flat
+              fab
+              small
+              absolute
+              right
               color="primary"
-              @click="$refs.startMenu.save(start)"
+              @click="$refs.calendar.next()"
             >
-            OK
+            <v-icon
+                dark
+              >
+              keyboard_arrow_right
+            </v-icon>
           </v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-menu
-          v-if="hasEnd"
-          ref="endMenu"
-          v-model="endMenu"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          :return-value.sync="end"
-          transition="scale-transition"
-          min-width="290px"
-          lazy
-          offset-y
-          full-width
-        >
-        <v-text-field
-            slot="activator"
-            v-model="end"
-            label="截止日期"
-            prepend-icon="event"
-            readonly
-          ></v-text-field>
-        <v-date-picker
-            v-model="end"
-            no-title
-            scrollable
-          >
-          <v-spacer></v-spacer>
-          <v-btn
-              flat
-              color="primary"
-              @click="endMenu = false"
+          <br><br><br>
+          <v-select
+              v-model="type"
+              :items="typeOptions"
+              label="日历类型"
+            ></v-select>
+          <v-checkbox
+              v-model="dark"
+              label="深色"
+            ></v-checkbox>
+          <v-select
+              v-model="color"
+              :items="colorOptions"
+              label="颜色"
+            ></v-select>
+          <v-menu
+              ref="startMenu"
+              v-model="startMenu"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="start"
+              transition="scale-transition"
+              min-width="290px"
+              lazy
+              offset-y
+              full-width
             >
-            Cancel
-          </v-btn>
-          <v-btn
-              flat
-              color="primary"
-              @click="$refs.endMenu.save(end)"
-            >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-menu
-          ref="nowMenu"
-          v-model="nowMenu"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          :return-value.sync="now"
-          transition="scale-transition"
-          min-width="290px"
-          lazy
-          offset-y
-          full-width
-        >
-        <v-text-field
-            slot="activator"
-            v-model="now"
-            label="今天"
-            prepend-icon="event"
-            readonly
-          ></v-text-field>
-        <v-date-picker
-            v-model="now"
-            no-title
-            scrollable
-          >
-          <v-spacer></v-spacer>
-          <v-btn
-              flat
-              color="primary"
-              @click="nowMenu = false"
-            >
-            Cancel
-          </v-btn>
-          <v-btn
-              flat
-              color="primary"
-              @click="$refs.nowMenu.save(now)"
-            >
-            OK
-          </v-btn>
-        </v-date-picker>
-      </v-menu>
-      <v-select
-          v-model="weekdays"
-          :items="weekdaysOptions"
-          label="周末开始节点"
-        ></v-select>
-      <v-text-field
-          v-if="type === 'custom-weekly'"
-          v-model="minWeeks"
-          label="Minimum Weeks"
-          type="number"
-        ></v-text-field>
-      <v-select
-          v-if="hasIntervals"
-          v-model="intervals"
-          :items="intervalsOptions"
-          label="Intervals"
-        ></v-select>
-      <v-select
-          v-if="type === 'custom-daily'"
-          v-model="maxDays"
-          :items="maxDaysOptions"
-          label="# of Days"
-        ></v-select>
-      <v-select
-          v-if="hasIntervals"
-          v-model="styleInterval"
-          :items="styleIntervalOptions"
-          label="Styling"
-        ></v-select>
-    </v-flex>
-    <v-flex
-        sm12
-        lg9
-        class="pl-3"
-      >
-      <v-sheet height="500">
-        <v-calendar
-            ref="calendar"
-            v-model="start"
-            :type="type"
-            :start="start"
-            :end="end"
-            :min-weeks="minWeeks"
-            :max-days="maxDays"
-            :now="now"
-            :dark="dark"
-            :weekdays="weekdays"
-            :first-interval="intervals.first"
-            :interval-minutes="intervals.minutes"
-            :interval-count="intervals.count"
-            :interval-height="intervals.height"
-            :interval-style="intervalStyle"
-            :show-interval-label="showIntervalLabel"
-            :color="color"
-          >
-          <!-- 日期插槽 -->
-          <template
-              slot="day"
-              slot-scope="{ date, day }"
-            >
-            <div>
-              <template v-for="event in eventsMap[date]">
-                <!-- timed events -->
-                <div
-                    :class='day'
-                    :key="event.title"
-                  ><router-link to="/activity">{{event.title}}</router-link></div>
-              </template>
-            </div>
-          </template>
-          <!-- 头插槽 -->
-          <template
-              slot="day-header"
-              slot-scope="{ date }"
-            >
-            <template v-for="event in eventsMap[date]">
-              <!-- all day events don't have time -->
-              <div
-                  v-if="!event.time"
-                  :key="event.title"
-                  class="my-event"
-                  @click="open(event)"
-                ><router-link to="'/activity">{{event.title}}</router-link></div>
-            </template>
-          </template>
-          <!-- 体插槽 -->
-          <template
-              slot="day-body"
-              slot-scope="{ date, timeToY, minutesToPixels }"
-            >
-            <template v-for="event in eventsMap[date]">
-              <!-- timed events -->
-              <div
-                  v-if="event.time"
-                  :key="event.title"
-                  :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
-                  class="my-event with-time"
+            <v-text-field
+                slot="activator"
+                v-model="start"
+                label="开始日期"
+                prepend-icon="event"
+                readonly
+              ></v-text-field>
+            <v-date-picker
+                v-model="start"
+                no-title
+                scrollable
+              >
+              <v-spacer></v-spacer>
+              <v-btn
+                  flat
+                  color="primary"
+                  @click="startMenu = false"
                 >
-                <router-link to="/activity">{{event.title}}</router-link>
-              </div>
-            </template>
-          </template>
-        </v-calendar>
-      </v-sheet>
-    </v-flex>
-  </v-layout>
+                Cancel
+              </v-btn>
+              <v-btn
+                  flat
+                  color="primary"
+                  @click="$refs.startMenu.save(start)"
+                >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-menu>
+          <v-menu
+              v-if="hasEnd"
+              ref="endMenu"
+              v-model="endMenu"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="end"
+              transition="scale-transition"
+              min-width="290px"
+              lazy
+              offset-y
+              full-width
+            >
+            <v-text-field
+                slot="activator"
+                v-model="end"
+                label="截止日期"
+                prepend-icon="event"
+                readonly
+              ></v-text-field>
+            <v-date-picker
+                v-model="end"
+                no-title
+                scrollable
+              >
+              <v-spacer></v-spacer>
+              <v-btn
+                  flat
+                  color="primary"
+                  @click="endMenu = false"
+                >
+                Cancel
+              </v-btn>
+              <v-btn
+                  flat
+                  color="primary"
+                  @click="$refs.endMenu.save(end)"
+                >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-menu>
+          <v-menu
+              ref="nowMenu"
+              v-model="nowMenu"
+              :close-on-content-click="false"
+              :nudge-right="40"
+              :return-value.sync="now"
+              transition="scale-transition"
+              min-width="290px"
+              lazy
+              offset-y
+              full-width
+            >
+            <v-text-field
+                slot="activator"
+                v-model="now"
+                label="今天"
+                prepend-icon="event"
+                readonly
+              ></v-text-field>
+            <v-date-picker
+                v-model="now"
+                no-title
+                scrollable
+              >
+              <v-spacer></v-spacer>
+              <v-btn
+                  flat
+                  color="primary"
+                  @click="nowMenu = false"
+                >
+                Cancel
+              </v-btn>
+              <v-btn
+                  flat
+                  color="primary"
+                  @click="$refs.nowMenu.save(now)"
+                >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-menu>
+          <v-select
+              v-model="weekdays"
+              :items="weekdaysOptions"
+              label="周末开始节点"
+            ></v-select>
+          <v-text-field
+              v-if="type === 'custom-weekly'"
+              v-model="minWeeks"
+              label="Minimum Weeks"
+              type="number"
+            ></v-text-field>
+          <v-select
+              v-if="hasIntervals"
+              v-model="intervals"
+              :items="intervalsOptions"
+              label="Intervals"
+            ></v-select>
+          <v-select
+              v-if="type === 'custom-daily'"
+              v-model="maxDays"
+              :items="maxDaysOptions"
+              label="# of Days"
+            ></v-select>
+          <v-select
+              v-if="hasIntervals"
+              v-model="styleInterval"
+              :items="styleIntervalOptions"
+              label="Styling"
+            ></v-select>
+        </v-flex>
+        <v-flex
+            sm12
+            lg9
+            class="pl-3"
+          >
+          <v-sheet height="500">
+            <v-calendar
+                ref="calendar"
+                v-model="start"
+                :type="type"
+                :start="start"
+                :end="end"
+                :min-weeks="minWeeks"
+                :max-days="maxDays"
+                :now="now"
+                :dark="dark"
+                :weekdays="weekdays"
+                :first-interval="intervals.first"
+                :interval-minutes="intervals.minutes"
+                :interval-count="intervals.count"
+                :interval-height="intervals.height"
+                :interval-style="intervalStyle"
+                :show-interval-label="showIntervalLabel"
+                :color="color"
+              >
+              <!-- 日期插槽 -->
+              <template
+                  slot="day"
+                  slot-scope="{ date, day }"
+                >
+                <div>
+                  <template v-for="event in eventsMap[date]">
+                    <!-- timed events -->
+                    <div
+                        :class='day'
+                        :key="event.title"
+                        @click="editItem(event)"
+                      ><h4>{{event.title}}</h4></div>
+                  </template>
+                </div>
+              </template>
+              <!-- 头插槽 -->
+              <template
+                  slot="day-header"
+                  slot-scope="{ date }"
+                >
+                <template v-for="event in eventsMap[date]">
+                  <!-- all day events don't have time -->
+                  <div
+                      v-if="!event.time"
+                      :key="event.title"
+                      class="my-event"
+                      @click="editItem(event)"
+                    >{{event.title}}</div>
+                </template>
+              </template>
+              <!-- 体插槽 -->
+              <template
+                  slot="day-body"
+                  slot-scope="{ date, timeToY, minutesToPixels }"
+                >
+                <template v-for="event in eventsMap[date]">
+                  <!-- timed events -->
+                  <div
+                      v-if="event.time"
+                      :key="event.title"
+                      :style="{ top: timeToY(event.time) + 'px', height: minutesToPixels(event.duration) + 'px' }"
+                      class="my-event with-time"
+                      @click="editItem(event)"
+                    >
+                    {{event.title}}
+                  </div>
+                </template>
+              </template>
+            </v-calendar>
+          </v-sheet>
+        </v-flex>
+      </v-layout>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -419,6 +439,10 @@ export default {
   methods: {
     showIntervalLabel (interval) {
       return interval.minute === 0
+    },
+    editItem (item) {
+      this.$emit('SET_EDITING', item)
+      window.ActivityForm.$emit('SET_EDITING', item)
     }
   }
 }

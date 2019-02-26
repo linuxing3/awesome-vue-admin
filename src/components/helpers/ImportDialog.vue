@@ -1,7 +1,7 @@
 <template>
   <v-dialog
       v-model='dialog'
-      width="50%"
+      width="80%"
     >
     <v-btn
         class="ma-3"

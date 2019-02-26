@@ -1,6 +1,6 @@
 import Home from '@/views/Home.vue'
 
-import { ActivitIdRoute } from './Activity'
+import { editActivity } from './Activity'
 
 export default [
   {
@@ -51,7 +51,7 @@ export default [
     component: () =>
       import(/* webpackChunkName: "routes" */
       /* webpackMode: "lazy" */
-        `@/views/Play.vue`)
+        `@/views/Dynamic.vue`)
   },
-  ActivitIdRoute
+  editActivity
 ]

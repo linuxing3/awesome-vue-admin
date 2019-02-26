@@ -60,6 +60,16 @@ export default {
     // 关系型数据键值中不包括_id的
     nonRelationFieldsNoId (): string[] {
       return this.Model.nonRelationFieldsNoId()
+    },
+    // The form or info page to edit
+    editRoute () {
+      return {
+        name: this.modelName + '_id',
+        params: {
+          type: 'edit',
+          model: this.model
+        }
+      }
     }
   },
   async mounted () {
@@ -111,7 +121,7 @@ export default {
      */
     setEditing (item: object) {
       this.editing = true
-      this.model = item || {}
+      this.model = item
     },
     /**
      * 删除

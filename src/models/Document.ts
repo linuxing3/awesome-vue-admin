@@ -8,24 +8,21 @@ export default class Document extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      type: this.string('XXX'),
-      mark: this.string('XXX'),
-      classification: this.string('XXX'),
-      startDate: this.string('2018-12-30'),
-      title: this.string('XXX'),
-      text: this.string('XXX'),
-      sendingEntity_id: this.attr(1),
-      fromEntity_id: this.attr(1),
-      sendingEntity: this.belongsTo(Entity, 'sendingEntity_id'),
-      fromEntity: this.belongsTo(Entity, 'fromEntity_id'),
-      toEntity_id: this.attr(1),
-      copyEntity_id: this.attr(1),
-      toEntity: this.belongsTo(Entity, 'toEntity_id'),
-      copyEntity: this.belongsTo(Entity, 'copyEntity_id'),
-      attachment: this.string('XXX'),
-      tags: this.string('XXX'),
-      author: this.belongsTo(User, 'author_id'),
-      author_id: this.attr(1)
+      classiLevel: this.string('internal'),
+      category: this.string('internal'),
+      year: this.string('2018-12-30'),
+      inOrOut: this.string('output'),
+      sendingCode: this.string('Vue'),
+      orderedNumber: this.string('001'),
+      title: this.string('Vue Typescript'),
+      content: this.string('Vue with electron'),
+      toEntity: this.string('Vue'),
+      copyEntity: this.string('Electron'),
+      date: this.string('2019-02-25'),
+      attachment: this.string(''),
+      keyword: this.string(''),
+      workEntity: this.string('Code'),
+      author: this.string('Daniel')
     }
   }
 }

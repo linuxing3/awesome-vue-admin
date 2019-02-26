@@ -306,7 +306,7 @@ export const changeHeaderOfCSV = ({
   targetFilePath = '',
   keysDef = {},
   reverse = false,
-  keepOriginalHeader = false
+  keepOriginalHeader = true
 }) => {
   // 1. 读取文件为字符串
   let content = fs.readFileSync(targetFilePath, 'utf8')

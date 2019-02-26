@@ -1,10 +1,5 @@
 <script>
 import { map, pick, pullAll } from 'lodash/fp'
-import Document from '@/models/Document'
-
-import Entity from '@/models/Entity'
-import User from '@/models/User'
-
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
@@ -56,37 +51,37 @@ export default {
               lg6>
             <v-menu
                 class="pr-2"
-                ref="statDate"
+                ref="date"
                 lazy
                 :close-on-content-click="false"
-                v-model="startDateMenu"
+                v-model="dateMenu"
                 transition="scale-transition"
                 offset-y
                 full-width
                 :nudge-bottom="-22"
                 max-width="290px"
-                :return-value.sync="model['startDate']"
+                :return-value.sync="model['date']"
               >
               <v-text-field
                   slot="activator"
-                  :label="$t('startDate')"
-                  v-model="model['startDate']"
+                  :label="$t('date')"
+                  v-model="model['date']"
                   append-icon="event"
                   readonly
                 ></v-text-field>
               <v-date-picker
-                  v-model="model['startDate']"
+                  v-model="model['date']"
                   no-title
                   scrollable>
                 <v-spacer></v-spacer>
                 <v-btn
                     flat
                     color="primary"
-                    @click="startDateMenu = false">Cancel</v-btn>
+                    @click="startDateMenu = false">{{ $t('cancel') }}</v-btn>
                 <v-btn
                     flat
                     color="primary"
-                    @click="$refs.statDate.save(model['startDate'])">OK</v-btn>
+                    @click="$refs.date.save(model['date'])">OK</v-btn>
               </v-date-picker>
             </v-menu>
           </v-flex>
@@ -94,30 +89,60 @@ export default {
               lg6
               sm6>
             <v-text-field
-                v-model="model['type']"
-                name="type"
-                key="type"
-                :label=" $t !== undefined ? $t('type') : 'type'">
+                v-model="model['inOrOut']"
+                name="inOrOut"
+                key="inOrOut"
+                :label=" $t !== undefined ? $t('inOrOut') : 'type'">
             </v-text-field>
           </v-flex>
           <v-flex
               lg6
               sm6>
             <v-text-field
-                v-model="model['mark']"
-                name="mark"
-                key="mark"
-                :label=" $t !== undefined ? $t('mark') : 'mark'">
+                v-model="model['year']"
+                name="year"
+                key="year"
+                :label=" $t !== undefined ? $t('year') : 'type'">
             </v-text-field>
           </v-flex>
           <v-flex
               lg6
               sm6>
             <v-text-field
-                v-model="model['classification']"
-                name="classification"
-                key="classification"
-                :label=" $t !== undefined ? $t('classification') : 'classification'">
+                v-model="model['category']"
+                name="category"
+                key="category"
+                :label=" $t !== undefined ? $t('category') : 'type'">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model['sendingCode']"
+                name="sendingCode"
+                key="sendingCode"
+                :label=" $t !== undefined ? $t('sendingCode') : 'mark'">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model['orderedNumber']"
+                name="orderedNumber"
+                key="orderedNumber"
+                :label=" $t !== undefined ? $t('orderedNumber') : 'mark'">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model['classiLevel']"
+                name="classiLevel"
+                key="classiLevel"
+                :label=" $t('classiLevel') ">
             </v-text-field>
           </v-flex>
           <v-flex
@@ -127,19 +152,49 @@ export default {
                 v-model="model['title']"
                 name="title"
                 key="title"
-                :label=" $t !== undefined ? $t('title') : 'title'">
+                :label=" $t('title') ">
             </v-text-field>
           </v-flex>
           <v-flex
               lg12
               sm12>
             <v-textarea
-                v-model="model['text']"
-                name="text"
-                key="text"
+                v-model="model['content']"
+                name="content"
+                key="content"
                 multi-line
-                :label=" $t !== undefined ? $t('text') : 'text'">
+                :label=" $t('content') ">
             </v-textarea>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model['toEntity']"
+                name="toEntity"
+                key="toEntity"
+                :label=" $t('toEntity') ">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model['copyEntity']"
+                name="copyEntity"
+                key="copyEntity"
+                :label=" $t('copyEntity') ">
+            </v-text-field>
+          </v-flex>
+          <v-flex
+              lg6
+              sm6>
+            <v-text-field
+                v-model="model['workEntity']"
+                name="workEntity"
+                key="workEntity"
+                :label=" $t('workEntity') ">
+            </v-text-field>
           </v-flex>
           <v-flex
               lg12
@@ -148,68 +203,28 @@ export default {
                 v-model="model['attachment']"
                 name="attachment"
                 key="attachment"
-                :label=" $t !== undefined ? $t('attachment') : 'attachment'">
+                :label=" $t('attachment') ">
             </v-text-field>
           </v-flex>
           <v-flex
               lg6
               sm6>
-            <v-select
-                v-model="model['sendingEntity_id']"
-                key="sendingEntity_id"
-                :label=" $t('sendingEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
+            <v-text-field
+                v-model="model['keyword']"
+                name="keyword"
+                key="keyword"
+                :label=" $t('keyword') ">
+            </v-text-field>
           </v-flex>
           <v-flex
               lg6
               sm6>
-            <v-select
-                v-model="model['fromEntity_id']"
-                key="fromEntity_id"
-                :label=" $t('fromEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['toEntity_id']"
-                key="toEntity_id"
-                :label=" $t('toEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['copyEntity_id']"
-                key="copyEntity_id"
-                :label=" $t('copyEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['author_id']"
-                key="author_id"
-                :label=" $t('author_id') "
-                :items="selectUsers"
-                item-text="name"
-                item-value="_id">
-            </v-select>
+            <v-text-field
+                v-model="model['author']"
+                name="author"
+                key="author"
+                :label=" $t('author') ">
+            </v-text-field>
           </v-flex>
         </v-layout>
       </v-form>

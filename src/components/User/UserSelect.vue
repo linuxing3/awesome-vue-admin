@@ -1,12 +1,12 @@
 <script>
 import { map, pick } from 'lodash/fp'
 
-import User from '@/User'
+import User from '@/models/User'
 
 export default {
   data () {
     return {
-      model: { '_id': 1, label: 'Select User' }
+      model: { _id: 1, label: 'Select User' }
     }
   },
   created () {

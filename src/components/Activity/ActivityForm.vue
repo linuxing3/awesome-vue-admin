@@ -41,10 +41,10 @@
             lg3>
           <v-menu
               class="pr-2"
-              ref="occurenceDate"
+              ref="date"
               lazy
               :close-on-content-click="false"
-              v-model="occurenceDateMenu"
+              v-model="dateMenu"
               transition="scale-transition"
               offset-y
               full-width
@@ -80,7 +80,7 @@
             lg12>
           <v-text-field
               name="title"
-              :label="$t('title')"
+              label="事由"
               v-model="model['title']"
             ></v-text-field>
         </v-flex>
@@ -92,7 +92,7 @@
               multi-line
               auto-grow
               name="content"
-              :label="$t('content')"
+              label="内容"
               v-model="model['content']"
             ></v-textarea>
         </v-flex>
@@ -179,6 +179,18 @@
             ></v-text-field>(分钟)
         </v-flex>
         <v-flex
+            class="mt-5"
+            sm12
+            lg12>
+          <v-textarea
+              outline
+              multi-line
+              name="reportContent"
+              :label="$t('reportContent')"
+              v-model="model['reportContent']"
+            ></v-textarea>
+        </v-flex>
+        <v-flex
             sm6
             lg6>
           <v-menu
@@ -218,14 +230,16 @@
           </v-menu>
         </v-flex>
         <v-flex
+            class="mt-5"
             sm12
             lg12>
           <v-textarea
               outline
               multi-line
-              name="reportContent"
-              :label="$t('reportContent')"
-              v-model="model['reportContent']"
+              auto-grow
+              name="instruction"
+              :label="$t('instruction')"
+              v-model="model['instruction']"
             ></v-textarea>
         </v-flex>
         <v-flex
@@ -267,24 +281,12 @@
             </v-date-picker>
           </v-menu>
         </v-flex>
-        <v-flex
-            sm12
-            lg12>
-          <v-textarea
-              outline
-              multi-line
-              auto-grow
-              name="instruction"
-              :label="$t('instruction')"
-              v-model="model['instruction']"
-            ></v-textarea>
-        </v-flex>
       </v-layout>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-          :color='editing ? "warning": "primary"'
+          :color="editing ? 'warning': 'primary'"
           @click="saveItem(model)">{{editing ? "更新": "添加"}}</v-btn>
       <!-- 导出单个，将item属性设置为model对象 -->
       <ExportDialog

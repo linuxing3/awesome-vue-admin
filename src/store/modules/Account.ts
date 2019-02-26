@@ -9,7 +9,7 @@ const state = {
   cached: [],
   defaultAccount: {
     name: 'admin',
-    password: 'admin123',
+    password: 'admin',
     email: 'admin@mfa.gov.cn',
     hash: '',
     role: 'manager'

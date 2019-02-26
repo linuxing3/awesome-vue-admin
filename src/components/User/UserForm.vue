@@ -1,9 +1,4 @@
 <script>
-import { map, pick, pullAll } from 'lodash/fp'
-import User from '@/models/User'
-
-import Entity from '@/models/Entity'
-
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
@@ -61,30 +56,6 @@ export default {
                 :name='field'
                 :label='tryT(field) '>
             </v-text-field>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['sendingEntity_id']"
-                key="sendingEntity_id"
-                :label=" $t('sendingEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
-          </v-flex>
-          <v-flex
-              lg6
-              sm6>
-            <v-select
-                v-model="model['fromEntity_id']"
-                key="fromEntity_id"
-                :label=" $t('fromEntity_id') "
-                :items="selectEntities"
-                item-text="name"
-                item-value="_id">
-            </v-select>
           </v-flex>
         </v-layout>
       </v-form>
