@@ -1,6 +1,10 @@
 <template>
   <DefaultLayout>
-    <PlayComponent :modelName='modelName' />
+    <v-text-field
+      class="ma-3"
+      @keyup="handleChange"
+      v-model='modelName' />
+    <PlayComponent ref="crud-form" :modelName='modelName' />
   </DefaultLayout>
 </template>
 
@@ -18,5 +22,9 @@ import PlayComponent from '@/components/helpers/CrudForm.vue'
 })
 export default class Play extends Vue {
   modelName = 'user'
+
+  handleChange () {
+    this.$refs('crud-form').$forceUpdate()
+  }
 }
 </script>
