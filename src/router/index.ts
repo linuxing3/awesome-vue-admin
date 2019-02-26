@@ -11,9 +11,16 @@ Vue.use(Router);
  */
 let requiredRoute: RequireContext = require.context(".", false, /\.ts$/);
 
-requiredRoute.keys().forEach(key => {
-  if (key === "./index.ts" || key === "./path.ts") return;
-  path.push(requiredRoute(key).default || requiredRoute(key));
+requiredRoute.keys().forEach(route => {
+  let routeConfig = requiredRoute(route)
+  if (route === "./index.ts" || route === "./path.ts") return;
+  if (Array.isArray(routeConfig.default)) {
+    routeConfig.default.forEach(subRoute => {
+      path.push(subRoute)
+    })
+  } else {
+    path.push(routeConfig.default);
+  }
 });
 
 const router = new Router({
@@ -23,11 +30,14 @@ const router = new Router({
 // router guards
 router.beforeEach((to: any, from: any, next: any) => {
   console.log("Going From " + from.path + " to " + to.path);
+  // validate user
+  // check if to edit or add
   next();
 });
 
 router.afterEach((to: any, from: any) => {
   console.log("Arrived " + to.path + " from " + from.path);
+  // clear model of previous component
 });
 
 export default router;
