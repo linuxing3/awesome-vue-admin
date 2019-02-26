@@ -1,7 +1,7 @@
 <template>
   <v-card
-    class="ma-3"
-  >
+      class="ma-3"
+    >
     <v-toolbar
         card
         prominent
