@@ -249,7 +249,9 @@
                   slot="day"
                   slot-scope="{ date, day }"
                 >
-                <div>
+                <div
+                  @click="type = 'day'"
+                  >
                   <template v-for="event in eventsMap[date]">
                     <!-- timed events -->
                     <div
@@ -442,7 +444,11 @@ export default {
       return interval.minute === 0
     },
     editItem (item) {
+      this.model = item
       this.$router.push(this.editRoute)
+    },
+    changeType(type) {
+      this.type = type
     }
   }
 }

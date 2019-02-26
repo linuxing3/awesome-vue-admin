@@ -9,7 +9,7 @@ export default {
       editing: false,
       model: {},
       modelName: 'document',
-      startDateMenu: false
+      dateMenu: false
     }
   },
   mixins: [crudMixin, exportMixin],
@@ -77,7 +77,7 @@ export default {
                 <v-btn
                     flat
                     color="primary"
-                    @click="startDateMenu = false">{{ $t('cancel') }}</v-btn>
+                    @click="dateMenu = false">{{ $t('cancel') }}</v-btn>
                 <v-btn
                     flat
                     color="primary"

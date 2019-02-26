@@ -1,13 +1,15 @@
 const path = require('path')
 const fs = require('fs')
+const { resolve } = require('path')
 const exec = require('child_process').exec
-const mime = require('mime')
 
 export class FileManager {
   drives = []
   rootDir = ''
+  homeDir = ''
+  templateDir = ''
 
-  constructor (rootDir) {
+  constructor (rootDir?) {
     this.rootDir = rootDir || '.'
     this.getFolders(this.rootDir)
   }
@@ -28,6 +30,23 @@ export class FileManager {
           this.drives.push(value.trim())
         })
     })
+  }
+  
+  getWindowsHomeDir() {
+    if (process.platform !== 'win32') {
+      throw new Error('getWindowsDrives called but process.plaform !== \'win32\'')
+    }
+  
+    exec('wmic environment where "name=\'home\'" get VariableValue', (error, stdout) => {
+      if (error) throw new Error(error)
+      console.log(stdout)
+      this.homeDir = stdout.split('\r\r\n')[1]
+      console.log(this.homeDir)
+    })
+  }
+  
+  getWindowsTemplateDir(homeDir, subDir) {
+    this.templateDir = resolve(homeDir, subDir)
   }
 
   /**

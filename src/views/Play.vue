@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <PlayComponent />
+    <PlayComponent :modelName='modelName' />
   </DefaultLayout>
 </template>
 
@@ -8,7 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import DefaultLayout from '@/layout/default.vue'
 
-import PlayComponent from '@/components/App/AppEditor.vue'
+import PlayComponent from '@/components/helpers/CrudForm.vue'
 
 @Component({
   components: {
@@ -17,7 +17,6 @@ import PlayComponent from '@/components/App/AppEditor.vue'
   }
 })
 export default class Play extends Vue {
-  methods: {
-  }
+  modelName = 'user'
 }
 </script>

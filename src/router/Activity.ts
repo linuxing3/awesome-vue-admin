@@ -10,7 +10,7 @@ export const activity = {
 
 export const editActivity = {
   path: '/activity/:id',
-  name: 'activity',
+  name: 'activity_id',
   meta: { breadcrumb: true, edit: true },
   component: () =>
     import(/* webpackChunkName: "routes" */

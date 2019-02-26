@@ -240,7 +240,7 @@ export const translateHeaders = ({
  * return result;
  * NOTE 实现方法2. reduce methods
  */
-export const translateBody = ({
+export const translateBody =  ({
   data = [],
   onlyKeepStringValue = true
 }): any[] => {
@@ -312,18 +312,17 @@ export const changeHeaderOfCSV = ({
   let content = fs.readFileSync(targetFilePath, 'utf8')
   // 2. 分别获取第一行为列标题，其他为数据行
   let { header, body } = splitCSVHeaderBody(content)
+  if (keepOriginalHeader) {
+    console.log(`写入原有列标题如下:\n${header}`)
+    fs.writeFileSync(targetFilePath, header, { encoding: 'utf-8', flag: 'w' })
+    fs.writeFileSync(targetFilePath, '\n', { encoding: 'utf-8', flag: 'a' })
+  }
   // 3. 翻译第一行，如果reverse为真，进行反向翻译。
   let newHeader = changeCSVHeader({ header, keysDef, reverse })
   // 3. 写入第一行为列标题
-  console.log(`清空原有数据，写入新的列标题`)
   console.log(`写入新的列标题如下:\n${newHeader}`)
-  fs.writeFileSync(targetFilePath, newHeader, { encoding: 'utf-8', flag: 'w' })
+  fs.writeFileSync(targetFilePath, newHeader, { encoding: 'utf-8', flag: 'a' })
   fs.writeFileSync(targetFilePath, '\n', { encoding: 'utf-8', flag: 'a' })
-  if (keepOriginalHeader) {
-    console.log(`写入原有列标题如下:\n${header}`)
-    fs.writeFileSync(targetFilePath, header, { encoding: 'utf-8', flag: 'a' })
-    fs.writeFileSync(targetFilePath, '\n', { encoding: 'utf-8', flag: 'a' })
-  }
   // 4. 写入其他数据行
   const data = body.join('\n')
   console.log(`添加新的数据行`)

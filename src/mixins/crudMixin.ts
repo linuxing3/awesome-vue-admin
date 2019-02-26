@@ -69,7 +69,7 @@ export default {
     // The form or info page to edit
     editRoute () {
       return {
-        name: this.modelName,
+        name: this.modelName + '_id',
         params: {
           id: this.model.id,
           type: 'edit',
@@ -81,7 +81,7 @@ export default {
     addRoute () {
       let model = new this.Model()
       return {
-        name: this.modelName,
+        name: this.modelName + '_id',
         params: {
           type: 'add',
           model
@@ -132,7 +132,7 @@ export default {
     reset () {
       // If previous route want to edit
       if (this.$route.params.type === 'edit') {
-        this.setEditing(this.model = this.$route.params.model)
+        this.setEditing(this.$route.params.model)
       } else {
         this.editing = false
         this.model = new this.Model()
@@ -168,6 +168,8 @@ export default {
       } else {
         this.createItem(item)
       }
+      this.editing = false
+      this.model = new this.Model()
     },
     /**
      * 更新
@@ -181,7 +183,6 @@ export default {
       })
       // ORM默认方法
       // this.Model.update(this.model);
-      this.reset()
     },
     /**
      * 创建
@@ -198,7 +199,6 @@ export default {
       // this.Model.insert({
       //   data: this.model,
       // });
-      this.reset()
     },
     queryField (field: string) {
       this.Model.query().where(field, this.filter.search).get()

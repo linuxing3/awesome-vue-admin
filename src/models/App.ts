@@ -15,7 +15,10 @@ export default class App extends BaseModel {
       _id: this.increment(),
       name: this.string('coder'),
       title: this.string('title'),
-      description: this.string('description')
+      description: this.string('description'),
+      homeDir: this.string(''),
+      subDir: this.string(''),
+      templateDir: this.string(''),
     }
   }
 }

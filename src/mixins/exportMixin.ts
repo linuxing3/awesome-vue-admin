@@ -116,7 +116,7 @@ export default {
      */
     exportItem (item) {
       this.exportCSV(item)
-      this.exportExcel(item)
+      // this.exportExcel(item)
     },
     exportCSV (item) {
       console.log(`导出到${this.modelDatasource}文件...`)
@@ -129,11 +129,18 @@ export default {
           onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
         })
 
-        console.log(`翻译行标题${this.modelDatasource}`)
-        if (this.keepOriginalHeader) this.changeCSVHeader()
+        if (this.keepOriginalHeader)  {
+          setTimeout(async () => {
+            alert('因为数据标题行为外文，需要添加中文对应标题。你可以随意删除无用标题') 
+            this.changeCSVHeader()
+          }, 3000);
+        }
 
-        console.log(`导出${this.modelDatasource}文件成功`)
-        shell.showItemInFolder(this.modelDatasource)
+        setTimeout(() => {
+          shell.showItemInFolder(this.modelDatasource)
+          console.log(`导出${this.modelDatasource}文件成功`)
+        }, 5000);
+
       } catch (error) {
         throw new Error(error)
       }
@@ -151,6 +158,7 @@ export default {
             reverse: this.reverseTranslate,
             keepOriginalHeader: true
           })
+          alert('完成标题对应，可以使用了')
         } catch (error) {
           throw new Error(error)
         }
@@ -172,7 +180,7 @@ export default {
     /**
      * 导出文件打印合并函数
      */
-    mergeWordApp () {
+    async mergeWordApp () {
       this.copyModelNameCSV()
       if (pathExistsSync(this.modelTemplate)) {
         shell.showItemInFolder(this.modelTemplate)

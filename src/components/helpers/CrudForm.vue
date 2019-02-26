@@ -29,7 +29,7 @@
             <v-text-field
                 v-model='model[field]'
                 :name='field'
-                :label=' $(field) '>
+                :label=' field '>
             </v-text-field>
           </v-flex>
         </v-layout>
@@ -63,10 +63,6 @@ export default {
     modelName: {
       type: String,
       default: 'user'
-    },
-    editing: {
-      type: Boolean,
-      default: false
     },
     avatar: {
       type: Object,
