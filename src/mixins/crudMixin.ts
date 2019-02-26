@@ -81,6 +81,10 @@ export default {
     this.$on('SET_EDITING', function (item: object) {
       this.setEditing(item)
     })
+    // If previous route want to edit
+    if (this.$route.meta.edit) {
+      this.$emit('SET_EDITING', this.$route.params.model)
+    }
   },
   methods: {
     /**
