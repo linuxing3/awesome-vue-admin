@@ -8,7 +8,6 @@ export default {
     return {
       editing: false,
       model: {},
-      modelName: '',
       filter: {
         search: '',
         sort: ''
@@ -19,6 +18,9 @@ export default {
     // 数据对象的定义模型
     Model (): Model {
       return models[this.modelName]
+    },
+    defaultModel () {
+      return new this.Model()
     },
     // 数据对象的实例数组，包含有关系的其他数据
     all (): any[] {
@@ -43,6 +45,9 @@ export default {
     },
     // 数据键值的数组，可用于表格标题行
     headers (): string[] {
+      return this.Model.fieldsKeys().splice(0, 6)
+    },
+    allHeaders (): string[] {
       return this.Model.fieldsKeys()
     },
     // 关系型数据键值的数组
@@ -64,10 +69,22 @@ export default {
     // The form or info page to edit
     editRoute () {
       return {
-        name: this.modelName + '_id',
+        name: this.modelName,
         params: {
+          id: this.model.id,
           type: 'edit',
           model: this.model
+        }
+      }
+    },
+    // The form or add
+    addRoute () {
+      let model = new this.Model()
+      return {
+        name: this.modelName,
+        params: {
+          type: 'add',
+          model
         }
       }
     }
@@ -81,10 +98,6 @@ export default {
     this.$on('SET_EDITING', function (item: object) {
       this.setEditing(item)
     })
-    // If previous route want to edit
-    if (this.$route.meta.edit) {
-      this.$emit('SET_EDITING', this.$route.params.model)
-    }
   },
   methods: {
     /**
@@ -117,8 +130,13 @@ export default {
      * 重置组件状态
      */
     reset () {
-      this.editing = false
-      this.model = new this.Model()
+      // If previous route want to edit
+      if (this.$route.params.type === 'edit') {
+        this.setEditing(this.model = this.$route.params.model)
+      } else {
+        this.editing = false
+        this.model = new this.Model()
+      }
     },
     /**
      * 设置[编辑]为真，[数据模型]为传入项目

@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <ActivityTable v-if="$route.path !== '/activity_id'"></ActivityTable>
+    <ActivityTable v-if="$route.params.type !== 'edit'"></ActivityTable>
     <ActivityForm></ActivityForm>
   </DefaultLayout>
 </template>

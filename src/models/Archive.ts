@@ -17,7 +17,7 @@ export default class Archive extends BaseModel {
       attachment: this.string('XXX'),
       tags: this.string('XXX'),
       author: this.string('string'),
-      manager: this.string('string'),
+      manager: this.string('string')
     }
   }
 }

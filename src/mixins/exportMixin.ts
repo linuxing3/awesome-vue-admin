@@ -130,8 +130,8 @@ export default {
         })
 
         console.log(`翻译行标题${this.modelDatasource}`)
-        if(this.keepOriginalHeader) this.changeCSVHeader()
-        
+        if (this.keepOriginalHeader) this.changeCSVHeader()
+
         console.log(`导出${this.modelDatasource}文件成功`)
         shell.showItemInFolder(this.modelDatasource)
       } catch (error) {
@@ -224,10 +224,10 @@ export default {
       // 写入文件
       XLSX.writeFile(workbook, filename, options)
     },
-    saveExcelAs (ws: XLSX.WorkSheet, type = 'csv') {
+    saveExcelAs (worksheet: XLSX.WorkSheet, type = 'csv') {
       let output
       if (type === 'csv') {
-        output = XLSX.utils.sheet_to_csv(ws, {
+        output = XLSX.utils.sheet_to_csv(worksheet, {
           FS: ',',
           blankrows: false
         })

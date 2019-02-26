@@ -343,6 +343,7 @@ export default {
   mixins: [crudMixin, exportMixin],
   data: () => ({
     modelName: 'activity',
+    editing: false,
     dark: false,
     startMenu: false,
     start: '2019-02-18',
@@ -441,8 +442,7 @@ export default {
       return interval.minute === 0
     },
     editItem (item) {
-      this.$emit('SET_EDITING', item)
-      window.ActivityForm.$emit('SET_EDITING', item)
+      this.$router.push(this.editRoute)
     }
   }
 }
