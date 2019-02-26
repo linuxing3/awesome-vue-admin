@@ -321,7 +321,7 @@ export const changeHeaderOfCSV = ({
   fs.writeFileSync(targetFilePath, '\n', { encoding: 'utf-8', flag: 'a' })
   if (keepOriginalHeader) {
     console.log(`写入原有列标题如下:\n${header}`)
-    fs.writeFileSync(targetFilePath, header, { encoding: 'utf-8', flag: 'w' })
+    fs.writeFileSync(targetFilePath, header, { encoding: 'utf-8', flag: 'a' })
     fs.writeFileSync(targetFilePath, '\n', { encoding: 'utf-8', flag: 'a' })
   }
   // 4. 写入其他数据行
