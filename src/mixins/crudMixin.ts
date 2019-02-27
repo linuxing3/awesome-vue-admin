@@ -26,6 +26,9 @@ export default {
     all (): any[] {
       return this.Model.query().get()
     },
+    count (): any[] {
+      return this.Model.query().count()
+    },
     // 数据对象的实例数组，包含有关系的其他数据
     witAll (): any[] {
       return this.Model.query()
@@ -45,7 +48,7 @@ export default {
     },
     // 数据键值的数组，可用于表格标题行
     headers (): string[] {
-      return this.Model.fieldsKeys().splice(0, 6)
+      return this.Model.fieldsKeys().splice(2, 10)
     },
     allHeaders (): string[] {
       return this.Model.fieldsKeys()

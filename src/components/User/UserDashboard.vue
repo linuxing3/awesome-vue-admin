@@ -23,11 +23,11 @@ export default {
     }
   },
   computed: {
-    labels () {
-      return [...this.items.map(item => item['name'])]
-    },
     values () {
-      return [...this.items.map(item => item['_id'])]
+      return [ this.count ]
+    },
+    labels () {
+      return ['user']
     }
   },
   mixins: [ exportMixin, crudMixin ],

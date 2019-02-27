@@ -242,6 +242,9 @@ export default {
       <ImportDialog
           buttonText="导入/整理"
           :modelName="modelName"></ImportDialog>
+      <AttachDialog
+          buttonText="单独附件"
+          :modelName="modelName"></AttachDialog>
     </v-card-actions>
   </v-card>
 </template>

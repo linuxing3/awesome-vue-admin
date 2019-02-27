@@ -1,10 +1,12 @@
 <template>
   <DefaultLayout>
     <v-text-field
-      class="ma-3"
-      @keyup="handleChange"
-      v-model='modelName' />
-    <PlayComponent ref="crud-form" :modelName='modelName' />
+        class="ma-3"
+        @keyup="handleChange"
+        v-model='modelName' />
+    <PlayComponent
+        ref="crud-form"
+        :modelName='modelName' />
   </DefaultLayout>
 </template>
 

@@ -18,7 +18,7 @@ export default class App extends BaseModel {
       description: this.string('description'),
       homeDir: this.string(''),
       subDir: this.string(''),
-      templateDir: this.string(''),
+      templateDir: this.string('')
     }
   }
 }

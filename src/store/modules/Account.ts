@@ -30,7 +30,7 @@ const state = {
 
 const mutations: any = {
   ...make.mutations(state),
-  CACHE_USER (state, newAccount) {
+  CACHE_ITEMS (state, newAccount) {
     state.cached.push(newAccount)
   }
 }
@@ -77,7 +77,8 @@ const AccountActions = {
 
         let accountInfo = {
           ...signupData,
-          hash
+          hash,
+          role: 'user'
         }
 
         // 2 保存用户名和加密密码
@@ -109,7 +110,8 @@ const AccountActions = {
     // 登录状态为真
     ctx.commit('SET_LOGGED_IN', true)
     // 缓存用户数据
-    ctx.commit('CACHE_USER', authData)
+    ctx.commit('SET_CURRENT_ITEM', authData)
+    ctx.commit('CACHE_ITEMS', authData)
     // 设置简单托证
     ctx.commit('SET_TOKEN', {
       ...ctx.state.token,
@@ -120,10 +122,11 @@ const AccountActions = {
   },
   // Logs out the current user.
   clearCache ({ commit }) {
-    // 登录状态为真
+    // 登录状态为假
     commit('SET_LOGGED_IN', false)
-    // 缓存用户数据
+    // 删除缓存用户数据
     commit('SET_CACHED', [])
+    commit('SET_CURRENT_ITEM', {})
   }
 }
 

@@ -1,5 +1,6 @@
 import { join } from 'path'
-import { copyFileSync, pathExistsSync } from 'fs-extra'
+import { copyFileSync, pathExistsSync, writeFileSync } from 'fs-extra'
+
 import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
@@ -8,6 +9,9 @@ import Docx from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
+import { fstat } from 'fs'
+
+const Account = models['account']
 
 export default {
   data () {
@@ -96,6 +100,9 @@ export default {
       }
     },
     resetData (data) {
+      // Check is current account is manager
+      if (!this.validate()) return
+      // Delete all data
       if (!Array.isArray(data)) return
       try {
         console.log(`删除${this.modelName}全部数据`)
@@ -129,18 +136,17 @@ export default {
           onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
         })
 
-        if (this.keepOriginalHeader)  {
+        if (this.keepOriginalHeader) {
           setTimeout(async () => {
-            alert('因为数据标题行为外文，需要添加中文对应标题。你可以随意删除无用标题') 
+            alert('因为数据标题行为外文，需要添加中文对应标题。你可以随意删除无用标题')
             this.changeCSVHeader()
-          }, 3000);
+          }, 3000)
         }
 
         setTimeout(() => {
           shell.showItemInFolder(this.modelDatasource)
           console.log(`导出${this.modelDatasource}文件成功`)
-        }, 5000);
-
+        }, 5000)
       } catch (error) {
         throw new Error(error)
       }
@@ -266,24 +272,29 @@ export default {
     /**
      * 打开Docx文件
      */
-    readDocxFile () {
+    openDocxFile () {
       const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
       // 文件对象
       this.importFileMeta = openedFiles[0]
       // 电子表对象
+    },
+    writeDocxFile (data) {
+      let filename = this.importFileMeta.path
       try {
-        this.document = new Docx.File({})
+        this.document = new Docx.Document()
       } catch (error) {
         throw new Error(error)
       }
       console.log('打开Docx文件，已读取数据')
-    },
-    writeDocxFile ({ document, filename, data, options }) {
       // 创建新的文档或使用默认文档
-      let p = new Docx.Paragraph('Title')
+      let p = new Docx.Paragraph(data)
       // 添加段落到文件中
       this.document.addParagraph(p)
       // 写入文件
+      const packer = new Docx.Packer()
+      packer.toBuffer(this.document).then(buffer => {
+        writeFileSync(filename || 'output.docx', buffer)
+      })
     }
   }
 }

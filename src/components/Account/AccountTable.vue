@@ -15,13 +15,10 @@ export default {
   },
   mixins: [crudMixin, exportMixin],
   async created () {
-    let authedAccounts = await Account.query().where('hash', this.cached[0].hash).get()
-    console.table(authedAccounts)
-    this.model = authedAccounts[0]
+    this.model = currentUser
     window.AccountForm = this
   },
   computed: {
-    cached: get('entities/account/cached'),
     computeImgePath: () => 'avatar/man_1.jpg'
   },
   methods: {

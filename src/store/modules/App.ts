@@ -20,7 +20,7 @@ const mutations: any = {
   /**
    * 将数据的结构存储下来
    */
-  init({ state }) {
+  init ({ state }) {
     // 设置当前模型的名称
     fileManger.getWindowsHomeDir()
     fileManger.getWindowsTemplateDir(fileManger.homeDir, 'documents/template/')
@@ -39,7 +39,7 @@ const mutations: any = {
 }
 
 const actions: any = {
-  clear({ commit }) {
+  clear ({ commit }) {
     //
     commit('SET_MODELS', {})
     //
@@ -49,7 +49,7 @@ const actions: any = {
 }
 
 const getters: any = {
-  Model(state) {
+  Model (state) {
     return state.models[state.currentModel]
   },
   ...make.getters(state)

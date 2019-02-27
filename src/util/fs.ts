@@ -31,12 +31,12 @@ export class FileManager {
         })
     })
   }
-  
-  getWindowsHomeDir() {
+
+  getWindowsHomeDir () {
     if (process.platform !== 'win32') {
       throw new Error('getWindowsDrives called but process.plaform !== \'win32\'')
     }
-  
+
     exec('wmic environment where "name=\'home\'" get VariableValue', (error, stdout) => {
       if (error) throw new Error(error)
       console.log(stdout)
@@ -44,8 +44,8 @@ export class FileManager {
       console.log(this.homeDir)
     })
   }
-  
-  getWindowsTemplateDir(homeDir, subDir) {
+
+  getWindowsTemplateDir (homeDir, subDir) {
     this.templateDir = resolve(homeDir, subDir)
   }
 

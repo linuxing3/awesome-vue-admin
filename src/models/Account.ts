@@ -13,4 +13,8 @@ export default class Account extends BaseModel {
       role: Model.string('')
     }
   }
+
+  isAdmin () {
+    return this['role'] === 'admin'
+  }
 }

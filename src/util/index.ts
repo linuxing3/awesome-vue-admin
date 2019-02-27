@@ -240,7 +240,7 @@ export const translateHeaders = ({
  * return result;
  * NOTE 实现方法2. reduce methods
  */
-export const translateBody =  ({
+export const translateBody = ({
   data = [],
   onlyKeepStringValue = true
 }): any[] => {
