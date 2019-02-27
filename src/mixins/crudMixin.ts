@@ -7,7 +7,7 @@ export default {
   data () {
     return {
       editing: false,
-      model: defaultModel,
+      model: {},
       editedIndex: -1,
       filter: {
         search: '',
@@ -44,18 +44,17 @@ export default {
       let { search, sort } = this.filter
       if (search === '') return this.witAll
       return baseFilter({ sort, search }, this.witAll)
-      // return this.Model.query().where('name', this.filter.search).get()
     },
     // 数据键值的数组
     fields (): string[] {
       return this.Model.fieldsKeys()
     },
     // 数据键值的数组，可用于表格标题行
-    headers (): string[] {
+    headersText (): string[] {
       return this.Model.fieldsKeys().splice(2, 10)
     },
-    headersConfig (): string[] {
-      this.fields().reduce(function (headersConfig, field) {
+    headers (): any[] {
+      return this.fields.reduce(function (headersConfig, field) {
         let config = {
           text: field,
           align: 'left',

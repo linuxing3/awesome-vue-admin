@@ -2,6 +2,7 @@
   <v-dialog
       v-model='dialog'
       width="80%"
+      loading="true"
     >
     <v-btn
         class="ma-3"

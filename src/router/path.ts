@@ -1,7 +1,5 @@
 import Home from '@/views/Home.vue'
 
-import { editActivity } from './Activity'
-
 export default [
   {
     name: 'home',
@@ -20,7 +18,6 @@ export default [
     name: 'NotFound',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
         `@/views/NotFound.vue`)
   },
   {
@@ -31,7 +28,6 @@ export default [
     name: 'AccessDenied',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
         `@/views/Deny.vue`)
   },
   {
@@ -42,7 +38,6 @@ export default [
     name: 'ServerError',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
         `@/views/Error.vue`)
   },
   {
@@ -50,8 +45,6 @@ export default [
     name: 'play',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      /* webpackMode: "lazy" */
         `@/views/Play.vue`)
-  },
-  editActivity
+  }
 ]

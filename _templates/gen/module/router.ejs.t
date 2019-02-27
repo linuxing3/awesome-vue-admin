@@ -10,6 +10,5 @@ const viewName = h.capitalize(model)
     name: '<%= routeName %>',
     meta: { breadcrumb: true },
     component: () =>
-        import(/* webpackChunkName: "routes" */
-    /* webpackMode: "lazy" */ `@/views/<%= viewName %>.vue`)
+        import(/* webpackChunkName: "routes" */ `@/views/<%= viewName %>.vue`)
 }

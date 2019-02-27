@@ -5,6 +5,5 @@ export default {
     public: true
   },
   component: () =>
-    import(/* webpackChunkName: "routes" */
-    /* webpackMode: "lazy" */ `@/views/Login.vue`)
+    import(/* webpackChunkName: "routes" */ `@/views/Login.vue`)
 }

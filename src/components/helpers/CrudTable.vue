@@ -1,9 +1,28 @@
 <template>
   <div>
+  <v-container
+      id="dropdown-example"
+      grid-list-xl>
+    <v-layout
+        row
+        wrap>
+      <v-flex
+          xs12
+          sm4>
+        <v-overflow-btn
+            :items="entities"
+            item-value="entityName"
+            v-model="modelName"
+            label="Entities"
+            target="#dropdown-example"
+          ></v-overflow-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
     <v-toolbar
         flat
         color="white">
-      <v-toolbar-title>My CRUD</v-toolbar-title>
+      <v-toolbar-title class="heading">{{modelName}} 表格</v-toolbar-title>
       <v-divider
           class="mx-2"
           inset
@@ -12,7 +31,7 @@
       <v-spacer></v-spacer>
       <v-dialog
           v-model="dialog"
-          max-width="500px">
+          max-width="80%">
         <v-btn
             slot="activator"
             color="primary"
@@ -27,44 +46,14 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex
+                    v-for="field in headers"
+                    :key="field.value"
                     xs12
                     sm6
                     md4>
                   <v-text-field
-                      v-model="editedItem.name"
-                      label="Dessert name"></v-text-field>
-                </v-flex>
-                <v-flex
-                    xs12
-                    sm6
-                    md4>
-                  <v-text-field
-                      v-model="editedItem.calories"
-                      label="Calories"></v-text-field>
-                </v-flex>
-                <v-flex
-                    xs12
-                    sm6
-                    md4>
-                  <v-text-field
-                      v-model="editedItem.fat"
-                      label="Fat (g)"></v-text-field>
-                </v-flex>
-                <v-flex
-                    xs12
-                    sm6
-                    md4>
-                  <v-text-field
-                      v-model="editedItem.carbs"
-                      label="Carbs (g)"></v-text-field>
-                </v-flex>
-                <v-flex
-                    xs12
-                    sm6
-                    md4>
-                  <v-text-field
-                      v-model="editedItem.protein"
-                      label="Protein (g)"></v-text-field>
+                      v-model="editedItem[field.value]"
+                      :label="field.value"></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>
@@ -88,10 +77,10 @@
     <v-data-table
         v-model="selected"
         :headers="headers"
-        :items="desserts"
+        :items="items"
         :pagination.sync="pagination"
         select-all
-        item-key="_id"
+        item-key="name"
         class="elevation-1"
       >
       <template
@@ -126,7 +115,7 @@
               @click="changeSort(header.value)"
             >
             <v-icon small>arrow_upward</v-icon>
-            {{ header.text }}
+            {{ $t(header.text) }}
           </th>
         </tr>
       </template>
@@ -143,11 +132,10 @@
                 hide-details
               ></v-checkbox>
           </td>
-          <td>{{ props.item.name }}</td>
-          <td class="text-xs-right">{{ props.item.calories }}</td>
-          <td class="text-xs-right">{{ props.item.fat }}</td>
-          <td class="text-xs-right">{{ props.item.carbs }}</td>
-          <td class="text-xs-right">{{ props.item.protein }}</td>
+          <td
+              v-for="field in headers"
+              :key="field.value"
+              >{{ props.item[field.value] }}</td>
           <td class="justify-center layout px-0">
             <v-icon
                 small
@@ -172,7 +160,7 @@
       </template>
       <template slot="footer">
         <td :colspan="headers.length">
-          <strong>This is an extra footer</strong>
+          <slot name="dialog"></slot>
         </td>
       </template>
     </v-data-table>
@@ -180,52 +168,22 @@
 </template>
 
 <script>
+import { pick, map } from 'lodash/fp'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
   mixins: [crudMixin, exportMixin],
-  props: {
-    modelName: {
-      type: String,
-      default: 'user'
-    }
-  },
   data: () => ({
+    modelName: 'user',
     dialog: false,
     pagination: {
       sortBy: 'name'
     },
     selected: [],
-    headers: [
-      {
-        text: 'Dessert (100g serving)',
-        align: 'left',
-        sortable: false,
-        value: 'name'
-      },
-      { text: 'Calories', value: 'calories' },
-      { text: 'Fat (g)', value: 'fat' },
-      { text: 'Carbs (g)', value: 'carbs' },
-      { text: 'Protein (g)', value: 'protein' },
-      { text: 'Actions', value: 'name', sortable: false }
-    ],
-    desserts: [],
     editedIndex: -1,
-    editedItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    },
-    defaultItem: {
-      name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    }
+    editedItem: {},
+    defaultItem: {}
   }),
 
   computed: {
@@ -237,16 +195,19 @@ export default {
   watch: {
     dialog (val) {
       val || this.close()
+    },
+    modelName (val) {
+      this.$forceUpdate()
     }
   },
 
   created () {
-    this.initialize()
+    // this.initialize()
   },
 
   methods: {
-    initialize () {
-      this.desserts = [
+    initializeMock () {
+      this.items = [
         {
           name: 'Frozen Yogurt',
           calories: 159,
@@ -321,14 +282,14 @@ export default {
     },
 
     editItem (item) {
-      this.editedIndex = this.desserts.indexOf(item)
+      this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
 
     deleteItem (item) {
-      const index = this.desserts.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      const index = this.items.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
     },
 
     close () {
@@ -341,16 +302,16 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        Object.assign(this.items[this.editedIndex], this.editedItem)
       } else {
-        this.desserts.push(this.editedItem)
+        this.items.push(this.editedItem)
       }
       this.close()
     },
 
     toggleAll () {
       if (this.selected.length) this.selected = []
-      else this.selected = this.desserts.slice()
+      else this.selected = this.items.slice()
     },
 
     changeSort (column) {
@@ -360,6 +321,11 @@ export default {
         this.pagination.sortBy = column
         this.pagination.descending = false
       }
+    },
+
+    handleChange (entityName) {
+      this.modelName = entityName
+      this.$forceUpdate()
     }
   }
 }

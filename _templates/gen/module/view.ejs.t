@@ -5,24 +5,19 @@ to: "src/views/<%= h.capitalize(model) %>.vue"
   const fileName = h.capitalize(model)
 %><template>
   <DefaultLayout>
-    <<%= fileName %>Table></<%= fileName %>Table>
-    <<%= fileName %>Form></<%= fileName %>Form>
+    <CrudTable>
+      <ExportDialog />
+      <ImportDialog />
+    </CrudTable>
   </DefaultLayout>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script lang="js">
 import DefaultLayout from '@/layout/default.vue'
 
-import <%= fileName %>Table from '@/components/<%= fileName %>/<%= fileName %>Table.vue'
-import <%= fileName %>Form from '@/components/<%= fileName %>/<%= fileName %>Form.vue'
-
-@Component({
+export default {
   components: {
-    DefaultLayout,
-    <%= fileName %>Table,
-    <%= fileName %>Form
+    DefaultLayout
   }
-})
-export default class <%= fileName %> extends Vue {}
+}
 </script>

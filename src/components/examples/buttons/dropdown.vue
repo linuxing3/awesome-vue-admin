@@ -36,10 +36,10 @@
         <p>Editable</p>
 
         <v-overflow-btn
-            :items="dropdown_edit"
+            :items="entities"
             label="Editable Btn"
             editable
-            item-value="text"
+            item-value="name"
           ></v-overflow-btn>
       </v-flex>
     </v-layout>
