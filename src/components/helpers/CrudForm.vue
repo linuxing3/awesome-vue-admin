@@ -94,7 +94,7 @@ export default {
   },
   data: () => ({}),
   created () {
-    window.crudForm = this
+    window.CrudForm = this
   },
   computed: {
     computeCardLayout () {

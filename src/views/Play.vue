@@ -26,7 +26,7 @@ export default class Play extends Vue {
   modelName = 'user'
 
   handleChange () {
-    this.$refs('crud-form').$forceUpdate()
+    (window as any).CrudForm.$forceUpdate()
   }
 }
 </script>
