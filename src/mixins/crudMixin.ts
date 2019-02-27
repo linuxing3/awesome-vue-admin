@@ -7,7 +7,8 @@ export default {
   data () {
     return {
       editing: false,
-      model: {},
+      model: defaultModel,
+      editedIndex: -1,
       filter: {
         search: '',
         sort: ''
@@ -15,6 +16,9 @@ export default {
     }
   },
   computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
     // 数据对象的定义模型
     Model (): Model {
       return models[this.modelName]
@@ -49,6 +53,18 @@ export default {
     // 数据键值的数组，可用于表格标题行
     headers (): string[] {
       return this.Model.fieldsKeys().splice(2, 10)
+    },
+    headersConfig (): string[] {
+      this.fields().reduce(function (headersConfig, field) {
+        let config = {
+          text: field,
+          align: 'left',
+          sortable: true,
+          value: field
+        }
+        headersConfig.push(config)
+        return headersConfig
+      }, [])
     },
     allHeaders (): string[] {
       return this.Model.fieldsKeys()
@@ -132,6 +148,18 @@ export default {
     /**
      * 重置组件状态
      */
+    initialize () {
+      // If previous route want to edit
+      if (this.$route.params.type === 'edit') {
+        this.setEditing(this.$route.params.model)
+      } else {
+        this.editing = false
+        this.model = new this.Model()
+      }
+    },
+    /**
+     * 重置组件状态
+     */
     reset () {
       // If previous route want to edit
       if (this.$route.params.type === 'edit') {
@@ -146,7 +174,12 @@ export default {
      */
     setEditing (item: object) {
       this.editing = true
-      this.model = item
+      this.model = item // shallow copy
+    },
+    setEditModel (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.model = Object.assign({}, item) // Deep copy
+      this.editing = true
     },
     /**
      * 删除
@@ -166,6 +199,8 @@ export default {
      * @param {object} item 要删除的项目，包含id字段
      */
     saveItem (item: object) {
+      // if (this.editedIndex > -1) {} else {}
+
       if (this.editing) {
         this.updateItem(item)
       } else {
