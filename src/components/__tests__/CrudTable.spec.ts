@@ -5,6 +5,6 @@ describe('CrudTable Components', () => {
   it('renders modelName when passed', () => {
     const modelName = 'user'
     const wrapper = shallowMount(CrudTable, {})
-    expect(wrapper.vm.modelName).toMatch(modelName)
+    expect(wrapper.vm.$data.modelName).toBe(modelName)
   })
 })
