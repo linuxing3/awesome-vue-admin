@@ -1,17 +1,15 @@
 <template>
   <DefaultLayout>
-    <PlayComponent />
+    Dashboard
   </DefaultLayout>
 </template>
 
-<script>
-import PlayComponent from '@/components/helpers/CrudTable.vue'
+<script lang="js">
 import DefaultLayout from '@/layout/default.vue'
 
 export default {
   components: {
-    DefaultLayout,
-    PlayComponent
+    DefaultLayout
   }
 }
 </script>

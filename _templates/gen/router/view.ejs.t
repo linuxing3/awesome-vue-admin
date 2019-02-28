@@ -5,10 +5,7 @@ to: "src/views/<%= h.capitalize(model) %>.vue"
   const fileName = h.capitalize(model)
 %><template>
   <DefaultLayout>
-    <CrudTable>
-      <ExportDialog />
-      <ImportDialog />
-    </CrudTable>
+    <%= fileName %>
   </DefaultLayout>
 </template>
 

@@ -27,21 +27,24 @@ const mainMenu = [
     name: 'activity',
     group: 'apps',
     icon: 'event',
-    color: 'grey'
+    color: 'grey',
+    type: 'crud'
   },
   {
     title: '文函处理',
     name: 'document',
     group: 'apps',
     icon: 'archive',
-    color: 'purple'
+    color: 'purple',
+    type: 'crud'
   },
   {
     title: '档案管理',
     group: 'apps',
     icon: 'folder',
     name: 'archive',
-    color: 'black'
+    color: 'black',
+    type: 'crud'
   },
   { header: '人员' },
   {
@@ -49,28 +52,32 @@ const mainMenu = [
     name: 'user',
     group: 'apps',
     icon: 'face',
-    color: 'green'
+    color: 'green',
+    type: 'crud'
   },
   {
     title: '个人简历',
     name: 'resummee',
     group: 'apps',
     icon: 'toc',
-    color: 'red'
+    color: 'red',
+    type: 'crud'
   },
   {
     title: '年终考核',
     name: 'evaluation',
     group: 'apps',
     icon: 'feedback',
-    color: 'pink'
+    color: 'pink',
+    type: 'crud'
   },
   {
     title: '党员管理',
     name: 'militant',
     group: 'apps',
     icon: 'label',
-    color: 'blue'
+    color: 'blue',
+    type: 'crud'
   },
   { header: '其他' },
   {
@@ -78,14 +85,16 @@ const mainMenu = [
     name: 'entity',
     group: 'apps',
     icon: 'account_balance',
-    color: 'primary'
+    color: 'primary',
+    type: 'crud'
   },
   {
     title: '资产管理',
     name: 'asset',
     group: 'apps',
     icon: 'store',
-    color: 'blue'
+    color: 'blue',
+    type: 'crud'
   },
   // injected
   { header: '系统' },

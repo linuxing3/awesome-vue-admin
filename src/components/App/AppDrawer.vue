@@ -53,8 +53,7 @@
                 <v-list-tile
                     v-for="(grand, i) in subItem.children"
                     :key="i"
-                    :to="genChildTarget(item, grand)"
-                    :href="grand.href"
+                    @click="crud(grand.name)"
                     ripple="ripple">
                   <v-list-tile-content>
                     <v-list-tile-title>{{ grand.title }}</v-list-tile-title>
@@ -65,10 +64,7 @@
               <v-list-tile
                   v-else
                   :key="i"
-                  :to="genChildTarget(item, subItem)"
-                  :href="subItem.href"
-                  :disabled="subItem.disabled"
-                  :target="subItem.target"
+                  @click="crud(subItem.name)"
                   ripple="ripple">
                 <v-list-tile-content>
                   <v-list-tile-title><span>{{ subItem.title }}</span></v-list-tile-title>
@@ -87,14 +83,10 @@
               v-else-if="item.divider"
               :key="i"></v-divider>
 
-          <!--top-level link-->
+          <!--top-level link with crud -->
           <v-list-tile
-              v-else
-              :to="!item.href ? { name: item.name } : null"
-              :href="item.href"
-              ripple="ripple"
-              :disabled="item.disabled"
-              :target="item.target"
+              v-else-if="item.type === 'crud'"
+              @click="crud(item.name)"
               rel="noopener"
               :key="item.name">
             <v-list-tile-action v-if="item.icon">
@@ -103,11 +95,25 @@
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
             </v-list-tile-content>
-            <!-- <v-circle class="white--text pa-0 chip--x-small" v-if="item.badge" :color="item.color || 'primary'" disabled="disabled">{{ item.badge }}</v-circle> -->
             <v-list-tile-action v-if="item.subAction">
               <v-icon class="success--text">{{ item.subAction }}</v-icon>
             </v-list-tile-action>
-            <!-- <v-circle class="caption blue lighten-2 white--text mx-0" v-else-if="item.chip" label="label" small="small">{{ item.chip }}</v-circle> -->
+          </v-list-tile>
+          <!-- top level link without crud -->
+          <v-list-tile
+              v-else
+              @click="$router.push({ name: item.name })"
+              rel="noopener"
+              :key="item.name">
+            <v-list-tile-action v-if="item.icon">
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action v-if="item.subAction">
+              <v-icon class="success--text">{{ item.subAction }}</v-icon>
+            </v-list-tile-action>
           </v-list-tile>
         </template>
       </v-list>
@@ -154,6 +160,16 @@ export default {
         }
       }
       return { name: `${item.group}/${subItem.name}` }
+    },
+    crud (menuItem) {
+      let modelName = menuItem.name
+      this.$router.push({
+        name: 'crud',
+        modelName
+      })
+      setTimeout(() => {
+        window.CrudTable.$emit('SET_MODEL', modelName)
+      }, 1000);
     }
   }
 }

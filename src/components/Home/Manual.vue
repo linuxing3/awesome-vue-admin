@@ -16,6 +16,7 @@
             md4
             sm12>
           <v-card
+              v-if="item.type === 'crud'"
               :color="item.color || 'indigo'"
               dark>
             <v-card-title
@@ -26,21 +27,33 @@
                 <v-btn
                     width="64px"
                     height="64px"
-                    @click="go(item)"
+                    @click="crud(item)"
                     icon>
                   <v-icon>{{item.icon}}</v-icon>
                 </v-btn>
               </v-avatar>
               <h2>{{ $t('entity.'+ item.name) }}</h2>
             </v-card-title>
-            <v-card-actions v-show="false">
-              <v-spacer></v-spacer>
-              <v-btn
-                  class="pr-5 pb-5"
-                  @click="go(item)"
-                  flat
-                  small>开始使用</v-btn>
-            </v-card-actions>
+          </v-card>
+          <v-card
+              v-else
+              :color="item.color || 'indigo'"
+              dark>
+            <v-card-title
+                class="pt-5 pb-5 justify-content-center"
+              >
+              <v-avatar
+                  size="64">
+                <v-btn
+                    width="64px"
+                    height="64px"
+                    @click="$router.push({ name: item.name })"
+                    icon>
+                  <v-icon>{{item.icon}}</v-icon>
+                </v-btn>
+              </v-avatar>
+              <h2>{{ $t('entity.'+ item.name) }}</h2>
+            </v-card-title>
           </v-card>
         </v-flex>
       </v-layout>
@@ -71,13 +84,15 @@ export default {
     computeAvatarMan4: () => 'avatar/man_4.jpg'
   },
   methods: {
-    go (menuItem) {
+    crud (menuItem) {
       let modelName = menuItem.name
       this.$router.push({
         name: 'crud',
         modelName
       })
-      window.CrudTable.$emit('SET_MODEL', modelName)
+      setTimeout(() => {
+        window.CrudTable.$emit('SET_MODEL', modelName)
+      }, 1000);
     }
   }
 }
