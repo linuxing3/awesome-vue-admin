@@ -73,11 +73,11 @@ export default {
   methods: {
     go (menuItem) {
       let modelName = menuItem.name
-      this.$router.push({ 
+      this.$router.push({
         name: 'crud',
         modelName
       })
-      window.CrudTable.$emit('SET_MODEL', modelName )
+      window.CrudTable.$emit('SET_MODEL', modelName)
     }
   }
 }

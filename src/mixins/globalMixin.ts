@@ -3,7 +3,7 @@ import Account from '@/models/Account'
 import Database from '@/models/Database'
 
 export const validateMixin = {
-  data() {
+  data () {
     return {
       currentEntity: 'user'
     }

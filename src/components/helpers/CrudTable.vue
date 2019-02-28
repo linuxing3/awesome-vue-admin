@@ -1,24 +1,24 @@
 <template>
   <div>
-  <v-container
-      id="dropdown-example"
-      grid-list-xl>
-    <v-layout
-        row
-        wrap>
-      <v-flex
-          xs12
-          sm4>
-        <v-overflow-btn
-            :items="entities"
-            item-value="entityName"
-            v-model="modelName"
-            label="Entities"
-            target="#dropdown-example"
-          ></v-overflow-btn>
-      </v-flex>
-    </v-layout>
-  </v-container>
+    <v-container
+        id="dropdown-example"
+        grid-list-xl>
+      <v-layout
+          row
+          wrap>
+        <v-flex
+            xs12
+            sm4>
+          <v-overflow-btn
+              :items="entities"
+              item-value="entityName"
+              v-model="modelName"
+              label="Entities"
+              target="#dropdown-example"
+            ></v-overflow-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
     <v-toolbar
         flat
         color="white">
@@ -135,7 +135,7 @@
           <td
               v-for="field in headers"
               :key="field.value"
-              >{{ props.item[field.value] }}</td>
+            >{{ props.item[field.value] }}</td>
           <td class="justify-center layout px-0">
             <v-icon
                 small
@@ -180,7 +180,7 @@ export default {
     pagination: {
       sortBy: 'name'
     },
-    selected: [],
+    selected: []
   }),
 
   computed: {
@@ -202,7 +202,9 @@ export default {
   },
 
   created () {
-    this.$on('SET_MODEL', (name) => this.modelName = name)
+    this.$on('SET_MODEL', (name) => {
+      this.modelName = name
+    })
     window.CrudTable = this
   },
 
