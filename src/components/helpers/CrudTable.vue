@@ -223,8 +223,7 @@ export default {
     close () {
       this.dialog = false
       setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
+        this.reset()
       }, 300)
     },
 
@@ -251,7 +250,7 @@ export default {
       }
     },
 
-    handleChange (entityName) {
+    entityChanged (entityName) {
       this.modelName = entityName
       this.$forceUpdate()
     }

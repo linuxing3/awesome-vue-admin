@@ -6,9 +6,8 @@ import { baseFilter } from '@/util'
 export default {
   data () {
     return {
-      editing: false,
-      editedItem: {},
-      editedIndex: -1,
+      editedItem: {},  // currently item to be edited
+      editedIndex: -1, // when -1, create, else update or delete
       filter: {
         search: '',
         sort: ''
@@ -19,12 +18,15 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
+    editing () {
+      return this.editedIndex === -1 ? false : true // is in edit state
+    },
     // 数据对象的定义模型
     Model (): Model {
       return models[this.modelName]
     },
     defaultItem () {
-      return new this.Model()
+      return new this.Model() // always a fresh new item
     },
     // 数据对象的实例数组，包含有关系的其他数据
     all (): any[] {
@@ -43,6 +45,7 @@ export default {
     items (): any[] {
       let { search, sort } = this.filter
       if (search === '') return this.witAll
+      // in filtered case, may different from editedIndex
       return baseFilter({ sort, search }, this.witAll)
     },
     // 数据键值的数组
@@ -89,7 +92,6 @@ export default {
       return {
         name: this.modelName + '_id',
         params: {
-          id: this.editedItem.id,
           type: 'edit',
           editedItem: this.editedItem
         }
@@ -106,8 +108,21 @@ export default {
       }
     }
   },
+  // watch modelName for refetch and update
+  watch: {
+    async modelName (val) {
+      // refetch data for current model
+      await this.fetch()
+    },
+    editedIndex (val) {
+      console.log(val)
+    }
+  },
   async mounted () {
+
     this.reset()
+
+    // For update, should call fetch again
     await this.fetch()
   },
   created () {
@@ -163,24 +178,25 @@ export default {
       if (this.$route.params.type === 'edit') {
         this.setEditedItem(this.$route.params.editedItem)
       } else {
-        this.editing = false
+        this.editedIndex = -1
         this.editedItem = new this.Model()
       }
     },
-    /**
-     * 设置[编辑]为真，[数据模型]为传入项目
-     */
-    setEditing (item: object) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = item // shallow copy
-      this.editing = true
-    },
 
     setEditedItem (item) {
-      this.editedIndex = this.items.indexOf(item)
+      // infilted case
+      if (this.filter.search = '') {
+        this.editedIndex = this.items.indexOf(item)
+      } else {
+        this.Model.find(item._id)
+          .then(entity => {
+           this.editedIndex = entity._id
+          })
+      }
+
       this.editedItem = Object.assign({}, item) // Deep copy
-      this.editing = true
     },
+
     /**
      * 删除
      * @param {object} item 要删除的项目
@@ -189,33 +205,42 @@ export default {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.setEditedItem(item)
       // ORM插件方法
-      this.Model.$delete(this.editedItem._id)
+      if (this.editedIndex > -1) {
+        this.Model.$delete(this.editedItem._id)
+          .then(entities => {
+            console.table(entities)
+          })
+      } else {
+        console.log('Not found item to delete!')
+      }
       // ORM默认方法
       // this.Model.delete(this.editedItem._id);
       this.reset()
     },
     /**
      * 保存，通过创建或更新(InsertOrUpdate)
+     * should call after setEditedItem is called and editedIndex is set
      * @param {object} item 要删除的项目，包含id字段
      */
     saveItem (item: object) {
-      if (this.editing) {
+      if (this.editedIndex > -1) {
         this.updateItem(item)
       } else {
         this.createItem(item)
       }
-      this.editing = false
+      this.editedIndex = -1
       this.editedItem = new this.Model()
     },
     /**
      * 更新
      * @param {object} item 要删除的项目，包含id字段
      */
-    updateItem (item: object) {
+    updateItem () {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
-      this.setEditedItem(item)
       this.Model.$update({
         data: this.editedItem
+      }).then(entities => {
+        console.table(entities)
       })
       // ORM默认方法
       // this.Model.update(this.model);
@@ -224,10 +249,8 @@ export default {
      * 创建
      * @param {object} item 要创建的项目数据，不包含id字段
      */
-    createItem (item: any) {
+    createItem () {
       // 设置[编辑]为假，[数据模型]为传入项目
-      if (!this.editing) this.editing = false
-      this.editedItem = item
       this.Model.$create({
         data: this.editedItem
       })
