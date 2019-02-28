@@ -7,7 +7,7 @@ export default {
   data () {
     return {
       editing: false,
-      model: {},
+      editedItem: {},
       editedIndex: -1,
       filter: {
         search: '',
@@ -23,7 +23,7 @@ export default {
     Model (): Model {
       return models[this.modelName]
     },
-    defaultModel () {
+    defaultItem () {
       return new this.Model()
     },
     // 数据对象的实例数组，包含有关系的其他数据
@@ -89,20 +89,19 @@ export default {
       return {
         name: this.modelName + '_id',
         params: {
-          id: this.model.id,
+          id: this.editedItem.id,
           type: 'edit',
-          model: this.model
+          editedItem: this.editedItem
         }
       }
     },
     // The form or add
     addRoute () {
-      let model = new this.Model()
       return {
         name: this.modelName + '_id',
         params: {
           type: 'add',
-          model
+          editedItem: this.editedItem
         }
       }
     }
@@ -114,7 +113,7 @@ export default {
   created () {
     // 组件自身监听事件，更新[编辑]和[数据模型]的状态
     this.$on('SET_EDITING', function (item: object) {
-      this.setEditing(item)
+      this.setEditedItem(item)
     })
   },
   methods: {
@@ -150,10 +149,10 @@ export default {
     initialize () {
       // If previous route want to edit
       if (this.$route.params.type === 'edit') {
-        this.setEditing(this.$route.params.model)
+        this.setEditedItem(this.$route.params.model)
       } else {
         this.editing = false
-        this.model = new this.Model()
+        this.editedItem = new this.Model()
       }
     },
     /**
@@ -162,22 +161,24 @@ export default {
     reset () {
       // If previous route want to edit
       if (this.$route.params.type === 'edit') {
-        this.setEditing(this.$route.params.model)
+        this.setEditedItem(this.$route.params.editedItem)
       } else {
         this.editing = false
-        this.model = new this.Model()
+        this.editedItem = new this.Model()
       }
     },
     /**
      * 设置[编辑]为真，[数据模型]为传入项目
      */
     setEditing (item: object) {
-      this.editing = true
-      this.model = item // shallow copy
-    },
-    setEditModel (item) {
       this.editedIndex = this.items.indexOf(item)
-      this.model = Object.assign({}, item) // Deep copy
+      this.editedItem = item // shallow copy
+      this.editing = true
+    },
+
+    setEditedItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item) // Deep copy
       this.editing = true
     },
     /**
@@ -186,11 +187,11 @@ export default {
      */
     deleteItem (item: object) {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
-      this.setEditing(item)
+      this.setEditedItem(item)
       // ORM插件方法
-      this.Model.$delete(this.model._id)
+      this.Model.$delete(this.editedItem._id)
       // ORM默认方法
-      // this.Model.delete(this.model._id);
+      // this.Model.delete(this.editedItem._id);
       this.reset()
     },
     /**
@@ -198,15 +199,13 @@ export default {
      * @param {object} item 要删除的项目，包含id字段
      */
     saveItem (item: object) {
-      // if (this.editedIndex > -1) {} else {}
-
       if (this.editing) {
         this.updateItem(item)
       } else {
         this.createItem(item)
       }
       this.editing = false
-      this.model = new this.Model()
+      this.editedItem = new this.Model()
     },
     /**
      * 更新
@@ -214,9 +213,9 @@ export default {
      */
     updateItem (item: object) {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
-      this.setEditing(item)
+      this.setEditedItem(item)
       this.Model.$update({
-        data: this.model
+        data: this.editedItem
       })
       // ORM默认方法
       // this.Model.update(this.model);
@@ -228,13 +227,13 @@ export default {
     createItem (item: any) {
       // 设置[编辑]为假，[数据模型]为传入项目
       if (!this.editing) this.editing = false
-      this.model = item
+      this.editedItem = item
       this.Model.$create({
-        data: this.model
+        data: this.editedItem
       })
       // ORM默认方法
       // this.Model.insert({
-      //   data: this.model,
+      //   data: this.editedItem,
       // });
     },
     queryField (field: string) {
@@ -250,9 +249,6 @@ export default {
       } else {
         return text
       }
-    },
-    isAttribute (field: string) {
-      return this.Model.isFieldAttribute(field)
     }
   }
 }
