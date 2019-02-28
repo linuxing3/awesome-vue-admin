@@ -41,7 +41,7 @@ const actions: any = {
       Database.query().where('name', name).get()
         .then(entities => {
           console.log('Check' + name + ' exists: ' + entities.length)
-          if (entities.length = 0) {
+          if (entities.length === 0) {
             Database.$create({
               data: {
                 name,

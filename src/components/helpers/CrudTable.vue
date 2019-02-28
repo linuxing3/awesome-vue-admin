@@ -36,9 +36,18 @@
           max-width="80%">
         <v-btn
             slot="activator"
-            color="primary"
-            dark
-            class="mb-2">新增</v-btn>
+            class="offset-mt-5"
+            fab
+            large
+            absolute
+            right
+            top
+            color="red darken-1"
+          >
+          <v-icon dark>
+            add
+          </v-icon>
+        </v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -158,7 +167,7 @@
       <template slot="no-data">
         <v-btn
             color="primary"
-            @click="reset">Reset</v-btn>
+            @click="reset">重置</v-btn>
       </template>
       <template slot="footer">
         <td :colspan="headers.length">
@@ -188,7 +197,7 @@ export default {
 
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? '新增' : '编辑'
     }
   },
 

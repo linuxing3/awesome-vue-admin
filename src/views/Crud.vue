@@ -3,7 +3,7 @@
     <CrudTable :modelName=" $route.params.blueprint || user ">
       <template v-slot:export="{ modelName, items }">
         <ExportDialog :modelName="modelName" :items="items" />
-        <ImportDialog :modelName="modelName" />
+        <ImportDialog class="pr-5" :modelName="modelName" />
       </template>
     </CrudTable>
   </DefaultLayout>

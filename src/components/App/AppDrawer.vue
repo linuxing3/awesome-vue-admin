@@ -53,7 +53,7 @@
                 <v-list-tile
                     v-for="(grand, i) in subItem.children"
                     :key="i"
-                    @click="crud(grand.name)"
+                    @click="goCrudBluePrint(grand.name)"
                     ripple="ripple">
                   <v-list-tile-content>
                     <v-list-tile-title>{{ grand.title }}</v-list-tile-title>
@@ -64,7 +64,7 @@
               <v-list-tile
                   v-else
                   :key="i"
-                  @click="crud(subItem.name)"
+                  @click="goCrudBluePrint(subItem.name)"
                   ripple="ripple">
                 <v-list-tile-content>
                   <v-list-tile-title><span>{{ subItem.title }}</span></v-list-tile-title>
@@ -86,7 +86,7 @@
           <!--top-level link with crud -->
           <v-list-tile
               v-else-if="item.type === 'crud'"
-              @click="crud(item.name)"
+              @click="goCrudBluePrint(item.name)"
               rel="noopener"
               :key="item.name">
             <v-list-tile-action v-if="item.icon">
@@ -102,7 +102,7 @@
           <!-- top level link without crud -->
           <v-list-tile
               v-else
-              @click="$router.push({ name: item.name, params: { blueprint: item.name} })"
+              @click="goCrudBluePrint(item.name)"
               rel="noopener"
               :key="item.name">
             <v-list-tile-action v-if="item.icon">
@@ -161,11 +161,13 @@ export default {
       }
       return { name: `${item.group}/${subItem.name}` }
     },
-    crud (menuItem) {
+    goCrudBluePrint (menuItem) {
       let modelName = menuItem.name
       this.$router.push({
         name: 'crud',
-        modelName
+        params: {
+          blueprint: modelName
+        }
       })
       setTimeout(() => {
         window.CrudTable.$emit('SET_MODEL', modelName)
