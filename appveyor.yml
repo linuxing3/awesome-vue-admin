@@ -27,7 +27,6 @@ shallow_clone: true
 test_script:
   - node --version
   - yarn --version
-  - yarn test:unit
 
 cache:
   - node_modules
