@@ -47,7 +47,7 @@
                 <v-btn
                     width="64px"
                     height="64px"
-                    @click="$router.push({ name: item.name })"
+                    @click="$router.push({ name: item.name, params: { blueprint: item.name } })"
                     icon>
                   <v-icon>{{item.icon}}</v-icon>
                 </v-btn>

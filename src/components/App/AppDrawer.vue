@@ -102,7 +102,7 @@
           <!-- top level link without crud -->
           <v-list-tile
               v-else
-              @click="$router.push({ name: item.name })"
+              @click="$router.push({ name: item.name, params: { blueprint: item.name} })"
               rel="noopener"
               :key="item.name">
             <v-list-tile-action v-if="item.icon">

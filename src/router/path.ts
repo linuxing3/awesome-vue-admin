@@ -48,7 +48,7 @@ export default [
     component: PlayView
   },
   {
-    path: '/crud',
+    path: '/crud/:blueprint',
     name: 'crud',
     meta: {
       title: 'crud',

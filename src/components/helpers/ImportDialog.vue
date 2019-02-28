@@ -56,7 +56,7 @@ export default {
     },
     buttonText: {
       type: String,
-      default: 'Open Dialog'
+      default: '导入'
     }
   },
   data: () => ({

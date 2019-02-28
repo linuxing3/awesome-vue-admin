@@ -1,8 +1,9 @@
 <template>
   <DefaultLayout>
-    <CrudTable>
+    <CrudTable :modelName=" $route.params.blueprint || user ">
       <template v-slot:export="{ modelName, items }">
         <ExportDialog :modelName="modelName" :items="items" />
+        <ImportDialog :modelName="modelName" />
       </template>
     </CrudTable>
   </DefaultLayout>

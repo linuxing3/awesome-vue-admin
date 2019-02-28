@@ -74,7 +74,7 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   props: {
     items: {
-      type: Object | Array,
+      type: Array,
       default: []
     },
     modelName: {
@@ -83,7 +83,7 @@ export default {
     },
     buttonText: {
       type: String,
-      default: 'Open Dialog'
+      default: '导出'
     }
   },
   data: () => ({

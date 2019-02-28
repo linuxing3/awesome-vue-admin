@@ -29,6 +29,8 @@
           vertical
         ></v-divider>
       <v-spacer></v-spacer>
+      <slot name="export" :modelName="modelName" :items="items"></slot>
+      <slot name="import" :modelName="modelName"></slot>
       <v-dialog
           v-model="dialog"
           max-width="80%">
@@ -65,6 +67,7 @@
                 class="editing ? 'primary' : 'warn'"
                 flat
                 @click="saveItem(editedItem)">{{ editing ? '编辑': '新增'}}</v-btn>
+            <slot name="export" :modelName="modelName" :items="[ editedItem ]"></slot>
             <v-btn
                 flat
                 @click="close">取消</v-btn>
@@ -163,8 +166,7 @@
         </td>
       </template>
     </v-data-table>
-    <slot name="export" v-bind:export="{ modelName, items }"></slot>
-    <slot name="import" v-bind:import="{ modelName, editedItem }"></slot>
+
   </div>
 </template>
 
