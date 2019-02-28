@@ -184,17 +184,8 @@ export default {
     },
 
     setEditedItem (item) {
-      // infilted case
-      if (this.filter.search = '') {
-        this.editedIndex = this.items.indexOf(item)
-      } else {
-        this.Model.find(item._id)
-          .then(entity => {
-           this.editedIndex = entity._id
-          })
-      }
-
       this.editedItem = Object.assign({}, item) // Deep copy
+      this.editedIndex = this.editedItem._id
     },
 
     /**
