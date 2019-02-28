@@ -197,12 +197,16 @@ export default {
       val || this.close()
     },
     modelName (val) {
+      // refetch data for current model
+      this.fetch()
+      // force update
       this.$forceUpdate()
     }
   },
 
   created () {
-    // this.initialize()
+    this.$on('SET_MODEL', (name) => this.modelName = name)
+    window.CrudTable = this
   },
 
   methods: {

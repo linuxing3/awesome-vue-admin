@@ -31,11 +31,7 @@
                   <v-icon>{{item.icon}}</v-icon>
                 </v-btn>
               </v-avatar>
-              <router-link
-                  class="white--text"
-                  :to="'/' + item.name">
-                <h2>{{ $t('entity.'+ item.name) }}</h2>
-              </router-link>
+              <h2>{{ $t('entity.'+ item.name) }}</h2>
             </v-card-title>
             <v-card-actions v-show="false">
               <v-spacer></v-spacer>
@@ -76,7 +72,12 @@ export default {
   },
   methods: {
     go (menuItem) {
-      this.$router.push({ name: menuItem.name })
+      let modelName = menuItem.name
+      this.$router.push({ 
+        name: 'crud',
+        modelName
+      })
+      window.CrudTable.$emit('SET_MODEL', modelName )
     }
   }
 }

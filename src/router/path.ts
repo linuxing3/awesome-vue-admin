@@ -1,4 +1,6 @@
 import Home from '@/views/Home.vue'
+import PlayView from '@/views/Play.vue'
+import CrudView from '@/views/Crud.vue'
 
 export default [
   {
@@ -43,8 +45,11 @@ export default [
   {
     path: '/play',
     name: 'play',
-    component: () =>
-      import(/* webpackChunkName: "routes" */
-        `@/views/Play.vue`)
+    component: PlayView
+  },
+  {
+    path: '/crud',
+    name: 'crud',
+    component: CrudView
   }
 ]
