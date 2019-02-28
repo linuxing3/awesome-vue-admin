@@ -1,6 +1,7 @@
 import { get } from 'vuex-pathify'
 import Account from '@/models/Account'
 import Database from '@/models/Database'
+import { entities } from '@/api/globals';
 
 export const validateMixin = {
   data () {
@@ -18,12 +19,13 @@ export const validateMixin = {
         })
         .get()
     },
-    entities () {
-      return Database.all().reduce((entities, entityConfig) => {
-        entities.push(entityConfig['name'])
-        return entities
-      }, [])
-    }
+    // entities () {
+    //   return Database.all().reduce((entities, entityConfig) => {
+    //     entities.push(entityConfig['name'])
+    //     return entities
+    //   }, [])
+    // }
+    entities: () => entities
   },
   methods: {
     isAdmin () {

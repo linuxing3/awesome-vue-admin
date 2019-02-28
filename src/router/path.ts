@@ -50,6 +50,12 @@ export default [
   {
     path: '/crud',
     name: 'crud',
+    meta: {
+      title: 'crud',
+      group: 'apps',
+      icon: 'start',
+      color: 'primary'
+    },
     component: CrudView
   }
 ]

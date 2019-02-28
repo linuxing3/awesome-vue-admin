@@ -73,7 +73,7 @@ import exportMixin from '@/mixins/exportMixin'
 
 export default {
   props: {
-    item: {
+    items: {
       type: Object | Array,
       default: []
     },
@@ -113,7 +113,7 @@ export default {
     },
     exportToCSV () {
       this.text = '导出成功!。文件位置' + this.modelDatasource
-      this.exportItem(this.item)
+      this.exportItem(this.items)
       this.snackbar = true
     }
   }

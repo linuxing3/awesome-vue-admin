@@ -36,7 +36,7 @@
             slot="activator"
             color="primary"
             dark
-            class="mb-2">New Item</v-btn>
+            class="mb-2">新增</v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -62,13 +62,12 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                color="blue darken-1"
+                class="editing ? 'primary' : 'warn'"
                 flat
-                @click="close">Cancel</v-btn>
+                @click="saveItem(editedItem)">{{ editing ? '编辑': '新增'}}</v-btn>
             <v-btn
-                color="blue darken-1"
                 flat
-                @click="saveItem(editedItem)">Save</v-btn>
+                @click="close">取消</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -108,6 +107,7 @@
                 @click.stop="toggleAll"
               ></v-checkbox>
           </th>
+          <th>actions</th>
           <th
               v-for="header in props.headers"
               :key="header.text"
@@ -132,25 +132,24 @@
                 hide-details
               ></v-checkbox>
           </td>
-          <td
-              v-for="field in headers"
-              :key="field.value"
-            >{{ props.item[field.value] }}</td>
-          <td class="justify-center layout px-0">
+          <td class="layout row justify-center align-item-center">
             <v-icon
-                small
-                class="mr-2"
+                color="green"
                 @click="editItem(props.item)"
               >
               edit
             </v-icon>
             <v-icon
-                small
+                color="red"
                 @click="deleteItem(props.item)"
               >
               delete
             </v-icon>
           </td>
+          <td
+              v-for="field in headers"
+              :key="field.value"
+            >{{ props.item[field.value] }}</td>
         </tr>
       </template>
       <template slot="no-data">
@@ -160,10 +159,12 @@
       </template>
       <template slot="footer">
         <td :colspan="headers.length">
-          <slot name="dialog"></slot>
+          Total {{ count }}
         </td>
       </template>
     </v-data-table>
+    <slot name="export" v-bind:export="{ modelName, items }"></slot>
+    <slot name="import" v-bind:import="{ modelName, editedItem }"></slot>
   </div>
 </template>
 
@@ -194,14 +195,14 @@ export default {
       val || this.close()
     },
     modelName (val) {
+      this.reset()
       // refetch data for current model
       this.fetch()
-      // force update
-      this.$forceUpdate()
     }
   },
 
   created () {
+
     this.$on('SET_MODEL', (name) => {
       this.modelName = name
     })

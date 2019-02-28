@@ -1,6 +1,9 @@
 <template>
   <DefaultLayout>
     <CrudTable>
+      <template v-slot:export="{ modelName, items }">
+        <ExportDialog :modelName="modelName" :items="items" />
+      </template>
     </CrudTable>
   </DefaultLayout>
 </template>
