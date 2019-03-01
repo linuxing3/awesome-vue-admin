@@ -58,11 +58,46 @@ export default {
     },
     headers (): any[] {
       return this.fields.reduce(function (headersConfig, field) {
+        let schema
+        if (field === 'content') {
+          schema = {
+            type: 'v-textarea',
+            flex: 'layout row xs12 sm12 md12 g12',
+            label: 'Write ' + field,
+            value: field,
+            multiple: true,
+            outline: true,
+            hint: 'Full Content'
+          }
+        } else if (field === 'date' || field.contains('Date') || field.contains('date')) {
+          schema = {
+            type: 'v-date-picker',
+            flex: 'layout row xs12 sm6 md3 gl3',
+            label: 'Pick ' + field
+          }
+        } else if (field === 'select') {
+          schema = {
+            type: 'v-select',
+            label: 'Select' + field,
+            flex: 'layout row xs12 sm6 md3 gl3',
+            'single-line': true,
+            'hide-details': true
+          }
+        } else {
+          schema = {
+            type: 'v-text-field',
+            flex: 'layout row xs12 sm6 md3 gl3',
+            label: 'Input ' + field,
+            value: field,
+            placeholder: field
+          }
+        }
         let config = {
           text: field,
           align: 'left',
           sortable: true,
-          value: field
+          value: field,
+          schema
         }
         headersConfig.push(config)
         return headersConfig

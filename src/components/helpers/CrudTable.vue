@@ -72,16 +72,27 @@
           <v-card-text>
             <v-container grid-list-md>
               <v-layout wrap>
+                <!-- generate form from schema  -->
                 <v-flex
                     v-for="field in headers"
                     :key="field.value"
                     xs12
                     sm6
                     md4>
-                  <v-text-field
+                  <v-textarea
+                      v-if="field.schema.type === 'v-textarea'"
                       v-model="editedItem[field.value]"
-                      :label="field.value"></v-text-field>
+                      :label=" $(field.text) "></v-textarea>
+                  <v-date-picker
+                      v-else-if="field.schema.type === 'v-date-picker'"
+                      v-model="editedItem[field.value]"
+                      :label=" $(field.text) "></v-date-picker>
+                  <v-text-field
+                      v-else
+                      v-model="editedItem[field.value]"
+                      :label=" $(field.text) "></v-text-field>
                 </v-flex>
+                <!-- end form from schema  -->
               </v-layout>
             </v-container>
           </v-card-text>
