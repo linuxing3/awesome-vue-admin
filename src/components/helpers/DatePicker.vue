@@ -2,7 +2,6 @@
   <v-layout
       row
       wrap>
-    <v-spacer></v-spacer>
     <v-flex
         xs12
         sm6
@@ -45,7 +44,7 @@
 <script>
 export default {
   data: () => ({
-    date: new Date().toISOString().substr(0, 10),
+    date: '2019-03-01',
     modal: false,
   })
 }

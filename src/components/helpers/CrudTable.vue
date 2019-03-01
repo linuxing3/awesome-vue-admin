@@ -38,7 +38,7 @@
       <!-- end slots -->
       <v-dialog
           v-model="dialog"
-          max-width="80%">
+          max-width="60%">
         <v-btn
             slot="activator"
             class="offset-mt-5"
@@ -67,25 +67,67 @@
           </v-card-title>
           <!-- activator in slot -->
           <v-card-text>
-            <v-container grid-list-md grid-list-sm>
-              <v-layout wrap>
+            <v-container fluid grid-list-xs>
+              <v-layout
+                v-for="field in headers"
+                :key="field.value"
+                row
+                wrap>
                 <!-- generate form from schema  -->
                 <v-flex
+                    v-if="field.schema.type === 'v-textarea'"
                     xs12
                     md8
                     sm8
-                    class="ml-5"
-                    v-for="field in headers"
-                    :key="field.value">
+                    class="ml-5">
                   <v-textarea
-                      v-if="field.schema.type === 'v-textarea'"
                       v-model="editedItem[field.value]"
                       :label=" $t(field.text) || field.text"></v-textarea>
-                  <DatePicker
-                      v-else-if="field.schema.type === 'v-date-picker'">
-                  </DatePicker>
+                </v-flex>
+                <v-flex
+                    v-else-if="field.schema.type === 'v-date-picker'"
+                    xs12
+                    md4
+                    sm4
+                    class="ml-5">
+                  <v-dialog
+                    ref="datedialog"
+                    v-model="modal"
+                    :return-value.sync="editedItem[field.value]"
+                    persistent
+                    lazy
+                    full-width
+                    width="290px"
+                  >
                   <v-text-field
-                      v-else
+                      slot="activator"
+                      v-model="editedItem[field.value]"
+                      :label="editedItem[field.text]"
+                      append-icon="event"
+                      readonly
+                    ></v-text-field>
+                  <v-date-picker
+                      v-model="editedItem[field.value]"
+                      scrollable>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                        flat
+                        color="primary"
+                        @click="modal = false">Cancel</v-btn>
+                    <v-btn
+                        flat
+                        color="primary"
+                        @click="$refs.datedialog.save(editedItem[field.value])">OK</v-btn>
+                  </v-date-picker>
+                </v-dialog>
+                </v-flex>
+                <v-flex
+                    v-else
+                    xs12
+                    md4
+                    sm4
+                    class="ml-5">
+                  <v-text-field
                       max-width="300px"
                       v-model="editedItem[field.value]"
                       :label=" $t(field.text) || field.text "></v-text-field>
@@ -216,7 +258,8 @@ export default {
     pagination: {
       sortBy: 'name'
     },
-    selected: []
+    selected: [],
+    modal: false
   }),
 
   computed: {
