@@ -1,6 +1,4 @@
 import { BaseModel } from './BaseModel'
-import User from './User'
-import Entity from './Entity'
 
 export default class Document extends BaseModel {
   static entity = 'document'
@@ -10,7 +8,7 @@ export default class Document extends BaseModel {
       _id: this.increment(),
       classiLevel: this.string('internal'),
       category: this.string('internal'),
-      year: this.string('2018-12-30'),
+      year: this.string('2019'),
       inOrOut: this.string('output'),
       sendingCode: this.string('Vue'),
       orderedNumber: this.string('001'),

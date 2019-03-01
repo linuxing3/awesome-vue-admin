@@ -27,6 +27,9 @@
         {{modelName}}共有<span class="heading1 red--text">{{ count }}</span>项记录
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-text-field
+        v-model="filter.search">
+      </v-text-field>
       <!-- slots of buttons -->
       <slot
           name="export"
@@ -35,6 +38,7 @@
       <slot
           name="import"
           :modelName="modelName"></slot>
+      </v-btn>
       <!-- end slots -->
       <v-dialog
           v-model="dialog"
@@ -66,6 +70,14 @@
             <slot
                 name="import"
                 :modelName="modelName"></slot>
+            <v-btn
+                fab
+                small
+                color="red darken-2 white--text"
+                @click="writeDocxFile"
+                icon>
+                <v-icon>file_copy</v-icon>
+            </v-btn>
           </v-card-title>
           <!-- activator in slot -->
           <v-card-text>
@@ -94,35 +106,10 @@
                     md4
                     sm4
                     class="ml-5">
-                  <v-dialog
-                      ref="datedialog"
-                      v-model="modal"
-                      :return-value.sync="editedItem[field.value]"
-                      persistent
-                      lazy
-                      full-width
-                      width="290px"
-                    >
-                    <v-text-field
-                        slot="activator"
-                        v-model="editedItem[field.value]"
-                        :label="editedItem[field.text]"
-                        append-icon="event"
-                        readonly
-                      ></v-text-field>
-                    <v-date-picker
-                        v-model="editedItem[field.value]"
-                        scrollable>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                          flat
-                          @click="modal = false">Cancel</v-btn>
-                      <v-btn
-                          flat
-                          color="primary"
-                          @click="$refs.datedialog.save(editedItem[field.value])">OK</v-btn>
-                    </v-date-picker>
-                  </v-dialog>
+                  <slot
+                    name="datedialog"
+                    :field="field"
+                    :editedItem="editedItem"></slot>
                 </v-flex>
                 <v-flex
                     v-else

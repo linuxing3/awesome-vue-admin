@@ -1,50 +1,48 @@
 <template>
-  <v-layout
-      row
-      wrap>
-    <v-flex
-        xs12
-        sm6
-        md4>
-      <v-dialog
-          ref="dialog"
-          v-model="modal"
-          :return-value.sync="date"
-          persistent
-          lazy
-          full-width
-          width="290px"
-        >
-        <v-text-field
-            slot="activator"
-            v-model="date"
-            label="Picker in dialog"
-            prepend-icon="event"
-            readonly
-          ></v-text-field>
-        <v-date-picker
-            v-model="date"
-            scrollable>
-          <v-spacer></v-spacer>
-          <v-btn
-              flat
-              color="primary"
-              @click="modal = false">Cancel</v-btn>
-          <v-btn
-              flat
-              color="primary"
-              @click="$refs.dialog.save(date)">OK</v-btn>
-        </v-date-picker>
-      </v-dialog>
-    </v-flex>
-    <v-spacer></v-spacer>
-  </v-layout>
+  <v-dialog
+      ref="datedialog"
+      v-model="modal"
+      :return-value.sync="editedItem[field.value]"
+      persistent
+      lazy
+      full-width
+      width="290px"
+    >
+    <v-text-field
+        slot="activator"
+        v-model="editedItem[field.value]"
+        :label="editedItem[field.text]"
+        append-icon="event"
+        readonly
+      ></v-text-field>
+    <v-date-picker
+        v-model="editedItem[field.value]"
+        scrollable>
+      <v-spacer></v-spacer>
+      <v-btn
+          flat
+          @click="modal = false">Cancel</v-btn>
+      <v-btn
+          flat
+          color="primary"
+          @click="$refs.datedialog.save(editedItem[field.value])">OK</v-btn>
+    </v-date-picker>
+  </v-dialog>
 </template>
 
 <script>
 export default {
+  props: {
+    field: {
+      type: Object,
+      default: {}
+    },
+    editedItem: {
+      type: Object,
+      default: {}
+    }
+  },
   data: () => ({
-    date: '2019-03-01',
     modal: false
   })
 }

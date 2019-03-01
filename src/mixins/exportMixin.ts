@@ -5,7 +5,7 @@ import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 import XLSX from 'xlsx'
-import Docx from 'docx'
+import { Document, Paragraph, Packer} from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
@@ -33,6 +33,7 @@ export default {
     },
     keysDef: () => keysDef, // 翻译定义
     templateDir: () => join(remote.app.getPath('home'), '/Documents/template'), // 用户模板目录
+    attachDir: () => join(remote.app.getPath('home'), '/Documents/attach'), // 用户模板目录
     userDataDir: () => join(remote.app.getPath('userData'), 'data'), // 用户数据目录
     // 获取模板目录下的doc文件
     templateDocs: function () {
@@ -276,21 +277,24 @@ export default {
       // 电子表对象
     },
     writeDocxFile (data) {
-      let filename = this.importFileMeta.path
+      let defaultPath = join(this.attachDir, this.modelName, 'test.doc' )
+      let filename = this.importFileMeta.path || defaultPath
       try {
-        this.document = new Docx.Document()
+        this.document = new Document()
       } catch (error) {
         throw new Error(error)
       }
-      console.log('打开Docx文件，已读取数据')
+      console.log('Docx文件')
+      console.log(defaultPath)
       // 创建新的文档或使用默认文档
-      let p = new Docx.Paragraph(data)
+      let p = new Paragraph(this.modelName)
       // 添加段落到文件中
       this.document.addParagraph(p)
+      console.log(this.document)
       // 写入文件
-      const packer = new Docx.Packer()
+      const packer = new Packer()
       packer.toBuffer(this.document).then(buffer => {
-        writeFileSync(filename || 'output.docx', buffer)
+        writeFileSync(filename, buffer)
       })
     }
   }

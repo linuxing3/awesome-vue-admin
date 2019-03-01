@@ -3,6 +3,42 @@ import { Model } from '@vuex-orm/core'
 import models from '@/models'
 import { baseFilter } from '@/util'
 
+export const generateHeaders = (field: string) => {
+  if (field === 'content') {
+    return {
+      type: 'v-textarea',
+      flex: 'layout row xs12 sm12 md12 g12',
+      label: 'Write ' + field,
+      value: field,
+      multiple: true,
+      outline: true,
+      hint: 'Full Content'
+    }
+  } else if (field === 'date' || field === 'startDate' || field === 'endDate') {
+    return {
+      type: 'v-date-picker',
+      flex: 'layout row xs12 sm6 md3 gl3',
+      label: 'Pick ' + field
+    }
+  } else if (field === 'select') {
+    return {
+      type: 'v-select',
+      label: 'Select' + field,
+      flex: 'layout row xs12 sm6 md3 gl3',
+      'single-line': true,
+      'hide-details': true
+    }
+  } else {
+    return {
+      type: 'v-text-field',
+      flex: 'layout row xs12 sm6 md3 gl3',
+      label: 'Input ' + field,
+      value: field,
+      placeholder: field
+    }
+  }
+}
+
 export default {
   data () {
     return {
@@ -10,7 +46,7 @@ export default {
       editedIndex: -1, // when -1, create, else update or delete
       filter: {
         search: '',
-        sort: ''
+        sort: '_id'
       }
     }
   },
@@ -53,45 +89,12 @@ export default {
       return this.Model.fieldsKeys()
     },
     // 数据键值的数组，可用于表格标题行
-    headersText (): string[] {
+    mainHeaders (): string[] {
       return this.Model.fieldsKeys().splice(2, 10)
     },
     headers (): any[] {
       return this.fields.reduce(function (headersConfig, field) {
-        let schema
-        if (field === 'content') {
-          schema = {
-            type: 'v-textarea',
-            flex: 'layout row xs12 sm12 md12 g12',
-            label: 'Write ' + field,
-            value: field,
-            multiple: true,
-            outline: true,
-            hint: 'Full Content'
-          }
-        } else if (field === 'date' || field === 'startDate' || field === 'endDate') {
-          schema = {
-            type: 'v-date-picker',
-            flex: 'layout row xs12 sm6 md3 gl3',
-            label: 'Pick ' + field
-          }
-        } else if (field === 'select') {
-          schema = {
-            type: 'v-select',
-            label: 'Select' + field,
-            flex: 'layout row xs12 sm6 md3 gl3',
-            'single-line': true,
-            'hide-details': true
-          }
-        } else {
-          schema = {
-            type: 'v-text-field',
-            flex: 'layout row xs12 sm6 md3 gl3',
-            label: 'Input ' + field,
-            value: field,
-            placeholder: field
-          }
-        }
+        let schema = generateHeaders(field) || {}
         let config = {
           text: field,
           align: 'left',
@@ -151,6 +154,10 @@ export default {
     },
     editedIndex (val) {
       console.log(val)
+    },
+    $route: {
+      handler: 'fetch',
+      immediate: true
     }
   },
   async mounted () {
