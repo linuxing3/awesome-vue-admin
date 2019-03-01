@@ -23,7 +23,7 @@ export default class Militant extends BaseModel {
       academicBackground: this.string('Master'),
       hrCategory: this.string('public official'),
       department: this.string('Business'),
-      workPostion: this.string('Business'),
+      workPosition: this.string('Business'),
       positionAndRank: this.string('Director'),
       militantComission: this.string('CN'),
       militantRole: this.string('Secretary'),

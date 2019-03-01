@@ -2,7 +2,7 @@
   <v-dialog
       v-model='dialog'
       width="80%"
-      loading="true"
+      :loading="loading"
     >
     <v-btn
         slot="activator"
@@ -11,7 +11,7 @@
         small
         color="indigo"
       >
-      <v-icon>print</v-icon>
+      <v-icon>get_app</v-icon>
     </v-btn>
     <v-card
         class="elevation-1 pa-3">
@@ -92,6 +92,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    loading: false,
     title: '导出打印从未如此方便！',
     msg: '使用Word或Wps可以方便地将数据导出到csv文件并合并打印, csv文件可以用Excel打开编辑, 也可以用Word合并打印',
     step1: '第一步: Wps中打开[工具]菜单, 选择[邮件合并工具栏]',

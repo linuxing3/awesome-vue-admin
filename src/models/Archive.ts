@@ -11,7 +11,7 @@ export default class Archive extends BaseModel {
       type: this.string('XXX'),
       mark: this.string('XXX'),
       classiLevel: this.string('XXX'),
-      startDate: this.string('2018-12-30'),
+      date: this.string('2018-12-30'),
       title: this.string('XXX'),
       archiveEntity: this.string(''),
       attachment: this.string('XXX'),

@@ -1,14 +1,15 @@
 <template>
   <div>
     <v-container
-        id="dropdown-example"
-        grid-list-xl>
+        id="dropdown-example">
       <v-layout
+          class="justify-start"
           row
           wrap>
         <v-flex
-            xs12
-            sm4>
+          xs12
+          md4
+          sm4>
           <v-overflow-btn
               :items="entities"
               item-value="entityName"
@@ -22,7 +23,7 @@
     <v-toolbar
         flat
         color="white">
-      <v-toolbar-title class="heading">{{modelName}} 表格</v-toolbar-title>
+      <v-toolbar-title class="heading">{{modelName}}共有<span class="heading1 red--text">{{ count }}</span>项记录</v-toolbar-title>
       <v-divider
           class="mx-2"
           inset
@@ -147,7 +148,7 @@
                 hide-details
               ></v-checkbox>
           </td>
-          <td class="layout row justify-center align-item-center">
+          <td class="layout row justify-center align-center">
             <v-icon
                 color="green"
                 @click="editItem(props.item)"
@@ -168,9 +169,7 @@
         </tr>
       </template>
       <template slot="no-data">
-        <v-btn
-            color="primary"
-            @click="reset">重置</v-btn>
+        <span class="heading">还没有信息，请点击右上角的按钮添加新的记录</span>
       </template>
       <template slot="footer">
         <td :colspan="headers.length">

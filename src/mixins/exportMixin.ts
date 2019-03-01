@@ -64,15 +64,10 @@ export default {
      * @param e 事件
      */
     getImportFile (e) {
-      // 从选择控件获取文件对象
-      this.importFileMeta = e.target.files[0]
-      // 检查导入文件名和本地模块是否一致
-      let fileName = this.importFileMeta.name.replace(/\.csv$/, '')
-      if (fileName !== this.modelName) {
-        alert('导入文件名称不规范，建议命名为' + this.modelName)
-      }
-      console.table(this.importFileMeta)
-      console.log(`导入表名: ${this.modelName}`)
+      const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
+      // 文件对象
+      this.importFileMeta = openedFiles[0]
+      console.log(this.importFileMeta)
     },
     /**
      * 导入数据函数
@@ -219,12 +214,14 @@ export default {
      * 打开Excel文件
      */
     readExcelFile () {
-      const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-      // 文件对象
-      this.importFileMeta = openedFiles[0]
       // 电子表对象
       try {
         this.workbook = XLSX.readFile(this.importFileMeta)
+        let sheetName = this.workbook.SheetNames[0]
+        let worksheet =  this.workbook.Sheets[sheetName]
+        let data = XLSX.utils.sheet_to_json(worksheet)
+        console.table(data)
+        if (data.length) this.persistData(data)
       } catch (error) {
         throw new Error(error)
       }

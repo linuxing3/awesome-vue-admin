@@ -2,23 +2,50 @@
   <v-dialog
       v-model='dialog'
       width="80%"
-      loading="true"
+      :loading="loading"
     >
     <v-btn
         slot="activator"
         fab
         dark
         small
-        color="indigo"
+        color="green"
       >
-      <v-icon>cloud</v-icon>
+      <v-icon>backup</v-icon>
     </v-btn>
     <v-card
         class="elevation-1 pa-3">
       <v-card-title
-          class="primary"
+          class="green"
           dark
-        ><div class="title white--text">当前表名：{{modelName}}</div></v-card-title>
+          layout
+          row
+          justify-space-between
+        >
+        <div class="title white--text">当前表名：{{modelName}}</div>
+        <v-spacer></v-spacer>
+        <v-card>
+          <v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn
+              icon
+              @click="getImportFile">
+              <v-icon
+                color="green"
+                >cloud</v-icon>
+            </v-btn>
+            {{ importFileMeta.path }}
+          </v-card-title>
+          <v-card-actions>
+            <v-btn
+              class="green white--text"
+              @click="readExcelFile">
+              <v-icon>add</v-icon>
+              Upload
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-card-title>
       <v-card-text>
         <h1 class="flex my-4 primary--text">{{title}}</h1>
         <div>
@@ -29,15 +56,12 @@
           <p>{{step4}}</p>
         </div>
         <v-divider />
-        <input
-            type="file"
-            @change=" getImportFile($event) "/>
       </v-card-text>
       <v-card-actions>
         <v-spacer />
         <v-btn
             class="ml-3 mr-3"
-            color="primary"
+            color="green"
             @click="importItem"
             :loading="loading">{{ $t('import')}}</v-btn>
         <v-btn
@@ -53,6 +77,7 @@
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
+  mixins: [ exportMixin ],
   props: {
     modelName: {
       type: String,
@@ -65,6 +90,7 @@ export default {
   },
   data: () => ({
     dialog: false,
+    loading: false,
     title: '导入现有数据表从未如此方便！',
     msg: '建议使用csv文件进行数据导入。',
     step1: '第一步: 用[导出数据]功能导出一个只有标题行的csv模板文件',
@@ -77,7 +103,6 @@ export default {
       this.dialog = !this.dialog
     })
     window.ImportDialog = this
-  },
-  mixins: [ exportMixin ]
+  }
 }
 </script>
