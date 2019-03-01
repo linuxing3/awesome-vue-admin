@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import PlayComponent from '@/components/helpers/CrudTable.vue'
 import DefaultLayout from '@/layout/default.vue'
+import PlayComponent from '@/components/helpers/SpeedDial.vue'
 
 export default {
   components: {

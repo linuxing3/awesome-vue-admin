@@ -5,10 +5,14 @@
       loading="true"
     >
     <v-btn
-        class="ma-3"
         slot="activator"
-        color="primary"
-        dark>{{buttonText}}</v-btn>
+        fab
+        dark
+        small
+        color="indigo"
+      >
+      <v-icon>cloud</v-icon>
+    </v-btn>
     <v-card
         class="elevation-1 pa-3">
       <v-card-title

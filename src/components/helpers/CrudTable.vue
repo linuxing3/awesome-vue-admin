@@ -29,8 +29,10 @@
           vertical
         ></v-divider>
       <v-spacer></v-spacer>
+      <!-- slots of buttons -->
       <slot name="export" :modelName="modelName" :items="items"></slot>
       <slot name="import" :modelName="modelName"></slot>
+      <!-- end slots -->
       <v-dialog
           v-model="dialog"
           max-width="80%">
@@ -50,9 +52,12 @@
         </v-btn>
         <v-card>
           <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
+            <span class="headline">{{ formTitle }} {{ modelName }}</span>
+            <v-spacer />
+            <slot name="export" :modelName="modelName" :items="items"></slot>
+            <slot name="import" :modelName="modelName"></slot>
           </v-card-title>
-
+          <!-- activator in slot -->
           <v-card-text>
             <v-container grid-list-md>
               <v-layout wrap>
@@ -73,12 +78,10 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                class="editing ? 'primary' : 'warn'"
-                flat
+                :class="editing ? 'warning' : 'primary'"
                 @click="saveItem(editedItem)">{{ editing ? '编辑': '新增'}}</v-btn>
-            <slot name="export" :modelName="modelName" :items="[ editedItem ]"></slot>
             <v-btn
-                flat
+                class="gray"
                 @click="close">取消</v-btn>
           </v-card-actions>
         </v-card>
