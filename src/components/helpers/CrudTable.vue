@@ -3,13 +3,13 @@
     <v-container
         id="dropdown-example">
       <v-layout
-          class="justify-start"
+          class="justify-end"
           row
           wrap>
         <v-flex
             xs12
-            md4
-            sm4>
+            md2
+            sm2>
           <v-overflow-btn
               :items="entities"
               item-value="entityName"
@@ -22,13 +22,10 @@
     </v-container>
     <v-toolbar
         flat
-        color="white">
-      <v-toolbar-title class="heading">{{modelName}}共有<span class="heading1 red--text">{{ count }}</span>项记录</v-toolbar-title>
-      <v-divider
-          class="mx-2"
-          inset
-          vertical
-        ></v-divider>
+        color="success">
+      <v-toolbar-title class="heading white--text">
+        {{modelName}}共有<span class="heading1 red--text">{{ count }}</span>项记录
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- slots of buttons -->
       <slot
@@ -57,7 +54,7 @@
           </v-icon>
         </v-btn>
         <v-card>
-          <v-card-title>
+          <v-card-title class="success lighten-1 white--text" dark>
             <span class="headline">{{ formTitle }} {{ modelName }}</span>
             <v-spacer />
             <slot
@@ -70,27 +67,28 @@
           </v-card-title>
           <!-- activator in slot -->
           <v-card-text>
-            <v-container grid-list-md>
+            <v-container grid-list-md grid-list-sm>
               <v-layout wrap>
                 <!-- generate form from schema  -->
                 <v-flex
-                    v-for="field in headers"
-                    :key="field.value"
                     xs12
-                    sm6
-                    md4>
+                    md8
+                    sm8
+                    class="ml-5"
+                    v-for="field in headers"
+                    :key="field.value">
                   <v-textarea
                       v-if="field.schema.type === 'v-textarea'"
                       v-model="editedItem[field.value]"
-                      :label=" $(field.text) "></v-textarea>
-                  <v-date-picker
-                      v-else-if="field.schema.type === 'v-date-picker'"
-                      v-model="editedItem[field.value]"
-                      :label=" $(field.text) "></v-date-picker>
+                      :label=" $t(field.text) || field.text"></v-textarea>
+                  <DatePicker
+                      v-else-if="field.schema.type === 'v-date-picker'">
+                  </DatePicker>
                   <v-text-field
                       v-else
+                      max-width="300px"
                       v-model="editedItem[field.value]"
-                      :label=" $(field.text) "></v-text-field>
+                      :label=" $t(field.text) || field.text "></v-text-field>
                 </v-flex>
                 <!-- end form from schema  -->
               </v-layout>
@@ -100,7 +98,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-                :class="editing ? 'warning' : 'primary'"
+                :class="editing ? 'warning' : 'success'"
                 @click="saveItem(editedItem)">{{ editing ? '编辑': '新增'}}</v-btn>
             <v-btn
                 class="gray"
@@ -109,6 +107,8 @@
         </v-card>
       </v-dialog>
     </v-toolbar>
+
+    <v-divider></v-divider>
 
     <v-data-table
         v-model="selected"
@@ -152,7 +152,7 @@
               @click="changeSort(header.value)"
             >
             <v-icon small>arrow_upward</v-icon>
-            {{ $t(header.text) }}
+            {{ $t(header.text) || header.text }}
           </th>
         </tr>
       </template>
@@ -160,11 +160,11 @@
           slot="items"
           slot-scope="props">
         <tr
-            :active="props.selected"
-            @click="props.selected = !props.selected">
+            :active="props.selected">
           <td>
             <v-checkbox
                 :input-value="props.selected"
+                @click.stop="props.selected = !props.selected"
                 primary
                 hide-details
               ></v-checkbox>
@@ -208,6 +208,7 @@ import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
+  components: {},
   mixins: [crudMixin, exportMixin],
   data: () => ({
     modelName: 'user',

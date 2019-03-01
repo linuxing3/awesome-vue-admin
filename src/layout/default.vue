@@ -119,7 +119,7 @@ export default {
 <style scoped>
 
 .setting-fab {
-  top: 50% !important;
+  top: 80% !important;
   right: 0;
   border-radius: 0;
 }

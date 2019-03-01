@@ -69,7 +69,7 @@ export default {
             outline: true,
             hint: 'Full Content'
           }
-        } else if (field === 'date' || field.contains('Date') || field.contains('date')) {
+        } else if (field === 'date' || field ==='startDate' || field ==='endDate') {
           schema = {
             type: 'v-date-picker',
             flex: 'layout row xs12 sm6 md3 gl3',
