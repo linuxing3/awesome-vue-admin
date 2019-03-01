@@ -1,33 +1,24 @@
 <template>
   <div>
     <v-container
-        id="dropdown-example">
-      <v-layout
-          class="justify-end"
-          row
-          wrap>
-        <v-flex
-            xs12
-            md2
-            sm2>
-          <v-overflow-btn
-              :items="entities"
-              item-value="entityName"
-              v-model="modelName"
-              label="Entities"
-              target="#dropdown-example"
-            ></v-overflow-btn>
-        </v-flex>
-      </v-layout>
+        id="entity-dropdown">
     </v-container>
     <v-toolbar
         flat
-        color="success">
-      <v-toolbar-title class="heading white--text">
-        {{modelName}}共有<span class="heading1 red--text">{{ count }}</span>项记录
-      </v-toolbar-title>
+        color="white">
+      <v-overflow-btn
+          class="heading mt-3"
+          :items="entities"
+          item-value="entityName"
+          v-model="modelName"
+          label="Entities"
+          target="#entity-dropdown"
+        ></v-overflow-btn>
       <v-spacer></v-spacer>
       <v-text-field
+        class="ml-5 mr-5"
+        label="Search"
+        prepend-icon="search"
         v-model="filter.search">
       </v-text-field>
       <!-- slots of buttons -->
@@ -38,7 +29,6 @@
       <slot
           name="import"
           :modelName="modelName"></slot>
-      </v-btn>
       <!-- end slots -->
       <v-dialog
           v-model="dialog"
@@ -63,13 +53,6 @@
               dark>
             <span class="headline">{{ formTitle }} {{ modelName }}</span>
             <v-spacer />
-            <slot
-                name="export"
-                :modelName="modelName"
-                :items="items"></slot>
-            <slot
-                name="import"
-                :modelName="modelName"></slot>
             <v-btn
                 fab
                 small
@@ -78,6 +61,10 @@
                 icon>
                 <v-icon>file_copy</v-icon>
             </v-btn>
+            <slot
+                name="export"
+                :modelName="modelName"
+                :items="[ editedItem ]"></slot>
           </v-card-title>
           <!-- activator in slot -->
           <v-card-text>
@@ -226,7 +213,7 @@
       </template>
       <template slot="footer">
         <td :colspan="headers.length">
-          Total {{ count }}
+          共有<span class="heading1 red--text">{{ count }}</span>项记录
         </td>
       </template>
     </v-data-table>

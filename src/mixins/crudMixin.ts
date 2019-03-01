@@ -285,14 +285,13 @@ export default {
       // 设置[编辑]为假，[数据模型]为传入项目
       this.Model.$create({
         data: this.editedItem
+      }).then(entities => {
+        console.table(entities)
       })
       // ORM默认方法
       // this.Model.insert({
       //   data: this.editedItem,
       // });
-    },
-    queryField (field: string) {
-      this.Model.query().where(field, this.filter.search).get()
     },
     /**
      * 尝试进行国际化翻译

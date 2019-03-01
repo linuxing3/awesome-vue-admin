@@ -31,13 +31,15 @@
         </div>
       </v-card-text>
 
-      <v-select
-          class='pa-5'
-          v-model="outputDocFile"
-          label="选择Word目标文件，默认为template.doc"
-          :items="templateDocs"></v-select>
+      <span class="red white--text">{{text}}</span>
 
       <v-card-actions>
+        <v-select
+            class='pa-5'
+            v-model="outputDocFile"
+            label="选择Word目标文件，默认为template.doc"
+            :items="templateDocs"></v-select>
+        <v-spacer />
         <v-btn
             class="ml-3 mr-3"
             color="primary"
@@ -47,8 +49,6 @@
             color="primary lighten-1"
             @click="exportToWord"
             :loading="loading">{{ $t('export') }}Word</v-btn>
-        <span class="red white--text">{{text}}</span>
-        <v-spacer />
         <v-btn
             class="ml-3 mr-3"
             @click="$emit('TOGGLE')"
