@@ -45,7 +45,7 @@
 export default {
   data: () => ({
     date: '2019-03-01',
-    modal: false,
+    modal: false
   })
 }
 </script>

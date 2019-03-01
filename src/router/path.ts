@@ -20,7 +20,7 @@ export default [
     name: 'NotFound',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      `@/views/NotFound.vue`)
+        `@/views/NotFound.vue`)
   },
   {
     path: '/403',
@@ -30,7 +30,7 @@ export default [
     name: 'AccessDenied',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      `@/views/Deny.vue`)
+        `@/views/Deny.vue`)
   },
   {
     path: '/500',
@@ -40,7 +40,7 @@ export default [
     name: 'ServerError',
     component: () =>
       import(/* webpackChunkName: "routes" */
-      `@/views/Error.vue`)
+        `@/views/Error.vue`)
   },
   {
     path: '/play',

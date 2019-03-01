@@ -54,7 +54,9 @@
           </v-icon>
         </v-btn>
         <v-card>
-          <v-card-title class="success lighten-1 white--text" dark>
+          <v-card-title
+              class="success lighten-1 white--text"
+              dark>
             <span class="headline">{{ formTitle }} {{ modelName }}</span>
             <v-spacer />
             <slot
@@ -67,12 +69,14 @@
           </v-card-title>
           <!-- activator in slot -->
           <v-card-text>
-            <v-container fluid grid-list-xs>
+            <v-container
+                fluid
+                grid-list-xs>
               <v-layout
-                v-for="field in headers"
-                :key="field.value"
-                row
-                wrap>
+                  v-for="field in headers"
+                  :key="field.value"
+                  row
+                  wrap>
                 <!-- generate form from schema  -->
                 <v-flex
                     v-if="field.schema.type === 'v-textarea'"
@@ -91,35 +95,34 @@
                     sm4
                     class="ml-5">
                   <v-dialog
-                    ref="datedialog"
-                    v-model="modal"
-                    :return-value.sync="editedItem[field.value]"
-                    persistent
-                    lazy
-                    full-width
-                    width="290px"
-                  >
-                  <v-text-field
-                      slot="activator"
-                      v-model="editedItem[field.value]"
-                      :label="editedItem[field.text]"
-                      append-icon="event"
-                      readonly
-                    ></v-text-field>
-                  <v-date-picker
-                      v-model="editedItem[field.value]"
-                      scrollable>
-                    <v-spacer></v-spacer>
-                    <v-btn
-                        flat
-                        color="primary"
-                        @click="modal = false">Cancel</v-btn>
-                    <v-btn
-                        flat
-                        color="primary"
-                        @click="$refs.datedialog.save(editedItem[field.value])">OK</v-btn>
-                  </v-date-picker>
-                </v-dialog>
+                      ref="datedialog"
+                      v-model="modal"
+                      :return-value.sync="editedItem[field.value]"
+                      persistent
+                      lazy
+                      full-width
+                      width="290px"
+                    >
+                    <v-text-field
+                        slot="activator"
+                        v-model="editedItem[field.value]"
+                        :label="editedItem[field.text]"
+                        append-icon="event"
+                        readonly
+                      ></v-text-field>
+                    <v-date-picker
+                        v-model="editedItem[field.value]"
+                        scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                          flat
+                          @click="modal = false">Cancel</v-btn>
+                      <v-btn
+                          flat
+                          color="primary"
+                          @click="$refs.datedialog.save(editedItem[field.value])">OK</v-btn>
+                    </v-date-picker>
+                  </v-dialog>
                 </v-flex>
                 <v-flex
                     v-else
