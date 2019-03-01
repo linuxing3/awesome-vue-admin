@@ -28,18 +28,18 @@
           <v-card-title>
             <v-spacer></v-spacer>
             <v-btn
-              icon
-              @click="getImportFile">
+                icon
+                @click="getImportFile">
               <v-icon
-                color="green"
+                  color="green"
                 >cloud</v-icon>
             </v-btn>
             {{ importFileMeta.path }}
           </v-card-title>
           <v-card-actions>
             <v-btn
-              class="green white--text"
-              @click="readExcelFile">
+                class="green white--text"
+                @click="readExcelFile">
               <v-icon>add</v-icon>
               Upload
             </v-btn>

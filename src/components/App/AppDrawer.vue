@@ -170,7 +170,7 @@ export default {
       })
       setTimeout(() => {
         window.CrudTable.$emit('SET_MODEL', menuItem)
-      }, 500);
+      }, 500)
     }
   }
 }

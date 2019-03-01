@@ -92,7 +92,7 @@ export default {
       })
       setTimeout(() => {
         window.CrudTable.$emit('SET_MODEL', modelName)
-      }, 1000);
+      }, 1000)
     }
   }
 }

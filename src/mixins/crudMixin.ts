@@ -6,7 +6,7 @@ import { baseFilter } from '@/util'
 export default {
   data () {
     return {
-      editedItem: {},  // currently item to be edited
+      editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
       filter: {
         search: '',
@@ -19,7 +19,7 @@ export default {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     },
     editing () {
-      return this.editedIndex === -1 ? false : true // is in edit state
+      return this.editedIndex !== -1 // is in edit state
     },
     // 数据对象的定义模型
     Model (): Model {
@@ -119,7 +119,6 @@ export default {
     }
   },
   async mounted () {
-
     this.reset()
 
     // For update, should call fetch again

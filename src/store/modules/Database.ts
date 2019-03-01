@@ -32,7 +32,7 @@ const actions: any = {
     commit('SET_MODELS', models)
     // 设置当前模型的名称
     commit('SET_CURRENT_MODEL', Database)
-    
+
     // 将所有对象模型的信息进行持久化
 
     Object.keys(models).forEach(name => {

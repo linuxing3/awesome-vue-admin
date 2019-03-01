@@ -218,7 +218,7 @@ export default {
       try {
         this.workbook = XLSX.readFile(this.importFileMeta)
         let sheetName = this.workbook.SheetNames[0]
-        let worksheet =  this.workbook.Sheets[sheetName]
+        let worksheet = this.workbook.Sheets[sheetName]
         let data = XLSX.utils.sheet_to_json(worksheet)
         console.table(data)
         if (data.length) this.persistData(data)

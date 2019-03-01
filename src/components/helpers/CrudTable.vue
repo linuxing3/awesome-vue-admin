@@ -7,9 +7,9 @@
           row
           wrap>
         <v-flex
-          xs12
-          md4
-          sm4>
+            xs12
+            md4
+            sm4>
           <v-overflow-btn
               :items="entities"
               item-value="entityName"
@@ -31,8 +31,13 @@
         ></v-divider>
       <v-spacer></v-spacer>
       <!-- slots of buttons -->
-      <slot name="export" :modelName="modelName" :items="items"></slot>
-      <slot name="import" :modelName="modelName"></slot>
+      <slot
+          name="export"
+          :modelName="modelName"
+          :items="items"></slot>
+      <slot
+          name="import"
+          :modelName="modelName"></slot>
       <!-- end slots -->
       <v-dialog
           v-model="dialog"
@@ -55,8 +60,13 @@
           <v-card-title>
             <span class="headline">{{ formTitle }} {{ modelName }}</span>
             <v-spacer />
-            <slot name="export" :modelName="modelName" :items="items"></slot>
-            <slot name="import" :modelName="modelName"></slot>
+            <slot
+                name="export"
+                :modelName="modelName"
+                :items="items"></slot>
+            <slot
+                name="import"
+                :modelName="modelName"></slot>
           </v-card-title>
           <!-- activator in slot -->
           <v-card-text>
@@ -215,7 +225,6 @@ export default {
   },
 
   created () {
-
     this.$on('SET_MODEL', (name) => {
       this.modelName = name
     })

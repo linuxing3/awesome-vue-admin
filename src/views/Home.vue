@@ -16,10 +16,10 @@ import Manual from '@/components/Home/Manual.vue' // @ is an alias to /src
   }
 })
 export default class Home extends Vue {
-  created() {
+  created () {
     this.initialize()
   }
-  
+
   initialize () {
     // Try to persist app settings
     // this.$store.commit('entities/app/init')
