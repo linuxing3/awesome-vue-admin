@@ -20,7 +20,7 @@ requiredModels.keys().forEach(fileName => {
     static fields() {
       let fields = this.fieldConfig.reduce((fields, field) => {
         // TODO with pullAll
-        fields['field_name'] = this.attr(field['label'])
+        fields['fieldname'] = this.attr(field['fieldname'])
         return fields
       }, {})
 
@@ -31,7 +31,7 @@ requiredModels.keys().forEach(fileName => {
     }
   }
 
-  models[modelName] = Model
+  models[entityName] = Model
 })
 
 export default models
