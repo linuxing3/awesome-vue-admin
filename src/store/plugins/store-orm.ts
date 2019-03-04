@@ -12,6 +12,7 @@ import localForagePlugin from 'vuex-orm-localforage'
 // 获取模型和模块
 import models from '@/models'
 import modules from '@/store/modules'
+import erp from '@/models/ERPModel'
 
 // 获取文件路径
 
@@ -25,9 +26,15 @@ if (!pathExistsSync(dbPath)) mkdirpSync(dbPath)
  */
 export const registerDatabase = (models: any, modules: any): Database => {
   const database = new Database()
+  // base models
   Object.keys(models).map(key => {
     console.log(`Registering ORM for ${key} model`)
     database.register(models[key], modules[key] || {})
+  })
+  // erp models
+  Object.keys(erp).map(key => {
+    console.log(`Registering ERP ORM for ${key} model`)
+    database.register(erp[key], modules[key] || {})
   })
   return database
 }

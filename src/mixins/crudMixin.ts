@@ -3,6 +3,10 @@ import { Model } from '@vuex-orm/core'
 import models from '@/models'
 import { baseFilter } from '@/util'
 
+export const isDateField = (field: string) => {
+  return field.endsWith('date') || field.endsWith('Date')
+}
+
 export const generateHeaders = (field: string) => {
   if (field === 'content') {
     return {
@@ -14,7 +18,7 @@ export const generateHeaders = (field: string) => {
       outline: true,
       hint: 'Full Content'
     }
-  } else if (field === 'date' || field === 'startDate' || field === 'endDate') {
+  } else if (isDateField(field)) {
     return {
       type: 'v-date-picker',
       flex: 'layout row xs12 sm6 md3 gl3',

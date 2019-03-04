@@ -1,25 +1,26 @@
-import { camelCase, toLower, upperFirst } from 'lodash'
+import { camelCase, upperFirst, lowerFirst } from 'lodash'
 import { BaseModel } from '@/models/BaseModel'
 
 let requiredModels: RequireContext = require.context('.', true, /\.json$/)
 
 let models = {}
 
-requiredModels.keys().forEach(key => {
-  let modelName = upperFirst(key.replace(/(\.\/|\.json)/g, ''))
-  let entityName = toLower(modelName)
+requiredModels.keys().forEach(fileName => {
+  const modelName = upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
+  const entityName = lowerFirst(modelName)
 
-  let fieldConfig = requiredModels(key).fields
+  const fieldConfig = requiredModels(fileName)['fields']
+  console.log(fieldConfig)
 
   class Model extends BaseModel {
     static entity = entityName
-
     static modelName = modelName
+    static fieldConfig = fieldConfig || []
 
-    static fields () {
-      let fields = fieldConfig.reduce((fields, field) => {
+    static fields() {
+      let fields = this.fieldConfig.reduce((fields, field) => {
         // TODO with pullAll
-        fields['field_name'] = this.attr(field[field_text])
+        fields['field_name'] = this.attr(field['label'])
         return fields
       }, {})
 

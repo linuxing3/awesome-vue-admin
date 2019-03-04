@@ -32,26 +32,6 @@ const actions: any = {
     commit('SET_MODELS', models)
     // 设置当前模型的名称
     commit('SET_CURRENT_MODEL', Database)
-
-    // 将所有对象模型的信息进行持久化
-
-    Object.keys(models).forEach(name => {
-      let headers = models[name].fieldsKeys()
-      let path = name
-      Database.query().where('name', name).get()
-        .then(entities => {
-          console.log('Check' + name + ' exists: ' + entities.length)
-          if (entities.length === 0) {
-            Database.$create({
-              data: {
-                name,
-                headers,
-                path
-              }
-            })
-          }
-        })
-    })
   },
   ...make.actions(state)
 }

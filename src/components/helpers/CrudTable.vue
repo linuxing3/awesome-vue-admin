@@ -93,10 +93,35 @@
                     md4
                     sm4
                     class="ml-5">
-                  <slot
-                    name="datedialog"
-                    :field="field"
-                    :editedItem="editedItem"></slot>
+                  <v-dialog
+                      :ref="field.value"
+                      v-model="modal"
+                      :return-value.sync="editedItem[field.value]"
+                      persistent
+                      lazy
+                      full-width
+                      width="290px"
+                    >
+                    <v-text-field
+                        slot="activator"
+                        v-model="editedItem[field.value]"
+                        :label="$t(field.text) || field.text"
+                        append-icon="event"
+                        readonly
+                      ></v-text-field>
+                    <v-date-picker
+                        v-model="editedItem[field.value]"
+                        scrollable>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                          flat
+                          @click="modal = false">Cancel</v-btn>
+                      <v-btn
+                          flat
+                          color="primary"
+                          @click="saveDate(field, editedItem)">OK</v-btn>
+                    </v-date-picker>
+                  </v-dialog>
                 </v-flex>
                 <v-flex
                     v-else
@@ -253,12 +278,19 @@ export default {
       this.reset()
       // refetch data for current model
       this.fetch()
+    },
+    editedItem (val) {
+      this.editedItem = val
     }
   },
 
   created () {
     this.$on('SET_MODEL', (name) => {
       this.modelName = name
+    })
+    this.$on('SET_DATE', (date) => {
+      console.log(date)
+      this.editedItem = { ...this.editedItem,  date }
     })
     window.CrudTable = this
   },
@@ -308,6 +340,13 @@ export default {
     entityChanged (entityName) {
       this.modelName = entityName
       this.$forceUpdate()
+    },
+
+    saveDate (field, editedItem) {
+      let fieldName = field.value
+      let dateControl = this.$refs[fieldName][0]
+      let date = this.editedItem[fieldName]
+      dateControl.save(date)
     }
   }
 }

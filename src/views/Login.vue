@@ -4,17 +4,14 @@
   </SimpleLayout>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+<script>
 import SimpleLayout from '@/layout/simple.vue'
-
 import LoginForm from '@/components/Login/LoginForm.vue'
 
-@Component({
+export default {
   components: {
     SimpleLayout,
     LoginForm
   }
-})
-export default class Login extends Vue {}
+}
 </script>
