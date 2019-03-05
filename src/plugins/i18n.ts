@@ -5,7 +5,7 @@ Vue.use(VueI18n)
 
 function loadLocaleMessages (): LocaleMessages {
   const locales = require.context('../locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
-  const erpLocales = require.context('../models/ERPModels', true, /\.json$/)
+  const erpLocales = require.context('../models/ERPModel', true, /\.json$/)
 
   const messages: LocaleMessages = {}
 
