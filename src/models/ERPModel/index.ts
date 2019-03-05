@@ -52,11 +52,11 @@ export function createMessages () {
     const fieldConfig = ERPModels(fileName)['fields']
 
     if (fieldConfig !== undefined) {
-      ERPMessages = fieldConfig.reduce((massages, field) => {
+      ERPMessages = fieldConfig.reduce((messages, field) => {
         let label = field['label']
         let fieldName = field['fieldname']
         let fieldNameCn = field['fieldname_cn']
-        massages['cn'][fieldName] = fieldNameCn || label
+        messages['cn'][fieldName] = fieldNameCn || label
         return messages
       }, {})
     }
