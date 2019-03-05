@@ -1,4 +1,4 @@
-import { camelCase, upperFirst, lowerFirst } from 'lodash'
+import { camelCase, upperFirst, lowerFirst, tail, first, last, nth } from 'lodash'
 import { BaseModel } from '@/models/BaseModel'
 import { LocaleMessages } from 'vue-i18n'
 
@@ -10,18 +10,34 @@ export function createModels () {
   let models = {}
 
   ERPModels.keys().forEach((fileName: string) => {
-    fileName = fileName.split('/').reverse()[0]
-    const modelName = upperFirst(camelCase(fileName.replace(/\.json/g, '')))
-    const entityName = lowerFirst(modelName)
-    const fieldConfig = ERPModels(fileName)['fields']
+    const fileNameMeta = tail(fileName.split('/'))
 
+    const modelName = upperFirst(camelCase(last(fileNameMeta).replace(/\.json/g, '')))
+    const entityName = lowerFirst(modelName)
+
+    const groups = {
+      section: first(fileNameMeta),
+      modelName: nth(fileNameMeta, -2),
+      fileName: last(fileNameMeta),
+      fullPath: fileName
+    }
+
+    const fieldConfig = ERPModels(fileName)['fields']
     if (fieldConfig !== undefined) {
       // Creating ORM Models
       class ERPModel extends BaseModel {
         static entity = entityName
         static modelName = modelName
         static fieldConfig = fieldConfig || []
-        static fields () {
+
+        static meta = {
+          icon: 'edit',
+          size: 36,
+          color: 'success',
+          groups
+        }
+
+        static fields() {
           let fields = this.fieldConfig.reduce((fields, field) => {
             let label = field['label']
             let fieldname = field['fieldname']
@@ -48,7 +64,6 @@ export function createMessages () {
   let ERPMessages: LocaleMessages = {}
 
   ERPModels.keys().forEach((fileName: string) => {
-    fileName = fileName.split('/').reverse()[0]
     const fieldConfig = ERPModels(fileName)['fields']
 
     if (fieldConfig !== undefined) {
@@ -58,7 +73,7 @@ export function createMessages () {
         let fieldNameCn = field['fieldname_cn']
         messages['cn'][fieldName] = fieldNameCn || label
         return messages
-      }, {})
+      }, { cn: {} })
     }
   })
   return ERPMessages

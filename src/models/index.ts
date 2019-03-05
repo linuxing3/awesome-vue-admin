@@ -9,11 +9,10 @@ import { toLower } from 'lodash'
 
 import erpModels from './ERPModel'
 
-let requiredModels: RequireContext = require.context('.', false, /\.ts$/)
+let requiredModels: RequireContext = require.context('./CoreModel', false, /\.ts$/)
 let models = {}
 
 requiredModels.keys().forEach(key => {
-  if (key === './index.ts') return
   let modelName = toLower(key.replace(/(\.\/|\.ts)/g, ''))
   models[modelName] = requiredModels(key).default || requiredModels(key)
 })

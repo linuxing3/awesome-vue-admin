@@ -1,6 +1,6 @@
 <template>
   <v-toolbar
-      color="success"
+      :color="$vuetify.theme.primary"
       fixed
       dark
       app

@@ -22,11 +22,15 @@ function loadLocaleMessages (): LocaleMessages {
 
 const mainMessages = loadLocaleMessages()
 
+const messages = {
+  ...mainMessages
+  // ...ERPMessages
+}
+
+console.log(messages)
+
 export default new VueI18n({
   locale: process.env.VUE_APP_I18N_LOCALE || 'en',
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
-  messages: {
-    ...mainMessages,
-    ...ERPMessages
-  }
+  messages
 })

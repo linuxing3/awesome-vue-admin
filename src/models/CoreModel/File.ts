@@ -1,4 +1,4 @@
-import { BaseModel } from './BaseModel'
+import { BaseModel } from '../BaseModel'
 export default class File extends BaseModel {
   static entity = 'file'
 

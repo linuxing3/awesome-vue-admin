@@ -1,76 +1,63 @@
 <template>
   <div id="pageCard">
-    <v-container
-        grid-list-lg
-        fluid>
-      <v-layout
-          row
-          wrap>
-        <v-flex sm12>
-          <h1>开始使用</h1>
-        </v-flex>
-        <v-flex
-            v-for="(item,index) in items"
-            :key="index"
-            lg2
-            md4
-            sm12>
-          <v-card
-              v-if="item.type === 'crud'"
-              :color="item.color || 'indigo'"
-              dark>
-            <v-card-title
-                class="pt-5 pb-5 justify-content-center"
-              >
+    <v-expansion-panel
+        v-model="panel"
+        expand
+      >
+      <v-expansion-panel-content
+          v-for="(section, i) in sections"
+          :key="i"
+        >
+        <div slot="header">{{ section }}</div>
+        <v-card
+          :key="model"
+          v-for="model in models">
+          <v-card-text v-if="model.meta.groups.section === section"
+            class="grey lighten-3">
               <v-avatar
                   size="64">
                 <v-btn
-                    width="64px"
-                    height="64px"
-                    @click="crud(item)"
+                    @click="crud(model)"
                     icon>
-                  <v-icon>{{item.icon}}</v-icon>
+                  <v-icon>{{model.meta.icon || 'star'}}</v-icon>
                 </v-btn>
               </v-avatar>
-              <h2>{{ $t('entity.'+ item.name) }}</h2>
-            </v-card-title>
-          </v-card>
-          <v-card
-              v-else
-              :color="item.color || 'indigo'"
-              dark>
-            <v-card-title
-                class="pt-5 pb-5 justify-content-center"
-              >
-              <v-avatar
-                  size="64">
-                <v-btn
-                    width="64px"
-                    height="64px"
-                    @click="$router.push({ name: item.name, params: { blueprint: item.name } })"
-                    icon>
-                  <v-icon>{{item.icon}}</v-icon>
-                </v-btn>
-              </v-avatar>
-              <h2>{{ $t('entity.'+ item.name) }}</h2>
-            </v-card-title>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    </v-container>
+              <h2>{{ $t(model.entity) }}</h2>
+          </v-card-text>
+        </v-card>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </div>
 </template>
 
 <script>
 import { join } from 'path'
-import { menuItems } from '@/api/menu'
+
+import models from '@/models'
+import { mayKeys } from 'lodash'
 
 export default {
   data () {
     return {
       show: true,
       cardText: '请查看手册, 了解具体使用方法',
-      items: menuItems
+      models,
+      panel: [true, false],
+      sections: [
+        'core',
+        'hr',
+        'accounts',
+        'assets',
+        'buying',
+        'education',
+        'healthcare',
+        'maintenance',
+        'projects',
+        'quality_management',
+        'selling',
+        'shopping_cart',
+        'stock'
+      ]
     }
   },
   computed: {
@@ -81,19 +68,11 @@ export default {
     computeBg5: () => 'bg/5.jpg',
     computeBg6: () => 'bg/6.jpg',
     computeBg10: () => 'bg/10.jpg',
-    computeAvatarMan4: () => 'avatar/man_4.jpg'
-  },
-  methods: {
-    crud (menuItem) {
-      let modelName = menuItem.name
-      this.$router.push({
-        name: 'crud',
-        modelName
-      })
-      setTimeout(() => {
-        window.CrudTable.$emit('SET_MODEL', modelName)
-      }, 1000)
+    computeAvatarMan4: () => 'avatar/man_4.jpg',
+    belongsToSection: function(section, model) {
+      return section === model.meta.groups.section
     }
-  }
+  },
+  methods: {}
 }
 </script>

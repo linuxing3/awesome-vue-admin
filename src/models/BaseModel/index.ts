@@ -17,6 +17,12 @@ import { keys, pullAll } from 'lodash'
 
 export class BaseModel extends Model {
   static primaryKey = '_id'
+  
+  static meta = {
+    icon: 'edit',
+    size: 36,
+    color: 'success'
+  }
 
   static fieldsKeys (): string[] {
     return keys(this.fields())

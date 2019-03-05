@@ -1,5 +1,5 @@
 import { Model, BelongsTo } from '@vuex-orm/core'
-import { BaseModel } from './BaseModel'
+import { BaseModel } from '../BaseModel'
 export default class Account extends BaseModel {
   static entity = 'account'
 

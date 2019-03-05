@@ -9,7 +9,7 @@
       width="260"
     >
     <v-toolbar
-        color="success darken-1"
+        :color="$vuetify.theme.primary"
         dark>
       <v-toolbar-title class="ml-0 pl-3">
         <span class="hidden-sm-and-down">综合管理系统</span>

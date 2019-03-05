@@ -1,5 +1,4 @@
-import { BaseModel } from './BaseModel'
-import Entity from './Entity'
+import { BaseModel } from '../BaseModel'
 
 export default class User extends BaseModel {
   static entity = 'user'

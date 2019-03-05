@@ -74,7 +74,7 @@ import { mapValues } from 'lodash'
 import { get, sync, call } from 'vuex-pathify'
 import { join } from 'path'
 
-import Account from '@/models/Account'
+import Account from '@/models/CoreModel/Account'
 import AppEvents from '@/util/event'
 
 import crudMixin from '@/mixins/crudMixin'

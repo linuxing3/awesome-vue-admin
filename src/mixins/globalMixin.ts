@@ -1,6 +1,6 @@
 import { get } from 'vuex-pathify'
-import Account from '@/models/Account'
-import Database from '@/models/Database'
+
+import Account from '@/models/CoreModel/Account'
 import { entities } from '@/api/globals'
 
 export const validateMixin = {
@@ -19,17 +19,24 @@ export const validateMixin = {
         })
         .get()
     },
-    // entities () {
-    //   return Database.all().reduce((entities, entityConfig) => {
-    //     entities.push(entityConfig['name'])
-    //     return entities
-    //   }, [])
-    // }
     entities: () => entities
   },
   methods: {
     isAdmin () {
       return this.currentItem.role === 'admin'
+    },
+    crud ( model ) {
+      let modelName =  model.entity
+      this.$router.push({
+        name: 'crud',
+        params: {
+          modelName
+        }
+      })
+      setTimeout(() => {
+        (window as any).CrudTable && 
+          (window as any).CrudTable.$emit('SET_MODEL', modelName)
+      }, 500)
     }
   }
 }
