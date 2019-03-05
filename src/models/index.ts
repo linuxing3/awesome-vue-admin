@@ -18,8 +18,7 @@ requiredModels.keys().forEach(key => {
   models[modelName] = requiredModels(key).default || requiredModels(key)
 })
 
-
-export default { 
+export default {
   ...models,
   ...erpModels
 }

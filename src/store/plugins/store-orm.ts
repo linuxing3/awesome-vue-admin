@@ -31,7 +31,7 @@ export const registerDatabase = (models: any, modules: any): Database => {
     console.log(`Registering ORM for ${key} model`)
     database.register(models[key], modules[key] || {})
   })
-  
+
   return database
 }
 

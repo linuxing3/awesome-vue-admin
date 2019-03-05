@@ -98,7 +98,7 @@ const mainMenu = [
   },
   {
     title: '资产管理',
-    name: 'assetsDoctypeAssetAsset',
+    name: 'Asset',
     group: 'apps',
     icon: 'store',
     color: 'blue',

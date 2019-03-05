@@ -7,8 +7,9 @@ import { BaseModel } from '@/models/BaseModel'
 let erpModels: RequireContext = require.context('.', true, /\.json$/)
 let models = {}
 
-erpModels.keys().forEach(fileName => {
-  const modelName = upperFirst(camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, '$1')))
+erpModels.keys().forEach((fileName: string) => {
+  fileName = fileName.split('/').reverse()[0]
+  const modelName = upperFirst(camelCase(fileName.replace(/\.json/g, '')))
   const entityName = lowerFirst(modelName)
   const fieldConfig = erpModels(fileName)['fields']
   if (fieldConfig !== undefined) {

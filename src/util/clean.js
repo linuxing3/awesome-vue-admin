@@ -1,8 +1,10 @@
-import { removeSync } from 'fs-extra'
+import { unlinkSync } from 'fs'
 
-requiredModels.keys().forEach(fileName => {
+let models = require.context('.', true, /\.json$/)
+
+models.keys().forEach(fileName => {
   if (fileName.match(/.*\.(py|js)$/)) {
-    removeSync(filaName)
+    unlinkSync(fileName)
     console.log(`${fileName} deleted`)
   } else {
     console.log('not deleted')
