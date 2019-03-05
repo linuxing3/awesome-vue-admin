@@ -169,6 +169,8 @@ export default {
 
     // For update, should call fetch again
     await this.fetch()
+
+    console.log(models)
   },
   created () {
     // 组件自身监听事件，更新[编辑]和[数据模型]的状态

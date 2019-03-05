@@ -16,10 +16,10 @@
         ></v-overflow-btn>
       <v-spacer></v-spacer>
       <v-text-field
-        class="ml-5 mr-5"
-        label="Search"
-        prepend-icon="search"
-        v-model="filter.search">
+          class="ml-5 mr-5"
+          label="Search"
+          prepend-icon="search"
+          v-model="filter.search">
       </v-text-field>
       <!-- slots of buttons -->
       <slot
@@ -59,7 +59,7 @@
                 color="red darken-2 white--text"
                 @click="writeDocxFile"
                 icon>
-                <v-icon>file_copy</v-icon>
+              <v-icon>file_copy</v-icon>
             </v-btn>
             <slot
                 name="export"
@@ -290,7 +290,7 @@ export default {
     })
     this.$on('SET_DATE', (date) => {
       console.log(date)
-      this.editedItem = { ...this.editedItem,  date }
+      this.editedItem = { ...this.editedItem, date }
     })
     window.CrudTable = this
   },

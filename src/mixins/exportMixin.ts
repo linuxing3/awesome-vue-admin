@@ -5,7 +5,7 @@ import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 import XLSX from 'xlsx'
-import { Document, Paragraph, Packer} from 'docx'
+import { Document, Paragraph, Packer } from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
@@ -277,7 +277,7 @@ export default {
       // 电子表对象
     },
     writeDocxFile (data) {
-      let defaultPath = join(this.attachDir, this.modelName, 'test.doc' )
+      let defaultPath = join(this.attachDir, this.modelName, 'test.doc')
       let filename = this.importFileMeta.path || defaultPath
       try {
         this.document = new Document()

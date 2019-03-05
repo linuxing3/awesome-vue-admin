@@ -96,6 +96,14 @@ const mainMenu = [
     color: 'blue',
     type: 'crud'
   },
+  {
+    title: '资产管理',
+    name: 'AssetsDoctypeAssetAsset',
+    group: 'apps',
+    icon: 'store',
+    color: 'blue',
+    type: 'crud'
+  },
   // injected
   { header: '系统' },
   {

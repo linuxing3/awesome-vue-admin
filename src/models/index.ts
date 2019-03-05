@@ -7,6 +7,8 @@
  */
 import { toLower } from 'lodash'
 
+import erpModels from './ERPModel'
+
 let requiredModels: RequireContext = require.context('.', false, /\.ts$/)
 let models = {}
 
@@ -16,4 +18,8 @@ requiredModels.keys().forEach(key => {
   models[modelName] = requiredModels(key).default || requiredModels(key)
 })
 
-export default models
+
+export default { 
+  ...models,
+  ...erpModels
+}
