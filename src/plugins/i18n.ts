@@ -19,9 +19,9 @@ function loadLocaleMessages (): LocaleMessages {
 
   erpLocales.keys().forEach((fileName: string) => {
     const fieldConfig = erpLocales(fileName)['fields']
-    fieldConfig.reduce((fields, field) => {
-      fields['cn'][field['fieldname']] = field['i18n']['cn'] || ''
-      return fields
+    messages = fieldConfig.reduce((massages, field) => {
+      massages['cn'][field['fieldname']] = field['fieldname_cn'] || field['label']
+      return messages
     }, messages)
   })
 
