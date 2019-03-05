@@ -28,7 +28,7 @@ erpModels.keys().forEach(fileName => {
         }
       }
     }
-    models[modelName] = ERPModel
+    models[entityName] = ERPModel
   }
 })
 
