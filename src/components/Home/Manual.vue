@@ -33,6 +33,7 @@
 
 <script>
 import { join } from 'path'
+import { pickBy } from 'lodash'
 
 import models from '@/models'
 import { mayKeys } from 'lodash'
@@ -70,10 +71,20 @@ export default {
     computeBg6: () => 'bg/6.jpg',
     computeBg10: () => 'bg/10.jpg',
     computeAvatarMan4: () => 'avatar/man_4.jpg',
-    belongsToSection: function (section, model) {
-      return section === model.meta.groups.section
-    }
   },
-  methods: {}
+  methods: {
+    erpModels: function (section) {
+      return pickBy(this.models, model => this.erpSection(model, section))
+    },
+    coreModels: function (section) {
+      return pickBy(this.models, model => this.coreSection(model, section))
+    },
+    erpSection: function (model, section) {
+      return section === model.meta.groups.section
+    },
+    coreSection: function (model, section) {
+      return model.meta.groups === undefined
+    }
+  }
 }
 </script>
