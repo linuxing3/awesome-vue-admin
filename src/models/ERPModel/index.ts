@@ -37,7 +37,7 @@ export function createModels () {
           groups
         }
 
-        static fields() {
+        static fields () {
           let fields = this.fieldConfig.reduce((fields, field) => {
             let label = field['label']
             let fieldname = field['fieldname']

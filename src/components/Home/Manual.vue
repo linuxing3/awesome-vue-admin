@@ -10,19 +10,20 @@
         >
         <div slot="header">{{ section }}</div>
         <v-card
-          :key="model"
-          v-for="model in models">
-          <v-card-text v-if="model.meta.groups.section === section"
-            class="grey lighten-3">
-              <v-avatar
-                  size="64">
-                <v-btn
-                    @click="crud(model)"
-                    icon>
-                  <v-icon>{{model.meta.icon || 'star'}}</v-icon>
-                </v-btn>
-              </v-avatar>
-              <h2>{{ $t(model.entity) }}</h2>
+            :key="model"
+            v-for="model in models">
+          <v-card-text
+              v-if="model.meta.groups.section === section"
+              class="grey lighten-3">
+            <v-avatar
+                size="64">
+              <v-btn
+                  @click="crud(model)"
+                  icon>
+                <v-icon>{{model.meta.icon || 'star'}}</v-icon>
+              </v-btn>
+            </v-avatar>
+            <h2>{{ $t(model.entity) }}</h2>
           </v-card-text>
         </v-card>
       </v-expansion-panel-content>
@@ -69,7 +70,7 @@ export default {
     computeBg6: () => 'bg/6.jpg',
     computeBg10: () => 'bg/10.jpg',
     computeAvatarMan4: () => 'avatar/man_4.jpg',
-    belongsToSection: function(section, model) {
+    belongsToSection: function (section, model) {
       return section === model.meta.groups.section
     }
   },
