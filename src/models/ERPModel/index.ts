@@ -19,7 +19,7 @@ erpModels.keys().forEach(fileName => {
       static fields () {
         let fields = this.fieldConfig.reduce((fields, field) => {
           // TODO with pullAll
-          fields['field_name'] = this.attr(field['label'])
+          fields[field['fieldname']] = this.attr(field['label'])
           return fields
         }, {})
         return {
