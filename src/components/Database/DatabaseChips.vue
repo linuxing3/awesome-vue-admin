@@ -1,31 +1,22 @@
 <template>
   <v-flex>
     <v-chip
-        v-for="item in entities"
+        v-for="item in items"
         :key="item"
         @click="select(item)"
-        :color="selectedColor"
-        outline
-        close
+        :color="$vuetify.theme.primary"
+        dark
       >{{ item }}</v-chip>
   </v-flex>
 </template>
 <script>
-import { entities } from '@/api/globals'
+
 export default {
-  data () {
-    return {
-      entities: [],
-      selectedColor: 'primary'
-    }
-  },
+  props: [ 'items'],
   methods: {
     select (item) {
-      window.dbApp.$emit('SELECT_MODEL', item)
+      window.databaseManager.$emit('SELECT_MODEL', item)
     }
-  },
-  created () {
-    this.entities = entities
   }
 }
 </script>
