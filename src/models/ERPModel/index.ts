@@ -1,6 +1,34 @@
 import { camelCase, upperFirst, lowerFirst, tail, first, last, nth } from 'lodash'
 import { BaseModel } from '@/models/BaseModel'
 import { LocaleMessages } from 'vue-i18n'
+import { writeFileSync } from 'fs'
+import { resolve } from 'path'
+import { pullAll } from 'lodash'
+
+export function genModelConfigJson ({
+  baseUrl = '.',
+  recursive = false
+}) {
+  const ERPModels: RequireContext = require.context(baseUrl, recursive, /\.json$/)
+  const rootDir = 'G:\\workspace\\awesome-vue-admin\\src\\models\\ERPModels'
+
+  ERPModels.keys().forEach((fileName: string) => {
+    const fileNameMeta = tail(fileName.split('/'))
+
+    const fieldConfig = ERPModels(fileName)['fields']
+    let fields = this.fieldConfig.reduce((fields, field) => {
+      let newFieldConfig = pullAll([ 'fieldname', 'fieldtype', 'label', 'options' ], field)
+      fields['fields'] = newFieldConfig
+      return fields
+    }, {})
+    // write to file
+    if (fileName.match(/.*\.(json)$/)) {
+      console.log(`${fileName} deleted`)
+    } else {
+      console.log('not deleted')
+    }
+  })
+}
 
 /**
  * Using json as model
