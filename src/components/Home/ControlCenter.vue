@@ -8,10 +8,40 @@
           v-for="(section, i) in sections"
           :key="i"
         >
-        <div 
+        <div
+          class="headline"
           @click="currentSection = section"
-          slot="header">{{ section }}</div>
-        <div>{{ items.length }}</div>
+          slot="header">
+          {{ section }}
+        </div>
+        <v-container
+          fluid
+          grid-list-xl
+        >
+        <v-layout
+            row
+            wrap
+        >
+          <v-flex
+            v-for="(item, index) in items"
+            :key="index"
+            @click="crud(item)"
+            xs12
+            md3
+            sm3
+            lg2
+            >
+            <NameCard
+              :imgPath="computeBg10"
+              :title="item.entity"
+              :item="item"
+              :subSection="item.meta.modelName"
+              :color="$vuetify.theme.primary"
+              >
+            </NameCard>
+          </v-flex>
+      </v-layout>
+    </v-container>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
@@ -30,9 +60,9 @@ export default {
       show: true,
       cardText: '请查看手册, 了解具体使用方法',
       panel: [true, false],
-      sections,
+      sections: [ sections[0] ],
       currentSection: '',
-      items: []
+      items: {}
     }
   },
   watch: {

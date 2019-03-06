@@ -100,14 +100,12 @@ export default {
     headers (): any[] {
       return this.fields.reduce(function (headersConfig, field) {
         let schema = generateHeaders(field) || {}
-        let items = this.selectItems[field] || []
         let config = {
           value: field,
           text: field,
           align: 'left',
           sortable: true,
-          schema,
-          items
+          schema
         }
         headersConfig.push(config)
         return headersConfig
