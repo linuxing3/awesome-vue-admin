@@ -1,13 +1,12 @@
-import { camelCase, upperFirst, lowerFirst, tail, first, last, nth } from 'lodash'
+import { camelCase, upperFirst, lowerFirst, tail, first, last, nth, pick } from 'lodash'
 import { BaseModel } from '@/models/BaseModel'
 import { LocaleMessages } from 'vue-i18n'
 import { pathExistsSync, mkdirpSync, writeFileSync } from 'fs-extra'
 import { resolve } from 'path'
-import { pick } from 'lodash'
 
 const ERPModels: RequireContext = require.context('.', true, /\.json$/)
 
-function pickFields(fieldConfig = []): any[] {
+function pickFields (fieldConfig = []): any[] {
   return fieldConfig.reduce((result, field) => {
     let newField = pick(field, ['fieldname', 'fieldtype', 'label', 'options'])
     result.push(newField)
@@ -19,7 +18,6 @@ function pickFields(fieldConfig = []): any[] {
  * 将ERPModels的fields内容重新组合，只取必要字段
  */
 export function genModelConfigJson () {
-
   const rootDir = 'G:\\workspace\\awesome-vue-admin\\src\\models\\TestModels'
 
   ERPModels.keys().forEach((fileName: string) => {
@@ -44,7 +42,7 @@ export function genModelConfigJson () {
       writeFileSync(newFileName, JSON.stringify({ fields: newFieldConfig }))
 
       console.log(`${fileName} created`)
-    } catch(err) {
+    } catch (err) {
       console.log(err)
     }
   })
@@ -54,7 +52,6 @@ export function genModelConfigJson () {
  * 使用新的Fields自动生成Model
  */
 export function createModels () {
-
   let models = {}
 
   ERPModels.keys().forEach((fileName: string) => {
