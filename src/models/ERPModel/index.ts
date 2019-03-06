@@ -1,9 +1,9 @@
 import { camelCase, upperFirst, lowerFirst, tail, first, last, nth } from 'lodash'
 import { BaseModel } from '@/models/BaseModel'
 import { LocaleMessages } from 'vue-i18n'
-import { writeFileSync } from 'fs'
+import { writeFileSync, fstat } from 'fs'
 import { resolve } from 'path'
-import { pullAll } from 'lodash'
+import { remove, pick } from 'lodash'
 
 export function genModelConfigJson ({
   baseUrl = '.',
@@ -14,18 +14,25 @@ export function genModelConfigJson ({
 
   ERPModels.keys().forEach((fileName: string) => {
     const fileNameMeta = tail(fileName.split('/'))
+    const sectionMeta = {
+      section: first(fileNameMeta),
+      modelName: nth(fileNameMeta, -2),
+      fileName: last(fileNameMeta),
+      fullPath: fileName
+    }
 
     const fieldConfig = ERPModels(fileName)['fields']
-    let fields = this.fieldConfig.reduce((fields, field) => {
-      let newFieldConfig = pullAll([ 'fieldname', 'fieldtype', 'label', 'options' ], field)
-      fields['fields'] = newFieldConfig
-      return fields
-    }, {})
+    const newFieldConfig = pick(remove(fieldConfig, (field) => {
+      return field['fieldtype'].match(/.*(Break)$/)
+    }), ['fieldname', 'fieldtype', 'label', 'options'])
+
     // write to file
-    if (fileName.match(/.*\.(json)$/)) {
-      console.log(`${fileName} deleted`)
-    } else {
-      console.log('not deleted')
+    try {
+      let newFileName = resolve(rootDir, sectionMeta.section, sectionMeta.modelName, sectionMeta.fileName)
+      writeFileSync(newFileName, { fields: newFieldConfig })
+      console.log(`${fileName} created`)
+    } catch(err) {
+      console.log(err)
     }
   })
 }

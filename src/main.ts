@@ -1,21 +1,28 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+// import Vue from 'vue'
+// import App from './App.vue'
+// import router from './router'
+// import store from './store'
 
-import './plugins/vuetify'
-import i18n from './plugins/i18n'
+// import './plugins/vuetify'
+// import i18n from './plugins/i18n'
 
-import './components'
+// import './components'
 
-import { validateMixin } from './mixins/globalMixin'
-Vue.mixin(validateMixin)
+// import { validateMixin } from './mixins/globalMixin'
+// Vue.mixin(validateMixin)
 
-Vue.config.productionTip = false
+// Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  i18n,
-  render: h => h(App)
-}).$mount('#app')
+// new Vue({
+//   router,
+//   store,
+//   i18n,
+//   render: h => h(App)
+// }).$mount('#app')
+
+import { genModelConfigJson } from '@/models/ERPModel'
+
+genModelConfigJson({
+  baseUrl: '@/models/ERPModel',
+  recursive: true
+})
