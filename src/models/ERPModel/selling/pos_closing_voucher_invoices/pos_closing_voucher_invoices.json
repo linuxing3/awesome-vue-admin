@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"invoice","fieldtype":"Link","label":"Invoices","options":"Sales Invoice"},{"fieldname":"qty_of_items","fieldtype":"Data","label":"Quantity of Items"},{"fieldname":"grand_total","fieldtype":"Currency","label":"Grand Total"}]}

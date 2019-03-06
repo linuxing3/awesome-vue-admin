@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"subject","fieldtype":"Data","label":"Subject"},{"fieldname":"start","fieldtype":"Int","label":"Begin On (Days)"},{"fieldname":"duration","fieldtype":"Int","label":"Duration (Days)"},{"fieldname":"task_weight","fieldtype":"Float","label":"Task Weight"},{"fieldname":"description","fieldtype":"Text Editor","label":"Description"}]}

@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"customer_name","fieldtype":"Link","label":"Customer Name","options":"Customer"},{"fieldname":"customer_group","fieldtype":"Link","label":"Customer Group","options":"Customer Group"},{"fieldname":"ref_code","fieldtype":"Data","label":"Ref Code"}]}

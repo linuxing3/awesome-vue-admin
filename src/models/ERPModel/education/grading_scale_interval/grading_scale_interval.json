@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"grade_code","fieldtype":"Data","label":"Grade Code"},{"fieldname":"threshold","fieldtype":"Percent","label":"Threshold"},{"fieldname":"grade_description","fieldtype":"Small Text","label":"Grade Description"}]}

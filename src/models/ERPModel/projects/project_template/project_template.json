@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"project_type","fieldtype":"Link","label":"Project Type","options":"Project Type"},{"fieldname":"tasks","fieldtype":"Table","label":"Tasks","options":"Project Template Task"}]}

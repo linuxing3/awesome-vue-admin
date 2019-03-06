@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"mode_of_payment","fieldtype":"Data","label":"Mode of Payment"},{"fieldname":"type","fieldtype":"Select","label":"Type","options":"Cash\nBank\nGeneral"},{"fieldname":"accounts","fieldtype":"Table","label":"Accounts","options":"Mode of Payment Account"}]}

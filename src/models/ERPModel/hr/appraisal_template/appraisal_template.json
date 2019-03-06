@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"kra_title","fieldtype":"Data","label":"Appraisal Template Title"},{"fieldname":"description","fieldtype":"Small Text","label":"Description"},{"fieldname":"goals","fieldtype":"Table","label":"Goals","options":"Appraisal Template Goal"}]}

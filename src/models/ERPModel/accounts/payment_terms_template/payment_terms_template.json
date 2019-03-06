@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"template_name","fieldtype":"Data","label":"Template Name"},{"fieldname":"terms","fieldtype":"Table","label":"Payment Terms","options":"Payment Terms Template Detail"}]}

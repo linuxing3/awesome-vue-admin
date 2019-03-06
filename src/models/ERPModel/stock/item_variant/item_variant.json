@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"item_attribute","fieldtype":"Link","label":"Item Attribute","options":"Item Attribute"},{"fieldname":"item_attribute_value","fieldtype":"Data","label":"Item Attribute Value","options":""}]}

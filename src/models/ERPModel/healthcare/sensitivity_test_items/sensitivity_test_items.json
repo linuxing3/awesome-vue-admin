@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"antibiotic","fieldtype":"Link","label":"Antibiotic","options":"Antibiotic"},{"fieldname":"antibiotic_sensitivity","fieldtype":"Link","label":"Sensitivity","options":"Sensitivity"}]}

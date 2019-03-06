@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"uom","fieldtype":"Link","label":"UOM","options":"UOM"},{"fieldname":"conversion_factor","fieldtype":"Float","label":"Conversion Factor"}]}

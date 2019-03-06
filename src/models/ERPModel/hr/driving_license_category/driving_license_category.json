@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"class","fieldtype":"Data","label":"Class"},{"fieldname":"description","fieldtype":"Data","label":"Description"},{"fieldname":"issuing_date","fieldtype":"Date","label":"Issuing Date"},{"fieldname":"expiry_date","fieldtype":"Date","label":"Expiry Date"}]}

@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"medical_code","fieldtype":"Link","label":"Medical Code","options":"Medical Code"},{"fieldname":"code","fieldtype":"Read Only","label":"Code","options":""},{"fieldname":"description","fieldtype":"Read Only","label":"Description","options":""}]}

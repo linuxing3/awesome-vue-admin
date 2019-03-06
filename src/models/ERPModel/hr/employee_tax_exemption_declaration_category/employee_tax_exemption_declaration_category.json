@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"exemption_sub_category","fieldtype":"Link","label":"Exemption Sub Category","options":"Employee Tax Exemption Sub Category"},{"fieldname":"exemption_category","fieldtype":"Link","label":"Exemption Category","options":"Employee Tax Exemption Category"},{"fieldname":"amount","fieldtype":"Currency","label":"Amount"}]}

@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"heading_text","fieldtype":"Heading","label":"Test"},{"fieldname":"lab_test_event","fieldtype":"Data","label":"Event"},{"fieldname":"lab_test_uom","fieldtype":"Link","label":"UOM","options":"Lab Test UOM"},{"fieldname":"normal_range","fieldtype":"Long Text","label":"Normal Range"},{"fieldname":"column_break_5","fieldtype":"Column Break"}]}

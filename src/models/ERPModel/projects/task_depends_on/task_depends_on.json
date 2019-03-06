@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"task","fieldtype":"Link","label":"Task","options":"Task"},{"fieldname":"column_break_2","fieldtype":"Column Break"},{"fieldname":"subject","fieldtype":"Text","label":"Subject","options":""},{"fieldname":"project","fieldtype":"Text","label":"Project"}]}

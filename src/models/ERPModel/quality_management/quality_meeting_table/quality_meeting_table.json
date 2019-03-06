@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"review","fieldtype":"Link","label":"Review","options":"Quality Review"},{"fieldname":"action","fieldtype":"Select","label":"Action","options":"Under Review\nPlanned"},{"fieldname":"responsible","fieldtype":"Link","label":"Responsible","options":"Role"},{"fieldname":"status","fieldtype":"Select","label":"Status","options":"Open\nClose"}]}

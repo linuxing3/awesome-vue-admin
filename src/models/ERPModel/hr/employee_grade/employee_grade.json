@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"default_leave_policy","fieldtype":"Link","label":"Default Leave Policy","options":"Leave Policy"},{"fieldname":"default_salary_structure","fieldtype":"Link","label":"Default Salary Structure","options":"Salary Structure"}]}

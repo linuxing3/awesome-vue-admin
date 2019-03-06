@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"schedule_name","fieldtype":"Data","label":"Schedule Name"},{"fieldname":"time_slots","fieldtype":"Table","label":"Time Slots","options":"Healthcare Schedule Time Slot"},{"fieldname":"disabled","fieldtype":"Check","label":"Disabled"}]}

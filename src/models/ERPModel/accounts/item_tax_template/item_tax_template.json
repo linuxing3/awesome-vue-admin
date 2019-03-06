@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"title","fieldtype":"Data","label":"Title"},{"fieldname":"taxes","fieldtype":"Table","label":"Tax Rates","options":"Item Tax Template Detail"}]}

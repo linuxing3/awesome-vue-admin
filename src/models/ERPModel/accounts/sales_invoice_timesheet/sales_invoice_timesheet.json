@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"time_sheet","fieldtype":"Link","label":"Time Sheet","options":"Timesheet"},{"fieldname":"billing_hours","fieldtype":"Float","label":"Billing Hours"},{"fieldname":"billing_amount","fieldtype":"Currency","label":"Billing Amount"},{"fieldname":"timesheet_detail","fieldtype":"Data","label":"Timesheet Detail"}]}

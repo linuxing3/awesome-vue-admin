@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"block_date","fieldtype":"Date","label":"Block Date"},{"fieldname":"reason","fieldtype":"Text","label":"Reason"}]}

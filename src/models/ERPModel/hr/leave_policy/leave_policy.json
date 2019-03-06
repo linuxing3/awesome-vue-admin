@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"leave_allocations_section","fieldtype":"Section Break","label":"Leave Allocations"},{"fieldname":"leave_policy_details","fieldtype":"Table","label":"Leave Policy Details","options":"Leave Policy Detail"},{"fieldname":"amended_from","fieldtype":"Link","label":"Amended From","options":"Leave Policy"}]}

@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"relation","fieldtype":"Select","label":"Relation","options":"\nFather\nMother\nSpouse\nSiblings\nFamily"},{"fieldname":"patient","fieldtype":"Link","label":"Patient","options":"Patient"},{"fieldname":"description","fieldtype":"Data","label":"Description"}]}

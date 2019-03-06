@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"start_time","fieldtype":"Time","label":"Start Time"},{"fieldname":"end_time","fieldtype":"Time","label":"End Time"},{"fieldname":"holiday_list","fieldtype":"Link","label":"Holiday List","options":"Holiday List"}]}

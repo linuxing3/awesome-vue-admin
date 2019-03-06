@@ -1,16 +1,26 @@
 import { camelCase, upperFirst, lowerFirst, tail, first, last, nth } from 'lodash'
 import { BaseModel } from '@/models/BaseModel'
 import { LocaleMessages } from 'vue-i18n'
-import { writeFileSync, fstat } from 'fs'
+import { pathExistsSync, mkdirpSync, writeFileSync } from 'fs-extra'
 import { resolve } from 'path'
-import { remove, pick } from 'lodash'
+import { pick } from 'lodash'
 
-export function genModelConfigJson ({
-  baseUrl = '.',
-  recursive = false
-}) {
-  const ERPModels: RequireContext = require.context(baseUrl, recursive, /\.json$/)
-  const rootDir = 'G:\\workspace\\awesome-vue-admin\\src\\models\\ERPModels'
+const ERPModels: RequireContext = require.context('.', true, /\.json$/)
+
+function pickFields(fieldConfig = []): any[] {
+  return fieldConfig.reduce((result, field) => {
+    let newField = pick(field, ['fieldname', 'fieldtype', 'label', 'options'])
+    result.push(newField)
+    return result
+  }, [])
+}
+
+/**
+ * 将ERPModels的fields内容重新组合，只取必要字段
+ */
+export function genModelConfigJson () {
+
+  const rootDir = 'G:\\workspace\\awesome-vue-admin\\src\\models\\TestModels'
 
   ERPModels.keys().forEach((fileName: string) => {
     const fileNameMeta = tail(fileName.split('/'))
@@ -21,15 +31,18 @@ export function genModelConfigJson ({
       fullPath: fileName
     }
 
-    const fieldConfig = ERPModels(fileName)['fields']
-    const newFieldConfig = pick(remove(fieldConfig, (field) => {
-      return field['fieldtype'].match(/.*(Break)$/)
-    }), ['fieldname', 'fieldtype', 'label', 'options'])
+    const fieldConfig: any[] = ERPModels(fileName)['fields']
+    const newFieldConfig = pickFields(fieldConfig)
 
     // write to file
     try {
-      let newFileName = resolve(rootDir, sectionMeta.section, sectionMeta.modelName, sectionMeta.fileName)
-      writeFileSync(newFileName, { fields: newFieldConfig })
+      let newFolderName = resolve(rootDir, sectionMeta.section, sectionMeta.modelName)
+      let newFileName = resolve(newFolderName, sectionMeta.fileName)
+
+      if (!pathExistsSync(newFolderName)) mkdirpSync(newFolderName)
+
+      writeFileSync(newFileName, JSON.stringify({ fields: newFieldConfig }))
+
       console.log(`${fileName} created`)
     } catch(err) {
       console.log(err)
@@ -38,13 +51,10 @@ export function genModelConfigJson ({
 }
 
 /**
- * Using json as model
+ * 使用新的Fields自动生成Model
  */
-export function createModels ({
-  baseUrl = '.',
-  recursive = false
-}) {
-  const ERPModels: RequireContext = require.context(baseUrl, recursive, /\.json$/)
+export function createModels () {
+
   let models = {}
 
   ERPModels.keys().forEach((fileName: string) => {
@@ -61,6 +71,7 @@ export function createModels ({
     }
 
     const fieldConfig = ERPModels(fileName)['fields']
+
     if (fieldConfig !== undefined) {
       // Creating ORM Models
       class ERPModel extends BaseModel {
@@ -76,7 +87,7 @@ export function createModels ({
         }
 
         static fields () {
-          let fields = this.fieldConfig.reduce((fields, field) => {
+          let fields = fieldConfig.reduce((fields, field) => {
             let label = field['label']
             let fieldname = field['fieldname']
             fields[fieldname] = this.attr(label)
@@ -119,8 +130,7 @@ export function createMessages () {
 
 export const ERPMessages = createMessages()
 
-const models = createModels({
-  baseUrl: './hr',
-  recursive: true
-})
+// genModelConfigJson()
+
+const models = createModels()
 export default models

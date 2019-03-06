@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"supplier","fieldtype":"Link","label":"Supplier","options":"Supplier"},{"fieldname":"supplier_part_no","fieldtype":"Data","label":"Supplier Part Number"}]}

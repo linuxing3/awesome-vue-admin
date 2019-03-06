@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"program","fieldtype":"Link","label":"Program","options":"Program"},{"fieldname":"student_batch","fieldtype":"Link","label":"Student Batch","options":"Student Batch Name"},{"fieldname":"total_students","fieldtype":"Data","label":"Total Students"}]}

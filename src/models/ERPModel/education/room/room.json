@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"room_name","fieldtype":"Data","label":"Room Name"},{"fieldname":"room_number","fieldtype":"Data","label":"Room Number"},{"fieldname":"seating_capacity","fieldtype":"Data","label":"Seating Capacity"}]}

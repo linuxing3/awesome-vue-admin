@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"name1","fieldtype":"Data","label":"Name","options":""},{"fieldname":"gender","fieldtype":"Select","label":"Gender","options":"\nMale\nFemale"},{"fieldname":"date_of_birth","fieldtype":"Date","label":"Date of Birth"}]}

@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"activity_type","fieldtype":"Data","label":"Activity Type"},{"fieldname":"costing_rate","fieldtype":"Currency","label":"Default Costing Rate"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"billing_rate","fieldtype":"Currency","label":"Default Billing Rate"},{"fieldname":"disabled","fieldtype":"Check","label":"Disabled"}]}

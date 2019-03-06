@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"description","fieldtype":"Small Text","label":"Description"},{"fieldname":"col_break3","fieldtype":"Column Break"},{"fieldname":"amount","fieldtype":"Currency","label":"Amount","options":"Company:company:default_currency"}]}

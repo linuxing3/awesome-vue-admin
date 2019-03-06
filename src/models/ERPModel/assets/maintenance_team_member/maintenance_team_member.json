@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"team_member","fieldtype":"Link","label":"Team Member","options":"User"},{"fieldname":"full_name","fieldtype":"Data","label":"Full Name","options":""},{"fieldname":"maintenance_role","fieldtype":"Link","label":"Maintenance Role","options":"Role"}]}

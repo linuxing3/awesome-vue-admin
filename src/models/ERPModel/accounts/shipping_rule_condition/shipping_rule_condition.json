@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"from_value","fieldtype":"Float","label":"From Value"},{"fieldname":"to_value","fieldtype":"Float","label":"To Value"},{"fieldname":"shipping_amount","fieldtype":"Currency","label":"Shipping Amount","options":"Company:company:default_currency"}]}

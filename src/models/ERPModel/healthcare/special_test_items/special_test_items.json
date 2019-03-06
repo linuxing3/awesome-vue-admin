@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"lab_test_particulars","fieldtype":"Data","label":"Particulars"},{"fieldname":"result_value","fieldtype":"Small Text","label":"Value"},{"fieldname":"require_result_value","fieldtype":"Check","label":"Require Result Value"},{"fieldname":"template","fieldtype":"Link","label":"Template","options":"Lab Test Template"}]}

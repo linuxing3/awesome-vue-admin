@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},{"fieldname":"account","fieldtype":"Link","label":"Account","options":"Account"}]}

@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"student","fieldtype":"Link","label":"Student","options":"Student"},{"fieldname":"student_name","fieldtype":"Data","label":"Student Name"},{"fieldname":"column_break_2","fieldtype":"Column Break"},{"fieldname":"group_roll_number","fieldtype":"Int","label":"Group Roll Number"},{"fieldname":"active","fieldtype":"Check","label":"Active"}]}

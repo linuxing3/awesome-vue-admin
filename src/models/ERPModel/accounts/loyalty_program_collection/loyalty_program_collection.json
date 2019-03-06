@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"tier_name","fieldtype":"Data","label":"Tier Name"},{"fieldname":"min_spent","fieldtype":"Currency","label":"Minimum Total Spent"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"collection_factor","fieldtype":"Currency","label":"Collection Factor (=1 LP)"}]}

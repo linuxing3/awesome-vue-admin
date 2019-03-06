@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"depreciation_options","fieldtype":"Section Break","label":"Depreciation Options"},{"fieldname":"schedule_based_on_fiscal_year","fieldtype":"Check","label":"Calculate Prorated Depreciation Schedule Based on Fiscal Year"},{"fieldname":"number_of_days_in_fiscal_year","fieldtype":"Data","label":"Number of Days in Fiscal Year"}]}

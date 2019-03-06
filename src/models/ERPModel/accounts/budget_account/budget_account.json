@@ -1,0 +1,1 @@
+{"fields":[{"fieldname":"account","fieldtype":"Link","label":"Account","options":"Account"},{"fieldname":"budget_amount","fieldtype":"Currency","label":"Budget Amount","options":"Company:company:default_currency"}]}
