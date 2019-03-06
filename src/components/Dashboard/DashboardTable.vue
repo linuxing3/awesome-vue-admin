@@ -1,104 +1,91 @@
-<script>
-import exportMixin from '@/mixins/exportMixin'
-import crudMixin from '@/mixins/crudMixin'
+<template>
+  <v-container
+    fluid
+    grid-list-xl
+  >
+  <v-layout
+      row
+      wrap
+  >
+    <v-flex
+      v-for="(section, index) in sections"
+      :key="index"
+      xs12
+      md3
+      sm3
+      lg2
+      >
+      <v-card
+          class="mt-3 mx-auto"
+          max-width="400"
+        >
+        <v-sheet
+            class="v-sheet--offset mx-auto"
+            :color="$vuetify.theme.primary"
+            elevation="12"
+            max-width="calc(100% - 32px)"
+          >
+          <v-sparkline
+              :labels="labels"
+              :value="value"
+              color="white"
+              line-width="2"
+              padding="16"
+            ></v-sparkline>
+        </v-sheet>
 
-const gradients = [
-  ['#222'],
-  ['#42b3f4'],
-  ['red', 'orange', 'yellow'],
-  ['purple', 'violet'],
-  ['#00c6ff', '#F0F', '#FF0'],
-  ['#f72047', '#ffd200', '#1feaea']
-]
+        <v-card-text class="pt-0">
+          <div class="title font-weight-light mb-2">{{section}}</div>
+          <div class="subheading font-weight-light grey--text">{{countSectionModels(section)}}</div>
+          <v-divider class="my-2"></v-divider>
+          <v-icon
+              class="mr-2"
+              small
+            >
+            clock
+          </v-icon>
+          <span class="caption grey--text font-weight-light">note</span>
+        </v-card-text>
+      </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+import { pickBy, mapKeys } from 'lodash'
+import { sections } from '@/api/globals'
+import models from '@/models'
 
 export default {
-  data () {
-    return {
-      modelName: 'activity',
-      gradient: gradients[4],
-      gradients,
-      padding: 16,
-      radius: 10,
-      width: 2
-    }
-  },
-  computed: {
-    labels () {
-      return [ '1 Hour', 'less than' ]
-    },
-    values () {
-      let moreThenOneHour = this.Model.query.where(record => record.duration > 60 || record.duration === 60).count()
-      let lessThenOneHour = this.Model.query.where(record => record.duration < 60).count()
-      return [ moreThenOneHour, lessThenOneHour ]
-      // return this.Model.query().where('label', this.label).get().count()
-    }
-  },
-  mixins: [ exportMixin, crudMixin ],
-  async created () {
-    console.table(this.items)
-    window.DashboardTable = this
-  },
+  data: () => ({
+    sections,
+    items: {},
+    currentSection: '',
+    labels: [
+      'a',
+      'b',
+      'c',
+      'd'
+    ],
+    value: [
+      200,
+      675,
+      410,
+      390
+    ]
+  }),
   methods: {
-    loadMockData () {
-      this.labels = [
-        '12am',
-        '3am',
-        '6am',
-        '9am',
-        '12pm',
-        '3pm',
-        '6pm',
-        '9pm'
-      ]
-      this.values = [
-        200,
-        675,
-        410,
-        390,
-        310,
-        460,
-        250,
-        240
-      ]
-    },
-    editItem (item) {
-      this.$emit('SET_EDITING', item)
-      window.DashboardForm.$emit('SET_EDITING', item)
+    countSectionModels (section) {
+      let items = pickBy(models, model => {
+        return model.meta.section === section
+      })
+      let count = Object.keys(items).length
+      return count
     }
   }
 }
 </script>
-
-<template>
-  <v-card
-      class="mt-5 mb-5 mx-auto"
-      max-width="400"
-      max-height="auto"
-    >
-    <v-sheet
-        class="v-sheet--offset mx-auto"
-        color="primary lighten-2"
-        elevation="12"
-        max-width="calc(100% - 32px)"
-      >
-      <v-sparkline
-          :labels="labels"
-          :value="values"
-          :gradient="gradient"
-          :line-width="width"
-          :padding="padding"
-          :smooth="radius || false"
-          color="white"
-        ></v-sparkline>
-    </v-sheet>
-
-    <v-card-actions class="pt-0">
-      <div class="title font-weight-light mb-2 ml-5">时间线</div>
-      <v-spacer></v-spacer>
-      <v-btn flat><router-link to="/dashboard">Add</router-link></v-btn>
-    </v-card-actions>
-  </v-card>
-</template>
 
 <style>
   .v-sheet--offset {
