@@ -9,34 +9,68 @@
           :key="i"
         >
         <div slot="header">{{ section }}</div>
-        <v-card
-            :key="model"
-            v-for="model in models">
-          <v-card-text
-              v-if="model.meta.groups.section === section"
-              class="grey lighten-3">
-            <v-avatar
-                size="64">
-              <v-btn
-                  @click="crud(model)"
-                  icon>
-                <v-icon>{{model.meta.icon || 'star'}}</v-icon>
-              </v-btn>
-            </v-avatar>
-            <h2>{{ $t(model.entity) }}</h2>
-          </v-card-text>
-        </v-card>
+        <div v-if="section !== 'core'">
+          <slot
+              name="erp"
+              :models="genERPModels(section)">
+          </slot>
+        </div>
+        <div v-else>
+          <slot
+              name="core"
+              :models="genCoreModels()">
+          </slot>
+        </div>
+        <slot name="default"></slot>
       </v-expansion-panel-content>
     </v-expansion-panel>
+    <template #default>
+    </template>
+    <template #grid="{ models }">
+      <v-card
+          :key="model"
+          v-for="model in models">
+        <v-card-text
+            class="grey lighten-3">
+          <v-avatar
+              size="64">
+            <v-btn
+                @click="crud(model)"
+                icon>
+              <v-icon>{{model.meta.icon || 'star'}}</v-icon>
+            </v-btn>
+          </v-avatar>
+          <h2>{{ $t(model.entity) }}</h2>
+        </v-card-text>
+      </v-card>
+    </template>
+    <template #erp="{ models }">
+      <v-card
+          :key="model"
+          v-for="model in models">
+        <v-card-text
+            class="grey lighten-3">
+          <v-avatar
+              size="64">
+            <v-btn
+                @click="crud(model)"
+                icon>
+              <v-icon>{{model.meta.icon || 'star'}}</v-icon>
+            </v-btn>
+          </v-avatar>
+          <h2>{{ $t(model.entity) }}</h2>
+        </v-card-text>
+      </v-card>
+    </template>
   </div>
 </template>
 
 <script>
 import { join } from 'path'
-import { pickBy } from 'lodash'
+import { pickBy, mapKeys } from 'lodash'
+import { sections } from '@/api/globals'
 
 import models from '@/models'
-import { mayKeys } from 'lodash'
 
 export default {
   data () {
@@ -45,21 +79,7 @@ export default {
       cardText: '请查看手册, 了解具体使用方法',
       models,
       panel: [true, false],
-      sections: [
-        'core',
-        'hr',
-        'accounts',
-        'assets',
-        'buying',
-        'education',
-        'healthcare',
-        'maintenance',
-        'projects',
-        'quality_management',
-        'selling',
-        'shopping_cart',
-        'stock'
-      ]
+      sections
     }
   },
   computed: {
@@ -70,20 +90,19 @@ export default {
     computeBg5: () => 'bg/5.jpg',
     computeBg6: () => 'bg/6.jpg',
     computeBg10: () => 'bg/10.jpg',
-    computeAvatarMan4: () => 'avatar/man_4.jpg',
+    computeAvatarMan4: () => 'avatar/man_4.jpg'
   },
+  created () {},
   methods: {
-    erpModels: function (section) {
-      return pickBy(this.models, model => this.erpSection(model, section))
+    genERPModels (section) {
+      return pickBy(this.models, model => {
+        return model.meta.section === section
+      })
     },
-    coreModels: function (section) {
-      return pickBy(this.models, model => this.coreSection(model, section))
-    },
-    erpSection: function (model, section) {
-      return section === model.meta.groups.section
-    },
-    coreSection: function (model, section) {
-      return model.meta.groups === undefined
+    genCoreModels () {
+      return pickBy(this.models, model => {
+        return model.meta.section === 'core'
+      })
     }
   }
 }

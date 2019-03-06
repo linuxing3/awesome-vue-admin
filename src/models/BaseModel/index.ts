@@ -21,7 +21,8 @@ export class BaseModel extends Model {
   static meta = {
     icon: 'edit',
     size: 36,
-    color: 'success'
+    color: 'success',
+    section: 'core'
   }
 
   static fieldsKeys (): string[] {

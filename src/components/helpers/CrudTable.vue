@@ -70,30 +70,31 @@
           <v-card-text>
             <v-container
                 fluid
-                grid-list-xs>
+                grid-list-xl>
               <v-layout
-                  v-for="field in headers"
-                  :key="field.value"
                   row
                   wrap>
                 <!-- generate form from schema  -->
                 <v-flex
-                    v-if="field.schema.type === 'v-textarea'"
-                    xs12
-                    md8
-                    sm8
-                    class="ml-5">
+                    v-for="field in headers"
+                    :key="field.value"
+                    xs10
+                    md10
+                    sm10
+                    class="pa-2 pr-2">
                   <v-textarea
+                      v-if="field.schema.type === 'v-textarea'"
                       v-model="editedItem[field.value]"
                       :label=" $t(field.text) || field.text"></v-textarea>
-                </v-flex>
-                <v-flex
-                    v-else-if="field.schema.type === 'v-date-picker'"
-                    xs12
-                    md4
-                    sm4
-                    class="ml-5">
+                  <v-select
+                      v-if="field.schema.type === 'v-select'"
+                      v-model="editedItem[field.value]"
+                      :items="field.items"
+                      item-text="name"
+                      item-value="_id"
+                      :label=" $t(field.text) || field.text"></v-select>
                   <v-dialog
+                      v-if="field.schema.type === 'v-date-picker'"
                       :ref="field.value"
                       v-model="modal"
                       :return-value.sync="editedItem[field.value]"
@@ -122,14 +123,8 @@
                           @click="saveDate(field, editedItem)">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
-                </v-flex>
-                <v-flex
-                    v-else
-                    xs12
-                    md4
-                    sm4
-                    class="ml-5">
                   <v-text-field
+                      v-if="field.schema.type === 'v-text-field'"
                       max-width="300px"
                       v-model="editedItem[field.value]"
                       :label=" $t(field.text) || field.text "></v-text-field>
@@ -274,10 +269,12 @@ export default {
     dialog (val) {
       val || this.close()
     },
-    modelName (val) {
-      this.reset()
-      // refetch data for current model
-      this.fetch()
+    modelName: {
+      handler (val) {
+        this.reset()
+        this.fetch()
+      },
+      immediate: true
     },
     editedItem (val) {
       this.editedItem = val

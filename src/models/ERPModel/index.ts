@@ -5,8 +5,11 @@ import { LocaleMessages } from 'vue-i18n'
 /**
  * Using json as model
  */
-export function createModels () {
-  const ERPModels: RequireContext = require.context('.', true, /\.json$/)
+export function createModels ({
+  baseUrl = '.',
+  recursive = false
+}) {
+  const ERPModels: RequireContext = require.context(baseUrl, recursive, /\.json$/)
   let models = {}
 
   ERPModels.keys().forEach((fileName: string) => {
@@ -15,7 +18,7 @@ export function createModels () {
     const modelName = upperFirst(camelCase(last(fileNameMeta).replace(/\.json/g, '')))
     const entityName = lowerFirst(modelName)
 
-    const groups = {
+    const sectionMeta = {
       section: first(fileNameMeta),
       modelName: nth(fileNameMeta, -2),
       fileName: last(fileNameMeta),
@@ -34,7 +37,7 @@ export function createModels () {
           icon: 'edit',
           size: 36,
           color: 'success',
-          groups
+          ...sectionMeta
         }
 
         static fields () {
@@ -81,5 +84,8 @@ export function createMessages () {
 
 export const ERPMessages = createMessages()
 
-const models = createModels()
+const models = createModels({
+  baseUrl: './hr',
+  recursive: true
+})
 export default models

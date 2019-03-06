@@ -48,6 +48,7 @@ export default {
     return {
       editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
+      selectedItems: {},
       filter: {
         search: '',
         sort: '_id'
@@ -99,12 +100,14 @@ export default {
     headers (): any[] {
       return this.fields.reduce(function (headersConfig, field) {
         let schema = generateHeaders(field) || {}
+        let items = this.selectItems[field] || []
         let config = {
+          value: field,
           text: field,
           align: 'left',
           sortable: true,
-          value: field,
-          schema
+          schema,
+          items
         }
         headersConfig.push(config)
         return headersConfig
