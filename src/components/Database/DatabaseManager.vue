@@ -44,8 +44,7 @@
   </div>
 </template>
 
-<script>
-import { baseFilter } from '@/util'
+<script lang="js">
 import models from '@/models'
 
 import DatabasesIterator from './DatabasesIterator.vue'
@@ -67,8 +66,11 @@ export default {
   },
   computed: {
     filteredItems () {
-      let { search, sort } = this.filter
-      return baseFilter({ sort, search }, this.entities)
+      let { search } = this.filter
+      return this.entities.filter((entity) => { 
+        let match = String(entity).toLowerCase()
+        return match.indexOf(search) > -1 
+      })
     }
   },
   created () {
