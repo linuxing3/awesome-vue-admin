@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"day","fieldtype":"Select","label":"Day","options":"Sunday\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday"},{"fieldname":"from_time","fieldtype":"Time","label":"From Time"},{"fieldname":"to_time","fieldtype":"Time","label":"To Time"}]}

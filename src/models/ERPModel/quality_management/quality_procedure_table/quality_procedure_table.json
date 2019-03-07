@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"procedure","fieldtype":"Select","label":"Procedure","options":"Step\nProcedure"},{"fieldname":"procedure_name","fieldtype":"Link","label":"Procedure","options":"Quality Procedure"},{"fieldname":"step","fieldtype":"Text","label":"Step"},{"fieldname":"responsible_individual","fieldtype":"Link","label":"Responsible Individual","options":"Role"}]}

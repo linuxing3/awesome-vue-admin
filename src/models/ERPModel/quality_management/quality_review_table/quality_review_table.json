@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"objective","fieldtype":"Data","label":"objective"},{"fieldname":"target","fieldtype":"Int","label":"Target"},{"fieldname":"achieved","fieldtype":"Int","label":"Achieved"},{"fieldname":"unit","fieldtype":"Data","label":"Unit"},{"fieldname":"yes_no","fieldtype":"Select","label":"Yes/No","options":"No\nYes"}]}

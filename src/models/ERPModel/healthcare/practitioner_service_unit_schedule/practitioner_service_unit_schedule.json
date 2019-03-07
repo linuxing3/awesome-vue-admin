@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"schedule","fieldtype":"Link","label":"Schedule","options":"Practitioner Schedule"},{"fieldname":"service_unit","fieldtype":"Link","label":"Service Unit","options":"Healthcare Service Unit"}]}

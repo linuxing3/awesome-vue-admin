@@ -1,1 +1,32 @@
-{"fields":[{"fieldname":"employee","fieldtype":"Link","label":"Employee","options":"Employee"},{"fieldname":"employee_name","fieldtype":"Data","label":"Employee Name","options":""},{"fieldname":"department","fieldtype":"Link","label":"Department","options":"Department"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"promotion_date","fieldtype":"Date","label":"Promotion Date"},{"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},{"fieldname":"details_section","fieldtype":"Section Break","label":"Employee Promotion Details"},{"fieldname":"promotion_details","fieldtype":"Table","label":"Employee Promotion Detail","options":"Employee Property History"},{"fieldname":"amended_from","fieldtype":"Link","label":"Amended From","options":"Employee Promotion"}]}
+{
+  "fields": [
+    { "fieldname": "employee", "fieldtype": "Link", "label": "Employee", "options": "Employee" },
+    { "fieldname": "employee_name", "fieldtype": "Data", "label": "Employee Name", "options": "" },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    { "fieldname": "column_break_3", "fieldtype": "Column Break" },
+    { "fieldname": "promotion_date", "fieldtype": "Date", "label": "Promotion Date" },
+    { "fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company" },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Employee Promotion Details"
+    },
+    {
+      "fieldname": "promotion_details",
+      "fieldtype": "Table",
+      "label": "Employee Promotion Detail",
+      "options": "Employee Property History"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "options": "Employee Promotion"
+    }
+  ]
+}

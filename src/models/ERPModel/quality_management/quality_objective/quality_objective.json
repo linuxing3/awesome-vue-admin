@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"objective","fieldtype":"Text","label":"Objective"},{"fieldname":"target","fieldtype":"Data","label":"Target"},{"fieldname":"unit","fieldtype":"Link","label":"Unit","options":"UOM"}]}

@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"appointment_type","fieldtype":"Data","label":"Type"},{"fieldname":"ip","fieldtype":"Check","label":"Is Inpatient"},{"fieldname":"default_duration","fieldtype":"Int","label":"Default Duration"},{"fieldname":"color","fieldtype":"Color","label":"Color"}]}

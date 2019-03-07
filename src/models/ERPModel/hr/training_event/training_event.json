@@ -1,1 +1,65 @@
-{"fields":[{"fieldname":"event_name","fieldtype":"Data","label":"Event Name"},{"fieldname":"training_program","fieldtype":"Link","label":"Training Program","options":"Training Program"},{"fieldname":"event_status","fieldtype":"Select","label":"Event Status","options":"Scheduled\nCompleted\nCancelled"},{"fieldname":"has_certificate","fieldtype":"Check","label":"Has Certificate"},{"fieldname":"column_break_2","fieldtype":"Column Break"},{"fieldname":"type","fieldtype":"Select","label":"Type","options":"Seminar\nTheory\nWorkshop\nConference\nExam\nInternet\nSelf-Study"},{"fieldname":"level","fieldtype":"Select","label":"Level","options":"\nBeginner\nExpert\nAdvance"},{"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},{"fieldname":"section_break_4","fieldtype":"Section Break"},{"fieldname":"trainer_name","fieldtype":"Data","label":"Trainer Name"},{"fieldname":"trainer_email","fieldtype":"Data","label":"Trainer Email","options":""},{"fieldname":"column_break_7","fieldtype":"Column Break"},{"fieldname":"supplier","fieldtype":"Link","label":"Supplier","options":"Supplier"},{"fieldname":"contact_number","fieldtype":"Data","label":"Contact Number"},{"fieldname":"section_break_9","fieldtype":"Section Break"},{"fieldname":"course","fieldtype":"Link","label":"Course","options":"Course"},{"fieldname":"location","fieldtype":"Data","label":"Location"},{"fieldname":"column_break_12","fieldtype":"Column Break"},{"fieldname":"start_time","fieldtype":"Datetime","label":"Start Time"},{"fieldname":"end_time","fieldtype":"Datetime","label":"End Time"},{"fieldname":"section_break_15","fieldtype":"Section Break"},{"fieldname":"introduction","fieldtype":"Text Editor","label":"Introduction"},{"fieldname":"section_break_18","fieldtype":"Section Break","label":"Attendees"},{"fieldname":"employees","fieldtype":"Table","label":"Employees","options":"Training Event Employee"},{"fieldname":"amended_from","fieldtype":"Link","label":"Amended From","options":"Training Event"},{"fieldname":"employee_emails","fieldtype":"Small Text","label":"Employee Emails","options":"Email"}]}
+{
+  "fields": [
+    { "fieldname": "event_name", "fieldtype": "Data", "label": "Event Name" },
+    {
+      "fieldname": "training_program",
+      "fieldtype": "Link",
+      "label": "Training Program",
+      "options": "Training Program"
+    },
+    {
+      "fieldname": "event_status",
+      "fieldtype": "Select",
+      "label": "Event Status",
+      "options": "Scheduled\nCompleted\nCancelled"
+    },
+    { "fieldname": "has_certificate", "fieldtype": "Check", "label": "Has Certificate" },
+    { "fieldname": "column_break_2", "fieldtype": "Column Break" },
+    {
+      "fieldname": "type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "Seminar\nTheory\nWorkshop\nConference\nExam\nInternet\nSelf-Study"
+    },
+    {
+      "fieldname": "level",
+      "fieldtype": "Select",
+      "label": "Level",
+      "options": "\nBeginner\nExpert\nAdvance"
+    },
+    { "fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company" },
+    { "fieldname": "section_break_4", "fieldtype": "Section Break" },
+    { "fieldname": "trainer_name", "fieldtype": "Data", "label": "Trainer Name" },
+    { "fieldname": "trainer_email", "fieldtype": "Data", "label": "Trainer Email", "options": "" },
+    { "fieldname": "column_break_7", "fieldtype": "Column Break" },
+    { "fieldname": "supplier", "fieldtype": "Link", "label": "Supplier", "options": "Supplier" },
+    { "fieldname": "contact_number", "fieldtype": "Data", "label": "Contact Number" },
+    { "fieldname": "section_break_9", "fieldtype": "Section Break" },
+    { "fieldname": "course", "fieldtype": "Link", "label": "Course", "options": "Course" },
+    { "fieldname": "location", "fieldtype": "Data", "label": "Location" },
+    { "fieldname": "column_break_12", "fieldtype": "Column Break" },
+    { "fieldname": "start_time", "fieldtype": "Datetime", "label": "Start Time" },
+    { "fieldname": "end_time", "fieldtype": "Datetime", "label": "End Time" },
+    { "fieldname": "section_break_15", "fieldtype": "Section Break" },
+    { "fieldname": "introduction", "fieldtype": "Text Editor", "label": "Introduction" },
+    { "fieldname": "section_break_18", "fieldtype": "Section Break", "label": "Attendees" },
+    {
+      "fieldname": "employees",
+      "fieldtype": "Table",
+      "label": "Employees",
+      "options": "Training Event Employee"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "options": "Training Event"
+    },
+    {
+      "fieldname": "employee_emails",
+      "fieldtype": "Small Text",
+      "label": "Employee Emails",
+      "options": "Email"
+    }
+  ]
+}

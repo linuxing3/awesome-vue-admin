@@ -1,0 +1,29 @@
+import { BaseModel } from '../../BaseModel'
+
+export interface IProjectTask {
+  _id: string
+  title: string
+  description: string
+  status: string // Open\nWorking\nPending Review\nOverdue\nCompleted\nCancelled
+  taskWeight: string
+  startDate: string
+  endDate: string
+  priority: string
+}
+
+export default class ProjectTask extends BaseModel {
+  static entity = 'projectTask';
+
+  static fields () {
+    return {
+      _id: this.increment(),
+      title: this.string('dev'),
+      description: this.string('description'),
+      status: this.string('status'),
+      taskWeight: this.string('taskWeight'),
+      startDate: this.string('startDate'),
+      endDate: this.string('startDate'),
+      priority: this.string('startDate')
+    }
+  }
+}

@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"barcode","fieldtype":"Data","label":"Barcode"},{"fieldname":"barcode_type","fieldtype":"Select","label":"Barcode Type","options":"\nEAN\nUPC-A"}]}

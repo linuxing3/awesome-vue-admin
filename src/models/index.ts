@@ -7,9 +7,9 @@
  */
 import { toLower } from 'lodash'
 
-import erpModels from './ERPModel'
+// import erpModels from './ERPModel'
 
-let requiredModels: RequireContext = require.context('./CoreModel', false, /\.ts$/)
+let requiredModels: RequireContext = require.context('./CoreModel', true, /\.ts$/)
 let models = {}
 
 requiredModels.keys().forEach(key => {
@@ -18,6 +18,5 @@ requiredModels.keys().forEach(key => {
 })
 
 export default {
-  ...models,
-  ...erpModels
+  ...models
 }

@@ -1,1 +1,67 @@
-{"fields":[{"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},{"fieldname":"purpose","fieldtype":"Select","label":"Purpose","options":"\nIssue\nReceipt\nTransfer"},{"fieldname":"asset","fieldtype":"Link","label":"Asset","options":"Asset"},{"fieldname":"transaction_date","fieldtype":"Datetime","label":"Transaction Date"},{"fieldname":"column_break_4","fieldtype":"Column Break"},{"fieldname":"quantity","fieldtype":"Float","label":"Quantity"},{"fieldname":"select_serial_no","fieldtype":"Link","label":"Select Serial No","options":"Serial No"},{"fieldname":"serial_no","fieldtype":"Small Text","label":"Serial No"},{"fieldname":"section_break_7","fieldtype":"Section Break"},{"fieldname":"source_location","fieldtype":"Link","label":"Source Location","options":"Location"},{"fieldname":"target_location","fieldtype":"Link","label":"Target Location","options":"Location"},{"fieldname":"column_break_10","fieldtype":"Column Break"},{"fieldname":"from_employee","fieldtype":"Link","label":"From Employee","options":"Employee"},{"fieldname":"to_employee","fieldtype":"Link","label":"To Employee","options":"Employee"},{"fieldname":"reference","fieldtype":"Section Break","label":"Reference"},{"fieldname":"reference_doctype","fieldtype":"Link","label":"Reference DocType","options":"DocType"},{"fieldname":"reference_name","fieldtype":"Dynamic Link","label":"Reference Name","options":"reference_doctype"},{"fieldname":"amended_from","fieldtype":"Link","label":"Amended From","options":"Asset Movement"}]}
+{
+  "fields": [
+    { "fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company" },
+    {
+      "fieldname": "purpose",
+      "fieldtype": "Select",
+      "label": "Purpose",
+      "options": "\nIssue\nReceipt\nTransfer"
+    },
+    { "fieldname": "asset", "fieldtype": "Link", "label": "Asset", "options": "Asset" },
+    { "fieldname": "transaction_date", "fieldtype": "Datetime", "label": "Transaction Date" },
+    { "fieldname": "column_break_4", "fieldtype": "Column Break" },
+    { "fieldname": "quantity", "fieldtype": "Float", "label": "Quantity" },
+    {
+      "fieldname": "select_serial_no",
+      "fieldtype": "Link",
+      "label": "Select Serial No",
+      "options": "Serial No"
+    },
+    { "fieldname": "serial_no", "fieldtype": "Small Text", "label": "Serial No" },
+    { "fieldname": "section_break_7", "fieldtype": "Section Break" },
+    {
+      "fieldname": "source_location",
+      "fieldtype": "Link",
+      "label": "Source Location",
+      "options": "Location"
+    },
+    {
+      "fieldname": "target_location",
+      "fieldtype": "Link",
+      "label": "Target Location",
+      "options": "Location"
+    },
+    { "fieldname": "column_break_10", "fieldtype": "Column Break" },
+    {
+      "fieldname": "from_employee",
+      "fieldtype": "Link",
+      "label": "From Employee",
+      "options": "Employee"
+    },
+    {
+      "fieldname": "to_employee",
+      "fieldtype": "Link",
+      "label": "To Employee",
+      "options": "Employee"
+    },
+    { "fieldname": "reference", "fieldtype": "Section Break", "label": "Reference" },
+    {
+      "fieldname": "reference_doctype",
+      "fieldtype": "Link",
+      "label": "Reference DocType",
+      "options": "DocType"
+    },
+    {
+      "fieldname": "reference_name",
+      "fieldtype": "Dynamic Link",
+      "label": "Reference Name",
+      "options": "reference_doctype"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "options": "Asset Movement"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+import { BaseModel } from '../../BaseModel'
+
+export interface IUserPromotion {
+   _id: string;
+   name: string;
+   department: string;
+   promotionDate: string;
+   promotionDetails: string;
+
+}
+
+export default class UserPromotion extends BaseModel {
+  static entity = 'userPromotion';
+
+  static fields () {
+    return {
+      _id: this.increment(),
+      name: this.string('secretary'),
+      department: this.string('department'),
+      promotionDate: this.string('promotionDate'),
+      promotionDetails: this.string('promotionDetails')
+    }
+  }
+}

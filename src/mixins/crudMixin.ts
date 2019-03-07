@@ -162,7 +162,7 @@ export default {
     editedIndex (val) {
       console.log(`Editing item ${val}`)
     },
-    "$route": {
+    '$route': {
       handler: 'fetch',
       immediate: true
     }
@@ -231,7 +231,7 @@ export default {
     },
     /**
      * 设置当前编辑项的索引和数据备用
-     * @param item 
+     * @param item
      */
     setEditedItem (item) {
       this.editedItem = Object.assign({}, item) // Deep copy

@@ -1,1 +1,191 @@
-{"fields":[{"fieldname":"naming_series","fieldtype":"Select","label":"Naming Series","options":"ACC-ASS-.YYYY.-"},{"fieldname":"asset_name","fieldtype":"Data","label":"Asset Name"},{"fieldname":"item_code","fieldtype":"Link","label":"Item Code","options":"Item"},{"fieldname":"item_name","fieldtype":"Read Only","label":"Item Name","options":""},{"fieldname":"asset_category","fieldtype":"Link","label":"Asset Category","options":"Asset Category"},{"fieldname":"asset_owner","fieldtype":"Select","label":"Asset Owner","options":"\nCompany\nSupplier\nCustomer"},{"fieldname":"asset_owner_company","fieldtype":"Link","label":"Asset Owner Company","options":"Company"},{"fieldname":"supplier","fieldtype":"Link","label":"Supplier","options":"Supplier"},{"fieldname":"customer","fieldtype":"Link","label":"Customer","options":"Customer"},{"fieldname":"image","fieldtype":"Attach Image","label":"Image"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},{"fieldname":"location","fieldtype":"Link","label":"Location","options":"Location"},{"fieldname":"custodian","fieldtype":"Link","label":"Custodian","options":"Employee"},{"fieldname":"cost_center","fieldtype":"Link","label":"Cost Center","options":"Cost Center"},{"fieldname":"department","fieldtype":"Link","label":"Department","options":"Department"},{"fieldname":"purchase_date","fieldtype":"Date","label":"Purchase Date"},{"fieldname":"disposal_date","fieldtype":"Date","label":"Disposal Date"},{"fieldname":"journal_entry_for_scrap","fieldtype":"Link","label":"Journal Entry for Scrap","options":"Journal Entry"},{"fieldname":"section_break_5","fieldtype":"Section Break"},{"fieldname":"gross_purchase_amount","fieldtype":"Currency","label":"Gross Purchase Amount","options":"Company:company:default_currency"},{"fieldname":"available_for_use_date","fieldtype":"Date","label":"Available-for-use Date"},{"fieldname":"column_break_18","fieldtype":"Column Break"},{"fieldname":"calculate_depreciation","fieldtype":"Check","label":"Calculate Depreciation"},{"fieldname":"is_existing_asset","fieldtype":"Check","label":"Is Existing Asset"},{"fieldname":"opening_accumulated_depreciation","fieldtype":"Currency","label":"Opening Accumulated Depreciation","options":"Company:company:default_currency"},{"fieldname":"number_of_depreciations_booked","fieldtype":"Int","label":"Number of Depreciations Booked"},{"fieldname":"section_break_23","fieldtype":"Section Break","label":"Depreciation"},{"fieldname":"finance_books","fieldtype":"Table","label":"Finance Books","options":"Asset Finance Book"},{"fieldname":"section_break_33","fieldtype":"Section Break"},{"fieldname":"depreciation_method","fieldtype":"Select","label":"Depreciation Method","options":"\nStraight Line\nDouble Declining Balance\nManual"},{"fieldname":"value_after_depreciation","fieldtype":"Currency","label":"Value After Depreciation","options":"Company:company:default_currency"},{"fieldname":"total_number_of_depreciations","fieldtype":"Int","label":"Total Number of Depreciations"},{"fieldname":"column_break_24","fieldtype":"Column Break"},{"fieldname":"frequency_of_depreciation","fieldtype":"Int","label":"Frequency of Depreciation (Months)"},{"fieldname":"next_depreciation_date","fieldtype":"Date","label":"Next Depreciation Date"},{"fieldname":"section_break_14","fieldtype":"Section Break","label":"Depreciation Schedule"},{"fieldname":"schedules","fieldtype":"Table","label":"Depreciation Schedules","options":"Depreciation Schedule"},{"fieldname":"insurance_details","fieldtype":"Section Break","label":"Insurance details"},{"fieldname":"policy_number","fieldtype":"Data","label":"Policy number"},{"fieldname":"insurer","fieldtype":"Data","label":"Insurer"},{"fieldname":"insured_value","fieldtype":"Data","label":"Insured value"},{"fieldname":"column_break_48","fieldtype":"Column Break"},{"fieldname":"insurance_start_date","fieldtype":"Date","label":"Insurance Start Date"},{"fieldname":"insurance_end_date","fieldtype":"Date","label":"Insurance End Date"},{"fieldname":"comprehensive_insurance","fieldtype":"Data","label":"Comprehensive Insurance"},{"fieldname":"section_break_31","fieldtype":"Section Break","label":"Maintenance"},{"fieldname":"maintenance_required","fieldtype":"Check","label":"Maintenance Required"},{"fieldname":"other_details","fieldtype":"Section Break","label":"Other Details"},{"fieldname":"status","fieldtype":"Select","label":"Status","options":"Draft\nSubmitted\nPartially Depreciated\nFully Depreciated\nSold\nScrapped\nIn Maintenance\nOut of Order\nIssue\nReceipt"},{"fieldname":"booked_fixed_asset","fieldtype":"Check","label":"Booked Fixed Asset"},{"fieldname":"column_break_51","fieldtype":"Column Break"},{"fieldname":"purchase_receipt","fieldtype":"Link","label":"Purchase Receipt","options":"Purchase Receipt"},{"fieldname":"purchase_receipt_amount","fieldtype":"Currency","label":"Purchase Receipt Amount"},{"fieldname":"purchase_invoice","fieldtype":"Link","label":"Purchase Invoice","options":"Purchase Invoice"},{"fieldname":"default_finance_book","fieldtype":"Link","label":"Default Finance Book","options":"Finance Book"},{"fieldname":"amended_from","fieldtype":"Link","label":"Amended From","options":"Asset"}]}
+{
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Naming Series",
+      "options": "ACC-ASS-.YYYY.-"
+    },
+    { "fieldname": "asset_name", "fieldtype": "Data", "label": "Asset Name" },
+    { "fieldname": "item_code", "fieldtype": "Link", "label": "Item Code", "options": "Item" },
+    { "fieldname": "item_name", "fieldtype": "Read Only", "label": "Item Name", "options": "" },
+    {
+      "fieldname": "asset_category",
+      "fieldtype": "Link",
+      "label": "Asset Category",
+      "options": "Asset Category"
+    },
+    {
+      "fieldname": "asset_owner",
+      "fieldtype": "Select",
+      "label": "Asset Owner",
+      "options": "\nCompany\nSupplier\nCustomer"
+    },
+    {
+      "fieldname": "asset_owner_company",
+      "fieldtype": "Link",
+      "label": "Asset Owner Company",
+      "options": "Company"
+    },
+    { "fieldname": "supplier", "fieldtype": "Link", "label": "Supplier", "options": "Supplier" },
+    { "fieldname": "customer", "fieldtype": "Link", "label": "Customer", "options": "Customer" },
+    { "fieldname": "image", "fieldtype": "Attach Image", "label": "Image" },
+    { "fieldname": "column_break_3", "fieldtype": "Column Break" },
+    { "fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company" },
+    { "fieldname": "location", "fieldtype": "Link", "label": "Location", "options": "Location" },
+    { "fieldname": "custodian", "fieldtype": "Link", "label": "Custodian", "options": "Employee" },
+    {
+      "fieldname": "cost_center",
+      "fieldtype": "Link",
+      "label": "Cost Center",
+      "options": "Cost Center"
+    },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    { "fieldname": "purchase_date", "fieldtype": "Date", "label": "Purchase Date" },
+    { "fieldname": "disposal_date", "fieldtype": "Date", "label": "Disposal Date" },
+    {
+      "fieldname": "journal_entry_for_scrap",
+      "fieldtype": "Link",
+      "label": "Journal Entry for Scrap",
+      "options": "Journal Entry"
+    },
+    { "fieldname": "section_break_5", "fieldtype": "Section Break" },
+    {
+      "fieldname": "gross_purchase_amount",
+      "fieldtype": "Currency",
+      "label": "Gross Purchase Amount",
+      "options": "Company:company:default_currency"
+    },
+    {
+      "fieldname": "available_for_use_date",
+      "fieldtype": "Date",
+      "label": "Available-for-use Date"
+    },
+    { "fieldname": "column_break_18", "fieldtype": "Column Break" },
+    {
+      "fieldname": "calculate_depreciation",
+      "fieldtype": "Check",
+      "label": "Calculate Depreciation"
+    },
+    { "fieldname": "is_existing_asset", "fieldtype": "Check", "label": "Is Existing Asset" },
+    {
+      "fieldname": "opening_accumulated_depreciation",
+      "fieldtype": "Currency",
+      "label": "Opening Accumulated Depreciation",
+      "options": "Company:company:default_currency"
+    },
+    {
+      "fieldname": "number_of_depreciations_booked",
+      "fieldtype": "Int",
+      "label": "Number of Depreciations Booked"
+    },
+    { "fieldname": "section_break_23", "fieldtype": "Section Break", "label": "Depreciation" },
+    {
+      "fieldname": "finance_books",
+      "fieldtype": "Table",
+      "label": "Finance Books",
+      "options": "Asset Finance Book"
+    },
+    { "fieldname": "section_break_33", "fieldtype": "Section Break" },
+    {
+      "fieldname": "depreciation_method",
+      "fieldtype": "Select",
+      "label": "Depreciation Method",
+      "options": "\nStraight Line\nDouble Declining Balance\nManual"
+    },
+    {
+      "fieldname": "value_after_depreciation",
+      "fieldtype": "Currency",
+      "label": "Value After Depreciation",
+      "options": "Company:company:default_currency"
+    },
+    {
+      "fieldname": "total_number_of_depreciations",
+      "fieldtype": "Int",
+      "label": "Total Number of Depreciations"
+    },
+    { "fieldname": "column_break_24", "fieldtype": "Column Break" },
+    {
+      "fieldname": "frequency_of_depreciation",
+      "fieldtype": "Int",
+      "label": "Frequency of Depreciation (Months)"
+    },
+    {
+      "fieldname": "next_depreciation_date",
+      "fieldtype": "Date",
+      "label": "Next Depreciation Date"
+    },
+    {
+      "fieldname": "section_break_14",
+      "fieldtype": "Section Break",
+      "label": "Depreciation Schedule"
+    },
+    {
+      "fieldname": "schedules",
+      "fieldtype": "Table",
+      "label": "Depreciation Schedules",
+      "options": "Depreciation Schedule"
+    },
+    {
+      "fieldname": "insurance_details",
+      "fieldtype": "Section Break",
+      "label": "Insurance details"
+    },
+    { "fieldname": "policy_number", "fieldtype": "Data", "label": "Policy number" },
+    { "fieldname": "insurer", "fieldtype": "Data", "label": "Insurer" },
+    { "fieldname": "insured_value", "fieldtype": "Data", "label": "Insured value" },
+    { "fieldname": "column_break_48", "fieldtype": "Column Break" },
+    { "fieldname": "insurance_start_date", "fieldtype": "Date", "label": "Insurance Start Date" },
+    { "fieldname": "insurance_end_date", "fieldtype": "Date", "label": "Insurance End Date" },
+    {
+      "fieldname": "comprehensive_insurance",
+      "fieldtype": "Data",
+      "label": "Comprehensive Insurance"
+    },
+    { "fieldname": "section_break_31", "fieldtype": "Section Break", "label": "Maintenance" },
+    { "fieldname": "maintenance_required", "fieldtype": "Check", "label": "Maintenance Required" },
+    { "fieldname": "other_details", "fieldtype": "Section Break", "label": "Other Details" },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSubmitted\nPartially Depreciated\nFully Depreciated\nSold\nScrapped\nIn Maintenance\nOut of Order\nIssue\nReceipt"
+    },
+    { "fieldname": "booked_fixed_asset", "fieldtype": "Check", "label": "Booked Fixed Asset" },
+    { "fieldname": "column_break_51", "fieldtype": "Column Break" },
+    {
+      "fieldname": "purchase_receipt",
+      "fieldtype": "Link",
+      "label": "Purchase Receipt",
+      "options": "Purchase Receipt"
+    },
+    {
+      "fieldname": "purchase_receipt_amount",
+      "fieldtype": "Currency",
+      "label": "Purchase Receipt Amount"
+    },
+    {
+      "fieldname": "purchase_invoice",
+      "fieldtype": "Link",
+      "label": "Purchase Invoice",
+      "options": "Purchase Invoice"
+    },
+    {
+      "fieldname": "default_finance_book",
+      "fieldtype": "Link",
+      "label": "Default Finance Book",
+      "options": "Finance Book"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "options": "Asset"
+    }
+  ]
+}

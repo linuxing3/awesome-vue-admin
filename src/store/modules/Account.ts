@@ -1,7 +1,7 @@
 import { ActionContext } from 'vuex'
 import { make } from 'vuex-pathify'
 import bcrypt from 'bcryptjs'
-import Account from '@/models/CoreModel/Account'
+import Account from '@/models/CoreModel/Account/Account'
 
 const state = {
   name: 'account',

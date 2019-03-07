@@ -1,6 +1,6 @@
 import { get } from 'vuex-pathify'
 
-import Account from '@/models/CoreModel/Account'
+import Account from '@/models/CoreModel/Account/Account'
 import { entities } from '@/api/globals'
 
 export const validateMixin = {

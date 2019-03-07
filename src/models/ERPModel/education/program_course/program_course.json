@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"course","fieldtype":"Link","label":"Course","options":"Course"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"course_name","fieldtype":"Data","label":"Course Name","options":""},{"fieldname":"required","fieldtype":"Check","label":"Mandatory"}]}

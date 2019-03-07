@@ -32,13 +32,13 @@ export default {
     keysDef: () => keysDef, // 翻译定义
     userHomeDir: () => remote.app.getPath('home'), // 用户模板目录
     userDataDir: () => remote.app.getPath('userData'), // 用户数据目录
-    templateDir: function () { 
+    templateDir: function () {
       return join(this.userHomeDir, '/Documents/template') // 用户模板目录
     },
-    attachDir: function() { 
+    attachDir: function () {
       return join(this.userHomeDir, '/Documents/attach') // 用户模板目录
     },
-    realDataDir: function() { 
+    realDataDir: function () {
       return join(this.userDataDir, 'data') // 用户数据目录
     },
     // 获取模板目录下的doc文件
@@ -173,7 +173,7 @@ export default {
           shell.showItemInFolder(this.modelDatasource)
           console.log(`导出${this.modelDatasource}文件成功`)
         }, 5000)
-        } catch (error) {
+      } catch (error) {
         throw new Error(error)
       }
     },

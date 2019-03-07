@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"criteria_name","fieldtype":"Data","label":"Criteria Name"},{"fieldname":"max_score","fieldtype":"Float","label":"Max Score"},{"fieldname":"formula","fieldtype":"Small Text","label":"Criteria Formula"},{"fieldname":"weight","fieldtype":"Percent","label":"Criteria Weight"}]}

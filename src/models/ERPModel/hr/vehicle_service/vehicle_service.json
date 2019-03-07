@@ -1,1 +1,23 @@
-{"fields":[{"fieldname":"service_item","fieldtype":"Select","label":"Service Item","options":"\nBrake Oil\nBrake Pad\nClutch Plate\nEngine Oil\nOil Change\nWheels"},{"fieldname":"type","fieldtype":"Select","label":"Type","options":"\nInspection\nService\nChange"},{"fieldname":"frequency","fieldtype":"Select","label":"Frequency","options":"\nMileage\nMonthly\nQuarterly\nHalf Yearly\nYearly"},{"fieldname":"expense_amount","fieldtype":"Currency","label":"Expense"}]}
+{
+  "fields": [
+    {
+      "fieldname": "service_item",
+      "fieldtype": "Select",
+      "label": "Service Item",
+      "options": "\nBrake Oil\nBrake Pad\nClutch Plate\nEngine Oil\nOil Change\nWheels"
+    },
+    {
+      "fieldname": "type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "\nInspection\nService\nChange"
+    },
+    {
+      "fieldname": "frequency",
+      "fieldtype": "Select",
+      "label": "Frequency",
+      "options": "\nMileage\nMonthly\nQuarterly\nHalf Yearly\nYearly"
+    },
+    { "fieldname": "expense_amount", "fieldtype": "Currency", "label": "Expense" }
+  ]
+}

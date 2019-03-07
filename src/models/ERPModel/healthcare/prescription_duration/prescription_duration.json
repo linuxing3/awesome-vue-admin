@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"number","fieldtype":"Int","label":"Number"},{"fieldname":"period","fieldtype":"Select","label":"Period","options":"Hour\nDay\nWeek\nMonth"}]}

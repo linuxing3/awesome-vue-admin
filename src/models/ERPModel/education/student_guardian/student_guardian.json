@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"guardian","fieldtype":"Link","label":"Guardian","options":"Guardian"},{"fieldname":"guardian_name","fieldtype":"Data","label":"Guardian Name"},{"fieldname":"relation","fieldtype":"Select","label":"Relation","options":"\nMother\nFather\nOthers"}]}

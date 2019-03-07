@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"parameter","fieldtype":"Data","label":"Parameter"},{"fieldname":"rating","fieldtype":"Select","label":"Rating","options":"1\n2\n3\n4\n5"},{"fieldname":"qualitative_feedback","fieldtype":"Data","label":"Qualitative Feedback"}]}

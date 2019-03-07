@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"medical_code_standard","fieldtype":"Link","label":"Medical Code Standard","options":"Medical Code Standard"},{"fieldname":"code","fieldtype":"Data","label":"Code"},{"fieldname":"description","fieldtype":"Small Text","label":"Description"}]}

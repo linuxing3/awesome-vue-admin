@@ -1,1 +1,24 @@
-{"fields":[{"fieldname":"asset_category_name","fieldtype":"Data","label":"Asset Category Name"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"finance_book_detail","fieldtype":"Section Break","label":"Finance Book Detail"},{"fieldname":"finance_books","fieldtype":"Table","label":"Finance Books","options":"Asset Finance Book"},{"fieldname":"section_break_2","fieldtype":"Section Break","label":"Accounts"},{"fieldname":"accounts","fieldtype":"Table","label":"Accounts","options":"Asset Category Account"}]}
+{
+  "fields": [
+    { "fieldname": "asset_category_name", "fieldtype": "Data", "label": "Asset Category Name" },
+    { "fieldname": "column_break_3", "fieldtype": "Column Break" },
+    {
+      "fieldname": "finance_book_detail",
+      "fieldtype": "Section Break",
+      "label": "Finance Book Detail"
+    },
+    {
+      "fieldname": "finance_books",
+      "fieldtype": "Table",
+      "label": "Finance Books",
+      "options": "Asset Finance Book"
+    },
+    { "fieldname": "section_break_2", "fieldtype": "Section Break", "label": "Accounts" },
+    {
+      "fieldname": "accounts",
+      "fieldtype": "Table",
+      "label": "Accounts",
+      "options": "Asset Category Account"
+    }
+  ]
+}

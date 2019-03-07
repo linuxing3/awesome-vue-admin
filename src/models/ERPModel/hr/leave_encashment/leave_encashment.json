@@ -1,1 +1,48 @@
-{"fields":[{"fieldname":"leave_period","fieldtype":"Link","label":"Leave Period","options":"Leave Period"},{"fieldname":"employee","fieldtype":"Link","label":"Employee","options":"Employee"},{"fieldname":"employee_name","fieldtype":"Data","label":"Employee Name","options":""},{"fieldname":"department","fieldtype":"Link","label":"Department","options":"Department"},{"fieldname":"leave_type","fieldtype":"Link","label":"Leave Type","options":"Leave Type"},{"fieldname":"column_break_4","fieldtype":"Column Break"},{"fieldname":"leave_allocation","fieldtype":"Link","label":"Leave Allocation","options":"Leave Allocation"},{"fieldname":"leave_balance","fieldtype":"Float","label":"Leave Balance"},{"fieldname":"encashable_days","fieldtype":"Float","label":"Encashable days"},{"fieldname":"amended_from","fieldtype":"Link","label":"Amended From","options":"Leave Encashment"},{"fieldname":"payroll","fieldtype":"Section Break","label":"Payroll"},{"fieldname":"encashment_amount","fieldtype":"Currency","label":"Encashment Amount"},{"fieldname":"encashment_date","fieldtype":"Date","label":"Encashment Date"},{"fieldname":"additional_salary","fieldtype":"Link","label":"Additional Salary","options":"Additional Salary"}]}
+{
+  "fields": [
+    {
+      "fieldname": "leave_period",
+      "fieldtype": "Link",
+      "label": "Leave Period",
+      "options": "Leave Period"
+    },
+    { "fieldname": "employee", "fieldtype": "Link", "label": "Employee", "options": "Employee" },
+    { "fieldname": "employee_name", "fieldtype": "Data", "label": "Employee Name", "options": "" },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "fieldname": "leave_type",
+      "fieldtype": "Link",
+      "label": "Leave Type",
+      "options": "Leave Type"
+    },
+    { "fieldname": "column_break_4", "fieldtype": "Column Break" },
+    {
+      "fieldname": "leave_allocation",
+      "fieldtype": "Link",
+      "label": "Leave Allocation",
+      "options": "Leave Allocation"
+    },
+    { "fieldname": "leave_balance", "fieldtype": "Float", "label": "Leave Balance" },
+    { "fieldname": "encashable_days", "fieldtype": "Float", "label": "Encashable days" },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "options": "Leave Encashment"
+    },
+    { "fieldname": "payroll", "fieldtype": "Section Break", "label": "Payroll" },
+    { "fieldname": "encashment_amount", "fieldtype": "Currency", "label": "Encashment Amount" },
+    { "fieldname": "encashment_date", "fieldtype": "Date", "label": "Encashment Date" },
+    {
+      "fieldname": "additional_salary",
+      "fieldtype": "Link",
+      "label": "Additional Salary",
+      "options": "Additional Salary"
+    }
+  ]
+}
