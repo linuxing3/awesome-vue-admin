@@ -9,39 +9,39 @@
           :key="i"
         >
         <div
-          class="headline"
-          @click="currentSection = section"
-          slot="header">
+            class="headline"
+            @click="currentSection = section"
+            slot="header">
           {{ section }}
         </div>
         <v-container
-          fluid
-          grid-list-xl
-        >
-        <v-layout
-            row
-            wrap
-        >
-          <v-flex
-            v-for="(item, index) in items"
-            :key="index"
-            @click="crud(item)"
-            xs12
-            md3
-            sm3
-            lg2
+            fluid
+            grid-list-xl
+          >
+          <v-layout
+              row
+              wrap
             >
-            <NameCard
-              :imgPath="computeBg10"
-              :title="item.entity"
-              :item="item"
-              :subSection="item.meta.modelName"
-              :color="$vuetify.theme.primary"
+            <v-flex
+                v-for="(item, index) in items"
+                :key="index"
+                @click="crud(item)"
+                xs12
+                md3
+                sm3
+                lg2
               >
-            </NameCard>
-          </v-flex>
-      </v-layout>
-    </v-container>
+              <NameCard
+                  :imgPath="computeBg10"
+                  :title="item.entity"
+                  :item="item"
+                  :subSection="item.meta.modelName"
+                  :color="$vuetify.theme.primary"
+                >
+              </NameCard>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </div>

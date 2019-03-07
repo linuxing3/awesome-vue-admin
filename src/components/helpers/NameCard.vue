@@ -24,12 +24,12 @@
 
     <v-card-actions>
       <span
-        class="grey--text"
-        v-text="subSection"></span>
+          class="grey--text"
+          v-text="subSection"></span>
       <v-spacer></v-spacer>
       <v-btn
-        @click="crud(item)"
-        icon>
+          @click="crud(item)"
+          icon>
         <v-icon :color="color">edit</v-icon>
       </v-btn>
     </v-card-actions>

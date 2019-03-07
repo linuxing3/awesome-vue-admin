@@ -43,7 +43,7 @@
         <v-btn
             class="ml-3 mr-3"
             color="primary"
-            @click.native='exportToCSV'>{{ $t('export') }}CSV</v-btn>
+            @click='exportToCSV'>{{ $t('export') }}CSV</v-btn>
         <v-btn
             class="ml-3 mr-3"
             color="primary lighten-1"
@@ -94,7 +94,7 @@ export default {
     dialog: false,
     loading: false,
     title: '导出打印从未如此方便！',
-    msg: '使用Word或Wps可以方便地将数据导出到csv文件并合并打印, csv文件可以用Excel打开编辑, 也可以用Word合并打印',
+    msg: '使用Word或Wps可以方便地将数据导出到csv文件并合并打印, csv/excel文件可以用Excel打开编辑, 也可以用Word合并打印',
     step1: '第一步: Wps中打开[工具]菜单, 选择[邮件合并工具栏]',
     step2: '第二步: 使用[邮件合并工具栏], 选择[数据源]按钮',
     step3: '第三步: 在打开的文件选择框中, 选择[文档]-[template]-[db.csv]',
@@ -114,11 +114,13 @@ export default {
   mixins: [ exportMixin ],
   methods: {
     exportToWord () {
+      this.fileFormat = 'docx'
       this.mergeWordApp()
     },
     exportToCSV () {
+      this.fileFormat = 'csv'
       this.text = '导出成功!。文件位置' + this.modelDatasource
-      this.exportItem(this.items)
+      this.attemptExport(this.items)
       this.snackbar = true
     }
   }

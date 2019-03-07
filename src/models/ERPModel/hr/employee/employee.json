@@ -1,1 +1,236 @@
-{"fields":[{"fieldname":"basic_information","fieldtype":"Section Break","label":""},{"fieldname":"employee","fieldtype":"Data","label":"Employee"},{"fieldname":"naming_series","fieldtype":"Select","label":"Series","options":"HR-EMP-"},{"fieldname":"salutation","fieldtype":"Link","label":"Salutation","options":"Salutation"},{"fieldname":"first_name","fieldtype":"Data","label":"First Name"},{"fieldname":"middle_name","fieldtype":"Data","label":"Middle Name"},{"fieldname":"last_name","fieldtype":"Data","label":"Last Name"},{"fieldname":"employee_name","fieldtype":"Data","label":"Full Name"},{"fieldname":"image","fieldtype":"Attach Image","label":"Image","options":""},{"fieldname":"column_break1","fieldtype":"Column Break"},{"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company"},{"fieldname":"status","fieldtype":"Select","label":"Status","options":"\nActive\nLeft"},{"fieldname":"employee_number","fieldtype":"Data","label":"Employee Number"},{"fieldname":"employment_type","fieldtype":"Link","label":"Employment Type","options":"Employment Type"},{"fieldname":"gender","fieldtype":"Link","label":"Gender","options":"Gender"},{"fieldname":"date_of_birth","fieldtype":"Date","label":"Date of Birth"},{"fieldname":"date_of_joining","fieldtype":"Date","label":"Date of Joining"},{"fieldname":"emergency_contact_details","fieldtype":"Section Break","label":"Emergency Contact"},{"fieldname":"emergency_phone_number","fieldtype":"Data","label":"Emergency Phone"},{"fieldname":"person_to_be_contacted","fieldtype":"Data","label":"Emergency Contact"},{"fieldname":"relation","fieldtype":"Data","label":"Relation"},{"fieldname":"erpnext_user","fieldtype":"Section Break","label":"ERPNext User"},{"fieldname":"user_id","fieldtype":"Link","label":"User ID","options":"User"},{"fieldname":"create_user","fieldtype":"Button","label":"Create User"},{"fieldname":"create_user_permission","fieldtype":"Check","label":"Create User Permission"},{"fieldname":"employment_details","fieldtype":"Section Break","label":"Joining Details"},{"fieldname":"job_applicant","fieldtype":"Link","label":"Job Applicant","options":"Job Applicant"},{"fieldname":"scheduled_confirmation_date","fieldtype":"Date","label":"Offer Date"},{"fieldname":"final_confirmation_date","fieldtype":"Date","label":"Confirmation Date"},{"fieldname":"col_break_22","fieldtype":"Column Break"},{"fieldname":"contract_end_date","fieldtype":"Date","label":"Contract End Date"},{"fieldname":"notice_number_of_days","fieldtype":"Int","label":"Notice (days)"},{"fieldname":"date_of_retirement","fieldtype":"Date","label":"Date Of Retirement"},{"fieldname":"job_profile","fieldtype":"Section Break","label":"Department and Grade"},{"fieldname":"department","fieldtype":"Link","label":"Department","options":"Department"},{"fieldname":"designation","fieldtype":"Link","label":"Designation","options":"Designation"},{"fieldname":"reports_to","fieldtype":"Link","label":"Reports to","options":"Employee"},{"fieldname":"column_break_31","fieldtype":"Column Break"},{"fieldname":"grade","fieldtype":"Link","label":"Grade","options":"Employee Grade"},{"fieldname":"branch","fieldtype":"Link","label":"Branch","options":"Branch"},{"fieldname":"organization_profile","fieldtype":"Section Break","label":"Leave Details"},{"fieldname":"leave_policy","fieldtype":"Link","label":"Leave Policy","options":"Leave Policy"},{"fieldname":"holiday_list","fieldtype":"Link","label":"Holiday List","options":"Holiday List"},{"fieldname":"salary_information","fieldtype":"Section Break","label":"Salary Details"},{"fieldname":"salary_mode","fieldtype":"Select","label":"Salary Mode","options":"\nBank\nCash\nCheque"},{"fieldname":"bank_name","fieldtype":"Data","label":"Bank Name"},{"fieldname":"bank_ac_no","fieldtype":"Data","label":"Bank A/C No."},{"fieldname":"health_insurance_section","fieldtype":"Section Break","label":"Health Insurance"},{"fieldname":"health_insurance_provider","fieldtype":"Link","label":"Health Insurance Provider","options":"Employee Health Insurance"},{"fieldname":"health_insurance_no","fieldtype":"Data","label":"Health Insurance No"},{"fieldname":"contact_details","fieldtype":"Section Break","label":"Contact Details"},{"fieldname":"cell_number","fieldtype":"Data","label":"Mobile"},{"fieldname":"prefered_contact_email","fieldtype":"Select","label":"Prefered Contact Email","options":"\nCompany Email\nPersonal Email\nUser ID"},{"fieldname":"prefered_email","fieldtype":"Data","label":"Prefered Email","options":"Email"},{"fieldname":"company_email","fieldtype":"Data","label":"Company Email","options":"Email"},{"fieldname":"personal_email","fieldtype":"Data","label":"Personal Email","options":"Email"},{"fieldname":"unsubscribed","fieldtype":"Check","label":"Unsubscribed"},{"fieldname":"column_break4","fieldtype":"Column Break"},{"fieldname":"permanent_accommodation_type","fieldtype":"Select","label":"Permanent Address Is","options":"\nRented\nOwned"},{"fieldname":"permanent_address","fieldtype":"Small Text","label":"Permanent Address"},{"fieldname":"current_accommodation_type","fieldtype":"Select","label":"Current Address Is","options":"\nRented\nOwned"},{"fieldname":"current_address","fieldtype":"Small Text","label":"Current Address"},{"fieldname":"sb53","fieldtype":"Section Break","label":"Personal Bio"},{"fieldname":"bio","fieldtype":"Text Editor","label":"Bio / Cover Letter"},{"fieldname":"personal_details","fieldtype":"Section Break","label":"Personal Details"},{"fieldname":"passport_number","fieldtype":"Data","label":"Passport Number"},{"fieldname":"date_of_issue","fieldtype":"Date","label":"Date of Issue"},{"fieldname":"valid_upto","fieldtype":"Date","label":"Valid Upto"},{"fieldname":"place_of_issue","fieldtype":"Data","label":"Place of Issue"},{"fieldname":"column_break6","fieldtype":"Column Break"},{"fieldname":"marital_status","fieldtype":"Select","label":"Marital Status","options":"\nSingle\nMarried\nDivorced\nWidowed"},{"fieldname":"blood_group","fieldtype":"Select","label":"Blood Group","options":"\nA+\nA-\nB+\nB-\nAB+\nAB-\nO+\nO-"},{"fieldname":"family_background","fieldtype":"Small Text","label":"Family Background"},{"fieldname":"health_details","fieldtype":"Small Text","label":"Health Details"},{"fieldname":"educational_qualification","fieldtype":"Section Break","label":"Educational Qualification"},{"fieldname":"education","fieldtype":"Table","label":"Education","options":"Employee Education"},{"fieldname":"previous_work_experience","fieldtype":"Section Break","label":"Previous Work Experience","options":"Simple"},{"fieldname":"external_work_history","fieldtype":"Table","label":"External Work History","options":"Employee External Work History"},{"fieldname":"history_in_company","fieldtype":"Section Break","label":"History In Company","options":"Simple"},{"fieldname":"internal_work_history","fieldtype":"Table","label":"Internal Work History","options":"Employee Internal Work History"},{"fieldname":"exit","fieldtype":"Section Break","label":"Exit"},{"fieldname":"resignation_letter_date","fieldtype":"Date","label":"Resignation Letter Date"},{"fieldname":"relieving_date","fieldtype":"Date","label":"Relieving Date"},{"fieldname":"reason_for_leaving","fieldtype":"Data","label":"Reason for Leaving"},{"fieldname":"leave_encashed","fieldtype":"Select","label":"Leave Encashed?","options":"\nYes\nNo"},{"fieldname":"encashment_date","fieldtype":"Date","label":"Encashment Date"},{"fieldname":"exit_interview_details","fieldtype":"Column Break","label":"Exit Interview Details"},{"fieldname":"held_on","fieldtype":"Date","label":"Held On"},{"fieldname":"reason_for_resignation","fieldtype":"Select","label":"Reason for Resignation","options":"\nBetter Prospects\nHealth Concerns"},{"fieldname":"new_workplace","fieldtype":"Data","label":"New Workplace"},{"fieldname":"feedback","fieldtype":"Small Text","label":"Feedback"},{"fieldname":"lft","fieldtype":"Int","label":"lft"},{"fieldname":"rgt","fieldtype":"Int","label":"rgt"},{"fieldname":"old_parent","fieldtype":"Data","label":"Old Parent"}]}
+{
+  "fields": [
+    { "fieldname": "employee", "fieldtype": "Data", "label": "Employee" },
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "HR-EMP-"
+    },
+    {
+      "fieldname": "salutation",
+      "fieldtype": "Link",
+      "label": "Salutation",
+      "options": "Salutation"
+    },
+    { "fieldname": "first_name", "fieldtype": "Data", "label": "First Name" },
+    { "fieldname": "middle_name", "fieldtype": "Data", "label": "Middle Name" },
+    { "fieldname": "last_name", "fieldtype": "Data", "label": "Last Name" },
+    { "fieldname": "employee_name", "fieldtype": "Data", "label": "Full Name" },
+    { "fieldname": "image", "fieldtype": "Attach Image", "label": "Image", "options": "" },
+    { "fieldname": "company", "fieldtype": "Link", "label": "Company", "options": "Company" },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "\nActive\nLeft"
+    },
+    { "fieldname": "employee_number", "fieldtype": "Data", "label": "Employee Number" },
+    {
+      "fieldname": "employment_type",
+      "fieldtype": "Link",
+      "label": "Employment Type",
+      "options": "Employment Type"
+    },
+    { "fieldname": "gender", "fieldtype": "Link", "label": "Gender", "options": "Gender" },
+    { "fieldname": "date_of_birth", "fieldtype": "Date", "label": "Date of Birth" },
+    { "fieldname": "date_of_joining", "fieldtype": "Date", "label": "Date of Joining" },
+    {
+      "fieldname": "emergency_contact_details",
+      "label": "Emergency Contact"
+    },
+    { "fieldname": "emergency_phone_number", "fieldtype": "Data", "label": "Emergency Phone" },
+    { "fieldname": "person_to_be_contacted", "fieldtype": "Data", "label": "Emergency Contact" },
+    { "fieldname": "relation", "fieldtype": "Data", "label": "Relation" },
+    {
+      "fieldname": "job_applicant",
+      "fieldtype": "Link",
+      "label": "Job Applicant",
+      "options": "Job Applicant"
+    },
+    { "fieldname": "scheduled_confirmation_date", "fieldtype": "Date", "label": "Offer Date" },
+    { "fieldname": "final_confirmation_date", "fieldtype": "Date", "label": "Confirmation Date" },
+
+    { "fieldname": "contract_end_date", "fieldtype": "Date", "label": "Contract End Date" },
+    { "fieldname": "notice_number_of_days", "fieldtype": "Int", "label": "Notice (days)" },
+    { "fieldname": "date_of_retirement", "fieldtype": "Date", "label": "Date Of Retirement" },
+    {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "label": "Department",
+      "options": "Department"
+    },
+    {
+      "fieldname": "designation",
+      "fieldtype": "Link",
+      "label": "Designation",
+      "options": "Designation"
+    },
+    {
+      "fieldname": "reports_to",
+      "fieldtype": "Link",
+      "label": "Reports to",
+      "options": "Employee"
+    },
+    { "fieldname": "grade", "fieldtype": "Link", "label": "Grade", "options": "Employee Grade" },
+    { "fieldname": "branch", "fieldtype": "Link", "label": "Branch", "options": "Branch" },
+    {
+      "fieldname": "leave_policy",
+      "fieldtype": "Link",
+      "label": "Leave Policy",
+      "options": "Leave Policy"
+    },
+    {
+      "fieldname": "holiday_list",
+      "fieldtype": "Link",
+      "label": "Holiday List",
+      "options": "Holiday List"
+    },
+    {
+      "fieldname": "salary_mode",
+      "fieldtype": "Select",
+      "label": "Salary Mode",
+      "options": "\nBank\nCash\nCheque"
+    },
+    { "fieldname": "bank_name", "fieldtype": "Data", "label": "Bank Name" },
+    { "fieldname": "bank_ac_no", "fieldtype": "Data", "label": "Bank A/C No." },
+    {
+      "fieldname": "health_insurance_section",
+
+      "label": "Health Insurance"
+    },
+    {
+      "fieldname": "health_insurance_provider",
+      "fieldtype": "Link",
+      "label": "Health Insurance Provider",
+      "options": "Employee Health Insurance"
+    },
+    { "fieldname": "health_insurance_no", "fieldtype": "Data", "label": "Health Insurance No" },
+    { "fieldname": "cell_number", "fieldtype": "Data", "label": "Mobile" },
+    {
+      "fieldname": "prefered_contact_email",
+      "fieldtype": "Select",
+      "label": "Prefered Contact Email",
+      "options": "\nCompany Email\nPersonal Email\nUser ID"
+    },
+    {
+      "fieldname": "prefered_email",
+      "fieldtype": "Data",
+      "label": "Prefered Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "company_email",
+      "fieldtype": "Data",
+      "label": "Company Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "personal_email",
+      "fieldtype": "Data",
+      "label": "Personal Email",
+      "options": "Email"
+    },
+    { "fieldname": "unsubscribed", "fieldtype": "Check", "label": "Unsubscribed" },
+    {
+      "fieldname": "permanent_accommodation_type",
+      "fieldtype": "Select",
+      "label": "Permanent Address Is",
+      "options": "\nRented\nOwned"
+    },
+    { "fieldname": "permanent_address", "fieldtype": "Small Text", "label": "Permanent Address" },
+    {
+      "fieldname": "current_accommodation_type",
+      "fieldtype": "Select",
+      "label": "Current Address Is",
+      "options": "\nRented\nOwned"
+    },
+    { "fieldname": "current_address", "fieldtype": "Small Text", "label": "Current Address" },
+
+    { "fieldname": "bio", "fieldtype": "Text Editor", "label": "Bio / Cover Letter" },
+
+    { "fieldname": "passport_number", "fieldtype": "Data", "label": "Passport Number" },
+    { "fieldname": "date_of_issue", "fieldtype": "Date", "label": "Date of Issue" },
+    { "fieldname": "valid_upto", "fieldtype": "Date", "label": "Valid Upto" },
+    { "fieldname": "place_of_issue", "fieldtype": "Data", "label": "Place of Issue" },
+    {
+      "fieldname": "marital_status",
+      "fieldtype": "Select",
+      "label": "Marital Status",
+      "options": "\nSingle\nMarried\nDivorced\nWidowed"
+    },
+    {
+      "fieldname": "blood_group",
+      "fieldtype": "Select",
+      "label": "Blood Group",
+      "options": "\nA+\nA-\nB+\nB-\nAB+\nAB-\nO+\nO-"
+    },
+    { "fieldname": "family_background", "fieldtype": "Small Text", "label": "Family Background" },
+    { "fieldname": "health_details", "fieldtype": "Small Text", "label": "Health Details" },
+    {
+      "fieldname": "educational_qualification",
+
+      "label": "Educational Qualification"
+    },
+    {
+      "fieldname": "education",
+      "fieldtype": "Table",
+      "label": "Education",
+      "options": "Employee Education"
+    },
+    {
+      "fieldname": "previous_work_experience",
+
+      "label": "Previous Work Experience",
+      "options": "Simple"
+    },
+    {
+      "fieldname": "external_work_history",
+      "fieldtype": "Table",
+      "label": "External Work History",
+      "options": "Employee External Work History"
+    },
+    {
+      "fieldname": "history_in_company",
+
+      "label": "History In Company",
+      "options": "Simple"
+    },
+    {
+      "fieldname": "internal_work_history",
+      "fieldtype": "Table",
+      "label": "Internal Work History",
+      "options": "Employee Internal Work History"
+    },
+    {
+      "fieldname": "resignation_letter_date",
+      "fieldtype": "Date",
+      "label": "Resignation Letter Date"
+    },
+    { "fieldname": "relieving_date", "fieldtype": "Date", "label": "Relieving Date" },
+    { "fieldname": "reason_for_leaving", "fieldtype": "Data", "label": "Reason for Leaving" },
+    {
+      "fieldname": "leave_encashed",
+      "fieldtype": "Select",
+      "label": "Leave Encashed?",
+      "options": "\nYes\nNo"
+    },
+    { "fieldname": "encashment_date", "fieldtype": "Date", "label": "Encashment Date" },
+    {
+      "fieldname": "exit_interview_details",
+      "label": "Exit Interview Details"
+    },
+    { "fieldname": "held_on", "fieldtype": "Date", "label": "Held On" },
+    {
+      "fieldname": "reason_for_resignation",
+      "fieldtype": "Select",
+      "label": "Reason for Resignation",
+      "options": "\nBetter Prospects\nHealth Concerns"
+    },
+    { "fieldname": "new_workplace", "fieldtype": "Data", "label": "New Workplace" },
+    { "fieldname": "feedback", "fieldtype": "Small Text", "label": "Feedback" },
+    { "fieldname": "lft", "fieldtype": "Int", "label": "lft" },
+    { "fieldname": "rgt", "fieldtype": "Int", "label": "rgt" },
+    { "fieldname": "old_parent", "fieldtype": "Data", "label": "Old Parent" }
+  ]
+}

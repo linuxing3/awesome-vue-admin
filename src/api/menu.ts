@@ -24,7 +24,7 @@ const mainMenu = [
     color: 'green'
   },
   {
-    title: '导入导出',
+    title: '数据表',
     group: 'apps',
     icon: 'store',
     name: 'database',

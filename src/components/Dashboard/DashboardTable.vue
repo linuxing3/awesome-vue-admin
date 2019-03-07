@@ -1,52 +1,52 @@
 <template>
   <v-container
-    fluid
-    grid-list-xl
-  >
-  <v-layout
-      row
-      wrap
-  >
-    <v-flex
-      v-for="(section, index) in sections"
-      :key="index"
-      xs12
-      md3
-      sm3
-      lg2
+      fluid
+      grid-list-xl
+    >
+    <v-layout
+        row
+        wrap
       >
-      <v-card
-          class="mt-3 mx-auto"
-          max-width="400"
+      <v-flex
+          v-for="(section, index) in sections"
+          :key="index"
+          xs12
+          md3
+          sm3
+          lg2
         >
-        <v-sheet
-            class="v-sheet--offset mx-auto"
-            :color="$vuetify.theme.primary"
-            elevation="12"
-            max-width="calc(100% - 32px)"
+        <v-card
+            class="mt-3 mx-auto"
+            max-width="400"
           >
-          <v-sparkline
-              :labels="labels"
-              :value="value"
-              color="white"
-              line-width="2"
-              padding="16"
-            ></v-sparkline>
-        </v-sheet>
-
-        <v-card-text class="pt-0">
-          <div class="title font-weight-light mb-2">{{section}}</div>
-          <div class="subheading font-weight-light grey--text">{{countSectionModels(section)}}</div>
-          <v-divider class="my-2"></v-divider>
-          <v-icon
-              class="mr-2"
-              small
+          <v-sheet
+              class="v-sheet--offset mx-auto"
+              :color="$vuetify.theme.primary"
+              elevation="12"
+              max-width="calc(100% - 32px)"
             >
-            clock
-          </v-icon>
-          <span class="caption grey--text font-weight-light">note</span>
-        </v-card-text>
-      </v-card>
+            <v-sparkline
+                :labels="labels"
+                :value="value"
+                color="white"
+                line-width="2"
+                padding="16"
+              ></v-sparkline>
+          </v-sheet>
+
+          <v-card-text class="pt-0">
+            <div class="title font-weight-light mb-2">{{section}}</div>
+            <div class="subheading font-weight-light grey--text">{{countSectionModels(section)}}</div>
+            <v-divider class="my-2"></v-divider>
+            <v-icon
+                class="mr-2"
+                small
+              >
+              clock
+            </v-icon>
+            <span class="caption grey--text font-weight-light">note</span>
+          </v-card-text>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>

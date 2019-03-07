@@ -12,7 +12,7 @@
 <script>
 
 export default {
-  props: [ 'items'],
+  props: [ 'items' ],
   methods: {
     select (item) {
       window.databaseManager.$emit('SELECT_MODEL', item)

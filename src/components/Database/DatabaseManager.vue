@@ -6,11 +6,11 @@
       <v-layout
           wrap
           row>
-        <v-flex 
-          xs12
-          md6
-          sm6
-          class="mt-2">
+        <v-flex
+            xs12
+            md6
+            sm6
+            class="mt-2">
           <div>
             <h1 class="heading red--text underline--text">
               <v-icon color="red">star</v-icon>
@@ -19,25 +19,25 @@
           </div>
         </v-flex>
         <v-flex
-          xs12
-          md6
-          sm6>
+            xs12
+            md6
+            sm6>
           <v-text-field
-            class="ml-5 mr-5"
-            label="Search"
-            prepend-icon="search"
-            v-model="filter.search" />
+              class="ml-5 mr-5"
+              label="Search"
+              prepend-icon="search"
+              v-model="filter.search" />
         </v-flex>
         <v-divider></v-divider>
         <v-flex
-          xs12
-          md12
-          sm12>
-            <DatabaseChips
+            xs12
+            md12
+            sm12>
+          <DatabaseChips
               :search="filter.search"
               :items="filteredItems"
             >
-            </DatabaseChips>
+          </DatabaseChips>
         </v-flex>
       </v-layout>
     </v-container>
@@ -67,9 +67,9 @@ export default {
   computed: {
     filteredItems () {
       let { search } = this.filter
-      return this.entities.filter((entity) => { 
+      return this.entities.filter((entity) => {
         let match = String(entity).toLowerCase()
-        return match.indexOf(search) > -1 
+        return match.indexOf(search) > -1
       })
     }
   },

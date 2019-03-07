@@ -1,1 +1,49 @@
-{"fields":[{"fieldname":"leave_type_name","fieldtype":"Data","label":"Leave Type Name"},{"fieldname":"max_leaves_allowed","fieldtype":"Int","label":"Max Leaves Allowed"},{"fieldname":"applicable_after","fieldtype":"Int","label":"Applicable After (Working Days)"},{"fieldname":"max_continuous_days_allowed","fieldtype":"Int","label":"Maximum Continuous Days Applicable"},{"fieldname":"column_break_3","fieldtype":"Column Break"},{"fieldname":"is_carry_forward","fieldtype":"Check","label":"Is Carry Forward"},{"fieldname":"is_lwp","fieldtype":"Check","label":"Is Leave Without Pay"},{"fieldname":"is_optional_leave","fieldtype":"Check","label":"Is Optional Leave"},{"fieldname":"allow_negative","fieldtype":"Check","label":"Allow Negative Balance"},{"fieldname":"include_holiday","fieldtype":"Check","label":"Include holidays within leaves as leaves"},{"fieldname":"is_compensatory","fieldtype":"Check","label":"Is Compensatory"},{"fieldname":"encashment","fieldtype":"Section Break","label":"Encashment"},{"fieldname":"allow_encashment","fieldtype":"Check","label":"Allow Encashment"},{"fieldname":"encashment_threshold_days","fieldtype":"Int","label":"Encashment Threshold Days"},{"fieldname":"earning_component","fieldtype":"Link","label":"Earning Component","options":"Salary Component"},{"fieldname":"earned_leave","fieldtype":"Section Break","label":"Earned Leave"},{"fieldname":"is_earned_leave","fieldtype":"Check","label":"Is Earned Leave"},{"fieldname":"earned_leave_frequency","fieldtype":"Select","label":"Earned Leave Frequency","options":"Monthly\nQuarterly\nYearly"},{"fieldname":"rounding","fieldtype":"Select","label":"Rounding","options":"0.5\n1.0"}]}
+{
+  "fields": [
+    { "fieldname": "leave_type_name", "fieldtype": "Data", "label": "Leave Type Name" },
+    { "fieldname": "max_leaves_allowed", "fieldtype": "Int", "label": "Max Leaves Allowed" },
+    {
+      "fieldname": "applicable_after",
+      "fieldtype": "Int",
+      "label": "Applicable After (Working Days)"
+    },
+    {
+      "fieldname": "max_continuous_days_allowed",
+      "fieldtype": "Int",
+      "label": "Maximum Continuous Days Applicable"
+    },
+    { "fieldname": "column_break_3", "fieldtype": "Column Break" },
+    { "fieldname": "is_carry_forward", "fieldtype": "Check", "label": "Is Carry Forward" },
+    { "fieldname": "is_lwp", "fieldtype": "Check", "label": "Is Leave Without Pay" },
+    { "fieldname": "is_optional_leave", "fieldtype": "Check", "label": "Is Optional Leave" },
+    { "fieldname": "allow_negative", "fieldtype": "Check", "label": "Allow Negative Balance" },
+    {
+      "fieldname": "include_holiday",
+      "fieldtype": "Check",
+      "label": "Include holidays within leaves as leaves"
+    },
+    { "fieldname": "is_compensatory", "fieldtype": "Check", "label": "Is Compensatory" },
+    { "fieldname": "encashment", "fieldtype": "Section Break", "label": "Encashment" },
+    { "fieldname": "allow_encashment", "fieldtype": "Check", "label": "Allow Encashment" },
+    {
+      "fieldname": "encashment_threshold_days",
+      "fieldtype": "Int",
+      "label": "Encashment Threshold Days"
+    },
+    {
+      "fieldname": "earning_component",
+      "fieldtype": "Link",
+      "label": "Earning Component",
+      "options": "Salary Component"
+    },
+    { "fieldname": "earned_leave", "fieldtype": "Section Break", "label": "Earned Leave" },
+    { "fieldname": "is_earned_leave", "fieldtype": "Check", "label": "Is Earned Leave" },
+    {
+      "fieldname": "earned_leave_frequency",
+      "fieldtype": "Select",
+      "label": "Earned Leave Frequency",
+      "options": "Monthly\nQuarterly\nYearly"
+    },
+    { "fieldname": "rounding", "fieldtype": "Select", "label": "Rounding", "options": "0.5\n1.0" }
+  ]
+}

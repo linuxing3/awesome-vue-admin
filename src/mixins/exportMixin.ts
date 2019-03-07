@@ -1,6 +1,6 @@
 import { join } from 'path'
-import { copyFileSync, pathExistsSync, writeFileSync } from 'fs-extra'
-
+import { copyFileSync, existsSync, writeFileSync } from 'fs'
+import { last } from 'lodash'
 import { remote, shell } from 'electron'
 import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
@@ -9,9 +9,6 @@ import { Document, Paragraph, Packer } from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
-import { fstat } from 'fs'
-
-const Account = models['account']
 
 export default {
   data () {
@@ -20,6 +17,7 @@ export default {
       outputDocFile: 'template',
       workbook: null,
       document: null,
+      fileFormat: 'csv',
       needChangeCSVHeader: false,
       keepOriginalHeader: true,
       reverseTranslate: false,
@@ -32,9 +30,17 @@ export default {
       return models[this.modelName]
     },
     keysDef: () => keysDef, // 翻译定义
-    templateDir: () => join(remote.app.getPath('home'), '/Documents/template'), // 用户模板目录
-    attachDir: () => join(remote.app.getPath('home'), '/Documents/attach'), // 用户模板目录
-    userDataDir: () => join(remote.app.getPath('userData'), 'data'), // 用户数据目录
+    userHomeDir: () => remote.app.getPath('home'), // 用户模板目录
+    userDataDir: () => remote.app.getPath('userData'), // 用户数据目录
+    templateDir: function () { 
+      return join(this.userHomeDir, '/Documents/template') // 用户模板目录
+    },
+    attachDir: function() { 
+      return join(this.userHomeDir, '/Documents/attach') // 用户模板目录
+    },
+    realDataDir: function() { 
+      return join(this.userDataDir, 'data') // 用户数据目录
+    },
     // 获取模板目录下的doc文件
     templateDocs: function () {
       return getFilesByExtentionInDir({ path: this.templateDir, ext: 'doc' })
@@ -42,6 +48,10 @@ export default {
     // 获取模板目录下的当前模型对应csv文件
     modelDatasource: function () {
       return this.resolvePath(this.modelName, 'csv')
+    },
+    // 获取模板目录下的当前模型对应csv文件
+    docxAttach: function () {
+      return this.resolvePath(this.modelName, 'docx')
     },
     // 获取模板目录下的默认csv文件
     defaultDatasource: function () {
@@ -68,12 +78,14 @@ export default {
       const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
       // 文件对象
       this.importFileMeta = openedFiles[0]
-      console.log(this.importFileMeta)
+      console.log(this.importFileMeta.path)
+      // 文件格式，csv， xls， docx
+      this.fileFormat = last(this.importFileMeta.path.split('.'))
     },
     /**
      * 导入数据函数
      */
-    async importItem () {
+    async importCSV () {
       console.log(`导入${this.modelName}.csv文件...`)
       let data: any[] = await ImportCSV({
         file: this.importFileMeta,
@@ -96,8 +108,6 @@ export default {
       }
     },
     resetData (data) {
-      // Check is current account is manager
-      if (!this.validate()) return
       // Delete all data
       if (!Array.isArray(data)) return
       try {
@@ -115,11 +125,27 @@ export default {
       }
     },
     /**
+     * 导入数据函数
+     */
+    attemptImport () {
+      if (this.fileFormat === 'csv') {
+        this.importCSV()
+      } else if (this.fileFormat === 'xls' || this.fileFormat === 'xlsx') {
+        this.importExcel()
+      }
+      // this.exportExcel(item)
+    },
+    /**
      * 导出数据函数
      */
-    exportItem (item) {
-      this.exportCSV(item)
-      // this.exportExcel(item)
+    attemptExport (item) {
+      if (this.fileFormat === 'csv') {
+        this.exportCSV(item)
+      } else if (this.fileFormat === 'xls' || this.fileFormat === 'xlsx') {
+        this.exportExcel()
+      } else if (this.fileFormat === 'docx') {
+        this.exportDocx()
+      }
     },
     exportCSV (item) {
       console.log(`导出到${this.modelDatasource}文件...`)
@@ -131,19 +157,23 @@ export default {
           needTranslateHeader: this.needChangeCSVHeader, // 这里不转换，待生成CSV文件后，更改CSV文件
           onlyKeepStringValue: this.onlyKeepStringValue // 这里转换[对象类]键值为[字符串类]键值
         })
-
+        // 选择是否保留原有标题
         if (this.keepOriginalHeader) {
           setTimeout(async () => {
-            alert('因为数据标题行为外文，需要添加中文对应标题。你可以随意删除无用标题')
-            this.changeCSVHeader()
+            let r = confirm('请选择是否保留原有标题。\n因为数据标题行为外文，需要添加中文对应标题。\n你可以随意删除无用标题')
+            if (r) {
+              this.changeCSVHeader()
+            } else {
+              alert('跳过...')
+            }
           }, 3000)
         }
-
+        // 打开文件所在目录并定位到文件
         setTimeout(() => {
           shell.showItemInFolder(this.modelDatasource)
           console.log(`导出${this.modelDatasource}文件成功`)
         }, 5000)
-      } catch (error) {
+        } catch (error) {
         throw new Error(error)
       }
     },
@@ -152,13 +182,13 @@ export default {
      */
     changeCSVHeader () {
       console.log(`更新${this.modelDatasource}文件的列标题...`)
-      if (pathExistsSync(this.modelDatasource)) {
+      if (existsSync(this.modelDatasource)) {
         try {
           changeHeaderOfCSV({
             targetFilePath: this.modelDatasource,
             keysDef: this.keysDef,
             reverse: this.reverseTranslate,
-            keepOriginalHeader: true
+            keepOriginalHeader: this.keepOriginalHeader
           })
           alert('完成标题对应，可以使用了')
         } catch (error) {
@@ -171,7 +201,7 @@ export default {
      */
     copyModelNameCSV () {
       console.log('备份为db.csv文件...')
-      if (pathExistsSync(this.modelDatasource)) {
+      if (existsSync(this.modelDatasource)) {
         try {
           copyFileSync(this.modelDatasource, this.defaultDatasource)
         } catch (error) {
@@ -184,7 +214,7 @@ export default {
      */
     async mergeWordApp () {
       this.copyModelNameCSV()
-      if (pathExistsSync(this.modelTemplate)) {
+      if (existsSync(this.modelTemplate)) {
         shell.showItemInFolder(this.modelTemplate)
         // shell.openItem(this.modelTemplate)
       } else {
@@ -197,7 +227,7 @@ export default {
     exportExcel (item) {
       /* show a file-open dialog and read the first selected file */
       let workbook = this.workbook
-      let filename = this.importFileMeta.path
+      let filename = this.importFileMeta.path || this.docxAttach
       let data = Array.isArray(item) ? item : [item]
       let sheetName = 'data'
       try {
@@ -214,7 +244,7 @@ export default {
     /**
      * 打开Excel文件
      */
-    readExcelFile () {
+    importExcel () {
       // 电子表对象
       try {
         this.workbook = XLSX.readFile(this.importFileMeta)
@@ -247,7 +277,7 @@ export default {
       return output
     },
     /**
-     *
+     * 拖放导入
      */
     async handleDrop (e) {
       e.stopPropagation()
@@ -267,16 +297,7 @@ export default {
       if (rABS) reader.readAsBinaryString(this.importFileMeta)
       else reader.readAsArrayBuffer(this.importFileMeta)
     },
-    /**
-     * 打开Docx文件
-     */
-    openDocxFile () {
-      const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
-      // 文件对象
-      this.importFileMeta = openedFiles[0]
-      // 电子表对象
-    },
-    writeDocxFile (data) {
+    exportDocx (data) {
       let defaultPath = join(this.attachDir, this.modelName, 'test.doc')
       let filename = this.importFileMeta.path || defaultPath
       try {
@@ -285,7 +306,7 @@ export default {
         throw new Error(error)
       }
       console.log('Docx文件')
-      console.log(defaultPath)
+      console.log(filename)
       // 创建新的文档或使用默认文档
       let p = new Paragraph(this.modelName)
       // 添加段落到文件中

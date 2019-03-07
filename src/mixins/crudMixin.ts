@@ -77,7 +77,7 @@ export default {
       return this.Model.query().count()
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    witAll (): any[] {
+    withAll (): any[] {
       return this.Model.query()
         .withAll()
         .get()
@@ -85,9 +85,9 @@ export default {
     // 数据对象的实例数组
     items (): any[] {
       let { search, sort } = this.filter
-      if (search === '') return this.witAll
+      if (search === '') return this.withAll
       // in filtered case, may different from editedIndex
-      return baseFilter({ sort, search }, this.witAll)
+      return baseFilter({ sort, search }, this.withAll)
     },
     // 数据键值的数组
     fields (): string[] {
@@ -95,7 +95,7 @@ export default {
     },
     // 数据键值的数组，可用于表格标题行
     mainHeaders (): string[] {
-      return this.Model.fieldsKeys().splice(2, 10)
+      return this.headers.splice(2, 10)
     },
     headers (): any[] {
       return this.fields.reduce(function (headersConfig, field) {
@@ -136,6 +136,7 @@ export default {
         name: this.modelName + '_id',
         params: {
           type: 'edit',
+          blueprint: this.modelName,
           editedItem: this.editedItem
         }
       }
@@ -146,6 +147,7 @@ export default {
         name: this.modelName + '_id',
         params: {
           type: 'add',
+          blueprint: this.modelName,
           editedItem: this.editedItem
         }
       }
@@ -158,20 +160,17 @@ export default {
       await this.fetch()
     },
     editedIndex (val) {
-      console.log(val)
+      console.log(`Editing item ${val}`)
     },
-    $route: {
+    "$route": {
       handler: 'fetch',
       immediate: true
     }
   },
   async mounted () {
     this.reset()
-
     // For update, should call fetch again
     await this.fetch()
-
-    console.log(models)
   },
   created () {
     // 组件自身监听事件，更新[编辑]和[数据模型]的状态
@@ -230,7 +229,10 @@ export default {
         this.editedItem = new this.Model()
       }
     },
-
+    /**
+     * 设置当前编辑项的索引和数据备用
+     * @param item 
+     */
     setEditedItem (item) {
       this.editedItem = Object.assign({}, item) // Deep copy
       this.editedIndex = this.editedItem._id
@@ -243,14 +245,14 @@ export default {
     deleteItem (item: object) {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.setEditedItem(item)
-      // ORM插件方法
+      // ORM Localforage插件方法
       if (this.editedIndex > -1) {
         this.Model.$delete(this.editedItem._id)
           .then(entities => {
             console.table(entities)
           })
       } else {
-        console.log('Not found item to delete!')
+        console.log('Found no item to delete!')
       }
       // ORM默认方法
       // this.Model.delete(this.editedItem._id);
