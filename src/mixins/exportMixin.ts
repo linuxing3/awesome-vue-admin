@@ -1,14 +1,14 @@
 import { join } from 'path'
-import { copyFileSync, existsSync, writeFileSync } from 'fs'
 import { last } from 'lodash'
+import { copyFileSync, existsSync, writeFileSync } from 'fs'
 import { remote, shell } from 'electron'
-import keysDef from '@/locales/cn.json'
-import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 import XLSX from 'xlsx'
-import { Document, Paragraph, Packer } from 'docx'
+import { Document, Paragraph, TextRun, Packer } from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
+import keysDef from '@/locales/cn.json'
+import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 
 export default {
   data() {
@@ -311,21 +311,22 @@ export default {
       let filename = this.importFileMeta.path || defaultPath
       try {
         this.document = new Document()
+        console.log(filename)
+        // 创建新的文档或使用默认文档
+        let p = new Paragraph(this.modelName)
+        let content = new TextRun(data)
+        p.addRun(content)
+        // 添加段落到文件中
+        this.document.addParagraph(p)
+        console.log(this.document)
+        // 写入文件
+        const packer = new Packer()
+        packer.toBuffer(this.document).then(buffer => {
+          writeFileSync(filename, buffer)
+        })
       } catch (error) {
         throw new Error(error)
       }
-      console.log('Docx文件')
-      console.log(filename)
-      // 创建新的文档或使用默认文档
-      let p = new Paragraph(this.modelName)
-      // 添加段落到文件中
-      this.document.addParagraph(p)
-      console.log(this.document)
-      // 写入文件
-      const packer = new Packer()
-      packer.toBuffer(this.document).then(buffer => {
-        writeFileSync(filename, buffer)
-      })
     }
   }
 }

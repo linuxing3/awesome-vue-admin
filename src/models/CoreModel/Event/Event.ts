@@ -1,7 +1,7 @@
 import { BaseModel } from '../../BaseModel'
 
 export default class Event extends BaseModel {
-  static entity = 'activity'
+  static entity = 'event'
 
   static fields () {
     return {

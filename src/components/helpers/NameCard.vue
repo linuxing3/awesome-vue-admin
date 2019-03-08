@@ -1,37 +1,24 @@
 <template>
-  <v-card class="mt-3">
+  <v-card 
+    class="ma-3">
     <v-sheet
         class="v-sheet--offset mx-auto"
-        :color="$vuetify.theme.primary"
         elevation="12"
-        max-width="calc(100% - 32px)"
+        max-width="calc(100% - 64px)"
       >
-      <v-img
-          :src="imgPath"
-          height="60px"
-        />
+      <v-sheet
+          class="pa-3 justify-center layout"
+          :color="$vuetify.theme.primary"
+          height="60"
+        >
+        <span
+          class="title white--text font-weight-light">{{title.toUpperCase()}}</span>
+      </v-sheet>
     </v-sheet>
-    <v-container
-        fill-height
-        fluid
-        pa-2
-      >
-      <v-layout fill-height>
-        <v-flex
-            xs12
-            align-end
-            flexbox>
-          <span
-              class="headline primary--text"
-              v-text="title"></span>
-        </v-flex>
-      </v-layout>
-    </v-container>
 
     <v-card-actions>
       <span
-          class="grey--text"
-          v-text="subSection"></span>
+          class="grey--text">选择功能板块</span>
       <v-spacer></v-spacer>
       <v-btn
           @click="crud(item)"
@@ -47,3 +34,9 @@ export default {
   props: ['imgPath', 'title', 'item', 'color', 'subSection']
 }
 </script>
+<style>
+  .v-sheet--offset {
+    top: -24px;
+    position: relative;
+  }
+</style>

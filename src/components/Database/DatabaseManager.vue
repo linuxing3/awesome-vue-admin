@@ -74,9 +74,9 @@ export default {
     }
   },
   created () {
-    this.$on('SELECT_MODEL', payload => {
-      this.modelName = payload
-      this.crud(models[this.modelName])
+    this.$on('SELECT_MODEL', modelName => {
+      // go to 
+      this.info(modelName)
     })
     window.databaseManager = this
   },

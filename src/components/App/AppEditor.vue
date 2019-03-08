@@ -1,16 +1,26 @@
 <template>
-  <v-layout
-      class="ma-3"
-    >
-    <quillEditor
-        v-model="content"
-        ref="quillEditor"
-        :options="editorOption"
-        @change="onEditorChange($event)"
-        @blur="onEditorBlur($event)"
-        @focus="onEditorFocus($event)"
-        @ready="onEditorReady($event)" />
-  </v-layout>
+  <v-container
+    fluid
+    fill-height>
+    <v-layout
+        class="justify-center ma-3"
+      >
+      <v-btn 
+        @click="saveDocument"
+        class="primary">
+        Save
+      </v-btn>
+      <v-divider />
+      <quillEditor
+          v-model="content"
+          ref="quillEditor"
+          :options="editorOption"
+          @change="onEditorChange($event)"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @ready="onEditorReady($event)" />
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -20,9 +30,10 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 
 import { quillEditor } from 'vue-quill-editor'
-import Docx from 'docx'
+import exportMixin from '@/mixins/exportMixin'
 
 export default {
+  mixins: [ exportMixin ],
   components: {
     quillEditor
   },
@@ -30,7 +41,6 @@ export default {
     return {
       message: 'Hi from Vue.',
       content: '<h2>I am Example A</h2>',
-      document: null,
       editorOption: {
         theme: 'snow'
       }
@@ -47,12 +57,18 @@ export default {
       console.log('editor ready!', quill)
     },
     onEditorChange (quill) {
-      // let { quill, html, text } = quill
       console.log('editor changed!', quill)
-      // do persist work here
-      this.document = new Docx.File({})
-      let p = new Docx.Paragraph(this.content)
-      this.document.addParagraph(p)
+    },
+    saveDocument () {
+      this.getImportFile()
+      let r = confirm(
+        '是否导出为Word？'
+      )
+      if (r) {
+        this.exportDocx(quill)
+      } else {
+        alert('跳过...')
+      }
     }
   }
 }

@@ -4,17 +4,30 @@
       grid-list-xl
     >
     <v-layout
+        class="mt-3"
         row
         wrap
       >
+      <v-flex
+        v-show="false"
+        xs12
+        sm12
+        md12
+        lg12
+        >
+        <v-img
+          src="nature/n7.jpeg"
+          height="280">
+        </v-img>
+      </v-flex>
       <v-flex
           v-for="(item, index) in items"
           :key="index"
           @click="crud(item)"
           xs12
-          md3
-          sm3
-          lg2
+          md4
+          sm4
+          lg4
         >
         <NameCard
             :imgPath="computeBg10"

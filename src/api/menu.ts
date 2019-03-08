@@ -17,13 +17,6 @@ const mainMenu = [
   // injected
   { header: '系统' },
   {
-    title: '编辑器',
-    group: 'apps',
-    icon: 'edit',
-    name: 'editor',
-    color: 'green'
-  },
-  {
     title: '数据表',
     group: 'apps',
     icon: 'store',

@@ -8,12 +8,12 @@
         wrap
       >
       <v-flex
-          v-for="(section, index) in sections"
+          v-for="(item, index) in items"
           :key="index"
           xs12
           md3
           sm3
-          lg2
+          lg4
         >
         <v-card
             class="mt-3 mx-auto"
@@ -35,17 +35,21 @@
           </v-sheet>
 
           <v-card-text class="pt-0">
-            <div class="title font-weight-light mb-2">{{section}}</div>
-            <div class="subheading font-weight-light grey--text">{{countSectionModels(section)}}</div>
+            <div class="title font-weight-light mb-2">{{item.entity.toUpperCase()}}</div>
+            <div class="subheading font-weight-light grey--text">Total Records: {{item.count()}}</div>
             <v-divider class="my-2"></v-divider>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer />
             <v-icon
                 class="mr-2"
                 small
               >
-              clock
+              star
             </v-icon>
-            <span class="caption grey--text font-weight-light">note</span>
-          </v-card-text>
+            <span class="caption grey--text font-weight-light">Belongs To Section: {{item.meta.section}}</span>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
@@ -54,14 +58,11 @@
 
 <script>
 import { pickBy, mapKeys } from 'lodash'
-import { sections } from '@/api/globals'
 import models from '@/models'
 
 export default {
   data: () => ({
-    sections,
-    items: {},
-    currentSection: '',
+    items: models,
     labels: [
       'a',
       'b',
@@ -75,15 +76,7 @@ export default {
       390
     ]
   }),
-  methods: {
-    countSectionModels (section) {
-      let items = pickBy(models, model => {
-        return model.meta.section === section
-      })
-      let count = Object.keys(items).length
-      return count
-    }
-  }
+  methods: {}
 }
 </script>
 

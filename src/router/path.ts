@@ -1,6 +1,7 @@
 import Home from '@/views/Home.vue'
 import PlayView from '@/views/Play.vue'
 import CrudView from '@/views/Crud.vue'
+import InfoView from '@/views/Info.vue'
 
 export default [
   {
@@ -58,5 +59,17 @@ export default [
       breadcrumb: true
     },
     component: CrudView
+  },
+  {
+    path: '/info/:blueprint/:id',
+    name: 'info',
+    meta: {
+      title: 'info',
+      group: 'apps',
+      icon: 'star',
+      color: 'primary',
+      breadcrumb: true
+    },
+    component: InfoView
   }
 ]
