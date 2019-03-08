@@ -78,9 +78,9 @@ export default {
       const openedFiles = remote.dialog.showOpenDialog({ properties: ['openFile'] })
       // 文件对象
       this.importFileMeta = openedFiles[0]
-      console.log(this.importFileMeta.path)
+      console.log(this.importFileMeta)
       // 文件格式，csv， xls， docx
-      this.fileFormat = last(this.importFileMeta.path.split('.'))
+      this.fileFormat = last(this.importFileMeta.split('.'))
     },
     /**
      * 导入数据函数

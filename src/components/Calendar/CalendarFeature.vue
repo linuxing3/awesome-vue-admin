@@ -13,7 +13,7 @@
             right
             top
             color="red darken-2"
-            @click="$router.push('/activity')"
+            @click="$router.push(addRoute)"
           >
           <v-icon dark>
             add
@@ -344,7 +344,7 @@ const stylings = {
 export default {
   mixins: [crudMixin, exportMixin],
   data: () => ({
-    modelName: 'activity',
+    modelName: 'event',
     editing: false,
     dark: false,
     startMenu: false,

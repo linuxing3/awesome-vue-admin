@@ -99,7 +99,7 @@ export default {
   methods: {
     exportToWord () {
       this.text = '导出成功!。文件位置' + this.importFileMeta.path
-      this.writeDocxFile(this.modelName)
+      this.exportDocx(this.modelName)
       this.snackbar = true
     }
   }

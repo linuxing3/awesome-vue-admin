@@ -16,16 +16,5 @@ import ControlCenter from '@/components/Home/ControlCenter.vue' // @ is an alias
     ControlCenter
   }
 })
-export default class Home extends Vue {
-  created () {
-    this.initialize()
-  }
-
-  initialize () {
-    // Try to persist app settings
-    // this.$store.commit('entities/app/init')
-    // Try to persist database names
-    this.$store.dispatch('entities/database/init')
-  }
-}
+export default class Home extends Vue {}
 </script>

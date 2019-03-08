@@ -5,16 +5,17 @@
  *   "user" : [user: User extends Model]
  * }
  */
-import { toLower } from 'lodash'
+import { lowerFirst, tail, last } from 'lodash'
 
 // import erpModels from './ERPModel'
 
 let requiredModels: RequireContext = require.context('./CoreModel', true, /\.ts$/)
 let models = {}
 
-requiredModels.keys().forEach(key => {
-  let modelName = toLower(key.replace(/(\.\/|\.ts)/g, ''))
-  models[modelName] = requiredModels(key).default || requiredModels(key)
+requiredModels.keys().forEach((fileName: string) => {
+  const fileNameMeta = last(tail(fileName.split('/')))
+  let modelName = lowerFirst(fileNameMeta.replace(/(\.\/|\.ts)/g, ''))
+  models[modelName] = requiredModels(fileName).default
 })
 
 export default {
