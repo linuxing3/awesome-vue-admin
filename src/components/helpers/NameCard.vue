@@ -1,26 +1,32 @@
 <template>
-  <v-card>
-    <v-img
-        :src="imgPath"
-        height="120px"
+  <v-card class="mt-3">
+    <v-sheet
+        class="v-sheet--offset mx-auto"
+        :color="$vuetify.theme.primary"
+        elevation="12"
+        max-width="calc(100% - 32px)"
       >
-      <v-container
-          fill-height
-          fluid
-          pa-2
-        >
-        <v-layout fill-height>
-          <v-flex
-              xs12
-              align-end
-              flexbox>
-            <span
-                class="headline white--text"
-                v-text="title"></span>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-img>
+      <v-img
+          :src="imgPath"
+          height="60px"
+        />
+    </v-sheet>
+    <v-container
+        fill-height
+        fluid
+        pa-2
+      >
+      <v-layout fill-height>
+        <v-flex
+            xs12
+            align-end
+            flexbox>
+          <span
+              class="headline primary--text"
+              v-text="title"></span>
+        </v-flex>
+      </v-layout>
+    </v-container>
 
     <v-card-actions>
       <span

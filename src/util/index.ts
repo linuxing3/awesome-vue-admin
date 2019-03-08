@@ -54,7 +54,7 @@ export function getFilesByExtentionInDir ({ path, ext }): string[] {
       ...{ realPath },
       ...{ shortFileName }
     }
-    console.table(fileMetaInfo)
+    // console.table(fileMetaInfo)
     res.push(shortFileName)
     return res
   }, [])

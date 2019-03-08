@@ -29,26 +29,40 @@
           <p>{{step4}}</p>
           <p>{{step5}}</p>
         </div>
+        <v-divider />
       </v-card-text>
 
-      <span class="red white--text">{{text}}</span>
-
       <v-card-actions>
-        <v-select
-            class='pa-5'
-            v-model="outputDocFile"
-            label="选择Word目标文件，默认为template.doc"
-            :items="templateDocs"></v-select>
-        <v-spacer />
         <v-btn
             class="ml-3 mr-3"
             color="primary"
-            @click='exportToCSV'>{{ $t('export') }}CSV</v-btn>
+            @click='exportToCSV'>
+            <v-icon class="pr-2">edit</v-icon>
+            {{ $t('export') }}数据表</v-btn>
+        <span 
+          class="font-weight-light red--text ml-5 ">
+          {{text}}
+        </span>
+      </v-card-actions>
+
+      <v-card-actions>
         <v-btn
             class="ml-3 mr-3"
-            color="primary lighten-1"
+            color="primary"
             @click="exportToWord"
-            :loading="loading">{{ $t('export') }}Word</v-btn>
+            :loading="loading">
+            <v-icon class="pr-2">print</v-icon>
+            {{ $t('export') }}Word
+            </v-btn>
+        <v-spacer />
+        <v-select
+            v-model="outputDocFile"
+            label="选择Word目标文件，默认为template.doc"
+            :items="templateDocs"></v-select>
+      </v-card-actions>
+
+      <v-card-actions>
+        <v-spacer />
         <v-btn
             class="ml-3 mr-3"
             @click="$emit('TOGGLE')"

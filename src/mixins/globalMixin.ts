@@ -1,4 +1,5 @@
 import { get } from 'vuex-pathify'
+import { words, truncate } from 'lodash'
 
 import Account from '@/models/CoreModel/Account/Account'
 import { entities } from '@/api/globals'
@@ -37,6 +38,16 @@ export const validateMixin = {
         ;(window as any).CrudTable &&
           (window as any).CrudTable.$emit('SET_MODEL', blueprint)
       }, 500)
+    },
+    truncateText (text) {
+        let count = words(text)
+        let omission = `[... ${count} more]`
+        return truncate(text, {
+          omission
+        })
+    },
+    countWords (text) {
+        return words(text)
     }
   }
 }

@@ -225,7 +225,7 @@
           <td
               v-for="field in headers"
               :key="field.value"
-            >{{ props.item[field.value] }}</td>
+            >{{ truncateText(props.item[field.value]) }}</td>
         </tr>
       </template>
       <template slot="no-data">

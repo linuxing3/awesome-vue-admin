@@ -1,50 +1,32 @@
 <template>
-  <div id="pageCard">
-    <v-expansion-panel
-        v-model="panel"
-        expand
+  <v-container
+      fluid
+      grid-list-xl
+    >
+    <v-layout
+        row
+        wrap
       >
-      <v-expansion-panel-content
-          v-for="(section, i) in sections"
-          :key="i"
+      <v-flex
+          v-for="(item, index) in items"
+          :key="index"
+          @click="crud(item)"
+          xs12
+          md3
+          sm3
+          lg2
         >
-        <div
-            class="headline"
-            @click="currentSection = section"
-            slot="header">
-          {{ section }}
-        </div>
-        <v-container
-            fluid
-            grid-list-xl
+        <NameCard
+            :imgPath="computeBg10"
+            :title="item.entity"
+            :item="item"
+            :subSection="item.meta.modelName"
+            :color="$vuetify.theme.primary"
           >
-          <v-layout
-              row
-              wrap
-            >
-            <v-flex
-                v-for="(item, index) in items"
-                :key="index"
-                @click="crud(item)"
-                xs12
-                md3
-                sm3
-                lg2
-              >
-              <NameCard
-                  :imgPath="computeBg10"
-                  :title="item.entity"
-                  :item="item"
-                  :subSection="item.meta.modelName"
-                  :color="$vuetify.theme.primary"
-                >
-              </NameCard>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-expansion-panel-content>
-    </v-expansion-panel>
-  </div>
+        </NameCard>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -62,13 +44,13 @@ export default {
       panel: [true, false],
       sections: [ sections[0] ],
       currentSection: '',
-      items: {}
+      items: models
     }
   },
   watch: {
     currentSection: {
       handler: function (val) {
-        this.genSectionModels(val)
+        this.count()
       },
       immediate: true
     }
@@ -89,6 +71,9 @@ export default {
       this.items = pickBy(models, model => {
         return model.meta.section === section
       })
+      console.log(Object.keys(this.items).length)
+    },
+    count () {
       console.log(Object.keys(this.items).length)
     }
   }

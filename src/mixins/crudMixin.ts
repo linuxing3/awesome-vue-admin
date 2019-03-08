@@ -249,7 +249,7 @@ export default {
       if (this.editedIndex > -1) {
         this.Model.$delete(this.editedItem._id)
           .then(entities => {
-            console.table(entities)
+            console.log(entities)
           })
       } else {
         console.log('Found no item to delete!')
@@ -281,7 +281,7 @@ export default {
       this.Model.$update({
         data: this.editedItem
       }).then(entities => {
-        console.table(entities)
+        console.log(entities)
       })
       // ORM默认方法
       // this.Model.update(this.model);
@@ -295,7 +295,7 @@ export default {
       this.Model.$create({
         data: this.editedItem
       }).then(entities => {
-        console.table(entities)
+        console.log(entities)
       })
       // ORM默认方法
       // this.Model.insert({

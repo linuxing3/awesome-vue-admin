@@ -27,6 +27,10 @@
         <v-card>
           <v-card-title>
             <v-spacer></v-spacer>
+            <span 
+              class="title font-weight-light green--text ml-5 ">
+                {{ importFileMeta.path || "选取导入文件 -> " }}
+            </span>
             <v-btn
                 icon
                 fab
@@ -36,14 +40,19 @@
                   color="green"
                 >cloud</v-icon>
             </v-btn>
-            {{ importFileMeta.path }}
           </v-card-title>
           <v-card-actions>
+            <span
+              v-if="this.importFileMeta.path"
+              class="title font-weight-light green--text ml-5 ">
+                开始正式导入
+            </span>
+            <v-spacer></v-spacer>
             <v-btn
                 class="green white--text"
                 @click="importItem">
               <v-icon>add</v-icon>
-              Upload
+              导入
             </v-btn>
           </v-card-actions>
         </v-card>
