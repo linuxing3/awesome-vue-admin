@@ -7,9 +7,9 @@
       <v-card-title
           class="success white--text"
           dark>
-        <span 
-          class="headline font-weight-light">
-            {{ formTitle }} {{ modelName }}
+        <span
+            class="headline font-weight-light">
+          {{ formTitle }} {{ modelName }}
         </span>
         <v-spacer />
         <v-btn
@@ -126,7 +126,7 @@ export default {
     }
   },
 
-  mounted() {
+  mounted () {
     let { blueprint, editedItem } = this.$route.params
     this.modelName = blueprint
     this.setEditedItem(editedItem)
@@ -141,7 +141,7 @@ export default {
       setTimeout(() => {
         this.reset()
       }, 300)
-    },
+    }
   }
 }
 </script>

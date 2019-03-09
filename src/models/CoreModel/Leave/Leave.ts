@@ -17,11 +17,10 @@ export default class Leave extends BaseModel {
     return {
       _id: this.increment(),
       applicant: this.string('applicant'),
-      fromDate: this.string('fromDate'),
-      toDate: this.string('toDate'),
+      fromDate: this.string('2019-03-08'),
+      toDate: this.string('2019-03-08'),
       isActive: this.string('isActive'),
       holidayList: this.string('holidayList')
-
     }
   }
 }

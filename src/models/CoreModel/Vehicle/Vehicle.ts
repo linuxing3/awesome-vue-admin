@@ -41,15 +41,14 @@ export default class Vehicle extends BaseModel {
       insuranceDetails: this.string('insuranceDetails'),
       insuranceCompany: this.string('insuranceCompany'),
       policyNo: this.string('policyNo'),
-      startDate: this.string('startDate'),
-      endDate: this.string('endDate'),
+      startDate: this.string('2009-09-09'),
+      endDate: this.string('2009-09-09'),
       additionalDetails: this.string('additionalDetails'),
       fueltype: this.string('fueltype'),
       fuelUom: this.string('fuelUom'),
       color: this.string('color'),
       wheels: this.string('wheels'),
       door: this.string('door')
-
     }
   }
 }

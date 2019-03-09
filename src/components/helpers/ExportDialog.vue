@@ -37,10 +37,10 @@
             class="ml-3 mr-3"
             color="primary"
             @click='exportToCSV'>
-            <v-icon class="pr-2">edit</v-icon>
-            {{ $t('export') }}数据表</v-btn>
-        <span 
-          class="font-weight-light red--text ml-5 ">
+          <v-icon class="pr-2">edit</v-icon>
+          {{ $t('export') }}数据表</v-btn>
+        <span
+            class="font-weight-light red--text ml-5 ">
           {{text}}
         </span>
       </v-card-actions>
@@ -51,9 +51,9 @@
             color="primary"
             @click="exportToWord"
             :loading="loading">
-            <v-icon class="pr-2">print</v-icon>
-            {{ $t('export') }}Word
-            </v-btn>
+          <v-icon class="pr-2">print</v-icon>
+          {{ $t('export') }}Word
+        </v-btn>
         <v-spacer />
         <v-select
             v-model="outputDocFile"

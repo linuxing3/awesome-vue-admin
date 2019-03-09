@@ -11,7 +11,7 @@ import keysDef from '@/locales/cn.json'
 import { getFilesByExtentionInDir, GenerateCSV, ImportCSV, changeHeaderOfCSV } from '@/util'
 
 export default {
-  data() {
+  data () {
     return {
       importFileMeta: {},
       outputDocFile: 'template',
@@ -26,55 +26,55 @@ export default {
     }
   },
   computed: {
-    Model(): Model {
+    Model (): Model {
       return models[this.modelName]
     },
     keysDef: () => keysDef, // 翻译定义
     userHomeDir: () => remote.app.getPath('home'), // 用户模板目录
     userDataDir: () => remote.app.getPath('userData'), // 用户数据目录
-    templateDir: function() {
+    templateDir: function () {
       return join(this.userHomeDir, '/Documents/template') // 用户模板目录
     },
-    attachDir: function() {
+    attachDir: function () {
       return join(this.userHomeDir, '/Documents/attach') // 用户模板目录
     },
-    realDataDir: function() {
+    realDataDir: function () {
       return join(this.userDataDir, 'data') // 用户数据目录
     },
     // 获取模板目录下的doc文件
-    templateDocs: function() {
+    templateDocs: function () {
       return getFilesByExtentionInDir({ path: this.templateDir, ext: 'doc' })
     },
     // 获取模板目录下的当前模型对应csv文件
-    modelDatasource: function() {
+    modelDatasource: function () {
       return this.resolvePath(this.modelName, 'csv')
     },
     // 获取模板目录下的当前模型对应csv文件
-    docxAttach: function() {
+    docxAttach: function () {
       return this.resolvePath(this.modelName, 'docx')
     },
     // 获取模板目录下的默认csv文件
-    defaultDatasource: function() {
+    defaultDatasource: function () {
       return this.resolvePath('db', 'csv')
     },
     // 获取模板目录下默认Word模板
-    defaultTemplate: function() {
+    defaultTemplate: function () {
       return this.resolvePath('template', 'doc')
     },
     // 获取模板目录下自选Word模板
-    modelTemplate: function() {
+    modelTemplate: function () {
       return this.resolvePath(this.outputDocFile, 'doc')
     }
   },
   methods: {
-    resolvePath(fileName, fileExt) {
+    resolvePath (fileName, fileExt) {
       return join(this.templateDir, `${fileName}.${fileExt}`)
     },
     /**
      * 获取导入文件信息
      * @param e 事件
      */
-    getImportFile(e) {
+    getImportFile (e) {
       if (e.target.files) {
         this.importFileMeta = e.target.files[0]
       } else {
@@ -90,7 +90,7 @@ export default {
     /**
      * 导入数据函数
      */
-    attemptImport() {
+    attemptImport () {
       if (this.fileFormat === 'csv') {
         // this.importCSV()
         this.importExcel()
@@ -102,7 +102,7 @@ export default {
     /**
      * 导入数据函数
      */
-    async importCSV() {
+    async importCSV () {
       console.log(`导入${this.modelName}.csv文件...`)
       let data: any[] = await ImportCSV({
         file: this.importFileMeta,
@@ -111,7 +111,7 @@ export default {
       console.table(data)
       if (data.length) this.persistData(data)
     },
-    persistData(data) {
+    persistData (data) {
       if (!Array.isArray(data)) return
       if (this.modelName === '') return
       try {
@@ -124,7 +124,7 @@ export default {
         throw new Error(error)
       }
     },
-    resetData(data) {
+    resetData (data) {
       // Delete all data
       if (!Array.isArray(data)) return
       try {
@@ -145,7 +145,7 @@ export default {
     /**
      * 导出数据函数
      */
-    attemptExport(item) {
+    attemptExport (item) {
       if (this.fileFormat === 'csv') {
         this.exportCSV(item)
       } else if (this.fileFormat === 'xls' || this.fileFormat === 'xlsx') {
@@ -154,7 +154,7 @@ export default {
         this.exportDocx()
       }
     },
-    exportCSV(item) {
+    exportCSV (item) {
       console.log(`导出到${this.modelDatasource}文件...`)
       try {
         GenerateCSV({
@@ -189,7 +189,7 @@ export default {
     /**
      * 导出文件修改标题函数
      */
-    changeCSVHeader() {
+    changeCSVHeader () {
       console.log(`更新${this.modelDatasource}文件的列标题...`)
       if (existsSync(this.modelDatasource)) {
         try {
@@ -208,7 +208,7 @@ export default {
     /**
      * 导出文件备份函数
      */
-    copyModelNameCSV() {
+    copyModelNameCSV () {
       console.log('备份为db.csv文件...')
       if (existsSync(this.modelDatasource)) {
         try {
@@ -221,7 +221,7 @@ export default {
     /**
      * 导出文件打印合并函数
      */
-    async mergeWordApp() {
+    async mergeWordApp () {
       this.copyModelNameCSV()
       if (existsSync(this.modelTemplate)) {
         shell.showItemInFolder(this.modelTemplate)
@@ -233,7 +233,7 @@ export default {
     /**
      * 导出到Excel文件
      */
-    exportExcel(item) {
+    exportExcel (item) {
       /* show a file-open dialog and read the first selected file */
       let workbook = this.workbook
       let filename = this.importFileMeta.path
@@ -253,7 +253,7 @@ export default {
     /**
      * 打开Excel文件
      */
-    importExcel() {
+    importExcel () {
       // 电子表对象
       try {
         this.workbook = XLSX.readFile(this.importFileMeta.path)
@@ -267,7 +267,7 @@ export default {
       }
       console.log('打开Excel文件，已读取数据')
     },
-    writeExcelFile({ workbook, filename, sheetName, data, options }) {
+    writeExcelFile ({ workbook, filename, sheetName, data, options }) {
       // 创建新的电子表格
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
       // 添加电子表格到文件中
@@ -275,7 +275,7 @@ export default {
       // 写入文件
       XLSX.writeFile(workbook, filename, options)
     },
-    saveExcelAs(worksheet: XLSX.WorkSheet, type = 'csv') {
+    saveExcelAs (worksheet: XLSX.WorkSheet, type = 'csv') {
       let output
       if (type === 'csv') {
         output = XLSX.utils.sheet_to_csv(worksheet, {
@@ -288,14 +288,14 @@ export default {
     /**
      * 拖放导入
      */
-    async handleDrop(e) {
+    async handleDrop (e) {
       e.stopPropagation()
       e.preventDefault()
       const reader = (window as any).reader
       let rABS = true
       let files = e.dataTransfer.files
       this.importFileMeta = files[0]
-      reader.onload = async function(e) {
+      reader.onload = async function (e) {
         let data = e.target.result
         if (!rABS) data = new Uint8Array(data)
         let workbook = XLSX.read(data, { type: rABS ? 'binary' : 'array' })
@@ -306,7 +306,7 @@ export default {
       if (rABS) reader.readAsBinaryString(this.importFileMeta.path)
       else reader.readAsArrayBuffer(this.importFileMeta.path)
     },
-    exportDocx(data) {
+    exportDocx (data) {
       let defaultPath = join(this.attachDir, this.modelName, 'test.docx')
       let filename = this.importFileMeta.path || defaultPath
 
@@ -315,7 +315,7 @@ export default {
       } catch (error) {
         throw new Error(error)
       }
-      
+
       try {
         this.document = new Document()
         console.log(filename)

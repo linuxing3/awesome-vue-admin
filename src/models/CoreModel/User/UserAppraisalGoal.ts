@@ -9,7 +9,7 @@ export default class UserAppraisalGoal extends BaseModel {
       kra: this.string('Business'),
       perWeightage: this.string('Daniel'),
       score: this.string('male'),
-      score_earned: this.string('2009-09-09')
+      score_earned: this.string('80')
     }
   }
 }

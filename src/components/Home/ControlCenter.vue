@@ -9,15 +9,15 @@
         wrap
       >
       <v-flex
-        v-show="false"
-        xs12
-        sm12
-        md12
-        lg12
+          v-show="false"
+          xs12
+          sm12
+          md12
+          lg12
         >
         <v-img
-          src="nature/n7.jpeg"
-          height="280">
+            src="nature/n7.jpeg"
+            height="280">
         </v-img>
       </v-flex>
       <v-flex

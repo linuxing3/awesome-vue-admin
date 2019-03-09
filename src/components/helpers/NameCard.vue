@@ -1,6 +1,6 @@
 <template>
-  <v-card 
-    class="ma-3">
+  <v-card
+      class="ma-3">
     <v-sheet
         class="v-sheet--offset mx-auto"
         elevation="12"
@@ -12,7 +12,7 @@
           height="60"
         >
         <span
-          class="title white--text font-weight-light">{{title.toUpperCase()}}</span>
+            class="title white--text font-weight-light">{{title.toUpperCase()}}</span>
       </v-sheet>
     </v-sheet>
 

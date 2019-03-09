@@ -1,13 +1,13 @@
 <template>
   <v-container
-    fluid
-    fill-height>
+      fluid
+      fill-height>
     <v-layout
         class="justify-center ma-3"
       >
-      <v-btn 
-        @click="saveDocument"
-        class="primary">
+      <v-btn
+          @click="saveDocument"
+          class="primary">
         Save
       </v-btn>
       <v-divider />

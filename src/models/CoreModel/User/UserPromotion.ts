@@ -17,7 +17,7 @@ export default class UserPromotion extends BaseModel {
       _id: this.increment(),
       name: this.string('secretary'),
       department: this.string('department'),
-      promotionDate: this.string('promotionDate'),
+      promotionDate: this.string('2009-09-09'),
       promotionDetails: this.string('promotionDetails')
     }
   }

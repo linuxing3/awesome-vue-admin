@@ -27,9 +27,9 @@
         <v-card>
           <v-card-title>
             <v-spacer></v-spacer>
-            <span 
-              class="title font-weight-light green--text ml-5 ">
-                {{ importFileMeta.path || "选取导入文件 -> " }}
+            <span
+                class="title font-weight-light green--text ml-5 ">
+              {{ importFileMeta.path || "选取导入文件 -> " }}
             </span>
             <v-btn
                 icon
@@ -43,9 +43,9 @@
           </v-card-title>
           <v-card-actions>
             <span
-              v-if="this.importFileMeta.path"
-              class="title font-weight-light green--text ml-5 ">
-                开始正式导入
+                v-if="this.importFileMeta.path"
+                class="title font-weight-light green--text ml-5 ">
+              开始正式导入
             </span>
             <v-spacer></v-spacer>
             <v-btn

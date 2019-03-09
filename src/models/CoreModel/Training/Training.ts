@@ -31,10 +31,10 @@ export default class Training extends BaseModel {
       trainer: this.string('trainer'),
       source: this.string('source'),
       location: this.string('location'),
-      startDate: this.string('startDate'),
-      endDate: this.string('endDate'),
-      startTime: this.string('startTime'),
-      endTime: this.string('endTime'),
+      startDate: this.string('priority'),
+      endDate: this.string('priority'),
+      startTime: this.string('09:00'),
+      endTime: this.string('11:00'),
       introduction: this.string('introduction'),
       participants: this.string('participants')
     }

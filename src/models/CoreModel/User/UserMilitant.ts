@@ -28,14 +28,14 @@ export default class Militant extends BaseModel {
       militantComission: this.string('CN'),
       militantRole: this.string('Secretary'),
       militantAdmissionDate: this.string('2009-09-09'),
-      militantFormalizationDate: this.string(''),
+      militantFormalizationDate: this.string('2009-09-09'),
       militanceStatus: this.string('normal'),
       telephone: this.string('1111111'),
       homeAddress: this.string('home'),
       looseContact: this.boolean(false),
       floating: this.boolean(false),
-      registerDate: this.string('registerDate'),
-      transferDate: this.string('transferDate')
+      registerDate: this.string('2009-09-09'),
+      transferDate: this.string('2009-09-09')
     }
   }
 }

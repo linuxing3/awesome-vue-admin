@@ -75,7 +75,7 @@ export default {
   },
   created () {
     this.$on('SELECT_MODEL', modelName => {
-      // go to 
+      // go to
       this.info(modelName)
     })
     window.databaseManager = this

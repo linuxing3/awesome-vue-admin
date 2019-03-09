@@ -34,9 +34,9 @@
               ></v-sparkline>
           </v-sheet>
 
-          <v-card-text 
-            @click="crud(item)"
-            class="pt-0">
+          <v-card-text
+              @click="crud(item)"
+              class="pt-0">
             <div class="title font-weight-light mb-2">{{item.entity.toUpperCase()}}</div>
             <div class="subheading font-weight-light grey--text">Total Records: {{item.count()}}</div>
             <v-divider class="my-2"></v-divider>

@@ -6,11 +6,11 @@
       <v-breadcrumbs-item
           to="/home">
         <v-icon
-          :color="$vuetify.theme.primary"
-          dark
-          large
-          fab>
-         home
+            :color="$vuetify.theme.primary"
+            dark
+            large
+            fab>
+          home
         </v-icon>
       </v-breadcrumbs-item>
       <v-breadcrumbs-item

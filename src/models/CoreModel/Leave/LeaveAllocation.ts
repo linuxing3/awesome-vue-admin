@@ -24,14 +24,13 @@ export default class LeaveAllocation extends BaseModel {
       applicant: this.string('applicant'),
       department: this.string('department'),
       type: this.string('type'),
-      fromDate: this.string('fromDate'),
-      toDate: this.string('toDate'),
+      fromDate: this.string('2019-03-08'),
+      toDate: this.string('2019-03-08'),
       newLeaveAllocated: this.string('newLeaveAllocated'),
       carryForward: this.string('carryForward'),
       unusedLeaves: this.string('unusedLeaves'),
       notes: this.string('notes'),
       description: this.string('description')
-
     }
   }
 }

@@ -21,9 +21,9 @@ export default class ProjectTask extends BaseModel {
       description: this.string('description'),
       status: this.string('status'),
       taskWeight: this.string('taskWeight'),
-      startDate: this.string('startDate'),
-      endDate: this.string('startDate'),
-      priority: this.string('startDate')
+      startDate: this.string('2019-03-08'),
+      endDate: this.string('2019-03-08'),
+      priority: this.string('priority')
     }
   }
 }
