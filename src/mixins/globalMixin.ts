@@ -39,20 +39,11 @@ export const validateMixin = {
           (window as any).CrudTable.$emit('SET_MODEL', blueprint)
       }, 500)
     },
-    info (modelName) {
-      let params = {
-        blueprint: modelName,
-        id: 1
-      }
+    info (params) {
       this.$router.push({
         name: 'info',
         params
       })
-      // update model
-      setTimeout(() => {
-        (window as any).CrudForm &&
-          (window as any).CrudForm.$emit('SET_MODEL', params)
-      }, 500);
     },
     truncateText (text) {
         let count = words(text)

@@ -65,7 +65,7 @@ export default {
         '是否导出为Word？'
       )
       if (r) {
-        this.exportDocx(quill)
+        this.exportDocx(this.content)
       } else {
         alert('跳过...')
       }

@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { last } from 'lodash'
-import { copyFileSync, existsSync, writeFileSync } from 'fs'
+import { copyFileSync, existsSync, writeFileSync, mkdirSync } from 'fs'
 import { remote, shell } from 'electron'
 import XLSX from 'xlsx'
 import { Document, Paragraph, TextRun, Packer } from 'docx'
@@ -307,8 +307,15 @@ export default {
       else reader.readAsArrayBuffer(this.importFileMeta.path)
     },
     exportDocx(data) {
-      let defaultPath = join(this.attachDir, this.modelName, 'test.doc')
+      let defaultPath = join(this.attachDir, this.modelName, 'test.docx')
       let filename = this.importFileMeta.path || defaultPath
+
+      try {
+        mkdirSync(join(this.attachDir, this.modelName))
+      } catch (error) {
+        throw new Error(error)
+      }
+      
       try {
         this.document = new Document()
         console.log(filename)

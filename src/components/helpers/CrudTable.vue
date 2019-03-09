@@ -199,6 +199,7 @@
           slot="items"
           slot-scope="props">
         <tr
+            @click="showInfo(props.item)"
             :active="props.selected">
           <td>
             <v-checkbox
@@ -275,19 +276,12 @@ export default {
         this.fetch()
       },
       immediate: true
-    },
-    editedItem (val) {
-      this.editedItem = val
     }
   },
 
   created () {
     this.$on('SET_MODEL', (name) => {
       this.modelName = name
-    })
-    this.$on('SET_DATE', (date) => {
-      console.log(date)
-      this.editedItem = { ...this.editedItem, date }
     })
     window.CrudTable = this
   },
@@ -299,11 +293,6 @@ export default {
       this.dialog = true
     },
 
-    removeItem (item) {
-      const index = this.items.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
-    },
-
     close () {
       this.dialog = false
       setTimeout(() => {
@@ -312,11 +301,6 @@ export default {
     },
 
     save () {
-      if (this.editedIndex > -1) {
-        // Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        // this.items.push(this.editedItem)
-      }
       this.close()
     },
 
@@ -334,16 +318,13 @@ export default {
       }
     },
 
-    entityChanged (entityName) {
-      this.modelName = entityName
-      this.$forceUpdate()
-    },
-
-    saveDate (field, editedItem) {
-      let fieldName = field.value
-      let dateControl = this.$refs[fieldName][0]
-      let date = this.editedItem[fieldName]
-      dateControl.save(date)
+    showInfo (item) {
+      let params = {
+        blueprint: this.modelName,
+        editedItem: item,
+        id: item._id
+      }
+      this.info(params)
     }
   }
 }

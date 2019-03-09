@@ -3,45 +3,20 @@
     <v-container
         id="entity-dropdown">
     </v-container>
-    <v-toolbar
-        flat
-        color="white">
-      <v-overflow-btn
-          class="heading mt-3"
-          :items="entities"
-          item-value="entityName"
-          v-model="modelName"
-          label="Entities"
-          target="#entity-dropdown"
-        ></v-overflow-btn>
-      <v-spacer></v-spacer>
-      <v-text-field
-          class="ml-5 mr-5"
-          label="Search"
-          prepend-icon="search"
-          v-model="filter.search">
-      </v-text-field>
-      <!-- slots of buttons -->
-      <slot
-          name="export"
-          :modelName="modelName"
-          :items="items"></slot>
-      <slot
-          name="import"
-          :modelName="modelName"></slot>
-    </v-toolbar>
-    <!-- end slots -->
     <v-card>
       <v-card-title
-          class="success lighten-1 white--text"
+          class="success white--text"
           dark>
-        <span class="headline">{{ formTitle }} {{ modelName }}</span>
+        <span 
+          class="headline font-weight-light">
+            {{ formTitle }} {{ modelName }}
+        </span>
         <v-spacer />
         <v-btn
             fab
             small
             color="red darken-2 white--text"
-            @click="exportDocx"
+            @click="exportDocx(modelName)"
             icon>
           <v-icon>file_copy</v-icon>
         </v-btn>
@@ -141,7 +116,7 @@ export default {
   components: {},
   mixins: [crudMixin, exportMixin],
   data: () => ({
-    modelName: '',
+    modelName: 'user',
     modal: false
   }),
 
@@ -151,26 +126,18 @@ export default {
     }
   },
 
-  watch: {
-    editedItem (val) {
-      this.editedItem = val
-    }
+  mounted() {
+    let { blueprint, editedItem } = this.$route.params
+    this.modelName = blueprint
+    this.setEditedItem(editedItem)
   },
 
   created () {
-    this.$on('SET_MODEL', (params) => {
-      this.modelName = params.blueprint
-      this.editItem = this.Model.find(params.id)
-    })
     window.CrudForm = this
   },
 
   methods: {
-    editItem (item) {
-      this.setEditedItem(item)
-    },
     close () {
-      this.dialog = false
       setTimeout(() => {
         this.reset()
       }, 300)
