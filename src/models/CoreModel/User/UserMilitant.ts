@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel'
 
-export interface IMilitant {
+export interface IUserMilitant {
   _id: string
   name: string
   admistionDate: string
@@ -9,8 +9,8 @@ export interface IMilitant {
   transferDate: string
 }
 
-export default class Militant extends BaseModel {
-  static entity = 'militant'
+export default class UserMilitant extends BaseModel {
+  static entity = 'userMilitant'
 
   static fields () {
     return {
