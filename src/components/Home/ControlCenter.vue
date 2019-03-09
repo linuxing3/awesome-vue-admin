@@ -23,7 +23,7 @@
       <v-flex
           v-for="(item, index) in items"
           :key="index"
-          @click="crud(item)"
+          @click="crud({ blueprint: item.entity })"
           xs12
           md4
           sm4

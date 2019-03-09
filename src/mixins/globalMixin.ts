@@ -26,18 +26,11 @@ export const validateMixin = {
     isAdmin () {
       return this.currentItem.role === 'admin'
     },
-    crud (model) {
-      let blueprint = model.entity
+    crud (params) {
       this.$router.push({
         name: 'crud',
-        params: {
-          blueprint
-        }
+        params
       })
-      setTimeout(() => {
-        ;(window as any).CrudTable &&
-          (window as any).CrudTable.$emit('SET_MODEL', blueprint)
-      }, 500)
     },
     info (params) {
       this.$router.push({

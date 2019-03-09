@@ -199,7 +199,6 @@
           slot="items"
           slot-scope="props">
         <tr
-            @click="showInfo(props.item)"
             :active="props.selected">
           <td>
             <v-checkbox
@@ -267,13 +266,21 @@ export default {
   },
 
   watch: {
-    dialog (val) {
-      val || this.close()
+    dialog (showOrNot) {
+      showOrNot || this.close()
     },
+    // watch modelName to refetch new data
     modelName: {
-      handler (val) {
+      handler (newModelName) {
         this.reset()
         this.fetch()
+      },
+      immediate: true
+    },
+    // watch params.blueprint to update modelName
+    "$route.params": {
+      handler (params) {
+        this.modelName = params.blueprint
       },
       immediate: true
     }
@@ -302,6 +309,13 @@ export default {
 
     save () {
       this.close()
+    },
+
+    saveDate (field, editedItem) {
+      let fieldName = field.value
+      let dateControl = this.$refs[fieldName][0]
+      let newDate = this.editedItem[fieldName]
+      dateControl.save(newDate)
     },
 
     toggleAll () {

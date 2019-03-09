@@ -126,10 +126,16 @@ export default {
     }
   },
 
-  mounted () {
-    let { blueprint, editedItem } = this.$route.params
-    this.modelName = blueprint
-    this.setEditedItem(editedItem)
+  watch: {
+    // watch params.blueprint to update modelName
+    "$route.params": {
+      handler (params) {
+        let { blueprint, editedItem } = params
+        this.modelName = blueprint
+        this.setEditedItem(editedItem)
+      },
+      immediate: true
+    }
   },
 
   created () {
@@ -141,6 +147,13 @@ export default {
       setTimeout(() => {
         this.reset()
       }, 300)
+    },
+    
+    saveDate (field, editedItem) {
+      let fieldName = field.value
+      let dateControl = this.$refs[fieldName][0]
+      let newDate = this.editedItem[fieldName]
+      dateControl.save(newDate)
     }
   }
 }

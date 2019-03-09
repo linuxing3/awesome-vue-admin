@@ -35,7 +35,7 @@
           </v-sheet>
 
           <v-card-text
-              @click="crud(item)"
+              @click="crud({ blueprint: item.entity })"
               class="pt-0">
             <div class="title font-weight-light mb-2">{{item.entity.toUpperCase()}}</div>
             <div class="subheading font-weight-light grey--text">Total Records: {{item.count()}}</div>

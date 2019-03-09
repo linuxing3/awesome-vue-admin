@@ -6,7 +6,7 @@
 
 <script>
 import DefaultLayout from '@/layout/default.vue'
-import PlayComponent from '@/components/helpers/SpeedDial.vue'
+import PlayComponent from '@/components/examples/cards/twitterCard'
 
 export default {
   components: {

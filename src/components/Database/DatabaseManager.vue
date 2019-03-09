@@ -76,7 +76,7 @@ export default {
   created () {
     this.$on('SELECT_MODEL', modelName => {
       // go to
-      this.info(modelName)
+      this.crud({ blueprint: modelName })
     })
     window.databaseManager = this
   },
