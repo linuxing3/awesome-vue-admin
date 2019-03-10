@@ -347,8 +347,8 @@ export default {
         this.document = new Document()
         // 创建新的文档或使用默认文档
         Object.keys(data).map(key => {
-          let p = new Paragraph(key)
-          let text = new TextRun(data[key])
+          let p = new Paragraph(key).heading1().center()
+          let text = new TextRun(data[key]).font('仿宋').size(16)
           p.addRun(text)
           // 添加段落到文件中
           this.document.addParagraph(p)
