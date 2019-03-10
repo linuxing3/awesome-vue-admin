@@ -21,9 +21,9 @@
         </v-img>
       </v-flex>
       <v-flex
-          v-for="(item, index) in items"
+          v-for="(model, index) in models"
           :key="index"
-          @click="crud({ blueprint: item.entity })"
+          @click="crud({ blueprint: model.entity })"
           xs12
           md4
           sm4
@@ -31,9 +31,9 @@
         >
         <NameCard
             :imgPath="computeBg10"
-            :title=" tryT('entity.' + item.entity) "
-            :item="item"
-            :subSection="item.meta.modelName"
+            :title=" tryT('entity.' + model.entity) "
+            :item="model"
+            :subSection="model.entity"
             :color="$vuetify.theme.primary"
           >
         </NameCard>
@@ -60,15 +60,7 @@ export default {
       panel: [true, false],
       sections: [ sections[0] ],
       currentSection: '',
-      items: models
-    }
-  },
-  watch: {
-    currentSection: {
-      handler: function (val) {
-        this.count()
-      },
-      immediate: true
+      models
     }
   },
   computed: {
@@ -89,7 +81,7 @@ export default {
       })
       console.log(Object.keys(this.items).length)
     },
-    count () {
+    countModels () {
       console.log(Object.keys(this.items).length)
     }
   }

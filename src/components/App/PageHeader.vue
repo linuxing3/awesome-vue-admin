@@ -8,14 +8,13 @@
         <v-icon
             :color="$vuetify.theme.primary"
             dark
-            large
             fab>
           home
         </v-icon>
       </v-breadcrumbs-item>
       <v-breadcrumbs-item
           :to="'/crud/' + subRoute">
-        <h1 class="title text-capitalize">
+        <h1 class="title text-capitalize font-weight-light">
           {{subRoute}}
         </h1>
       </v-breadcrumbs-item>

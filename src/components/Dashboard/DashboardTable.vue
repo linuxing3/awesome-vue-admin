@@ -26,19 +26,24 @@
               max-width="calc(100% - 32px)"
             >
             <v-sparkline
-                :labels="labels"
-                :value="value"
+                :fill="fill"
+                :gradient="gradient"
+                :smooth="radius || false"
+                :labels="['first', 'total']"
+                :value="[ 0, item.count() ]"
                 color="white"
                 line-width="2"
-                padding="16"
+                :padding="padding"
               ></v-sparkline>
           </v-sheet>
 
           <v-card-text
               @click="crud({ blueprint: item.entity })"
               class="pt-0">
-            <div class="title font-weight-light mb-2">{{item.entity.toUpperCase()}}</div>
-            <div class="subheading font-weight-light grey--text">Total Records: {{item.count()}}</div>
+            <div class="title text-capitalize font-weight-bold mb-2">{{item.entity}}</div>
+            <span class="font-weight-light grey--text">Total Records: </span>
+            <v-spacer />
+            <span class="display-1 font-weight-bold grey--text">{{item.count()}}</span>
             <v-divider class="my-2"></v-divider>
           </v-card-text>
 
@@ -62,20 +67,30 @@
 import { pickBy, mapKeys } from 'lodash'
 import models from '@/models'
 
+const gradients = [
+  ['#222'],
+  ['#42b3f4'],
+  ['red', 'orange', 'yellow'],
+  ['purple', 'violet'],
+  ['#00c6ff', '#F0F', '#FF0'],
+  ['#f72047', '#ffd200', '#1feaea']
+]
+
 export default {
   data: () => ({
+    fill: true,
+    gradient: gradients[1],
+    gradients,
+    padding: 8,
+    radius: 10,
     items: models,
     labels: [
-      'a',
-      'b',
-      'c',
-      'd'
+      'first',
+      'last'
     ],
     value: [
-      200,
-      675,
-      410,
-      390
+      0,
+      10
     ]
   }),
   methods: {}

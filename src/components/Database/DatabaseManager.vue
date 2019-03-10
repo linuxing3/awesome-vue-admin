@@ -8,27 +8,19 @@
           row>
         <v-flex
             xs12
-            md6
-            sm6
-            class="mt-2">
-          <div>
-            <h1 class="heading red--text underline--text">
-              <v-icon color="red">star</v-icon>
-              {{ modelName  }}
-            </h1>
-          </div>
-        </v-flex>
-        <v-flex
-            xs12
-            md6
-            sm6>
+            md4
+            sm4
+            class="mt-2 ml-5">
+          <h1 class="primary--text font-weight-bold">
+            {{ modelName  }}
+          </h1>
+          <v-spacer />
           <v-text-field
-              class="ml-5 mr-5"
+              class="mt-2 ml-2"
               label="Search"
               prepend-icon="search"
               v-model="filter.search" />
         </v-flex>
-        <v-divider></v-divider>
         <v-flex
             xs12
             md12

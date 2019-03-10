@@ -12,19 +12,15 @@
           height="60"
         >
         <span
-            class="title text-capitalize white--text font-weight-light">{{title}}</span>
+            class="title text-capitalize white--text font-weight-bold">{{ title }}</span>
       </v-sheet>
     </v-sheet>
 
+    <v-divider />
+
     <v-card-actions>
       <span
-          class="grey--text">选择功能板块</span>
-      <v-spacer></v-spacer>
-      <v-btn
-          @click="crud(item)"
-          icon>
-        <v-icon :color="color">edit</v-icon>
-      </v-btn>
+          class="pa-3 grey--text font-weight-light">Model Name: {{ subSection }}</span>
     </v-card-actions>
   </v-card>
 </template>

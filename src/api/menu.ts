@@ -2,7 +2,7 @@
 const mainMenu = [
   { header: '开始' },
   {
-    title: '模块',
+    title: '功能中心',
     name: 'home',
     group: 'apps',
     icon: 'notes',
@@ -18,14 +18,14 @@ const mainMenu = [
   // injected
   { header: '系统' },
   {
-    title: '数据表',
+    title: '数据',
     group: 'apps',
     icon: 'table_chart',
     name: 'database',
     color: 'black'
   },
   {
-    title: '演示场',
+    title: '图库',
     group: 'apps',
     icon: 'fastfood',
     name: 'play',
