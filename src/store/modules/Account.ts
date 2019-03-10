@@ -12,7 +12,8 @@ const state = {
     password: 'admin',
     email: 'admin@mfa.gov.cn',
     hash: '',
-    role: 'manager'
+    role: 'manager',
+    avatar: 'avatar/man_1.jpg'
   },
   currentItem: {},
   loggedIn: false,
@@ -38,7 +39,7 @@ const mutations: any = {
 const AccountActions = {
   // 创建初始化用户
   async init (ctx: ActionContext<any, any>) {
-    let { name, password, email, role } = ctx.state.defaultAccount
+    let { name, password, email, role, avatar } = ctx.state.defaultAccount
 
     console.log('检查默认账户是否存在')
     await (Account as any).$fetch()
@@ -53,7 +54,8 @@ const AccountActions = {
         password,
         email,
         role,
-        hash
+        hash,
+        avatar
       }
 
       await (Account as any).$create({ data: accountInfo })

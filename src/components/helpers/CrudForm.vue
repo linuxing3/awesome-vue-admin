@@ -7,9 +7,19 @@
       <v-card-title
           class="success white--text"
           dark>
+        <v-avatar
+            size="256"
+          >
+          <img
+              :src=" editedItem.avatar || 'avatar/man_1.jpg' "
+              alt="Admin Panel"
+              width="200"
+              height="200">
+        </v-avatar>
+        <v-spacer />
         <span
-            class="headline font-weight-light">
-          {{ formTitle }} {{ modelName }}
+            class="display-3 font-weight-bold">
+          {{ editedItem.name }}
         </span>
         <v-spacer />
         <v-btn
@@ -128,7 +138,7 @@ export default {
 
   watch: {
     // watch params.blueprint to update modelName
-    "$route.params": {
+    '$route.params': {
       handler (params) {
         let { blueprint, editedItem } = params
         this.modelName = blueprint
@@ -148,7 +158,6 @@ export default {
         this.reset()
       }, 300)
     },
-    
     saveDate (field, editedItem) {
       let fieldName = field.value
       let dateControl = this.$refs[fieldName][0]

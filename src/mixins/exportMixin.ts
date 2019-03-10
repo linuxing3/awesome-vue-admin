@@ -346,7 +346,7 @@ export default {
       try {
         // 创建新的文档或使用默认文档
         this.document = new Document({
-          creator: "cnve",
+          creator: 'cnve',
           description: `Attachment of model ${this.modelName}`,
           title: this.modelName
         })

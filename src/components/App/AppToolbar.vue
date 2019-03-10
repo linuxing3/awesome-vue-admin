@@ -52,32 +52,44 @@
   </v-toolbar>
 </template>
 <script>
+import { get } from 'vuex-pathify'
 import { toggleFullScreen } from '@/util'
 import { join } from 'path'
 export default {
   name: 'app-toolbar',
-  data: () => ({
-    baseUrl: process.env.BASE_URL,
-    items: [
-      {
-        icon: 'settings',
-        href: '#',
-        title: '个人设置',
-        click (e) {
-          window.getApp.$emit('APP_ACCOUNTSETTING')
+  data () {
+    return {
+      baseUrl: process.env.BASE_URL,
+      items: [
+        {
+          icon: 'settings',
+          href: '#',
+          title: '个人设置',
+          click: (e) => {
+            this.$router.push({
+              name: 'info',
+              params: {
+                type: 'edit',
+                editedItem: this.currentItem,
+                blueprint: 'account',
+                id: this.currentItem.id || 0
+              }
+            })
+          }
+        },
+        {
+          icon: 'fullscreen_exit',
+          href: '#',
+          title: '登出',
+          click: (e) => {
+            window.getApp.$emit('APP_LOGOUT')
+          }
         }
-      },
-      {
-        icon: 'fullscreen_exit',
-        href: '#',
-        title: '登出',
-        click (e) {
-          window.getApp.$emit('APP_LOGOUT')
-        }
-      }
-    ]
-  }),
+      ]
+    }
+  },
   computed: {
+    currentItem: get('entities/account/currentItem'),
     computeAvatar: () => join(process.env.BASE_URL, 'avatar/mf-avatar.svg'),
     toolbarColor: () => this.$vuetify.options.extra.mainNav,
     notificationCount: () => Notification.query().count()

@@ -7,6 +7,7 @@ export interface Event {
   snackbar?: any
   $router?: any
   $message?: any
+  $store?: any
   editing?: boolean
   model?: any
 }
@@ -66,7 +67,14 @@ const events: Event[] = [
   {
     name: 'APP_ACCOUNTSETTING',
     callback: function (e: any) {
-      this.$router.push({ path: '/account' })
+      let { currentItem } = this.$store.state.account
+      this.$router.push({
+        name: 'info',
+        params: {
+          blueprint: 'account',
+          id: currentItem.id || 0
+        }
+      })
     }
   },
   {

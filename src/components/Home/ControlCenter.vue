@@ -31,7 +31,7 @@
         >
         <NameCard
             :imgPath="computeBg10"
-            :title="item.entity"
+            :title=" tryT('entity.' + item.entity) "
             :item="item"
             :subSection="item.meta.modelName"
             :color="$vuetify.theme.primary"
@@ -48,10 +48,13 @@ import { pickBy, mapKeys } from 'lodash'
 import { sections } from '@/api/globals'
 
 import models from '@/models'
+import crudMixin from '@/mixins/crudMixin'
 
 export default {
+  mixins: [ crudMixin ],
   data () {
     return {
+      modelName: 'account',
       show: true,
       cardText: '请查看手册, 了解具体使用方法',
       panel: [true, false],

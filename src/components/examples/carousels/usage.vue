@@ -1,5 +1,7 @@
 <template>
-  <v-carousel>
+  <v-carousel
+      class="mt-5"
+    >
     <v-carousel-item
         v-for="(item,i) in items"
         :key="i"
@@ -14,16 +16,31 @@ export default {
     return {
       items: [
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+          src: 'bg/1.jpg'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+          src: 'bg/2.jpg'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+          src: 'bg/3.jpg'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+          src: 'bg/4.jpg'
+        },
+        {
+          src: 'bg/5.jpg'
+        },
+        {
+          src: 'bg/6.jpg'
+        },
+        {
+          src: 'bg/7.jpg'
+        },
+        {
+          src: 'bg/8.jpg'
+        },
+        {
+          src: 'bg/9.jpg'
         }
       ]
     }

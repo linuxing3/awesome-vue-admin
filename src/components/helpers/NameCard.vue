@@ -12,7 +12,7 @@
           height="60"
         >
         <span
-            class="title white--text font-weight-light">{{title.toUpperCase()}}</span>
+            class="title text-capitalize white--text font-weight-light">{{title}}</span>
       </v-sheet>
     </v-sheet>
 

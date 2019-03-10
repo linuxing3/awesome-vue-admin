@@ -39,3 +39,35 @@ export const accountModels = genERPModels(models, 'accounts')
 export const educationModels = genERPModels(models, 'education')
 export const healthcareModels = genERPModels(models, 'healthcare')
 export const stockModels = genERPModels(models, 'stock')
+
+export const publicAssets = {
+  backgrounds: [
+    { src: 'bg/1.jpg' },
+    { src: 'bg/2.jpg' },
+    { src: 'bg/3.jpg' },
+    { src: 'bg/4.jpg' },
+    { src: 'bg/5.jpg' },
+    { src: 'bg/6.jpg' },
+    { src: 'bg/7.jpg' }
+  ],
+  avatars: [
+    { src: 'avatar/man_1.jpg' },
+    { src: 'avatar/man_2.jpg' },
+    { src: 'avatar/man_3.jpg' },
+    { src: 'avatar/man_5.jpg' },
+    { src: 'avatar/a1.jpg' },
+    { src: 'avatar/a2.jpg' },
+    { src: 'avatar/a3.jpg' },
+    { src: 'avatar/a4.jpg' }
+  ],
+  nature: [
+    { src: 'nature/n1.jpeg' },
+    { src: 'nature/n2.jpeg' },
+    { src: 'nature/n3.jpeg' },
+    { src: 'nature/n4.jpeg' },
+    { src: 'nature/n5.jpeg' },
+    { src: 'nature/n6.jpeg' },
+    { src: 'nature/n7.jpeg' },
+    { src: 'nature/n8.jpg' }
+  ]
+}

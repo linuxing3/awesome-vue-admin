@@ -1,50 +1,75 @@
 <template>
   <v-card
       class="elevation-1 pa-3 mt-5">
-    <v-card-text>
-      <div class="layout column align-center">
-        <v-avatar
-            size="256"
-          >
-          <img
-              src="avatar/man_1.jpg"
-              alt="Admin Panel"
-              width="200"
-              height="200">
-        </v-avatar>
+    <v-card-title>
+      <div
+          @click="chooseAvatar"
+          class="layout column align-center">
+
+        <v-layout
+            row
+            justify-center>
+          <v-dialog
+              v-model="dialog"
+              persistent
+              max-width="400">
+            <v-avatar
+                slot="activator"
+                size="256"
+              >
+              <img
+                  :src="model.avatar"
+                  alt="Admin Panel"
+                  width="200"
+                  height="200">
+            </v-avatar>
+
+            <v-card>
+              <v-card-title class="headline primary--text">
+                选择你的头像图片
+                <v-spacer />
+                <v-btn
+                    @click="dialog = false"
+                    flat>关闭</v-btn>
+              </v-card-title>
+              <v-card-text>
+                <PhotoGallery :items="avatars" />
+              </v-card-text>
+            </v-card>
+          </v-dialog>
+        </v-layout>
+
         <h1 class="flex my-4 primary--text">通用管理系统</h1>
       </div>
 
-    </v-card-text>
+    </v-card-title>
 
-    <v-responsive class="loginPanel">
-      <v-text-field
-          class="ml-5 mr-5"
-          v-model="model.name"
-          label="姓名"
-          type="text"
-          data-vv-name="model.name"
-          prepend-icon="contacts"
-          required
-        ></v-text-field>
-      <v-text-field
-          class="ml-5 mr-5"
-          v-model="model.password"
-          label="密码"
-          type="password"
-          data-vv-name="model.password"
-          prepend-icon="lock"
-          required
-        ></v-text-field>
-      <v-text-field
-          class="ml-5 mr-5"
-          v-model="model.email"
-          label="电子邮件"
-          type="email"
-          data-vv-name="model.email"
-          prepend-icon="email"
-        ></v-text-field>
-    </v-responsive>
+    <v-card-text>
+      <v-layout row>
+        <v-flex>
+          <v-text-field
+              class="ml-5 mr-5"
+              v-model="model.name"
+              label="姓名"
+              type="text"
+              data-vv-name="model.name"
+              prepend-icon="contacts"
+              required
+            ></v-text-field>
+        </v-flex>
+        <v-flex>
+          <v-text-field
+              class="ml-5 mr-5"
+              v-model="model.password"
+              label="密码"
+              type="password"
+              data-vv-name="model.password"
+              prepend-icon="lock"
+              required
+            ></v-text-field>
+        </v-flex>
+      </v-layout>
+    </v-card-text>
 
     <v-card-actions>
       <v-spacer />
@@ -77,20 +102,26 @@ import { join } from 'path'
 import Account from '@/models/CoreModel/Account/Account'
 import AppEvents from '@/util/event'
 
+import { publicAssets } from '@/api/globals'
+
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
+const { avatars } = publicAssets
 
 export default {
   data () {
     return {
       modelName: 'account',
       loading: false,
+      avatars,
+      dialog: false,
       model: {
         name: '',
         password: '',
         email: '',
         hash: '',
-        role: ''
+        role: 'user',
+        avatar: 'avatar/man_1.jpg'
       },
       snackbar: {
         show: false,
@@ -99,15 +130,32 @@ export default {
       }
     }
   },
+  watch: {
+    'model.name': {
+      handler (name) {
+        let account = Account.query()
+          .where('name', name).get()[0]
+        if (account !== undefined) {
+          this.model.avatar = account.avatar
+        }
+      },
+      immediate: false
+    }
+  },
   computed: {
     loggedIn: sync('entities/account/loggedIn')
   },
   mixins: [ crudMixin, exportMixin ],
   async created () {
     await this.init()
+
     AppEvents.forEach(item => {
       this.$on(item.name, item.callback)
     })
+    this.$on('select-photo', photo => {
+      this.chooseAvatar(photo.src)
+    })
+
     window.LoginForm = this
   },
   methods: {
@@ -141,6 +189,11 @@ export default {
         this.clearCache()
         this.$router.push('/login')
       }, 1000)
+    },
+    chooseAvatar (avatar) {
+      // choose avatar from photo gallery
+      this.model.avatar = avatar
+      this.dialog = false
     }
   }
 }
@@ -148,7 +201,7 @@ export default {
 <style scoped>
 #loginPanel {
   height: 50%;
-  width: 100%;
+  width: 50%;
   position: absolute;
   top: 0;
   left: 0;

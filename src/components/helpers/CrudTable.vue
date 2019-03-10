@@ -59,7 +59,7 @@
                 color="red darken-2 white--text"
                 @click="exportDocx(editedItem)"
                 icon>
-              <v-icon>file_copy</v-icon>
+              <v-icon>attach_file</v-icon>
             </v-btn>
             <slot
                 name="export"
@@ -153,14 +153,13 @@
         v-model="selected"
         :headers="headers"
         :items="items"
+        item-key="_id"
         :pagination.sync="pagination"
         select-all
-        item-key="name"
         class="elevation-1"
       >
       <template
-          slot="headerCell"
-          slot-scope="props">
+          v-slot:header-cell="props">
         <v-tooltip bottom>
           <span slot="activator">
             {{ props.header.text }}
@@ -171,8 +170,7 @@
         </v-tooltip>
       </template>
       <template
-          slot="headers"
-          slot-scope="props">
+          v-slot:headers="props">
         <tr>
           <th>
             <v-checkbox
@@ -196,14 +194,12 @@
         </tr>
       </template>
       <template
-          slot="items"
-          slot-scope="props">
+          v-slot:items="props">
         <tr
             :active="props.selected">
           <td>
             <v-checkbox
-                :input-value="props.selected"
-                @click.stop="props.selected = !props.selected"
+                v-model="props.selected"
                 primary
                 hide-details
               ></v-checkbox>
@@ -223,17 +219,18 @@
             </v-icon>
           </td>
           <td
+              class="text-truncate"
               v-for="field in headers"
               :key="field.value"
             >{{ truncateText(props.item[field.value]) }}</td>
         </tr>
       </template>
-      <template slot="no-data">
+      <template v-slot:no-data>
         <span class="heading">还没有信息，请点击右上角的按钮添加新的记录</span>
       </template>
-      <template slot="footer">
+      <template v-slot:footer>
         <td :colspan="headers.length">
-          共有<span class="heading1 red--text">{{ count }}</span>项记录
+          共有<span class="heading1 red--text">{{ count }}</span>项记录。选中<span class="heading1 red--text">{{ selected.length }}</span>项记录。
         </td>
       </template>
     </v-data-table>
@@ -253,7 +250,9 @@ export default {
     modelName: 'user',
     dialog: false,
     pagination: {
-      sortBy: 'name'
+      sortBy: '_id',
+      rowsPerPage: 25,
+      descending: true
     },
     selected: [],
     modal: false
@@ -278,7 +277,7 @@ export default {
       immediate: true
     },
     // watch params.blueprint to update modelName
-    "$route.params": {
+    '$route.params': {
       handler (params) {
         this.modelName = params.blueprint
       },

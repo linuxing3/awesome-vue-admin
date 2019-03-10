@@ -15,7 +15,7 @@
       </v-breadcrumbs-item>
       <v-breadcrumbs-item
           :to="'/crud/' + subRoute">
-        <h1 class="title">
+        <h1 class="title text-capitalize">
           {{subRoute}}
         </h1>
       </v-breadcrumbs-item>
@@ -33,6 +33,9 @@
 
 <script>
 export default {
+  created () {
+    window.PageHeader = this
+  },
   computed: {
     subRoute: function () {
       return this.$route.params.blueprint

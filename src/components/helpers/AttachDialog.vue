@@ -25,7 +25,7 @@
         <v-btn
             class="ml-3 mr-3"
             color="primary"
-            @click.native='openDocxFile'>Open Word File</v-btn>
+            @click.native='openDocxFile(item)'>Open Word File</v-btn>
         <v-btn
             class="ml-3 mr-3"
             color="primary lighten-1"

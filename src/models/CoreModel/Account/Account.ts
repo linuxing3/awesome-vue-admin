@@ -5,12 +5,13 @@ export default class Account extends BaseModel {
 
   static fields () {
     return {
-      _id: Model.increment(),
-      name: Model.string(''),
-      email: Model.string(''),
-      password: Model.string(''),
-      hash: Model.string(''),
-      role: Model.string('')
+      _id: this.increment(),
+      name: this.string(''),
+      email: this.string(''),
+      password: this.string(''),
+      hash: this.string(''),
+      role: this.string(''),
+      avatar: this.string('avatar/man_1.jpg')
     }
   }
 
