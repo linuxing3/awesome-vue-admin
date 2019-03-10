@@ -97,8 +97,8 @@
                       v-if="field.schema.type === 'v-date-picker'"
                       v-model="editedItem[field.value]"
                       :label="tryT(field.text) || field.text"
-                      hint="For example, 2009-09-09"
-                      mask="2009-09-09"
+                      max-width="300px"
+                      :hint=" 'Input' + field.text + ', like 2009-09-09'"
                     ></v-text-field>
                   <v-dialog
                       v-if="field.schema.type === 'date-picker'"
@@ -131,6 +131,7 @@
                       v-if="field.schema.type === 'v-text-field'"
                       max-width="300px"
                       v-model="editedItem[field.value]"
+                      :hint="'Input ' + field.text"
                       :label=" tryT(field.text) || field.text "></v-text-field>
                 </v-flex>
                 <!-- end form from schema  -->

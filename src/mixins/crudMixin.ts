@@ -23,7 +23,8 @@ export const generateHeaders = (field: string) => {
       type: 'v-date-picker',
       flex: 'layout row xs12 sm6 md3 gl3',
       label: 'Pick ' + field,
-      value: field
+      value: field,
+      placeholder: field
     }
   } else if (field === 'select') {
     return {
