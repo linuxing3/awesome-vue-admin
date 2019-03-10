@@ -1,7 +1,7 @@
 import { BaseModel } from '../../BaseModel'
 
-export default class User extends BaseModel {
-  static entity = 'user'
+export default class Department extends BaseModel {
+  static entity = 'department'
 
   static fields () {
     return {

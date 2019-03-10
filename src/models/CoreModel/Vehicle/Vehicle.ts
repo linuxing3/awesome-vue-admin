@@ -3,7 +3,7 @@ import { BaseModel } from '../../BaseModel'
 export interface IVehicle {
    _id: string;
    licensePlate: string;
-   make: string;
+   mark: string;
    model: string;
    details: string;
    lastOdometerValue: string;
@@ -30,8 +30,8 @@ export default class Vehicle extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      licensePlate: this.string('make'),
-      make: this.string('make'),
+      licensePlate: this.string('license'),
+      mark: this.string('mark'),
       model: this.string('model'),
       details: this.string('details'),
       lastOdometerValue: this.string('lastOdometerValue'),

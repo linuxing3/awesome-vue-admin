@@ -93,24 +93,28 @@
                       item-text="name"
                       item-value="_id"
                       :label=" tryT(field.text) || field.text"></v-select>
-                  <v-dialog
+                  <v-text-field
                       v-if="field.schema.type === 'v-date-picker'"
+                      v-model="editedItem[field.value]"
+                      :label="tryT(field.text) || field.text"
+                      hint="For example, 2009-09-09"
+                      mask="2009-09-09"
+                    ></v-text-field>
+                  <v-dialog
+                      v-if="field.schema.type === 'date-picker'"
                       :ref="field.value"
                       v-model="modal"
-                      :return-value.sync="editedItem[field.value]"
-                      persistent
-                      lazy
                       full-width
                       width="290px"
                     >
-                    <v-text-field
+                    <v-btn
+                        icon
                         slot="activator"
-                        v-model="editedItem[field.value]"
-                        :label="tryT(field.text) || field.text"
-                        append-icon="event"
-                        readonly
-                      ></v-text-field>
+                      >
+                      <v-icon>event</v-icon>
+                    </v-btn>
                     <v-date-picker
+                        v-show="false"
                         v-model="editedItem[field.value]"
                         scrollable>
                       <v-spacer></v-spacer>
@@ -120,7 +124,7 @@
                       <v-btn
                           flat
                           color="primary"
-                          @click="saveDate(field, editedItem)">OK</v-btn>
+                          @click="saveDate(field.value, editedItem)">OK</v-btn>
                     </v-date-picker>
                   </v-dialog>
                   <v-text-field
@@ -255,7 +259,8 @@ export default {
       descending: true
     },
     selected: [],
-    modal: false
+    modal: false,
+    dateControl: null
   }),
 
   computed: {
@@ -267,6 +272,9 @@ export default {
   watch: {
     dialog (showOrNot) {
       showOrNot || this.close()
+    },
+    modal (showOrNot) {
+      this.$nextTick()
     },
     // watch modelName to refetch new data
     modelName: {
@@ -309,12 +317,14 @@ export default {
     save () {
       this.close()
     },
-
-    saveDate (field, editedItem) {
-      let fieldName = field.value
-      let dateControl = this.$refs[fieldName][0]
+    // TODO 动态生成的多个日期选择器，在保存时refs自动跳到下一个
+    saveDate (fieldName, editedItem) {
+      console.log(fieldName)
+      this.dateControl = this.$refs[fieldName][0]
+      console.log(this.dateControl)
       let newDate = this.editedItem[fieldName]
-      dateControl.save(newDate)
+      this.dateControl.save(newDate)
+      this.dateControl = null
     },
 
     toggleAll () {
