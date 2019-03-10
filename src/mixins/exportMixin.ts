@@ -1,5 +1,5 @@
 import { join } from 'path'
-import { last } from 'lodash'
+import { last, uniqueId } from 'lodash'
 import { copyFileSync, existsSync, writeFileSync, mkdirSync } from 'fs'
 import { remote, shell } from 'electron'
 import XLSX from 'xlsx'
@@ -17,6 +17,7 @@ export default {
       outputDocFile: 'template',
       workbook: null,
       document: null,
+      attachFile: '',
       fileFormat: 'csv',
       needChangeCSVHeader: false,
       keepOriginalHeader: true,
@@ -49,10 +50,6 @@ export default {
     modelDatasource: function () {
       return this.resolvePath(this.modelName, 'csv')
     },
-    // 获取模板目录下的当前模型对应csv文件
-    docxAttach: function () {
-      return this.resolvePath(this.modelName, 'docx')
-    },
     // 获取模板目录下的默认csv文件
     defaultDatasource: function () {
       return this.resolvePath('db', 'csv')
@@ -71,7 +68,7 @@ export default {
       return join(this.templateDir, `${fileName}.${fileExt}`)
     },
     /**
-     * 获取导入文件信息
+     * 获取导入文件的宏信息，设置当前文件格式
      * @param e 事件
      */
     getImportFile (e) {
@@ -88,7 +85,7 @@ export default {
       this.$forceUpdate()
     },
     /**
-     * 导入数据函数
+     * 根据文件扩展名，导入数据
      */
     attemptImport () {
       if (this.fileFormat === 'csv') {
@@ -100,7 +97,7 @@ export default {
       this.importFileMeta = {}
     },
     /**
-     * 导入数据函数
+     * 导入csv文件的数据，并执行持久化
      */
     async importCSV () {
       console.log(`导入${this.modelName}.csv文件...`)
@@ -111,6 +108,10 @@ export default {
       console.table(data)
       if (data.length) this.persistData(data)
     },
+    /**
+     * 将数据持久化，这里是存到本地indexDb中
+     * @param data 需要持久化的数据
+     */
     persistData (data) {
       if (!Array.isArray(data)) return
       if (this.modelName === '') return
@@ -124,6 +125,10 @@ export default {
         throw new Error(error)
       }
     },
+    /**
+     * 根据数据集，删除持久化内容
+     * @param data 数据集
+     */
     resetData (data) {
       // Delete all data
       if (!Array.isArray(data)) return
@@ -143,7 +148,7 @@ export default {
     },
 
     /**
-     * 导出数据函数
+     * 根据文件格式，尝试导出数据
      */
     attemptExport (item) {
       if (this.fileFormat === 'csv') {
@@ -154,6 +159,10 @@ export default {
         this.exportDocx()
       }
     },
+    /**
+     * 导出数据项目，可以选择是否保留原来的标题行，或者需要翻译
+     * @param item 数据项目
+     */
     exportCSV (item) {
       console.log(`导出到${this.modelDatasource}文件...`)
       try {
@@ -187,7 +196,7 @@ export default {
       }
     },
     /**
-     * 导出文件修改标题函数
+     * 修改导出csv文件的标题，插入或不插入标题翻译行
      */
     changeCSVHeader () {
       console.log(`更新${this.modelDatasource}文件的列标题...`)
@@ -206,7 +215,7 @@ export default {
       }
     },
     /**
-     * 导出文件备份函数
+     * 将导出的csv文件备份为db文件
      */
     copyModelNameCSV () {
       console.log('备份为db.csv文件...')
@@ -219,7 +228,7 @@ export default {
       }
     },
     /**
-     * 导出文件打印合并函数
+     * 导出文件到Word，打印合并
      */
     async mergeWordApp () {
       this.copyModelNameCSV()
@@ -231,7 +240,7 @@ export default {
       }
     },
     /**
-     * 导出到Excel文件
+     * 将数据项目导出到Excel文件
      */
     exportExcel (item) {
       /* show a file-open dialog and read the first selected file */
@@ -251,7 +260,7 @@ export default {
       }
     },
     /**
-     * 打开Excel文件
+     * 导入Excel文件，从用户选取的文件中
      */
     importExcel () {
       // 电子表对象
@@ -267,6 +276,10 @@ export default {
       }
       console.log('打开Excel文件，已读取数据')
     },
+    /**
+     * 写入Excel文件
+     * @param param0 Excel文件的参数
+     */
     writeExcelFile ({ workbook, filename, sheetName, data, options }) {
       // 创建新的电子表格
       const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data)
@@ -275,6 +288,11 @@ export default {
       // 写入文件
       XLSX.writeFile(workbook, filename, options)
     },
+    /**
+     * 保存Excel文件为csv
+     * @param worksheet 电子试算表
+     * @param type 文件类型
+     */
     saveExcelAs (worksheet: XLSX.WorkSheet, type = 'csv') {
       let output
       if (type === 'csv') {
@@ -306,34 +324,45 @@ export default {
       if (rABS) reader.readAsBinaryString(this.importFileMeta.path)
       else reader.readAsArrayBuffer(this.importFileMeta.path)
     },
+    /**
+     * 自动生成附件
+     * @param data string 写入附件的内容
+     */
     exportDocx (data) {
-      let defaultPath = join(this.attachDir, this.modelName, 'test.docx')
-      let filename = this.importFileMeta.path || defaultPath
-
+      let uuid = uniqueId(`${this.modelName}_`)
+      let moduleAttachDir = join(this.attachDir, this.modelName)
       try {
-        mkdirSync(join(this.attachDir, this.modelName))
+        mkdirSync(moduleAttachDir)
       } catch (error) {
         throw new Error(error)
+      }
+
+      if (this.importFileMeta.path !== undefined) {
+        this.attachFile = this.importFileMeta.path
+      } else {
+        this.attachFile = join(moduleAttachDir, `${uuid}.docx`)
       }
 
       try {
         this.document = new Document()
-        console.log(filename)
         // 创建新的文档或使用默认文档
-        let p = new Paragraph(this.modelName)
-        let content = new TextRun(data)
-        p.addRun(content)
-        // 添加段落到文件中
-        this.document.addParagraph(p)
+        Object.keys(data).map(key => {
+          let p = new Paragraph(key)
+          let text = new TextRun(data[key])
+          p.addRun(text)
+          // 添加段落到文件中
+          this.document.addParagraph(p)
+        })
         console.log(this.document)
         // 写入文件
         const packer = new Packer()
         packer.toBuffer(this.document).then(buffer => {
-          writeFileSync(filename, buffer)
+          writeFileSync(this.attachFile, buffer)
         })
       } catch (error) {
         throw new Error(error)
       }
+      this.attachFile = ''
     }
   }
 }

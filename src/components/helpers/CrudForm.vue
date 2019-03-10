@@ -16,7 +16,7 @@
             fab
             small
             color="red darken-2 white--text"
-            @click="exportDocx(modelName)"
+            @click="exportDocx(editedItem)"
             icon>
           <v-icon>file_copy</v-icon>
         </v-btn>

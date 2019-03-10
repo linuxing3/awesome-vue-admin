@@ -35,53 +35,59 @@ const mainMenu = [
 const seniorMenu = [
   { header: '高级功能' },
   {
+    name: 'Weixin',
     title: '打开微信',
     group: 'senior',
-    icon: 'fab fa-weixin',
+    icon: 'weixin',
     href: 'https://wx.qq.com',
     target: '_blank',
-    name: 'Weixin'
+    color: 'success'
   },
   {
+    name: 'Whatsapp',
     title: 'Whatsapp',
     group: 'senior',
-    icon: 'fab fa-whatsapp',
+    icon: 'whatsapp',
     href: 'https://web.whatsapp.com/',
     target: '_blank',
-    name: 'Whatsapp'
+    color: 'success'
   },
   {
+    name: 'QQDoc',
     title: '在线文档',
     group: 'senior',
-    icon: 'fas fa-file-word',
+    icon: 'file',
     href: 'https://docs.qq.com',
     target: '_blank',
-    name: 'QQDoc'
+    color: 'success'
   },
   {
+    name: 'MFAMail',
     title: '内部邮箱',
     group: 'senior',
-    icon: 'fas fa-inbox',
+    icon: 'mailbox',
     href: 'https://mail.mfa.gov.cn',
     target: '_blank',
-    name: 'MFAMail'
+    color: 'success'
   },
   {
+    name: 'BBVA',
     title: '国外网银',
     group: 'senior',
-    icon: 'fas fa-money-bill',
+    icon: 'bank',
     href:
       'https://www.bbvaprovinet.provincial.com/WCPL_VE_WEB/wcpl_ve_web/provinet/BBVAInicioWC.jsp',
     target: '_blank',
-    name: 'BBVA'
+    color: 'success'
   },
   {
+    name: 'ElectronApp',
     title: '更多应用',
     group: 'senior',
-    icon: 'fab fa-chrome',
+    icon: 'broswer',
     href: 'https://electronjs.org/apps',
     target: '_blank',
-    name: 'ElectronApp'
+    color: 'success'
   }
 ]
 
@@ -90,4 +96,7 @@ export const menuItems = mainMenu.reduce((arr, item) => {
   return arr
 }, [])
 
-export default mainMenu
+export default { 
+  ...mainMenu,
+  ...seniorMenu
+}

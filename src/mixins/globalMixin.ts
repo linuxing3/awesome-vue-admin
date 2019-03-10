@@ -40,9 +40,8 @@ export const validateMixin = {
     },
     truncateText (text) {
       let count = words(text)
-      let omission = `[... ${count} more]`
       return truncate(text, {
-        omission
+        length: 10
       })
     },
     countWords (text) {

@@ -86,7 +86,7 @@
           <!--top-level link with crud -->
           <v-list-tile
               v-else-if="item.type === 'crud'"
-              @click="goCrudBluePrint(item.name)"
+              @click="crud({ blueprint: item.name })"
               rel="noopener"
               :key="item.name">
             <v-list-tile-action v-if="item.icon">
@@ -100,6 +100,19 @@
             </v-list-tile-action>
           </v-list-tile>
           <!-- top level link without crud -->
+          <v-list-tile
+              v-else-if="item.href !== undefined "
+              :href="item.href"
+              :target="item.target"
+              rel="noopener"
+              :key="item.name">
+            <v-list-tile-action v-if="item.icon">
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
           <v-list-tile
               v-else
               @click="$router.push({ name: item.name })"
@@ -160,17 +173,6 @@ export default {
         }
       }
       return { name: `${item.group}/${subItem.name}` }
-    },
-    goCrudBluePrint (menuItem) {
-      this.$router.push({
-        name: 'crud',
-        params: {
-          blueprint: menuItem
-        }
-      })
-      setTimeout(() => {
-        window.CrudTable.$emit('SET_MODEL', menuItem)
-      }, 500)
     }
   }
 }

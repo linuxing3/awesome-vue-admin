@@ -57,7 +57,7 @@
                 fab
                 small
                 color="red darken-2 white--text"
-                @click="exportDocx"
+                @click="exportDocx(editedItem)"
                 icon>
               <v-icon>file_copy</v-icon>
             </v-btn>
