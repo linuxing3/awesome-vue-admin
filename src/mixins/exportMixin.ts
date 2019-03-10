@@ -3,7 +3,7 @@ import { last, uniqueId } from 'lodash'
 import { copyFileSync, existsSync, writeFileSync, mkdirSync } from 'fs'
 import { remote, shell } from 'electron'
 import XLSX from 'xlsx'
-import { Document, Paragraph, TextRun, Packer } from 'docx'
+import { Document, Paragraph, TextRun, Table, Packer } from 'docx'
 
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
@@ -328,13 +328,12 @@ export default {
      * 自动生成附件
      * @param data string 写入附件的内容
      */
-    exportDocx (data) {
+    exportDocx (content) {
       let uuid = uniqueId(`${this.modelName}_`)
+
       let moduleAttachDir = join(this.attachDir, this.modelName)
-      try {
+      if (!existsSync(moduleAttachDir)) {
         mkdirSync(moduleAttachDir)
-      } catch (error) {
-        throw new Error(error)
       }
 
       if (this.importFileMeta.path !== undefined) {
@@ -342,27 +341,34 @@ export default {
       } else {
         this.attachFile = join(moduleAttachDir, `${uuid}.docx`)
       }
+      console.log(this.attachFile)
 
       try {
-        this.document = new Document()
         // 创建新的文档或使用默认文档
-        Object.keys(data).map(key => {
-          let p = new Paragraph(key).heading1().center()
-          let text = new TextRun(data[key]).font('仿宋').size(16)
-          p.addRun(text)
-          // 添加段落到文件中
-          this.document.addParagraph(p)
+        this.document = new Document({
+          creator: "cnve",
+          description: `Attachment of model ${this.modelName}`,
+          title: this.modelName
         })
+
+        // 添加数据到正文
+        Object.keys(content).map(key => {
+          this.document.addParagraph(new Paragraph(key).heading3())
+          this.document.addParagraph(new Paragraph(content[key]).heading3())
+        })
+
         console.log(this.document)
         // 写入文件
         const packer = new Packer()
         packer.toBuffer(this.document).then(buffer => {
           writeFileSync(this.attachFile, buffer)
+          this.attachFile = ''
+          this.document = null
         })
+        shell.showItemInFolder(this.attachFile)
       } catch (error) {
         throw new Error(error)
       }
-      this.attachFile = ''
     }
   }
 }
