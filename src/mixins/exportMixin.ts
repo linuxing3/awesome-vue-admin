@@ -329,7 +329,7 @@ export default {
      * @param data string 写入附件的内容
      */
     exportDocx (content) {
-      let uuid = uniqueId(`${this.modelName}_`)
+      let uuid = uniqueId(`${this.modelName}_attach_`)
 
       let moduleAttachDir = join(this.attachDir, this.modelName)
       if (!existsSync(moduleAttachDir)) {
@@ -339,7 +339,8 @@ export default {
       if (this.importFileMeta.path !== undefined) {
         this.attachFile = this.importFileMeta.path
       } else {
-        this.attachFile = join(moduleAttachDir, `${uuid}.docx`)
+        let fileIdRef = this.editedItem._id || uniqueId()
+        this.attachFile = join(moduleAttachDir, fileIdRef , `${uuid}.docx`)
       }
       console.log(this.attachFile)
 
