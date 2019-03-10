@@ -331,7 +331,8 @@ export default {
     exportDocx (content) {
       let uuid = uniqueId(`${this.modelName}_attach_`)
 
-      let moduleAttachDir = join(this.attachDir, this.modelName)
+      let fileIdRef = this.editedItem._id.toString() || uniqueId().toString()
+      let moduleAttachDir = join(this.attachDir, this.modelName, fileIdRef)
       if (!existsSync(moduleAttachDir)) {
         mkdirSync(moduleAttachDir)
       }
@@ -339,8 +340,7 @@ export default {
       if (this.importFileMeta.path !== undefined) {
         this.attachFile = this.importFileMeta.path
       } else {
-        let fileIdRef = this.editedItem._id || uniqueId()
-        this.attachFile = join(moduleAttachDir, fileIdRef , `${uuid}.docx`)
+        this.attachFile = join(moduleAttachDir, `${uuid}.docx`)
       }
       console.log(this.attachFile)
 
