@@ -13,7 +13,7 @@
 
     <v-btn
         flat>
-        你已登录 {{loginTime}} 分钟
+      你已登录 {{loginTime}} 分钟
     </v-btn>
 
     <v-btn
@@ -96,7 +96,7 @@ export default {
     }
   },
   mounted () {
-    this.$subscribeTo(interval(60000), function(count) {
+    this.$subscribeTo(interval(60000), function (count) {
       this.loginTime = count
     })
   },

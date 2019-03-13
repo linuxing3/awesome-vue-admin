@@ -2,7 +2,7 @@ import { words, truncate } from 'lodash'
 import { get } from 'vuex-pathify'
 
 import { interval } from 'rxjs'
-import { pluck, map } from 'rxjs/operators';
+import { pluck, map } from 'rxjs/operators'
 
 import Account from '@/models/CoreModel/Account/Account'
 import { entities } from '@/api/globals'
@@ -52,7 +52,7 @@ export const validateMixin = {
     }
   },
   mounted () {
-    this.$subscribeTo(interval(60000), function(count) {
+    this.$subscribeTo(interval(60000), function (count) {
       this.loginTime = count
     })
   },
@@ -61,8 +61,8 @@ export const validateMixin = {
     return {
       watchModelName: this.$watchAsObservable('modelName').pipe(
         pluck('newValue'),
-        map(value => { 
-          console.log(`New modelName: ${value}`) 
+        map(value => {
+          console.log(`New modelName: ${value}`)
           // update current component
           this.$forceUpdate()
           // refetch asyncData

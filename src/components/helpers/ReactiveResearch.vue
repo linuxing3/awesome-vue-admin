@@ -13,35 +13,37 @@
     </v-card-title>
     <v-card-text>
       <v-data-iterator
-        :items="news"
-        :rows-per-page-items="rowsPerPageItems"
-        :pagination.sync="pagination"
-        row
-        wrap
-      >
-          <v-list
+          :items="news"
+          :rows-per-page-items="rowsPerPageItems"
+          :pagination.sync="pagination"
+          row
+          wrap
+        >
+        <v-list
             slot="item"
             slot-scope="props"
+          >
+          <v-flex
+              xs12
+              sm12
+              md12
+              lg12
             >
-              <v-flex
-                  xs12
-                  sm12
-                  md12
-                  lg12
-                >
-            <v-list-tile :href="props.item.url" target='_blank'>
+            <v-list-tile
+                :href="props.item.url"
+                target='_blank'>
               <v-list-tile-content>
                 <v-list-tile-title>{{ props.item.title }}</v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-icon
-                  @click="addToBookmark(props.item)"
+                    @click="addToBookmark(props.item)"
                   >add</v-icon>
               </v-list-tile-action>
             </v-list-tile>
             <v-divider></v-divider>
-            </v-flex>
-          </v-list>
+          </v-flex>
+        </v-list>
       </v-data-iterator>
     </v-card-text>
   </v-card>
@@ -84,17 +86,15 @@ const researchNewsEndpoint: string = 'http://hn.algolia.com/api/v1/search?query=
 
 const researchWikipediaEndpoint: string = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search='
 
-
 /**
  * 开始调研
  */
 
-export const researchGeneric = function(
+export const researchGeneric = function (
   observable: Observable<Event>,
   ajaxOptions: AjaxOptions = {},
   options: HandleObservableOptions = {}
 ): Observable<Array<HackerNewsResult>> {
-
   const { time = 300, scheduler } = options
 
   const { baseUrl, formatFunc } = ajaxOptions
@@ -113,7 +113,7 @@ export const researchGeneric = function(
   )
 }
 
-export const researchHackerNews = function(
+export const researchHackerNews = function (
   observable: Observable<Event>,
   options: HandleObservableOptions = {}
 ): Observable<Array<HackerNewsResult>> {
@@ -134,7 +134,7 @@ export const researchHackerNews = function(
   )
 }
 
-export const researchWikipedia = function(
+export const researchWikipedia = function (
   observable: Observable<Event>,
   options: HandleObservableOptions = {}
 ): Observable<Array<any>> {
@@ -152,16 +152,16 @@ export const researchWikipedia = function(
       title: title,
       description: results[2][i],
       url: results[3][i]
-      }))
+    }))
     )
   )
 }
 
 @Component<ReactiveResearch>({
   name: 'reactive-research',
-  subscriptions(this: Vue) {
+  subscriptions (this: Vue) {
     return {
-      news: researchWikipedia(this.$fromDOMEvent('input', 'keyup'))    
+      news: researchWikipedia(this.$fromDOMEvent('input', 'keyup'))
     }
   }
 })
