@@ -52,8 +52,8 @@ export const validateMixin = {
     }
   },
   mounted () {
-    this.$subscribeTo(interval(1000), function(count) {
-      console.log(count)
+    this.$subscribeTo(interval(60000), function(count) {
+      this.loginTime = count
     })
   },
   subscriptions () {
@@ -66,7 +66,7 @@ export const validateMixin = {
           // update current component
           this.$forceUpdate()
           // refetch asyncData
-          this.fetch()
+          this.fetch && this.fetch()
         })
       )
     }

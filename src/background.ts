@@ -39,9 +39,9 @@ function registerShortcuts (win: BrowserWindow) {
   globalShortcut.register('CommandOrControl+Shift+X', () => {
     if (!process.env.IS_TEST) win.webContents.openDevTools()
   })
-  globalShortcut.register('CommandOrControl+F11', () => {
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
-  })
+  // globalShortcut.register('CommandOrControl+F11', () => {
+  //   if (!process.env.IS_TEST) win.webContents.openDevTools()
+  // })
 }
 
 // Quit when all windows are closed.

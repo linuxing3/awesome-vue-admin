@@ -12,6 +12,11 @@
     <v-spacer></v-spacer>
 
     <v-btn
+        flat>
+        你已登录 {{loginTime}} 分钟
+    </v-btn>
+
+    <v-btn
         icon
         @click="$router.push('/home')">
       <v-icon>home</v-icon>
@@ -52,14 +57,16 @@
   </v-toolbar>
 </template>
 <script>
+import { join } from 'path'
+import { interval } from 'rxjs'
 import { get } from 'vuex-pathify'
 import { toggleFullScreen } from '@/util'
-import { join } from 'path'
 export default {
   name: 'app-toolbar',
   data () {
     return {
       baseUrl: process.env.BASE_URL,
+      loginTime: 0,
       items: [
         {
           icon: 'settings',
@@ -87,6 +94,11 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.$subscribeTo(interval(60000), function(count) {
+      this.loginTime = count
+    })
   },
   computed: {
     currentItem: get('entities/account/currentItem'),

@@ -2,6 +2,7 @@ import Home from '@/views/Home.vue'
 import PlayView from '@/views/Play.vue'
 import CrudView from '@/views/Crud.vue'
 import InfoView from '@/views/Info.vue'
+import Research from '@/views/Research.vue'
 
 export default [
   {
@@ -51,7 +52,7 @@ export default [
   {
     path: '/research',
     name: 'research',
-    component: ReactiveSearch
+    component: Research
   },
   {
     path: '/crud/:blueprint',
