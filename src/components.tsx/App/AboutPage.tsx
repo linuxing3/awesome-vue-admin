@@ -7,6 +7,7 @@ import {
   VLayout,
   VFlex,
   VBtn,
+  VIcon,
   VCardText,
   VCardActions
 } from 'vuetify-tsx'
@@ -15,16 +16,16 @@ const AboutComponent = component({
   name: 'App',
   render (): VNode {
     return (
-      <VLayout row wrap>
+      <VLayout>
         <VFlex>
           <VCard>
-            <VCardTitle class="primary white--text">
-              <h1 class="pa-2">关于</h1>
+            <VCardTitle>
+              关于
             </VCardTitle>
             <VCardText>Vuetify is awesome material desing</VCardText>
             <VCardActions>
-              <VBtn to={{ name: 'home' }}>
-                <div>主页</div>
+              <VBtn>
+                <VIcon>edit</VIcon>
               </VBtn>
             </VCardActions>
           </VCard>

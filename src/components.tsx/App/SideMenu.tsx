@@ -17,13 +17,13 @@ import {
   VToolbarTitle
 } from 'vuetify-tsx'
 
-import mainMenu from '@/api/menu'
+import mainMenu from '../../api/menu'
 
 interface Item {
-  title: string;
-  name: string;
-  group: string;
-  icon: string;
+  title?: string;
+  name?: string;
+  group?: string;
+  icon?: string;
   header?: string;
   items?: Item[];
 }
@@ -49,12 +49,12 @@ const SideMenu = tsx.componentFactoryOf<ISideMenuData>().create({
     (window as any).SideMenu = this
   },
   render (): VNode {
-    const { items } = this
+    const { items, drawer } = this
 
     let subHeader = (item: Item) => <VSubheader>{item.header}</VSubheader>
 
     let subMenu = (subItem: Item) => (
-      <VListTile ripple to={{ name: subItem.name }}>
+      <VListTile>
         <VListTileContent>
           <VListTileTitle>{subItem.title}</VListTileTitle>
         </VListTileContent>
@@ -62,33 +62,20 @@ const SideMenu = tsx.componentFactoryOf<ISideMenuData>().create({
     )
 
     return (
-      <VNavigationDrawer
-        dark={this.$vuetify.dark}
-        fixed
-        app
-        width="260"
-        value={this.drawer}
-      >
-        <VToolbar color="primary" dark>
-          <img height={48} src={this.logoUrl} />
-          <VToolbarTitle class="ml-0 pl-3">
-            <span class="hidden-sm-and-down">综合管理系统</span>
+      <VNavigationDrawer>
+        <VToolbar>
+          <VToolbarTitle>
+            综合管理系统
           </VToolbarTitle>
         </VToolbar>
         <VList>
           {items.map((item: Item) => {
             return (
               <VListGroup
-                prependIcon={item.icon}
-                key={item.name}
-                group={item.group}
-                noAction
               >
                 {/* generate mainMenu */}
                 <VListTile
-                  slot={'activator'}
-                  ripple
-                  to={{ name: item.name }}
+
                 >
                   <VListTileContent>
                     <VListTileTitle>{item.title}</VListTileTitle>

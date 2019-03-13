@@ -20,6 +20,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      "vue-tsx-support/enable-check",
       "webpack-env",
       "jest",
       "webpack"
@@ -38,18 +39,13 @@
   },
   "include": [
     "node_modules/vue-tsx-support/enable-check.d.ts",
-    "node_modules/vue-tsx-support/options/allow-unkown-props.d.ts",
-    "node_modules/vue-tsx-support/options/allow-element-unkown-attrs.d.ts",
-    "node_modules/vue-tsx-support/options/enable-vue-router.d.ts",
-    "node_modules/vue-tsx-support/options/enable-html-attrs.d.ts",
     "src/**/*.ts",
-    // "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    // "tests/**/*.tsx"
   ],
   "exclude": [
     "node_modules",
-    "src/components.tsx/**/*.tsx"
+    "src/**/*.tsx",
+    "tests/**/*.tsx"
   ]
 }
