@@ -49,6 +49,11 @@ export default [
     component: PlayView
   },
   {
+    path: '/research',
+    name: 'research',
+    component: ReactiveSearch
+  },
+  {
     path: '/crud/:blueprint',
     name: 'crud',
     meta: {

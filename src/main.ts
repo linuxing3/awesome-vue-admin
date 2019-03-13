@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 
 import './plugins/vuetify'
+import './plugins/reactivex'
 import i18n from './plugins/i18n'
 
 import './components'

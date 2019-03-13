@@ -1,5 +1,8 @@
-import { get } from 'vuex-pathify'
 import { words, truncate } from 'lodash'
+import { get } from 'vuex-pathify'
+
+import { interval } from 'rxjs'
+import { pluck, map } from 'rxjs/operators';
 
 import Account from '@/models/CoreModel/Account/Account'
 import { entities } from '@/api/globals'
@@ -46,6 +49,26 @@ export const validateMixin = {
     },
     countWords (text) {
       return words(text)
+    }
+  },
+  mounted () {
+    this.$subscribeTo(interval(1000), function(count) {
+      console.log(count)
+    })
+  },
+  subscriptions () {
+    // declaratively map to another property with Rx operators
+    return {
+      watchModelName: this.$watchAsObservable('modelName').pipe(
+        pluck('newValue'),
+        map(value => { 
+          console.log(`New modelName: ${value}`) 
+          // update current component
+          this.$forceUpdate()
+          // refetch asyncData
+          this.fetch()
+        })
+      )
     }
   }
 }

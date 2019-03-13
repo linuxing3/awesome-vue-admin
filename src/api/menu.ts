@@ -15,6 +15,13 @@ const mainMenu = [
     name: 'dashboard',
     color: 'black'
   },
+  {
+    title: '调研',
+    group: 'apps',
+    icon: 'search',
+    name: 'research',
+    color: 'black'
+  },
   // injected
   { header: '系统' },
   {
