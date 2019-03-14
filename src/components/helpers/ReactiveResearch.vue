@@ -56,6 +56,8 @@ import { Component, Vue } from 'vue-property-decorator'
 import { from, Observable, SchedulerLike } from 'rxjs'
 import { debounceTime, map, pluck, switchMap } from 'rxjs/operators'
 
+import models from '@/models'
+
 interface HackerNewsResult {
   objectID: string
   title?: string
@@ -184,6 +186,13 @@ export default class ReactiveResearch extends Vue {
 
   addToBookmark (item) {
     console.log(item)
+    let BookMark = models['bookmark']
+    BookMark.$create({ data: item })
+      .then(results => console.log(results))
+  }
+
+  openLinkInNewWindow (item) {
+    window.open(item.url, '_blank', 'nodeIntegration=yes')
   }
 }
 </script>
