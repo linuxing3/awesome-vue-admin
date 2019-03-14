@@ -11179,6 +11179,13 @@ vue-cli-plugin-vuetify@^0.4.6:
   resolved "https://registry.yarnpkg.com/vue-cli-plugin-vuetify/-/vue-cli-plugin-vuetify-0.4.6.tgz#91c4534d17bc04bbd6f41eacdb6ff49be0f59f2b"
   integrity sha512-vkai2B3XqanmscUYSioIjJkU7bzBZGl9mCuIISEZtaDy3qWEkF143UGdJ72u/rGuOytLxpV+9B+FNoV93qlnag==
 
+vue-crud-x@^0.1.9:
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/vue-crud-x/-/vue-crud-x-0.1.9.tgz#3c5b03f5b8800b5cbfab6aeb491088eb92111f77"
+  integrity sha512-cnsoH6zpLiGUFFpT+dDthDlOa4E78kxHprWVIBLbn7Ja3kfaLzRlauqaWK8Pb5wKiwcLyGLEn+ffePdO3LoxXQ==
+  dependencies:
+    lodash.clonedeep "^4.5.0"
+
 vue-echarts@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/vue-echarts/-/vue-echarts-4.0.1.tgz#3d3a14f53119701bba09545a68b17cf0689cad29"
