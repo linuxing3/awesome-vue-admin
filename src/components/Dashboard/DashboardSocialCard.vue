@@ -13,31 +13,30 @@
           xs12
           md3
           sm3
-          lg4
+          lg3
         >
         <v-card
             class="mt-3 mx-auto"
             max-width="400"
           >
 
+          <v-card-title
+              class="pt-1">
+            <div class="grey--text font-weight-thin">Total</div>
+            <v-spacer />
+            <v-icon color="primary">face</v-icon>
+          </v-card-title>
+
           <v-card-text
               class="pt-0">
-            <div class="display-1 text-capitalize font-weight-bold mb-2">{{item}}</div>
-            <span class="font-weight-light grey--text">Total Records: </span>
-            <v-spacer />
-            <span class="display-1 font-weight-bold grey--text">{{item}}</span>
+            <div class="display-1 text-capitalize font-weight-bold mb-2">200</div>
+            <span class="font-weight-light grey--text mr-1">Week: 20% </span>
+            <v-icon small color="red">face</v-icon>
+            <span class="font-weight-light grey--text ml-1">Daily: 20% </span>
+            <v-icon small color="indigo">face</v-icon>
             <v-divider class="my-2"></v-divider>
+            <span class="font-weight-light grey--text">Daily: 20% </span>
           </v-card-text>
-
-          <v-card-actions>
-            <v-spacer />
-            <v-icon
-                class="mr-2"
-                small
-              >
-              star
-            </v-icon>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

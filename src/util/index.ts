@@ -458,3 +458,19 @@ export const preferValueAsString = (value: any) => {
     return value.name && value.name
   }
 }
+
+export function randomize () {
+  return [0, 0, 0].map(v => {
+    return Math.round(300 + Math.random() * 700) / 10
+  })
+}
+
+export function randomizeCircle() {
+  let data = []
+  for (let index = 0; index < 360; index++) {
+    let t = (index / 100) * Math.PI
+    let r = Math.sin(2 * t) * Math.cos(2 * t)
+    data.push([r, t])
+  }
+  return data
+}

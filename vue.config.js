@@ -1,5 +1,12 @@
 const isElectron = process.env.NODE_ENV === 'production'
 
+const dependencies = {
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ]
+}
+
 function changeTarget (config) {
   if (isElectron) {
     config.target = 'electron-renderer'
@@ -37,6 +44,7 @@ module.exports = {
   // configureWebpack: config => {
   //   changeTarget(config);
   // },
+  dependencies,
   pluginOptions: {
     i18n
   }

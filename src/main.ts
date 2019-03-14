@@ -6,6 +6,7 @@ import store from './store'
 
 import './plugins/vuetify'
 import './plugins/reactivex'
+import './plugins/echarts'
 import i18n from './plugins/i18n'
 
 import './components'

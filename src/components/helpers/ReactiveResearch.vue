@@ -29,11 +29,11 @@
               md12
               lg12
             >
-            <v-list-tile
-                :href="props.item.url"
-                target='_blank'>
+            <v-list-tile>
               <v-list-tile-content>
-                <v-list-tile-title>{{ props.item.title }}</v-list-tile-title>
+                <v-list-tile-title>
+                  <a :href="props.item.url" target="_blank">{{ props.item.title }}</a>
+                </v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-icon
