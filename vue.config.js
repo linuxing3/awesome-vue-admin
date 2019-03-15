@@ -44,7 +44,7 @@ module.exports = {
   // configureWebpack: config => {
   //   changeTarget(config);
   // },
-  dependencies,
+  ...dependencies,
   pluginOptions: {
     i18n
   }
