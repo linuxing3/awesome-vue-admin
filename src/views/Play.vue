@@ -1,15 +1,13 @@
 <template>
   <DefaultLayout>
-    <PlayComponent v-show="false"/>
-    <PhotoGallery :items="backgrounds" />
-    <PhotoGallery :items="nature" />
+    <PlayComponent v-show="true"/>
   </DefaultLayout>
 </template>
 
 <script>
 import DefaultLayout from '@/layout/default.vue'
-import PlayComponent from '@/components/examples/lists/subheadingsAndDividers'
 import { publicAssets } from '@/api/globals'
+import PlayComponent from '@/components/helpers/CrudX.vue'
 
 const { backgrounds, avatars, nature } = publicAssets
 
