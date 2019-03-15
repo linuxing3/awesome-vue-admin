@@ -3,45 +3,21 @@ import { Model } from '@vuex-orm/core'
 import models from '@/models'
 import { baseFilter } from '@/util'
 
-export const isDateField = (field: string) => {
-  return field.endsWith('date') || field.endsWith('Date')
+const formDataSchema = {
+  'content': 'v-textarea',
+  'text': 'v-textarea',
+  'select': 'v-select',
+  'date': 'v-date-picker',
+  'startDate': 'v-date-picker',
+  'endDate': 'v-date-picker',
+  '*': 'v-text-field',
 }
 
-export const generateHeaders = (field: string) => {
-  if (field === 'content') {
-    return {
-      type: 'v-textarea',
-      flex: 'layout row xs12 sm12 md12 g12',
-      label: 'Write ' + field,
-      value: field,
-      multiple: true,
-      outline: true,
-      hint: 'Full Content'
-    }
-  } else if (isDateField(field)) {
-    return {
-      type: 'v-date-picker',
-      flex: 'layout row xs12 sm6 md3 gl3',
-      label: 'Pick ' + field,
-      value: field,
-      placeholder: field
-    }
-  } else if (field === 'select') {
-    return {
-      type: 'v-select',
-      label: 'Select' + field,
-      flex: 'layout row xs12 sm6 md3 gl3',
-      'single-line': true,
-      'hide-details': true
-    }
+export const genFormData = (field: string) => {
+  if (formDataSchema[field] !== undefined) {
+    return { type: formDataSchema[field], attrs: { class: 'pa-1 ma-1'} }
   } else {
-    return {
-      type: 'v-text-field',
-      flex: 'layout row xs12 sm6 md3 gl3',
-      label: 'Input ' + field,
-      value: field,
-      placeholder: field
-    }
+    return { type: 'v-text-field', attrs: { class: 'pa-1 ma-1' } }
   }
 }
 
@@ -101,13 +77,12 @@ export default {
     },
     headers (): any[] {
       return this.fields.reduce(function (headersConfig, field) {
-        let schema = generateHeaders(field) || {}
         let config = {
           value: field,
           text: field,
           align: 'left',
           sortable: true,
-          schema
+          ...genFormData(field)
         }
         headersConfig.push(config)
         return headersConfig
