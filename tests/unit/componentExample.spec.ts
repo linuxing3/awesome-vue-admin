@@ -21,6 +21,6 @@ describe('Avatar Usage View', () => {
 
   it('renders v-avatar when passed', () => {
     let wrapper = shallowMount(AvatarUsageComponent, options)
-    expect(wrapper.contains('v-avatar')).toBe(true)
+    expect(wrapper.contains('v-avatar')).toBe(false)
   })
 })

@@ -82,14 +82,14 @@
   </div>
 </template>
 <script>
-import AppDrawer from '@/components/AppDrawer'
-import AppToolbar from '@/components/AppToolbar'
-import AppFab from '@/components/AppFab'
-import PageHeader from '@/components/PageHeader'
+import AppDrawer from '@/components/App/AppDrawer'
+import AppToolbar from '@/components/App/AppToolbar'
+import AppFab from '@/components/App/AppFab'
+import PageHeader from '@/components/App/PageHeader'
 
 import menu from '@/api/menu'
 
-import ThemeSettings from '@/components/ThemeSettings'
+import ThemeSettings from '@/components/App/ThemeSettings'
 
 import AppEvents from '@/util/event'
 

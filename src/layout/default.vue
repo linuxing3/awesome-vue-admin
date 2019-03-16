@@ -74,10 +74,9 @@ import AppDrawer from '@/components/App/AppDrawer'
 import AppToolbar from '@/components/App/AppToolbar'
 import AppFab from '@/components/App/AppFab'
 import PageHeader from '@/components/App/PageHeader'
+import ThemeSettings from '@/components/App/ThemeSettings'
 
 import menu from '@/api/menu'
-
-import ThemeSettings from '@/components/App/ThemeSettings'
 
 import AppEvents from '@/util/event'
 

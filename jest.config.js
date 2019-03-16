@@ -31,5 +31,7 @@ module.exports = {
     'ts-jest': {
       babelConfig: true
     }
-  }
+  },
+  watch: false,
+  watchman: false
 }
