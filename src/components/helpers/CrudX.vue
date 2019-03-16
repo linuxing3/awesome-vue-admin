@@ -87,9 +87,6 @@ export default {
       return models[this.modelName]
     }
   },
-  mounted() {
-    this.modelName = 'user'
-  },
   data () {
     return {
       modelName: '',
@@ -149,7 +146,7 @@ export default {
         },
         crudOps: { // CRUD
           export: async (payload) => {
-            // 
+            //
           },
           find: async (payload) => {
             await this.ModelClass.$fetch()
@@ -188,7 +185,7 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     await this.ModelClass.$fetch()
   },
   methods: {
@@ -221,7 +218,7 @@ export default {
       this.editedIndex = item._id
     },
     /**
-     * 
+     *
      * @return Observable
      */
     fetchRemote (term) {
@@ -231,7 +228,7 @@ export default {
       return from({ records, totalRecs, pagination })
     },
     /**
-     * 
+     *
      * @return Observable
      */
     genHeader (fields) {

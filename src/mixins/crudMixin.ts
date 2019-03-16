@@ -2,24 +2,7 @@ import { keyBy } from 'lodash'
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
 import { baseFilter } from '@/util'
-
-const formDataSchema = {
-  'content': 'v-textarea',
-  'text': 'v-textarea',
-  'select': 'v-select',
-  'date': 'v-date-picker',
-  'startDate': 'v-date-picker',
-  'endDate': 'v-date-picker',
-  '*': 'v-text-field',
-}
-
-export const genFormData = (field: string) => {
-  if (formDataSchema[field] !== undefined) {
-    return { type: formDataSchema[field], attrs: { class: 'pa-1 ma-1'} }
-  } else {
-    return { type: 'v-text-field', attrs: { class: 'pa-1 ma-1' } }
-  }
-}
+import { genFormData, genTableHeaders } from '@/util/genFormData'
 
 export default {
   data () {
@@ -76,17 +59,7 @@ export default {
       return this.headers.splice(2, 10)
     },
     headers (): any[] {
-      return this.fields.reduce(function (headersConfig, field) {
-        let config = {
-          value: field,
-          text: field,
-          align: 'left',
-          sortable: true,
-          ...genFormData(field)
-        }
-        headersConfig.push(config)
-        return headersConfig
-      }, [])
+      return genTableHeaders(this.fields)
     },
     allHeaders (): string[] {
       return this.Model.fieldsKeys()
