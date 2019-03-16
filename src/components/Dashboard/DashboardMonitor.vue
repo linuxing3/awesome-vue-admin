@@ -52,7 +52,7 @@
           </v-card-text>
         </v-card>
       </v-flex>
-      
+
     </v-layout>
   </v-container>
 </template>
@@ -64,7 +64,7 @@ import { getBarOption, getPolarOption, getPieOption } from '@/util/charts'
 import { publicAssets } from '@/api/globals'
 
 export default {
-  data() {
+  data () {
     let polar = getPolarOption()
     let bar = getBarOption()
     let pie = getPieOption()

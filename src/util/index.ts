@@ -465,7 +465,7 @@ export function randomize () {
   })
 }
 
-export function randomizeCircle() {
+export function randomizeCircle () {
   let data = []
   for (let index = 0; index < 360; index++) {
     let t = (index / 100) * Math.PI

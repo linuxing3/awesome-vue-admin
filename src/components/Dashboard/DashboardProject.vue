@@ -30,24 +30,24 @@
                 row
                 wrap
               >
-                <v-flex
-                    slot="item"
-                    slot-scope="props"
-                    xs12
-                    sm12
-                    md12
-                    lg12
-                  >
-                  <v-card>
-                    <v-card-title class="subheading font-weight-bold">{{ props.item.status }}</v-card-title>
-                    <v-divider></v-divider>
-                    <v-list dense>
-                      <v-list-tile>
-                        <v-list-tile-content class="align-end">{{ props.item.tasks }}</v-list-tile-content>
-                      </v-list-tile>
-                    </v-list>
-                  </v-card>
-                </v-flex>
+              <v-flex
+                  slot="item"
+                  slot-scope="props"
+                  xs12
+                  sm12
+                  md12
+                  lg12
+                >
+                <v-card>
+                  <v-card-title class="subheading font-weight-bold">{{ props.item.status }}</v-card-title>
+                  <v-divider></v-divider>
+                  <v-list dense>
+                    <v-list-tile>
+                      <v-list-tile-content class="align-end">{{ props.item.tasks }}</v-list-tile-content>
+                    </v-list-tile>
+                  </v-list>
+                </v-card>
+              </v-flex>
             </v-data-iterator>
 
           </v-card-text>
@@ -73,7 +73,7 @@ export default {
       rowsPerPage: 25,
       descending: true
     },
-    selected: [],
+    selected: []
   })
 }
 </script>

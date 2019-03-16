@@ -5,30 +5,7 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelName = h.capitalize(h.inflection.singularize(model))
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import exportMixin from '@/mixins/exportMixin'
-import crudMixin from '@/mixins/crudMixin'
-
-export default {
-  data() {
-    return {
-      modelName: '<%= modelName.toLowerCase() %>'
-    }
-  },
-  mixins: [ exportMixin, crudMixin ],
-  created() {
-    window.<%= modelTableName %> = this
-  },
-  methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
-      window.<%= modelFormName %>.$emit('SET_EDITING', item)
-    }
-  }
-}
-</script>
-
-<template>
+%><template>
   <v-card>
     <v-card-title>
       <slot name="form-dialog" />
@@ -101,5 +78,29 @@ export default {
     </v-responsive>
   </v-card>
 </template>
+
+<script>
+import exportMixin from '@/mixins/exportMixin'
+import crudMixin from '@/mixins/crudMixin'
+
+export default {
+  data() {
+    return {
+      modelName: '<%= modelName.toLowerCase() %>'
+    }
+  },
+  mixins: [ exportMixin, crudMixin ],
+  created() {
+    window.<%= modelTableName %> = this
+  },
+  methods: {
+    editItem(item) {
+      this.$emit('SET_EDITING', item);
+      window.<%= modelFormName %>.$emit('SET_EDITING', item)
+    }
+  }
+}
+</script>
+
 <style scoped>
 </style>

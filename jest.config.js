@@ -33,5 +33,5 @@ module.exports = {
     }
   },
   watch: false,
-  watchman: false
+  watchman: true
 }

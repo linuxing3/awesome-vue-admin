@@ -185,7 +185,7 @@ export default {
       }
     }
   },
-  async mounted() {
+  async mounted () {
     await this.ModelClass.$fetch()
   },
   methods: {

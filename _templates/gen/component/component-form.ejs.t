@@ -5,26 +5,7 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
   const modelName = h.capitalize(h.inflection.singularize(model))
   const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><script>
-import <%= modelName %> from '@/models/<%= modelName %>'
-
-import crudMixin from '@/mixins/crudMixin'
-import exportMixin from '@/mixins/exportMixin'
-
-export default {
-  data() {
-    return {
-      modelName: '<%= modelName.toLowerCase() %>'
-    }
-  },
-  mixins: [ crudMixin, exportMixin ],
-  created() {
-    window.<%= modelFormName %> = this
-  }
-}
-</script>
-
-<template>
+%><template>
   <v-card>
     <v-toolbar
         card
@@ -66,14 +47,32 @@ export default {
           @click='saveItem(model)'>{{editing ? '更新': '添加'}}</v-btn>
       <!-- 导出单个，将item属性设置为model对象 -->
       <ExportDialog
-          buttonText="导出/打印"
-          :item="[model]"
+          :items="[ model ]"
           :modelName="modelName"></ExportDialog>
       <ImportDialog
-          buttonText="导入/整理"
           :modelName="modelName"></ImportDialog>
     </v-card-actions>
   </v-card>
 </template>
+
+<script>
+import <%= modelName %> from '@/models/<%= modelName %>'
+
+import crudMixin from '@/mixins/crudMixin'
+import exportMixin from '@/mixins/exportMixin'
+
+export default {
+  data() {
+    return {
+      modelName: '<%= modelName.toLowerCase() %>'
+    }
+  },
+  mixins: [ crudMixin, exportMixin ],
+  created() {
+    window.<%= modelFormName %> = this
+  }
+}
+</script>
+
 <style scoped>
 </style>

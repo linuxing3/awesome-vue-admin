@@ -32,7 +32,9 @@
             <v-list-tile>
               <v-list-tile-content>
                 <v-list-tile-title>
-                  <a :href="props.item.url" target="_blank">{{ props.item.title }}</a>
+                  <a
+                      :href="props.item.url"
+                      target="_blank">{{ props.item.title }}</a>
                 </v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>

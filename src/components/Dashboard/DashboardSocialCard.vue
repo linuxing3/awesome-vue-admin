@@ -31,9 +31,13 @@
               class="pt-0">
             <div class="display-1 text-capitalize font-weight-bold mb-2">200</div>
             <span class="font-weight-light grey--text mr-1">Week: 20% </span>
-            <v-icon small color="red">face</v-icon>
+            <v-icon
+                small
+                color="red">face</v-icon>
             <span class="font-weight-light grey--text ml-1">Daily: 20% </span>
-            <v-icon small color="indigo">face</v-icon>
+            <v-icon
+                small
+                color="indigo">face</v-icon>
             <v-divider class="my-2"></v-divider>
             <span class="font-weight-light grey--text">Daily: 20% </span>
           </v-card-text>
@@ -63,7 +67,7 @@ export default {
     gradients,
     padding: 8,
     radius: 10,
-    items: [1,2,3,4],
+    items: [1, 2, 3, 4],
     labels: [
       'first',
       'last'

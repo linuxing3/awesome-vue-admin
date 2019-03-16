@@ -83,25 +83,28 @@
                     sm10
                     class="pa-2 pr-2">
                   <v-textarea
-                      v-if="field.schema.type === 'v-textarea'"
+                      :class=' field.attrs.class'
+                      v-if="field.type === 'v-textarea'"
                       v-model="editedItem[field.value]"
                       :label=" tryT(field.text) || field.text"></v-textarea>
                   <v-select
-                      v-if="field.schema.type === 'v-select'"
+                      :class=' field.attrs.class'
+                      v-if="field.type === 'v-select'"
                       v-model="editedItem[field.value]"
                       :items="field.items"
                       item-text="name"
                       item-value="_id"
                       :label=" tryT(field.text) || field.text"></v-select>
                   <v-text-field
-                      v-if="field.schema.type === 'v-date-picker'"
+                      :class=' field.attrs.class'
+                      v-if="field.type === 'v-date-picker'"
                       v-model="editedItem[field.value]"
                       :label="tryT(field.text) || field.text"
                       max-width="300px"
                       :hint=" 'Input' + field.text + ', like 2009-09-09'"
                     ></v-text-field>
                   <v-dialog
-                      v-if="field.schema.type === 'date-picker'"
+                      v-if="field.type === 'vvv-date-picker'"
                       :ref="field.value"
                       v-model="modal"
                       full-width
@@ -128,9 +131,9 @@
                     </v-date-picker>
                   </v-dialog>
                   <v-text-field
-                      v-if="field.schema.type === 'v-text-field'"
-                      max-width="300px"
+                      v-if="field.type === 'v-text-field'"
                       v-model="editedItem[field.value]"
+                      :class=' field.attrs.class'
                       :hint="'Input ' + field.text"
                       :label=" tryT(field.text) || field.text "></v-text-field>
                 </v-flex>

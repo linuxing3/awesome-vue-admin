@@ -25,7 +25,7 @@ export function getBarOption () {
   }
 }
 
-export function getPolarOption() {
+export function getPolarOption () {
   let data = randomizeCircle()
   return {
     title: {
@@ -60,7 +60,7 @@ export function getPolarOption() {
   }
 }
 
-export function getPieOption() {
+export function getPieOption () {
   return {
     title: {
       text: '饼图程序调用高亮示例',
