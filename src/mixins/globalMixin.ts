@@ -59,15 +59,9 @@ export const validateMixin = {
   subscriptions () {
     // declaratively map to another property with Rx operators
     return {
-      watchModelName: this.$watchAsObservable('modelName').pipe(
+      ModelClass: this.$watchAsObservable('modelName').pipe(
         pluck('newValue'),
-        map(value => {
-          console.log(`New modelName: ${value}`)
-          // update current component
-          this.$forceUpdate()
-          // refetch asyncData
-          this.fetch && this.fetch()
-        })
+        map(newModelName => this.models[newModelName])
       )
     }
   }

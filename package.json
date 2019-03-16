@@ -17,7 +17,7 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "test:unit": "vue-cli-service test:unit",
-    "test:uw": "vue-cli-service test:unit --watch"
+    "test:uw": "vue-cli-service test:unit --watch --no-cache"
   },
   "dependencies": {
     "@vuex-orm/core": "^0.31.4",

@@ -31,16 +31,8 @@ Vue.config.productionTip = false
  */
 
 const globalComponentFiles = fs
-  .readdirSync(path.join(__dirname, '../../src/components'))
-  .filter(fileName => /^_base-.+\.vue$/.test(fileName))
-
-for (let fileName of globalComponentFiles) {
-  if (fileName !== null) {
-    const componentName = (_ as any).pascalCase(fileName.match(/^_(base-.+)\.vue$/)[1])
-    const componentConfig = require('../../src/components/' + fileName)
-    Vue.component(componentName, componentConfig.default || componentConfig)
-  }
-}
+  .readdirSync(path.join(__dirname, '../../src/components/helpers'))
+  .filter(fileName => /^.+\.vue$/.test(fileName))
 
 /**
  * 在所有组件中混入[风格]对象
@@ -48,8 +40,6 @@ for (let fileName of globalComponentFiles) {
 
 Vue.mixin({
   created () {
-    // HACK: Set a fallback for the `$style` until vue-jest
-    // includes better support for CSS modules.
     this['$style'] = this['$style'] || {}
   }
 })

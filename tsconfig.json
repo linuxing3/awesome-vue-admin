@@ -20,7 +20,6 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "vue-tsx-support/enable-check",
       "webpack-env",
       "jest",
       "webpack"

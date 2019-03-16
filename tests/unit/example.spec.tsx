@@ -1,12 +1,26 @@
 import { shallowMount } from '@vue/test-utils'
-import Home from '@/views/Home.vue'
+import AvatarUsageComponent from '@/components/examples/avatars/usage.vue'
 
-describe('Home View', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'This is HomeView Page'
-    const wrapper = shallowMount(Home, {
-      propsData: { msg }
-    })
-    expect(wrapper.text()).toMatch('')
+let options = (global as any).createVuetifyComponent()
+
+describe('Avatar Usage View', () => {
+
+  beforeEach(() => {
+    let wrapper = shallowMount(AvatarUsageComponent, options)
+  })
+
+  it('renders data slider when passed', () => {
+    let wrapper = shallowMount(AvatarUsageComponent, options)
+    expect(wrapper.vm.$data.slider).toBe(56)
+  })
+
+  it('renders img when passed', () => {
+    let wrapper = shallowMount(AvatarUsageComponent, options)
+    expect(wrapper.contains('img')).toBe(true)
+  })
+
+  it('renders v-avatar when passed', () => {
+    let wrapper = shallowMount(AvatarUsageComponent, options)
+    expect(wrapper.contains('v-avatar')).toBe(true)
   })
 })
