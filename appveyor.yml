@@ -5,7 +5,7 @@ platform:
   - x86
 
 environment:
-  APPVEYOR_RDP_PASSWORD: 20090909
+  APPVEYOR_RDP_PASSWORD: Vue#2009
   matrix:
     - nodejs_version: '10'
   GH_TOKEN:
