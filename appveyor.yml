@@ -5,12 +5,16 @@ platform:
   - x86
 
 environment:
+  APPVEYOR_RDP_PASSWORD: 20090909
   matrix:
     - nodejs_version: '10'
   GH_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
   ACCESS_TOKEN:
     secure: nHwMgMQEtRz4aOFCd55jOo41s9dXD2S4m9Tf0hohiQFQofo2mJ3KThNyL5HBg/Eb
+
+init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -25,17 +29,15 @@ matrix:
 shallow_clone: true
 
 test_script:
-  - node --version
-  - yarn --version
+  - yarn test:unit
 
 cache:
   - node_modules
   - "%LOCALAPPDATA%\\Yarn"
-  - '%USERPROFILE%\.electron'
   - '%APPDATA%\npm-cache'
 
 build_script:
-  # - yarn lint
+  - yarn lint
   - yarn electron:build
 
 skip_tags: true
