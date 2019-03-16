@@ -1,7 +1,7 @@
 <script>
 import { map, pick } from 'lodash/fp'
 
-import Login from '@/Login'
+import Login from '@/models/Login'
 
 export default {
   data () {
