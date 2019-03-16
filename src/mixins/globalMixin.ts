@@ -55,14 +55,5 @@ export const validateMixin = {
     this.$subscribeTo(interval(60000), function (count) {
       this.loginTime = count
     })
-  },
-  subscriptions () {
-    // declaratively map to another property with Rx operators
-    return {
-      ModelClass: this.$watchAsObservable('modelName').pipe(
-        pluck('newValue'),
-        map(newModelName => this.models[newModelName])
-      )
-    }
   }
 }

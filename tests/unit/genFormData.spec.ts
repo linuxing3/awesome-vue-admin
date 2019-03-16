@@ -27,10 +27,13 @@ describe('Generate table headers with fields Name', () => {
 
   })
   it('renders headers value and type when passed', () => {
-    let fields = [ '_id', 'name', 'date' ]
+    let fields = [ '_id', 'name', 'date', 'content' ]
     let tableHeaders = genTableHeaders(fields)
     expect(tableHeaders[0]['value']).toBe('_id')
+    expect(tableHeaders[1]['type']).toBe('v-text-field')
     expect(tableHeaders[2]['type']).toBe('v-date-picker')
+    expect(tableHeaders[3]['type']).toBe('v-textarea')
+    expect(tableHeaders[1]['attrs']['class']).toBe('pa-1 ma-1')
   })
 
 })
