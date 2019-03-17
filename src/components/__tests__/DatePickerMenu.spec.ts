@@ -11,10 +11,7 @@ describe('Test date picker with menu', () => {
   })
 
   it('Test refs', () => {
-    expect(wrapper.vm.$refs.length).toBe(2)
+    expect(Object.keys(wrapper.vm.$refs).length).toBe(2)
   })
 
-  it('Test first ref is dialog', () => {
-    expect(wrapper.vm.$refs[0]).toBe('dialog')
-  })
 })
