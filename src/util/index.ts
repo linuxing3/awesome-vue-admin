@@ -110,9 +110,9 @@ const getFilesFp = curry(getFilesByExtentionInDir)
  * @sortKey:   用来排序的排序器
  */
 export const baseFilter = ({ sort, search }, items = []): any[] => {
-  var filter = search && search.toLowerCase()
-  var order = 1
-  var data = items
+  let filter = search && search.toLowerCase()
+  let order = 1
+  let data = items
   data = lazyFilter(filter)(data)
   data = lazySorter(sort)(order)(data)
   return data

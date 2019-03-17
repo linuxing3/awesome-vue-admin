@@ -171,7 +171,7 @@ export default {
       // 设置[编辑]为假，[数据模型]为传入项目
       if (!this.editing) this.editing = false
       this.model = item
-      let id = (item as any).id
+      let id = (item).id
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.setEditing(item)
       await axios

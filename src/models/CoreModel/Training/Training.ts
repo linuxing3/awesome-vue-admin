@@ -1,25 +1,25 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface ITraining {
-   _id: string;
-   title: string;
-   status: string;
-   type: string;
-   level: string;
-   trainer: string;
-   source: string;
-   location: string;
-   startDate: string;
-   endDate: string;
-   startTime: string;
-   endTime: string;
-   introduction: string;
-   participants: string;
+  _id: string
+  title: string
+  status: string
+  type: string
+  level: string
+  trainer: string
+  source: string
+  location: string
+  startDate: string
+  endDate: string
+  startTime: string
+  endTime: string
+  introduction: string
+  participants: string
 
 }
 
 export default class Training extends BaseModel {
-  static entity = 'training';
+  static entity = 'training'
 
   static fields () {
     return {

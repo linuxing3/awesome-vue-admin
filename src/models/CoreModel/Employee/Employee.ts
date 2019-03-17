@@ -1,67 +1,67 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface IEmployee {
-   _id: string;
-   salutation: string;
-   firstName: string;
-   middleName: string;
-   lastName: string;
-   image: string;
-   status: string;
-   employeeNo: string;
-   gender: string;
-   birthday: string;
-   joiningDate: string;
-   emergencyContact: string;
-   emergencyPhoneNo: string;
-   contractStartDate: string;
-   contractEndDate: string;
-   department: string;
-   designation: string;
-   reportsTo: string;
-   grade: string;
-   branch: string;
-   leavePolicy: string;
-   holidayList: string;
-   salaryMode: string;
-   bankName: string;
-   bankAccount: string;
-   healthInsurance: string;
-   healthInsuranceProvider: string;
-   healthInsuranceNo: string;
-   cellPhone: string;
-   preferedEmail: string;
-   companyEmail: string;
-   personalEmail: string;
-   unsubscribed: string;
-   permanentAccommodation: string;
-   permanentAddress: string;
-   currentAccomodation: string;
-   currentAddress: string;
-   bio: string;
-   passportNumber: string;
-   dateOfIssue: string;
-   placeOfIssue: string;
-   maritalStatus: string;
-   bloodGroup: string;
-   familyBackground: string;
-   healthDetails: string;
-   educationalQualification: string;
-   previousWorkExperience: string;
-   externalWorkHistory: string;
-   historyInCompany: string;
-   relievingDate: string;
-   reasonForLeaving: string;
-   leaveEncashed: string;
-   encashDate: string;
-   resiged: string;
-   reasonForResignation: string;
-   feedback: string;
+  _id: string
+  salutation: string
+  firstName: string
+  middleName: string
+  lastName: string
+  image: string
+  status: string
+  employeeNo: string
+  gender: string
+  birthday: string
+  joiningDate: string
+  emergencyContact: string
+  emergencyPhoneNo: string
+  contractStartDate: string
+  contractEndDate: string
+  department: string
+  designation: string
+  reportsTo: string
+  grade: string
+  branch: string
+  leavePolicy: string
+  holidayList: string
+  salaryMode: string
+  bankName: string
+  bankAccount: string
+  healthInsurance: string
+  healthInsuranceProvider: string
+  healthInsuranceNo: string
+  cellPhone: string
+  preferedEmail: string
+  companyEmail: string
+  personalEmail: string
+  unsubscribed: string
+  permanentAccommodation: string
+  permanentAddress: string
+  currentAccomodation: string
+  currentAddress: string
+  bio: string
+  passportNumber: string
+  dateOfIssue: string
+  placeOfIssue: string
+  maritalStatus: string
+  bloodGroup: string
+  familyBackground: string
+  healthDetails: string
+  educationalQualification: string
+  previousWorkExperience: string
+  externalWorkHistory: string
+  historyInCompany: string
+  relievingDate: string
+  reasonForLeaving: string
+  leaveEncashed: string
+  encashDate: string
+  resiged: string
+  reasonForResignation: string
+  feedback: string
 
 }
 
 export default class Employee extends BaseModel {
-  static entity = 'employee';
+  static entity = 'employee'
 
   static fields () {
     return {

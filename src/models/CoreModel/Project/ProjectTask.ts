@@ -12,7 +12,7 @@ export interface IProjectTask {
 }
 
 export default class ProjectTask extends BaseModel {
-  static entity = 'projectTask';
+  static entity = 'projectTask'
 
   static fields () {
     return {

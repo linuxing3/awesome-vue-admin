@@ -202,7 +202,7 @@ Object.defineProperty(window, 'localStorage', {
   const localVue = createLocalVue()
   localVue.use(VueRouter)
   const returnOptions = { localVue }
-  const router = new VueRouter({ routes: path as RouteConfig[] })
+  const router = new VueRouter({ routes: path })
   returnOptions['router'] = router
   return returnOptions
 }
@@ -229,7 +229,7 @@ Object.defineProperty(window, 'localStorage', {
   })
   // 注入router
   const router = new VueRouter({
-    routes: path as RouteConfig[],
+    routes: path,
     ...routerOptions
   })
   returnOptions['router'] = router

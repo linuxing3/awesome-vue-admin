@@ -14,7 +14,7 @@ export interface IAssetMaintenance {
 }
 
 export default class AssetMaintenance extends BaseModel {
-  static entity = 'assetMaintenance';
+  static entity = 'assetMaintenance'
 
   static fields () {
     return {

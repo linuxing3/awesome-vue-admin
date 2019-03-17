@@ -1,16 +1,16 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface IUserPromotion {
-   _id: string;
-   name: string;
-   department: string;
-   promotionDate: string;
-   promotionDetails: string;
+  _id: string
+  name: string
+  department: string
+  promotionDate: string
+  promotionDetails: string
 
 }
 
 export default class UserPromotion extends BaseModel {
-  static entity = 'userPromotion';
+  static entity = 'userPromotion'
 
   static fields () {
     return {

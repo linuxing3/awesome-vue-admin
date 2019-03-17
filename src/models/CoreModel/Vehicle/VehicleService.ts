@@ -1,16 +1,16 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface IVehicleService {
-   _id: string;
-   serviceItem: string;
-   type: string;
-   frequency: string;
-   expenseAmount: string;
+  _id: string
+  serviceItem: string
+  type: string
+  frequency: string
+  expenseAmount: string
 
 }
 
 export default class VehicleService extends BaseModel {
-  static entity = 'vehicleService';
+  static entity = 'vehicleService'
 
   static fields () {
     return {

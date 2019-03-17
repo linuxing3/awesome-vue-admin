@@ -1,31 +1,31 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface IVehicle {
-   _id: string;
-   licensePlate: string;
-   mark: string;
-   model: string;
-   details: string;
-   lastOdometerValue: string;
-   location: string;
-   chassisNo: string;
-   value: string;
-   insuranceDetails: string;
-   insuranceCompany: string;
-   policyNo: string;
-   startDate: string;
-   endDate: string;
-   additionalDetails: string;
-   fueltype: string;
-   fuelUom: string;
-   color: string;
-   wheels: string;
-   door: string;
+  _id: string
+  licensePlate: string
+  mark: string
+  model: string
+  details: string
+  lastOdometerValue: string
+  location: string
+  chassisNo: string
+  value: string
+  insuranceDetails: string
+  insuranceCompany: string
+  policyNo: string
+  startDate: string
+  endDate: string
+  additionalDetails: string
+  fueltype: string
+  fuelUom: string
+  color: string
+  wheels: string
+  door: string
 
 }
 
 export default class Vehicle extends BaseModel {
-  static entity = 'vehicle';
+  static entity = 'vehicle'
 
   static fields () {
     return {

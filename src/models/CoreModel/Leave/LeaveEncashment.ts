@@ -1,16 +1,16 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface ILeaveEncashment {
-   _id: string;
-   leaveBalance: string;
-   encashmentAmount: string;
-   encashmentDate: string;
-   additionalSalary: string;
+  _id: string
+  leaveBalance: string
+  encashmentAmount: string
+  encashmentDate: string
+  additionalSalary: string
 
 }
 
 export default class LeaveEncashment extends BaseModel {
-  static entity = 'leaveEncashment';
+  static entity = 'leaveEncashment'
 
   static fields () {
     return {

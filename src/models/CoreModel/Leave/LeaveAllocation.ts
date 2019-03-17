@@ -1,22 +1,22 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface ILeaveAllocation {
-   _id: string;
-   applicant: string;
-   department: string;
-   type: string;
-   fromDate: string;
-   toDate: string;
-   newLeaveAllocated: string;
-   carryForward: string;
-   unusedLeaves: string;
-   notes: string;
-   description: string;
+  _id: string
+  applicant: string
+  department: string
+  type: string
+  fromDate: string
+  toDate: string
+  newLeaveAllocated: string
+  carryForward: string
+  unusedLeaves: string
+  notes: string
+  description: string
 
 }
 
 export default class LeaveAllocation extends BaseModel {
-  static entity = 'leaveAllocation';
+  static entity = 'leaveAllocation'
 
   static fields () {
     return {

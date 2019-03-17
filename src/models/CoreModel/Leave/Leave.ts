@@ -1,17 +1,17 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface ILeave {
-   _id: string;
-   applicant: string;
-   fromDate: string;
-   toDate: string;
-   isActive: string;
-   holidayList: string;
+  _id: string
+  applicant: string
+  fromDate: string
+  toDate: string
+  isActive: string
+  holidayList: string
 
 }
 
 export default class Leave extends BaseModel {
-  static entity = 'leave';
+  static entity = 'leave'
 
   static fields () {
     return {

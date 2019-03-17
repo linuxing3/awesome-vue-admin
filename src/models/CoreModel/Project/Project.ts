@@ -1,32 +1,32 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface IProject {
-   _id: string;
-   Name: string;
-   type: string;
-   status: string;
-   isActive: string;
-   percentComplete: string;
-   expectedStartDate: string;
-   expectedEndDate: string;
-   priority: string;
-   department: string;
-   tasks: string;
-   notes: string;
-   actualStartDate: string;
-   actualEndDate: string;
-   estimatedCost: string;
-   totalCost: string;
-   ExpenseClaim: string;
-   collectProgress: string;
-   frequency: string;
-   fromTime: string;
-   toTime: string;
+  _id: string
+  Name: string
+  type: string
+  status: string
+  isActive: string
+  percentComplete: string
+  expectedStartDate: string
+  expectedEndDate: string
+  priority: string
+  department: string
+  tasks: string
+  notes: string
+  actualStartDate: string
+  actualEndDate: string
+  estimatedCost: string
+  totalCost: string
+  ExpenseClaim: string
+  collectProgress: string
+  frequency: string
+  fromTime: string
+  toTime: string
 
 }
 
 export default class Project extends BaseModel {
-  static entity = 'project';
+  static entity = 'project'
 
   static fields () {
     return {

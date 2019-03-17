@@ -1,21 +1,21 @@
 import { BaseModel } from '../../BaseModel'
 
 export interface IAsset {
-   _id: string;
-   assetName: string;
-   itemCode: string;
-   itemName: string;
-   assetCategory: string;
-   assetOwner: string;
-   assetOwnerCompany: string;
-   image: string;
-   location: string;
-   custodian: string;
+  _id: string
+  assetName: string
+  itemCode: string
+  itemName: string
+  assetCategory: string
+  assetOwner: string
+  assetOwnerCompany: string
+  image: string
+  location: string
+  custodian: string
 
 }
 
 export default class Asset extends BaseModel {
-  static entity = 'asset';
+  static entity = 'asset'
 
   static fields () {
     return {

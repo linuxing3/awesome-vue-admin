@@ -7,7 +7,7 @@ export interface IProjectType {
 }
 
 export default class ProjectType extends BaseModel {
-  static entity = 'projectType';
+  static entity = 'projectType'
 
   static fields () {
     return {

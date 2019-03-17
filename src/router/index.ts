@@ -1,43 +1,43 @@
 /* eslint-disable */
-import Vue from "vue";
-import Router, { RouteConfig } from "vue-router";
+import Vue from 'vue'
+import Router, { RouteConfig } from 'vue-router'
 
-import path from "./path";
+import path from './path'
 
-Vue.use(Router);
+Vue.use(Router)
 
 /**
  * 动态路由
  */
-let requiredRoute: RequireContext = require.context(".", false, /\.ts$/);
+let requiredRoute: RequireContext = require.context('.', false, /\.ts$/)
 
 requiredRoute.keys().forEach(route => {
   let routeConfig = requiredRoute(route)
-  if (route === "./index.ts" || route === "./path.ts") return;
+  if (route === './index.ts' || route === './path.ts') return
   if (Array.isArray(routeConfig.default)) {
     routeConfig.default.forEach(subRoute => {
       path.push(subRoute)
     })
   } else {
-    path.push(routeConfig.default);
+    path.push(routeConfig.default)
   }
-});
+})
 
 const router = new Router({
-  routes: path as RouteConfig[],
-});
+  routes: path as RouteConfig[]
+})
 
 // router guards
 router.beforeEach((to: any, from: any, next: any) => {
-  console.log("Going From " + from.path + " to " + to.path);
+  console.log('Going From ' + from.path + ' to ' + to.path)
   // validate user
   // check if to edit or add
-  next();
-});
+  next()
+})
 
 router.afterEach((to: any, from: any) => {
-  console.log("Arrived " + to.path + " from " + from.path);
+  console.log('Arrived ' + to.path + ' from ' + from.path)
   // clear model of previous component
-});
+})
 
-export default router;
+export default router
