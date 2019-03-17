@@ -12,7 +12,7 @@ export interface VueElectronPlugin {
  *   window.$app = remote.app
  *   window.$shell = shell
  * }
-*/
+ */
 
 const VueElectron: VueElectronPlugin = {
   install (Vue: VueConstructor, args?) {

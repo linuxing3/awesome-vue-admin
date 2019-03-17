@@ -1,11 +1,9 @@
 const isElectron = process.env.NODE_ENV === 'production'
 
-const dependencies = {
-  transpileDependencies: [
-    'vue-echarts',
-    'resize-detector'
-  ]
-}
+const transpileDependencies = [
+  'vue-echarts',
+  'resize-detector'
+]
 
 function changeTarget (config) {
   if (isElectron) {
@@ -44,7 +42,7 @@ module.exports = {
   // configureWebpack: config => {
   //   changeTarget(config);
   // },
-  ...dependencies,
+  transpileDependencies,
   pluginOptions: {
     i18n
   }
