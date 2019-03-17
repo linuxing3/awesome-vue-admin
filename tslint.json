@@ -1,0 +1,18 @@
+{
+    "defaultSeverity": "warn",
+    "extends": [
+        "tslint-config-standard"
+    ],
+    "linterOptions": {
+        "include": [
+        "./src/**/*.ts"
+        ],
+        "exclude": [
+        "**/*.spec.js",
+        "./node_modules/**/*"
+        ]
+    },
+    "jsRules": {},
+    "rules": {},
+    "rulesDirectory": []
+}

@@ -12,7 +12,7 @@ describe('Generate form data with field Name', () => {
   })
 
   it('renders v-textarea with regex when passed', () => {
-    let formData: FormDataConfig  = genFormData('isContentAndcontent')
+    let formData: FormDataConfig = genFormData('isContentAndcontent')
     expect(formData.type).toBe('v-textarea')
   })
 })
