@@ -4,7 +4,7 @@ import AvatarUsageComponent from '@/components/examples/avatars/usage.vue'
 let options = (global as any).createVuetifyComponent()
 
 describe('Avatar Usage View', () => {
-  let wrapper: Wrapper
+  let wrapper
 
   beforeEach(() => {
     wrapper = shallowMount(AvatarUsageComponent, options)

@@ -4,7 +4,7 @@ import DateDialogAndMenu from '@/components/examples/date-pickers/dateDialogAndM
 let options = (global as any).createVuetifyComponent()
 
 describe('Test date picker with menu', () => {
-  let wrapper: Wrapper
+  let wrapper
 
   beforeEach(() => {
     wrapper = shallowMount(DateDialogAndMenu, options)

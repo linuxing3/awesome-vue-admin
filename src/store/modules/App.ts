@@ -1,10 +1,6 @@
 import { make } from 'vuex-pathify'
-import { FileManager } from '@/util/fs'
-
 import models from '@/models'
 const App = models['app']
-
-const fileManger: FileManager = new FileManager()
 
 const state: any = {
   name: 'app',
@@ -22,16 +18,10 @@ const mutations: any = {
    */
   init ({ state }) {
     // 设置当前模型的名称
-    fileManger.getWindowsHomeDir()
-    fileManger.getWindowsTemplateDir(fileManger.homeDir, 'documents/template/')
-    let { homeDir, templateDir } = fileManger
-
     state.model = {
       name: 'awesome-vue-manager',
       title: 'Awesome Vue Manager',
-      description: 'Awesome Vue Manager with General use purpose',
-      homeDir,
-      templateDir
+      description: 'Awesome Vue Manager with General use purpose'
     }
     App.$create({ data: state.model })
   },
