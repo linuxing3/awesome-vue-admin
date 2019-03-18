@@ -216,23 +216,39 @@ Object.defineProperty(window, 'localStorage', {
   vuexOptions = {},
   routerOptions = {}
 ) => {
-  const localVue = createLocalVue()
+  let store: Store<{}>
+  let router: VueRouter
   // 启用插件
+  let localVue = createLocalVue()
   localVue.use(Vuetify)
   localVue.use(Vuex)
   localVue.use(VueRouter)
-  const returnOptions = { localVue }
+
   // 注入store
-  const store: Store<{}> = new Store({
-    ...cloneDeep(vuexModule),
-    ...vuexOptions
-  })
+  if (vuexModule === undefined) {
+    store = (global as any).mockORMStore
+  } else {
+    store = new Store({
+      ...cloneDeep(vuexModule),
+      ...vuexOptions
+    })
+  }
   // 注入router
-  const router = new VueRouter({
+  router = new VueRouter({
     routes: path,
     ...routerOptions
   })
-  returnOptions['router'] = router
-  returnOptions['store'] = store
-  return returnOptions
+
+  return {
+    router,
+    store,
+    localVue
+  }
 }
+
+/**
+  * Gobal mocks
+  */
+;(global as any).mockApp = require('./__mocks__/app')
+;(global as any).mockComponent = require('./__mocks__/component')
+;(global as any).mockORMStore = require('./__mocks__/orm-store')

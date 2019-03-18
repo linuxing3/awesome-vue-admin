@@ -89,16 +89,19 @@ export default {
       modelName: '<%= modelName.toLowerCase() %>'
     }
   },
+  watch {
+    modelName: {
+      handler (newModelName) {
+        this.fetch()
+      },
+      immediate: true
+    },
+  },
   mixins: [ exportMixin, crudMixin ],
   created() {
     window.<%= modelTableName %> = this
   },
-  methods: {
-    editItem(item) {
-      this.$emit('SET_EDITING', item);
-      window.<%= modelFormName %>.$emit('SET_EDITING', item)
-    }
-  }
+  methods: {}
 }
 </script>
 

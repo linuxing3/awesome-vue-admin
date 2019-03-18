@@ -7,9 +7,8 @@ const EntityName = h.inflection.singularize(model).toLowerCase()
 %>import { BaseModel} from "../../BaseModel";
 
 export interface I<%= ModelName %> {
-   _id: string;
-   <%= fieldName %>: <%= fieldType %>;
-   <% fieldNames.split(",").map(field => { %><%= field %>: string;
+   _id: string
+   <% fieldNames.split(",").map(field => { %><%= field %>: string
    <% }) %>
 }
 
@@ -19,8 +18,7 @@ export default class <%= ModelName %> extends BaseModel {
   static fields() {
     return {
       _id: this.increment(),
-      <%= fieldName %>: this.<%= fieldType %>("<%= fieldValue %>"),
-      <% fieldNames.split(",").map(field => { %><%= field %>: this.string("<%= field %>"),
+      <% fieldNames.split(",").map(field => { %><%= field %>: this.attr("<%= field %>"),
       <% }) %>
     };
   }

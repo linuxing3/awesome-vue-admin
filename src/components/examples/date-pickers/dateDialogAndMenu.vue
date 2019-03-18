@@ -19,6 +19,7 @@
           min-width="290px"
         >
         <v-text-field
+            name="firstTextField"
             slot="activator"
             v-model="date"
             label="Picker in menu"

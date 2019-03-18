@@ -3,7 +3,6 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 ---
 <%
   const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
   const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
 %><template>
   <v-card>
@@ -66,6 +65,14 @@ export default {
     return {
       modelName: '<%= modelName.toLowerCase() %>'
     }
+  },
+  watch {
+    editedItem: {
+      handler (newItem) {
+        console.log(newItem)
+      },
+      immediate: true
+    },
   },
   mixins: [ crudMixin, exportMixin ],
   created() {

@@ -15,45 +15,12 @@ module.exports = {
           return 'Component names should contain one word, better capitalized.';
         }
         return true
-    }
-    },
-    {
-      type: 'input',
-      name: 'fieldName',
-      message: 'Default Field Name (ex: name)',
-      validate (value) {
-        if (!value.length) {
-          return 'Field must have a name, better lowercase';
-        }
-        return true
-    }
-    },
-    {
-      type: 'input',
-      name: 'fieldType',
-      message: 'Default Field Type(ex: string, number, boolean, attr)',
-      validate (value) {
-        if (!value.length) {
-          return 'Field must have a name, better lowercase';
-        }
-        return true
-        }
-    },
-    {
-      type: 'input',
-      name: 'fieldValue',
-      message: 'Default Field Value(ex: Daniel)',
-      validate (value) {
-        if (!value.length) {
-          return 'Field must have a value, please name it';
-        }
-        return true
-        }
+      }
     },
     {
       type: 'input',
       name: 'fieldNames',
-      message: 'Need More Fields?(just input names separate by comma: "age,gender,title")'
+      message: 'input Fields?(separate by comma: "age, gender, title")'
     }
     ]
 
