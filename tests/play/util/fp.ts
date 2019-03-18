@@ -25,6 +25,7 @@ const histogram = () => {
   )
 
   const subscribe = gaussianStream.subscribe(v => console.log(v))
+  return subscribe
 }
 
 const scanExample = () => {
