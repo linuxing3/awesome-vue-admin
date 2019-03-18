@@ -5,7 +5,7 @@ import DateDialogAndMenu from '@/components/examples/date-pickers/dateDialogAndM
 let options = (global as any).createVuetifyComponent()
 
 describe('Test date picker with menu', () => {
-  let wrapper: Wrapper<CombinedVueInstance<DateDialogAndMenu, object, object, object, Record<never, any>>>
+  let wrapper
   let saveFn
 
   beforeEach(() => {
