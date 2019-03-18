@@ -247,8 +247,8 @@ Object.defineProperty(window, 'localStorage', {
 }
 
 /**
-  * Gobal mocks
-  */
+ * Global Mocks
+ */
 ;(global as any).mockApp = require('./__mocks__/app')
 ;(global as any).mockComponent = require('./__mocks__/component')
 ;(global as any).mockORMStore = require('./__mocks__/orm-store')

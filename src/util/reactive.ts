@@ -31,7 +31,7 @@ export const filterExample = () => {
 /**
  * literal example
  *
- **/
+ */
 export const beautyExample = () => {
   const beauty = from(['Monica', 'Johana'])
   const hansome = from(['Antonio', 'Juan'])

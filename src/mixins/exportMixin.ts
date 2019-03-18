@@ -361,11 +361,14 @@ export default {
         console.log(this.document)
         // 写入文件
         const packer = new Packer()
-        packer.toBuffer(this.document).then(buffer => {
-          writeFileSync(this.attachFile, buffer)
-          this.attachFile = ''
-          this.document = null
-        })
+        packer.toBuffer(this.document)
+          .then(buffer => {
+            writeFileSync(this.attachFile, buffer)
+            this.attachFile = ''
+            this.document = null
+          }).catch(error => {
+            throw new Error(error)
+          })
         shell.showItemInFolder(this.attachFile)
       } catch (error) {
         throw new Error(error)

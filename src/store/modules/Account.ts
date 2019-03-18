@@ -88,7 +88,7 @@ const AccountActions = {
         console.log('保存用户名和加密密码')
 
         // 3 使用创建后账户，再次尝试登录
-        ctx.dispatch('signup', accountInfo)
+        await ctx.dispatch('signup', accountInfo)
       } catch (e) {
         throw new Error('添加新账户失败!')
       }
@@ -100,7 +100,7 @@ const AccountActions = {
       let valid = await bcrypt.compare(password, hash)
       if (valid) {
         console.log('密码验证通过')
-        ctx.dispatch('setLoginStatus', authedAccount)
+        await ctx.dispatch('setLoginStatus', authedAccount)
       } else {
         console.log('无效密码')
         ctx.commit('SET_LOGGED_IN', false)

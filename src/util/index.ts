@@ -387,7 +387,7 @@ export const GenerateCSV = ({
  * @param {String|Object} needTranslate 需要转移列标题
  * @param {String|Object} keysDef? 标题定义json文件
  * @return {Promise} 成功将返回一个results对象，其data属性为真正的数据数组
- **/
+ */
 export const ImportCSV = async ({ file = {}, keysDef = {} }): Promise<any> => {
   return new Promise((resolve, reject) => {
     Papa.parse(file, {

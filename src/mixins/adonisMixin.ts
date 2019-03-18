@@ -50,7 +50,7 @@ export default {
     })
   },
   methods: {
-    async checkAdonis () {
+    checkAdonis () {
       let options = {
         method: 'GET',
         protocol: 'http:',
@@ -58,7 +58,7 @@ export default {
         port: '3333',
         path: '/'
       }
-      await ipcRenderer.send('adonis-request', options)
+      ipcRenderer.send('adonis-request', options)
     },
     /**
      * Login and get token
