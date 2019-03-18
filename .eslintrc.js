@@ -10,7 +10,7 @@ module.exports = {
     'no-debugger': 'off',
     'no-unreachable': 'off',
     'no-empty': 'warn',
-    'no-trailing-spaces': 'warn',
+    'no-trailing-spaces': 'error',
     'vue/no-use-v-if-with-v-for': 'off',
     'vue/valid-v-on': 'off',
     'vue/require-valid-default-prop': 'off',
