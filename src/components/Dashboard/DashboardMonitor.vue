@@ -74,29 +74,82 @@
 
 <script>
 import models from '@/models'
-import { getBarOption, getPolarOption, getPieOption } from '@/util/charts'
-
-import { publicAssets } from '@/api/globals'
+import { modelStatistic } from '@/util/statistic'
 
 export default {
   data () {
-    let { backgrounds, avatars, nature } = publicAssets
-
     return {
-      backgrounds,
-      avatars,
-      nature
+      dataSet: {}
     }
   },
+  mounted () {
+    this.dataSet = modelStatistic({
+      models,
+      fieldsDefModel: 'projectType',
+      fieldDef: 'title',
+      queryModel: 'project',
+      queryFieldName: 'type'
+    })
+    console.log(this.dataSet)
+  },
   computed: {
-    pie () {
-      return getPieOption()
-    },
     bar () {
-      return getBarOption()
+      let source = []
+      source.push(['Product', '2015'])
+      Object.keys(this.dataSet).forEach(item => {
+        source.push([item, this.dataSet[item]])
+      })
+
+      return {
+        legend: {},
+        tooltip: {},
+        dataset: {
+          source
+        },
+        xAxis: { type: 'category' },
+        yAxis: {},
+        series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
+      }
     },
-    polar () {
-      return getPolarOption()
+    pie () {
+      let serieData = []
+      let legendData = []
+      Object.keys(this.dataSet).forEach(key => {
+        serieData.push({ value: this.dataSet[key], name: key })
+        legendData.push(key)
+      })
+
+      return {
+        title: {
+          text: '饼图程序',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: legendData
+        },
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: serieData,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
     }
   }
 }
