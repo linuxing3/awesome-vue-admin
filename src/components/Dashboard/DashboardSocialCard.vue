@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .v-sheet--offset {
     top: -36px;
     left: 10px;

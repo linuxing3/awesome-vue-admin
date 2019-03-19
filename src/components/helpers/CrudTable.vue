@@ -7,6 +7,7 @@
         flat
         color="white">
       <v-overflow-btn
+          v-if="1 !== 1"
           class="heading mt-3"
           :items="entities"
           item-value="entityName"
@@ -39,7 +40,7 @@
             fab
             large
             absolute
-            right
+            left
             top
             color="red darken-1"
           >
