@@ -1,4 +1,5 @@
 import { BaseModel } from '../../BaseModel'
+import Document from './Document'
 
 export default class Archive extends BaseModel {
   static entity = 'archive'
@@ -15,7 +16,8 @@ export default class Archive extends BaseModel {
       attachment: this.string('XXX'),
       tags: this.string('XXX'),
       author: this.string('string'),
-      manager: this.string('string')
+      manager: this.string('string'),
+      documents:this.hasMany(Document, 'archive_id')
     }
   }
 }

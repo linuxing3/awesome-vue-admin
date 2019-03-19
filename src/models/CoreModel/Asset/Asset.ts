@@ -1,4 +1,6 @@
 import { BaseModel } from '../../BaseModel'
+import User from '../User/User';
+import AssetUser from './AssetUser';
 
 export interface IAsset {
   _id: string
@@ -11,7 +13,6 @@ export interface IAsset {
   image: string
   location: string
   custodian: string
-
 }
 
 export default class Asset extends BaseModel {
@@ -36,7 +37,8 @@ export default class Asset extends BaseModel {
       barCode: this.string('barCode'),
       supplier: this.string('supplier'),
       location: this.string('location'),
-      custodian: this.string('custodian')
+      custodian: this.string('custodian'),
+      users: this.belongsToMany(User, AssetUser, 'asset_id', 'user_id')
     }
   }
 }

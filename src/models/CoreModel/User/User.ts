@@ -1,4 +1,9 @@
 import { BaseModel } from '../../BaseModel'
+import UserMilitant from './UserMilitant';
+import UserAppraisal from './UserAppraisal';
+import Project from '../Project/Project';
+import ProjectUser from '../Project/ProjectUser';
+import UserDesignation from './UserDesignation';
 
 export default class User extends BaseModel {
   static entity = 'user'
@@ -26,7 +31,11 @@ export default class User extends BaseModel {
       conyugeBonus: this.string('n/a'),
       memo: this.string('n/a'),
       protocolId: this.number(101),
-      isActive: this.string('n/a')
+      isActive: this.string('n/a'),
+      militant: this.hasOne(UserMilitant, 'user_id'),
+      appraisals: this.hasMany(UserAppraisal, 'user_id'),
+      designations: this.hasMany(UserDesignation, 'user_id'),
+      projects: this.belongsToMany(Project, ProjectUser, 'project_id', 'user_id')
     }
   }
 }

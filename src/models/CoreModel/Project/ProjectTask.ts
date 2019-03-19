@@ -23,7 +23,8 @@ export default class ProjectTask extends BaseModel {
       taskWeight: this.string('taskWeight'),
       startDate: this.string('2019-03-08'),
       endDate: this.string('2019-03-08'),
-      priority: this.string('priority')
+      priority: this.string('priority'),
+      project_id: this.attr(null)
     }
   }
 }

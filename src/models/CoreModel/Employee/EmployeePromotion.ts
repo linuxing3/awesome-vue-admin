@@ -1,4 +1,5 @@
 import { BaseModel } from '../../BaseModel'
+import Employee from './Employee';
 
 export interface IEmployeePromotion {
   _id: string
@@ -18,8 +19,8 @@ export default class EmployeePromotion extends BaseModel {
       name: this.string('secretary'),
       department: this.string('department'),
       promotionDate: this.string('promotionDate'),
-      promotionDetails: this.string('promotionDetails')
-
+      promotionDetails: this.string('promotionDetails'),
+      Employee_id: this.attr(null)
     }
   }
 }

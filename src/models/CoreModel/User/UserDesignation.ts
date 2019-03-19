@@ -7,7 +7,8 @@ export default class UserDesignation extends BaseModel {
     return {
       _id: this.increment(),
       designation: this.string('Business'),
-      description: this.string('Daniel')
+      description: this.string('Daniel'),
+      user_id: this.attr(null)
     }
   }
 }

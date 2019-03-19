@@ -20,7 +20,9 @@ export default class Document extends BaseModel {
       attachment: this.string(''),
       keyword: this.string(''),
       workEntity: this.string('Code'),
-      author: this.string('Daniel')
+      author: this.string('Daniel'),
+      archive_id: this.attr(null),
+      type_id: this.attr(null),
     }
   }
 }

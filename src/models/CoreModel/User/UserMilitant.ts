@@ -35,7 +35,8 @@ export default class UserMilitant extends BaseModel {
       looseContact: this.boolean(false),
       floating: this.boolean(false),
       registerDate: this.string('2009-09-09'),
-      transferDate: this.string('2009-09-09')
+      transferDate: this.string('2009-09-09'),
+      user_id: this.attr(null)
     }
   }
 }

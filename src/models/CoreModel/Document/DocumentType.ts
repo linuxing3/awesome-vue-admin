@@ -1,4 +1,5 @@
 import { BaseModel } from '../../BaseModel'
+import Document from './Document';
 
 export default class DocumentType extends BaseModel {
   static entity = 'documentType'
@@ -6,7 +7,8 @@ export default class DocumentType extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      title: this.string('internal')
+      title: this.string('internal'),
+      documents: this.hasMany(Document, 'type_id')
     }
   }
 }

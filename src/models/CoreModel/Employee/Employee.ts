@@ -1,4 +1,6 @@
 import { BaseModel } from '../../BaseModel'
+import EmployeePromotion from './EmployeePromotion';
+import Leave from '../Leave/Leave';
 
 export interface IEmployee {
   _id: string
@@ -120,7 +122,9 @@ export default class Employee extends BaseModel {
       encashDate: this.string('2019-03-08'),
       resiged: this.string('resiged'),
       reasonForResignation: this.string('reasonForResignation'),
-      feedback: this.string('feedback')
+      feedback: this.string('feedback'),
+      promotions: this.hasMany(EmployeePromotion, 'employee_id'),
+      leaves: this.hasMany(Leave, 'employee_id')
     }
   }
 }

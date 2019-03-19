@@ -72,7 +72,7 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
 import models from '@/models'
 import { modelStatistic } from '@/util/statistic'
 
@@ -99,16 +99,16 @@ export default {
     pullDataSet () {
       this.projectDataSet = modelStatistic({
         models,
-        fieldsDefModel: 'projectType',
-        fieldDef: 'title',
-        queryModel: 'project',
+        lookupModelName: 'projectType',
+        lookupFieldName: 'title',
+        queryModelName: 'project',
         queryFieldName: 'type'
       })
       this.documentDataSet = modelStatistic({
         models,
-        fieldsDefModel: 'documentType',
-        fieldDef: 'title',
-        queryModel: 'document',
+        lookupModelName: 'documentType',
+        lookupFieldName: 'title',
+        queryModelName: 'document',
         queryFieldName: 'category'
       })
     },

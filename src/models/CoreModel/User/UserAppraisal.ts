@@ -11,7 +11,8 @@ export default class UserAppraisal extends BaseModel {
       startDate: this.string('male'),
       endDate: this.string('2009-09-09'),
       goals: this.string('han'),
-      remarks: this.string('Master')
+      remarks: this.string('Master'),
+      user_id: this.attr(null)
     }
   }
 }

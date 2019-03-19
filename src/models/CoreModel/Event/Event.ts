@@ -17,7 +17,9 @@ export default class Event extends BaseModel {
       reportContent: this.string('Discussion'),
       instructionDate: this.string('2019-02-23'),
       instruction: this.string('Read'),
-      priority: this.string('HIGH')
+      priority: this.string('HIGH'),
+      user_id: this.attr(null),
+      project_id: this.attr(null)
     }
   }
 }

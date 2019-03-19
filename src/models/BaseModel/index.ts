@@ -13,7 +13,7 @@ import {
   MorphTo,
   Attribute
 } from '@vuex-orm/core'
-import { keys, pullAll } from 'lodash'
+import { keys, pullAll, uniq, mapKeys } from 'lodash'
 
 export class BaseModel extends Model {
   static primaryKey = '_id'
@@ -66,6 +66,17 @@ export class BaseModel extends Model {
 
   static count (): number {
     return this.query().count()
+  }
+
+  /**
+ * 使用lodash获取某模型中某一字段的全部值组成的数组
+ * @param Model 模型
+ * @param fieldDef 字段名
+ * @returns 某一字段的全部值组成的数组
+ */
+  static findUniqueValuesOfField (fieldName: string) {
+    let records: any[] = this.query().get()
+    return (uniq(keys(mapKeys(records, record => record[fieldName]))))
   }
 
   /**
