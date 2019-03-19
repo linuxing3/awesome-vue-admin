@@ -6,7 +6,6 @@ import models from '@/models'
 import ProjectType from '@/models/CoreModel/Project/ProjectType'
 
 export function getBarOption () {
-
   let dataSet = modelStatistic({
     models,
     fieldsDefModel: 'projectType',
@@ -74,7 +73,6 @@ export function getPolarOption () {
 }
 
 export function getPieOption () {
-
   let value1 = Project.query().where('type', '规章制度').get().length
   let value2 = Project.query().where('type', '工程').get().length
 

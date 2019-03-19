@@ -7,7 +7,7 @@ import { uniq, mapKeys, keys } from 'lodash'
  * @param queryFieldName [string] 将查询的字段
  * @returns [object] 包含名称和统计量的对象, { type1: 10, type2: 10 }
  */
-export const modelStatistic =  (
+export const modelStatistic = (
   {
     models,
     fieldsDefModel,
@@ -17,7 +17,7 @@ export const modelStatistic =  (
   }) => {
   let fields: string[] = uniq(findValuesOfField(models[fieldsDefModel], fieldDef))
 
-  return fields.reduce(function(dataSet, fieldName) {
+  return fields.reduce(function (dataSet, fieldName) {
     let fieldCount = models[queryModel]
       .query()
       .where(queryFieldName, fieldName)
@@ -33,12 +33,12 @@ export const modelStatistic =  (
  * @param fieldDef 字段名
  * @returns 某一字段的全部值组成的数组
  */
-export const findValuesOfField =  (Model, fieldDef) => {
+export const findValuesOfField = (Model, fieldDef) => {
   let records = Model.query().get()
-  return records.reduce(function(fields, item){
-      fields.push(item[fieldDef])
-      return fields
-    }, [])
+  return records.reduce(function (fields, item) {
+    fields.push(item[fieldDef])
+    return fields
+  }, [])
 }
 
 /**
@@ -47,7 +47,7 @@ export const findValuesOfField =  (Model, fieldDef) => {
  * @param fieldDef 字段名
  * @returns 某一字段的全部值组成的数组
  */
-export const _findValuesOfField =  (Model, fieldDef) => {
+export const _findValuesOfField = (Model, fieldDef) => {
   let records = Model.query().get()
   return (uniq(keys(mapKeys(records, o => o[fieldDef]))))
 }
