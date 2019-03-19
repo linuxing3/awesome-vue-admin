@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel'
-import User from '../User/User';
-import AssetUser from './AssetUser';
+import User from '../User/User'
+import AssetUser from './AssetUser'
 
 export interface IAsset {
   _id: string

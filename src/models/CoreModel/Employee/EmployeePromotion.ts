@@ -1,5 +1,5 @@
 import { BaseModel } from '../../BaseModel'
-import Employee from './Employee';
+import Employee from './Employee'
 
 export interface IEmployeePromotion {
   _id: string

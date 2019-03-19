@@ -1,9 +1,9 @@
 import { BaseModel } from '../../BaseModel'
-import UserMilitant from './UserMilitant';
-import UserAppraisal from './UserAppraisal';
-import Project from '../Project/Project';
-import ProjectUser from '../Project/ProjectUser';
-import UserDesignation from './UserDesignation';
+import UserMilitant from './UserMilitant'
+import UserAppraisal from './UserAppraisal'
+import Project from '../Project/Project'
+import ProjectUser from '../Project/ProjectUser'
+import UserDesignation from './UserDesignation'
 
 export default class User extends BaseModel {
   static entity = 'user'

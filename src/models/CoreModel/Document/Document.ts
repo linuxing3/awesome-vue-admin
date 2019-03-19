@@ -22,7 +22,7 @@ export default class Document extends BaseModel {
       workEntity: this.string('Code'),
       author: this.string('Daniel'),
       archive_id: this.attr(null),
-      type_id: this.attr(null),
+      type_id: this.attr(null)
     }
   }
 }

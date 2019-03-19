@@ -1,14 +1,13 @@
 import { BaseModel } from '../../BaseModel'
-import ProjectTask from './ProjectTask';
-import Event from '../Event/Event';
-import User from '../User/User';
-import ProjectUser from './ProjectUser';
+import ProjectTask from './ProjectTask'
+import Event from '../Event/Event'
+import User from '../User/User'
+import ProjectUser from './ProjectUser'
 
 export interface IProject {
   _id: string
   name: string
   type: string
-  board_id: string | number
   status: string
   isActive: string
   percentComplete: string

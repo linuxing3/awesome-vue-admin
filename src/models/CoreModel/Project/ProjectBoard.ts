@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel'
 import Project from './Project'
-import User from '../User/User';
+import User from '../User/User'
 
 export interface IProjectBoard {
   _id: string
@@ -18,7 +18,7 @@ export default class ProjectBoard extends BaseModel {
       name: this.string('home'),
       title: this.string('Home Tasks'),
       owner: this.hasOne(User, 'user_id'),
-      projects: this.hasMany(Project,'board_id')
+      projects: this.hasMany(Project, 'board_id')
     }
   }
 }

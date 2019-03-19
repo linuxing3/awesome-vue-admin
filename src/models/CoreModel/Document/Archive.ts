@@ -17,7 +17,7 @@ export default class Archive extends BaseModel {
       tags: this.string('XXX'),
       author: this.string('string'),
       manager: this.string('string'),
-      documents:this.hasMany(Document, 'archive_id')
+      documents: this.hasMany(Document, 'archive_id')
     }
   }
 }

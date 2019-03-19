@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel'
-import EmployeePromotion from './EmployeePromotion';
-import Leave from '../Leave/Leave';
+import EmployeePromotion from './EmployeePromotion'
+import Leave from '../Leave/Leave'
 
 export interface IEmployee {
   _id: string

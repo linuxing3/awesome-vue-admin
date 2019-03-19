@@ -46,7 +46,7 @@ export const modelStatistic = ({
   }
 
   try {
-    return lookupFields.reduce(function(dataSet, fieldName) {
+    return lookupFields.reduce(function (dataSet, fieldName) {
       let fieldCount = models[queryModelName]
         .query()
         .where(queryFieldName, fieldName)
@@ -62,7 +62,7 @@ export const modelStatistic = ({
 export const validLookupFields = ({
   models,
   lookupModelName,
-  lookupFieldName,
+  lookupFieldName
 }: IStatisticQuery) => {
   let lookupFields: string[] = []
   // get fields from lookup model if fields is undefined
@@ -87,7 +87,7 @@ export const validLookupFields = ({
  */
 export const findUniqueValuesOfField = (Model, lookupFieldName: string) => {
   let records = Model.query().get()
-  let fields: string[] = records.reduce(function(fields: any[], record: IGenericField) {
+  let fields: string[] = records.reduce(function (fields: any[], record: IGenericField) {
     fields.push(record[lookupFieldName])
     return fields
   }, [])
