@@ -9,9 +9,9 @@
       >
       <v-flex
           xs12
-          md12
-          sm12
-          lg12
+          md4
+          sm4
+          lg4
           @click="crud({ blueprint: 'project'})"
         >
         <v-card
@@ -41,12 +41,6 @@
                 >
                 <v-card>
                   <v-card-title class="subheading font-weight-bold">{{ props.item.status }}</v-card-title>
-                  <v-divider></v-divider>
-                  <v-list dense>
-                    <v-list-tile>
-                      <v-list-tile-content class="align-end">{{ props.item.name }}</v-list-tile-content>
-                    </v-list-tile>
-                  </v-list>
                 </v-card>
               </v-flex>
             </v-data-iterator>

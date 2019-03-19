@@ -18,7 +18,7 @@
               class="pt-3">
             <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">财务开支</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="pie" />
+            <v-chart :options="projectPie" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -31,9 +31,9 @@
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">资源消耗</div>
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">文书种类</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="pie" />
+            <v-chart :options="documentPie" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -46,9 +46,9 @@
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">月度工作量</div>
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">文件统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="bar" />
+            <v-chart :options="documentBar" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -61,9 +61,9 @@
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">季度工作量</div>
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">项目统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="bar" />
+            <v-chart :options="projectBar" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -79,43 +79,44 @@ import { modelStatistic } from '@/util/statistic'
 export default {
   data () {
     return {
-      dataSet: {}
+      projectDataSet: {},
+      documentDataSet: {},
+      items: ['project', 'projectType', 'document', 'documentType']
     }
   },
   mounted () {
-    this.dataSet = modelStatistic({
-      models,
-      fieldsDefModel: 'projectType',
-      fieldDef: 'title',
-      queryModel: 'project',
-      queryFieldName: 'type'
-    })
-    console.log(this.dataSet)
+    // 必须先载入持久数据
+    this.asyncFetch(this.items)
+    // 设置数据集
+    this.pullDataSet(this.items)
   },
-  computed: {
-    bar () {
-      let source = []
-      source.push(['Product', '2015'])
-      Object.keys(this.dataSet).forEach(item => {
-        source.push([item, this.dataSet[item]])
+  methods: {
+    asyncFetch (items) {
+      items.forEach(model => {
+        models[model].$fetch()
       })
-
-      return {
-        legend: {},
-        tooltip: {},
-        dataset: {
-          source
-        },
-        xAxis: { type: 'category' },
-        yAxis: {},
-        series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
-      }
     },
-    pie () {
+    pullDataSet () {
+      this.projectDataSet = modelStatistic({
+        models,
+        fieldsDefModel: 'projectType',
+        fieldDef: 'title',
+        queryModel: 'project',
+        queryFieldName: 'type'
+      })
+      this.documentDataSet = modelStatistic({
+        models,
+        fieldsDefModel: 'documentType',
+        fieldDef: 'title',
+        queryModel: 'document',
+        queryFieldName: 'category'
+      })
+    },
+    drawPieChart (dataSet) {
       let serieData = []
       let legendData = []
-      Object.keys(this.dataSet).forEach(key => {
-        serieData.push({ value: this.dataSet[key], name: key })
+      Object.keys(dataSet).forEach(key => {
+        serieData.push({ value: dataSet[key], name: key })
         legendData.push(key)
       })
 
@@ -150,6 +151,38 @@ export default {
           }
         ]
       }
+    },
+    drawBarChart (dataSet) {
+      let series = [{ type: 'bar' }]
+      let source = []
+      Object.keys(dataSet).forEach(item => {
+        source.push([item, dataSet[item]])
+      })
+
+      return {
+        legend: {},
+        tooltip: {},
+        dataset: {
+          source
+        },
+        xAxis: { type: 'category' },
+        yAxis: {},
+        series
+      }
+    }
+  },
+  computed: {
+    projectBar () {
+      return this.drawBarChart(this.projectDataSet)
+    },
+    documentBar () {
+      return this.drawBarChart(this.documentDataSet)
+    },
+    projectPie () {
+      return this.drawPieChart(this.projectDataSet)
+    },
+    documentPie () {
+      return this.drawPieChart(this.documentDataSet)
     }
   }
 }
