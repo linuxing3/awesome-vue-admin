@@ -1,6 +1,7 @@
 <template>
   <DefaultLayout>
-    <PlayComponent v-show="true"/>
+    <PlayComponent v-show="false"/>
+    <PhotoGallery :items="backgrounds"/>
   </DefaultLayout>
 </template>
 

@@ -20,7 +20,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test:uw": "vue-cli-service test:unit --watch",
     "play:debug": "node --nolazy --inspect-brk=9229 ./tests/play/util/bin/fp.js",
-    "play:watch": "tsc -p ./tests/play/util --watch"
+    "play:watch": "tsc -p ./tests/play/util --watch",
+    "play:debug:ts": "ts-node ./tests/play/util/ftp.ts"
   },
   "dependencies": {
     "@vuex-orm/core": "^0.31.4",

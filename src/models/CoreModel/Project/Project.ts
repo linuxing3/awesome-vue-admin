@@ -2,7 +2,7 @@ import { BaseModel } from '../../BaseModel'
 
 export interface IProject {
   _id: string
-  Name: string
+  name: string
   type: string
   status: string
   isActive: string
@@ -31,7 +31,7 @@ export default class Project extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      Name: this.string('dev'),
+      name: this.string('dev'),
       type: this.string('type'),
       status: this.string('status'),
       isActive: this.string('isActive'),

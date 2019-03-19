@@ -71,3 +71,47 @@ export const publicAssets = {
     { src: 'nature/n8.jpg' }
   ]
 }
+
+export const gradients = [
+  ['#222'],
+  ['#42b3f4'],
+  ['red', 'orange', 'yellow'],
+  ['purple', 'violet'],
+  ['#00c6ff', '#F0F', '#FF0'],
+  ['#f72047', '#ffd200', '#1feaea']
+]
+
+export const bookmarks = [
+  {
+    title: 'feedly',
+    url: 'https://feedly.com/i/category/Venezuela',
+    description: '',
+    tags: '',
+    date: ''
+  },
+  {
+    title: 'El universal',
+    url: 'https://eluniversal.com',
+    description: '',
+    tags: '',
+    date: ''
+  },
+  {
+    title: 'El national',
+    url: 'https://el-nacional.com',
+    description: '',
+    tags: '',
+    date: ''
+  }
+]
+
+export const searchEngine = [
+  {
+    name: 'wikipedia',
+    endPoint: 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search='
+  },
+  {
+    name: 'wikipedia',
+    endPoint: 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search='
+  }
+]

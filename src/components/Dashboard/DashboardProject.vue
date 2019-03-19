@@ -12,6 +12,7 @@
           md12
           sm12
           lg12
+          @click="crud({ blueprint: 'project'})"
         >
         <v-card
             class="mt-1 mx-auto"
@@ -19,7 +20,7 @@
           <v-card-text
               class="pt-3">
 
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">Project</div>
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">进行中项目</div>
 
             <v-divider class="my-2"></v-divider>
 
@@ -43,7 +44,7 @@
                   <v-divider></v-divider>
                   <v-list dense>
                     <v-list-tile>
-                      <v-list-tile-content class="align-end">{{ props.item.tasks }}</v-list-tile-content>
+                      <v-list-tile-content class="align-end">{{ props.item.name }}</v-list-tile-content>
                     </v-list-tile>
                   </v-list>
                 </v-card>

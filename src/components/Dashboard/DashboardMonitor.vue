@@ -16,22 +16,7 @@
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">Polar Chart</div>
-            <v-divider class="my-2"></v-divider>
-            <v-chart :options="polar" />
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex
-          xs12
-          md6
-          sm6
-          lg6
-        >
-        <v-card>
-          <v-card-text
-              class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">Pie Chart</div>
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">财务开支</div>
             <v-divider class="my-2"></v-divider>
             <v-chart :options="pie" />
           </v-card-text>
@@ -46,7 +31,37 @@
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">Bar Chart</div>
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">资源消耗</div>
+            <v-divider class="my-2"></v-divider>
+            <v-chart :options="pie" />
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      <v-flex
+          xs12
+          md6
+          sm6
+          lg6
+        >
+        <v-card>
+          <v-card-text
+              class="pt-3">
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">月度工作量</div>
+            <v-divider class="my-2"></v-divider>
+            <v-chart :options="bar" />
+          </v-card-text>
+        </v-card>
+      </v-flex>
+      <v-flex
+          xs12
+          md6
+          sm6
+          lg6
+        >
+        <v-card>
+          <v-card-text
+              class="pt-3">
+            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">季度工作量</div>
             <v-divider class="my-2"></v-divider>
             <v-chart :options="bar" />
           </v-card-text>
@@ -65,18 +80,23 @@ import { publicAssets } from '@/api/globals'
 
 export default {
   data () {
-    let polar = getPolarOption()
-    let bar = getBarOption()
-    let pie = getPieOption()
     let { backgrounds, avatars, nature } = publicAssets
 
     return {
       backgrounds,
       avatars,
-      nature,
-      bar,
-      pie,
-      polar
+      nature
+    }
+  },
+  computed: {
+    pie () {
+      return getPieOption()
+    },
+    bar () {
+      return getBarOption()
+    },
+    polar () {
+      return getPolarOption()
     }
   }
 }

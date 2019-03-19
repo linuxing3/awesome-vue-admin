@@ -5,10 +5,10 @@ export default class Bookmark extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      url: this.string('http://eluniversal.com'),
-      title: this.string('El Universal'),
-      description: this.string('El Universal diary'),
-      tags: this.string('ve'),
+      title: this.string('Feedly'),
+      url: this.string('https://feedly.com'),
+      description: this.string('News Feeds on Fingers'),
+      tags: this.string('study'),
       date: this.string('2019-03-10')
     }
   }

@@ -59,6 +59,7 @@ import { from, Observable, SchedulerLike } from 'rxjs'
 import { debounceTime, map, pluck, switchMap } from 'rxjs/operators'
 
 import models from '@/models'
+import { searchEngine } from '@/api/globals'
 
 interface HackerNewsResult {
   objectID: string
@@ -82,13 +83,13 @@ interface HandleObservableOptions {
 }
 
 interface AjaxOptions {
-  baseUrl?: string
+  endPoint?: string
   formatFunc?: Function
 }
 
-const researchNewsEndpoint: string = 'http://hn.algolia.com/api/v1/search?query='
+const researchNewsEndpoint: string = searchEngine[0]['endPoint']
 
-const researchWikipediaEndpoint: string = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search='
+const researchWikipediaEndpoint: string = searchEngine[1]['endPoint']
 
 /**
  * 开始调研
@@ -101,7 +102,7 @@ export const researchGeneric = function (
 ): Observable<Array<HackerNewsResult>> {
   const { time = 300, scheduler } = options
 
-  const { baseUrl, formatFunc } = ajaxOptions
+  const { endPoint, formatFunc } = ajaxOptions
 
   return observable.pipe(
     // 节流
@@ -109,7 +110,7 @@ export const researchGeneric = function (
     // 摘取输入框内容
     pluck<Event, string>('target', 'value'),
     // 遍历
-    switchMap(value => from(axios.get(`${baseUrl}${value}`))),
+    switchMap(value => from(axios.get(`${endPoint}${value}`))),
     // 摘取data和hits
     pluck('data', 'hits'),
     // 去除无效数据
@@ -171,26 +172,17 @@ export const researchWikipedia = function (
 })
 export default class ReactiveResearch extends Vue {
   news: Array<any> = []
-  searchEngine: Array<any> = [
-    {
-      name: 'wikipedia',
-      baseUrl: 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search='
-    },
-    {
-      name: 'wikipedia',
-      baseUrl: 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&origin=*&search='
-    }
-  ]
+  searchEngine: Array<any> = searchEngine
   rowsPerPageItems = [ 25, 50, 100 ]
   pagination = {
     rowsPerPage: 50
   }
 
-  addToBookmark (item) {
+  async addToBookmark (item) {
     console.log(item)
     let BookMark = models['bookmark']
-    BookMark.$create({ data: item })
-      .then(results => console.log(results))
+    let newBookmarks = await BookMark.$create({ data: item })
+    console.log(newBookmarks)
   }
 
   openLinkInNewWindow (item) {

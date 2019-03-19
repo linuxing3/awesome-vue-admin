@@ -1,18 +1,31 @@
 import { randomize, randomizeCircle } from '@/util'
+import { modelStatistic } from '@/util/statistic'
+
+import Project from '@/models/CoreModel/Project/Project'
+import models from '@/models'
+import ProjectType from '@/models/CoreModel/Project/ProjectType'
 
 export function getBarOption () {
+
+  let dataSet = modelStatistic({
+    models,
+    fieldsDefModel: 'projectType',
+    fieldDef: 'title',
+    queryModel: 'project',
+    queryFieldName: 'type'
+  })
+  let source = []
+  source.push(['Product', '2015'])
+  Object.keys(dataSet).forEach(item => {
+    source.push([item, dataSet[item]])
+  })
+
   return {
     legend: {},
     tooltip: {},
     dataset: {
       // Provide data.
-      source: [
-        ['Product', '2015', '2016', '2017'],
-        ['Matcha Latte', ...randomize()],
-        ['Milk Tea', ...randomize()],
-        ['Cheese Cocoa', ...randomize()],
-        ['Walnut Brownie', ...randomize()]
-      ]
+      source
     },
     // Declare X axis, which is a category axis, mapping
     // to the first column by default.
@@ -61,6 +74,10 @@ export function getPolarOption () {
 }
 
 export function getPieOption () {
+
+  let value1 = Project.query().where('type', '规章制度').get().length
+  let value2 = Project.query().where('type', '工程').get().length
+
   return {
     title: {
       text: '饼图程序调用高亮示例',
@@ -73,7 +90,7 @@ export function getPieOption () {
     legend: {
       orient: 'vertical',
       left: 'left',
-      data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+      data: ['直接访问', '搜索引擎']
     },
     series: [
       {
@@ -81,13 +98,7 @@ export function getPieOption () {
         type: 'pie',
         radius: '55%',
         center: ['50%', '60%'],
-        data: [
-          { value: 335, name: '直接访问' },
-          { value: 310, name: '邮件营销' },
-          { value: 234, name: '联盟广告' },
-          { value: 135, name: '视频广告' },
-          { value: 1548, name: '搜索引擎' }
-        ],
+        data: [{ value: value1, name: '规章制度' }, { value: value2, name: '工程' }],
         itemStyle: {
           emphasis: {
             shadowBlur: 10,
