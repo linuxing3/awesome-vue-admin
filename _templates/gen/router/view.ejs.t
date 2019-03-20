@@ -3,7 +3,7 @@ to: "src/views/<%= h.capitalize(model) %>.vue"
 ---
 <%
   const modelName = h.capitalize(model)
-  const componentName = h.capitalize(model) + 'Table'
+  const componentName = h.capitalize(model)
 %><template>
   <DefaultLayout>
     <<%= componentName %> />

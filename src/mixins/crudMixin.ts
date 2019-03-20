@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     formTitle () {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? '添加' : '编辑'
     },
     editing () {
       return this.editedIndex !== -1 // is in edit state

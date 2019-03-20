@@ -1,17 +1,17 @@
 <template>
   <DefaultLayout>
-    <UserTable />
+    <User />
   </DefaultLayout>
 </template>
 
 <script lang="js">
 import DefaultLayout from '@/layout/default.vue'
-import UserTable from '@/components/User/UserTable.vue'
+import User from '@/components/User/User.vue'
 
 export default {
   components: {
     DefaultLayout,
-    UserTable
+    User
   }
 }
 </script>

@@ -1,63 +1,81 @@
 <template>
   <v-card>
-    <v-toolbar
-        card
-        prominent
-        extended
-        :color='editing ? "warning": "primary"'
-        dark=''>
-      <v-toolbar-title class='headline'>
-        {{editing ? '你在进行编辑更新' : '你在添加模式'}}
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
+    <v-card-title
+        class="success lighten-1 white--text"
+        dark>
+      <span class="headline">{{ formTitle }} {{ modelName }}</span>
+      <v-spacer />
       <v-btn
-          icon
-          @click='reset'>
-        <v-icon>close</v-icon>
+          fab
+          small
+          color="red darken-2 white--text"
+          @click="exportDocx(editedItem)"
+          icon>
+        <v-icon>attach_file</v-icon>
       </v-btn>
-    </v-toolbar>
+      <ExportDialog
+          buttonText="导出/打印"
+          :items="[ editedItem ]"
+          :modelName="modelName" ></ExportDialog>
+    </v-card-title>
+    <!-- activator in slot -->
     <v-card-text>
-      <v-form>
-        <v-layout wrap>
-          <v-flex
-              v-for='field in fields'
-              :key='field'
-              lg6
-              sm6>
-            <v-text-field
-                v-model='model[field]'
-                :name='field'
-                :label='tryT(field) '>
-            </v-text-field>
-          </v-flex>
-        </v-layout>
+      <v-form ref="form" v-model="valid">
+        <v-container
+            fluid
+            grid-list-xl>
+          <v-layout
+              row
+              wrap>
+            <!-- generate form from schema  -->
+            <v-flex
+                xs10
+                md10
+                sm10
+                class="pa-2 pr-2">
+              <v-text-field
+                  :editable="false"
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['name']"
+                  :label=" tryT('name') "></v-text-field>
+            </v-flex>
+            <!-- end form from schema  -->
+          </v-layout>
+        </v-container>
       </v-form>
     </v-card-text>
-    <v-card-actions class='pb-3'>
+
+    <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-          :color='editing ? "warning": "primary"'
-          @click='saveItem(model)'>{{editing ? '更新': '添加'}}</v-btn>
-      <!-- 导出单个，将item属性设置为model对象 -->
-      <ExportDialog
-          :items="[ model ]"
-          :modelName="modelName"></ExportDialog>
-      <ImportDialog
-          :modelName="modelName"></ImportDialog>
+          :class="editing ? 'warning' : 'success'"
+          @click="validate">{{ editing ? '编辑': '新增'}}</v-btn>
+      <v-btn
+          class="gray"
+          @click="resetValidation">取消</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import User from '@/models/User'
-
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
   data () {
     return {
-      modelName: 'user'
+      modelName: 'user',
+      rules: {
+        nameRules: [
+          v => !!v || 'Name is required',
+          v => v.length <= 10 || 'Name must be less than 10 characters'
+        ],
+        emailRules: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+/.test(v) || 'E-mail must be valid'
+        ]
+      }
     }
   },
   watch: {
@@ -66,11 +84,28 @@ export default {
         console.log(newItem)
       },
       immediate: true
-    }
+    },
   },
   mixins: [ crudMixin, exportMixin ],
   created () {
+    this.$on('set-edit-item', (item) => {
+      this.setEditedItem(item)
+    })
     window.UserForm = this
+  },
+  methods: { 
+    validate () {
+      if (this.$refs.form.validate()) {
+        this.saveItem(this.editedItem)
+        window.UserTable.$emit('toggle-form', false)
+        this.reset()
+      }
+    },
+    resetValidation () {
+      this.$refs.form.resetValidation()
+      window.UserTable.$emit('toggle-form', false)
+      this.reset()
+    }
   }
 }
 </script>

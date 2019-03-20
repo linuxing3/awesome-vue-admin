@@ -25,58 +25,7 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
             add
           </v-icon>
         </v-btn>
-        <v-card>
-          <v-card-title
-              class="success lighten-1 white--text"
-              dark>
-            <span class="headline">{{ formTitle }} {{ modelName }}</span>
-            <v-spacer />
-            <v-btn
-                fab
-                small
-                color="red darken-2 white--text"
-                @click="exportDocx(editedItem)"
-                icon>
-              <v-icon>attach_file</v-icon>
-            </v-btn>
-            <ExportDialog
-                buttonText="导出/打印"
-                :items="[ editedItem ]"
-                :modelName="modelName" ></ExportDialog>
-          </v-card-title>
-          <!-- activator in slot -->
-          <v-card-text>
-            <v-container
-                fluid
-                grid-list-xl>
-              <v-layout
-                  row
-                  wrap>
-                <!-- generate form from schema  -->
-                <v-flex
-                    xs10
-                    md10
-                    sm10
-                    class="pa-2 pr-2">
-                  <v-text-field
-                      v-model="editedItem['_id']"
-                      :label=" tryT('_id') "></v-text-field>
-                </v-flex>
-                <!-- end form from schema  -->
-              </v-layout>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-                :class="editing ? 'warning' : 'success'"
-                @click="saveItem(editedItem)">{{ editing ? '编辑': '新增'}}</v-btn>
-            <v-btn
-                class="gray"
-                @click="close">取消</v-btn>
-          </v-card-actions>
-        </v-card>
+        <slot></slot>
       </v-dialog>
       <!-- 导出多个，将item属性设置为items数组 -->
       <v-spacer></v-spacer>
@@ -212,31 +161,15 @@ export default {
   mixins: [ exportMixin, crudMixin ],
   created () {
     window.<%= modelTableName %> = this
+    this.$on('toggle-form', (v) => { 
+      this.dialog = v
+    })
   },
   methods: {
     editItem (item) {
       this.setEditedItem(item)
+      window.<%= modelFormName %>.setEditedItem(item)
       this.dialog = true
-    },
-
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.reset()
-      }, 300)
-    },
-
-    save () {
-      this.close()
-    },
-
-    saveDate (fieldName, editedItem) {
-      console.log(fieldName)
-      this.dateControl = this.$refs[fieldName][0]
-      console.log(this.dateControl)
-      let newDate = this.editedItem[fieldName]
-      this.dateControl.save(newDate)
-      this.dateControl = null
     },
 
     toggleAll () {
