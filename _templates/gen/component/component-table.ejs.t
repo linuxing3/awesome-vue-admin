@@ -76,7 +76,7 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
                 @click.stop="toggleAll"
               ></v-checkbox>
           </th>
-          <th>actions</th>
+          <th>{{ tryT('action')}}</th>
           <th
               v-for="header in props.headers"
               :key="header.text"

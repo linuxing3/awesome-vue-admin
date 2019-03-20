@@ -25,9 +25,9 @@
           :key="index"
           @click="$router.push({ name: model.entity})"
           xs12
-          md4
-          sm4
-          lg4
+          md3
+          sm3
+          lg3
         >
         <NameCard
             :imgPath="computeBg10"

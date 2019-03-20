@@ -1,9 +1,19 @@
 <template>
   <v-app>
-    <!-- <AppToolbar></AppToolbar> -->
     <v-content>
-      <v-container>
-        <slot></slot>
+      <v-container
+          fluid
+          fill-height>
+        <v-layout
+            align-center
+            justify-center>
+          <v-flex
+              xs12
+              sm8
+              md6>
+              <slot />
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-content>
   </v-app>
@@ -19,3 +29,5 @@ export default {
   }
 }
 </script>
+<style scoped>
+</style>

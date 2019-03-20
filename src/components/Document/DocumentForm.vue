@@ -1,11 +1,4 @@
----
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue'
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
-%><template>
+<template>
   <v-card>
     <v-card-title
         :class="editing ? 'success darken-1' : 'red darken-1'"
@@ -28,7 +21,9 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
     </v-card-title>
     <!-- activator in slot -->
     <v-card-text>
-      <v-form ref="form" v-model="valid">
+      <v-form
+ref="form"
+              v-model="valid">
         <v-container
             fluid
             grid-list-xl>
@@ -42,9 +37,39 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="10"
-                  v-model="editedItem['name']"
-                  :label=" tryT('name') "></v-text-field>
+                  :counter="50"
+                  v-model="editedItem['title']"
+                  :label=" tryT('title') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  v-model="editedItem['classiLevel']"
+                  :items="['internal', 'classified']"
+                  :label="tryT('classiLevel')"
+                ></v-select>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  v-model="editedItem['category']"
+                  :items="['letter', 'note']"
+                  :label="tryT('category')"
+                ></v-select>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  v-model="editedItem['inOrOut']"
+                  :items="['out', 'in']"
+                  :label="tryT('inOrOut')"
+                ></v-select>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -71,11 +96,11 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      modelName: '<%= modelName.toLowerCase() %>',
+      modelName: 'document',
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
-          v => v.length <= 10 || 'Name must be less than 10 characters'
+          v => v.length <= 50 || 'Name must be less than 10 characters'
         ],
         emailRules: [
           v => !!v || 'E-mail is required',
@@ -90,26 +115,26 @@ export default {
         console.log(newItem)
       },
       immediate: true
-    },
+    }
   },
   mixins: [ crudMixin, exportMixin ],
   created () {
     this.$on('set-edit-item', (item) => {
       this.setEditedItem(item)
     })
-    window.<%= modelFormName %> = this
+    window.DocumentForm = this
   },
-  methods: { 
+  methods: {
     validate () {
       if (this.$refs.form.validate()) {
         this.saveItem(this.editedItem)
-        window.<%= modelTableName %>.$emit('toggle-form', false)
+        window.DocumentTable.$emit('toggle-form', false)
         this.reset()
       }
     },
     resetValidation () {
       this.$refs.form.resetValidation()
-      window.<%= modelTableName %>.$emit('toggle-form', false)
+      window.DocumentTable.$emit('toggle-form', false)
       this.reset()
     }
   }

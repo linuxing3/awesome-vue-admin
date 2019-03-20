@@ -1,11 +1,12 @@
 <template>
   <v-card>
     <v-card-title
-        class="success lighten-1 white--text"
+        :class="editing ? 'success darken-1' : 'red darken-1'"
         dark>
-      <span class="headline">{{ formTitle }} {{ modelName }}</span>
+      <span class="display-1 text-capitalize white--text font-weight-thin">{{ formTitle }} - {{ modelName }}  {{editedIndex !== -1 ? '-' + editedIndex : ''}}</span>
       <v-spacer />
       <v-btn
+          v-if="editedIndex !== -1"
           fab
           small
           color="red darken-2 white--text"
@@ -29,16 +30,48 @@
               wrap>
             <!-- generate form from schema  -->
             <v-flex
-                xs10
-                md10
-                sm10
+                xs12
+                md6
+                sm6
                 class="pa-2 pr-2">
               <v-text-field
-                  :editable="false"
                   :rules="rules.nameRules"
                   :counter="10"
                   v-model="editedItem['name']"
                   :label=" tryT('name') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                sm6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['birthday']"
+                  :label=" tryT('birthday') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                sm6
+                class="pa-2 pr-2">
+              <v-select
+                :label=" tryT('gender')"
+                :items="['Male', 'Female']"
+                v-model="editedItem['gender']">
+              </v-select>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                sm6
+                class="pa-2 pr-2">
+              <v-select
+                :label=" tryT('etnia')"
+                :items="['', 'Female']"
+                v-model="editedItem['etnia']">
+              </v-select>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -49,7 +82,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-          :class="editing ? 'warning' : 'success'"
+          :class="editing ? 'success white--text' : 'red white--text'"
           @click="validate">{{ editing ? '编辑': '新增'}}</v-btn>
       <v-btn
           class="gray"
@@ -93,7 +126,7 @@ export default {
     })
     window.UserForm = this
   },
-  methods: { 
+  methods: {
     validate () {
       if (this.$refs.form.validate()) {
         this.saveItem(this.editedItem)

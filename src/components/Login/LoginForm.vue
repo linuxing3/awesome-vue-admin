@@ -1,5 +1,6 @@
 <template>
   <v-card
+      max-width="750px"
       class="elevation-1 pa-3 mt-5">
     <v-card-title>
       <div
@@ -45,8 +46,8 @@
     </v-card-title>
 
     <v-card-text>
-      <v-layout row>
-        <v-flex>
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md6>
           <v-text-field
               class="ml-5 mr-5"
               v-model="model.name"
@@ -57,7 +58,7 @@
               required
             ></v-text-field>
         </v-flex>
-        <v-flex>
+        <v-flex xs12 sm6 md6>
           <v-text-field
               class="ml-5 mr-5"
               v-model="model.password"
@@ -74,7 +75,6 @@
     <v-card-actions>
       <v-spacer />
       <v-btn
-          class="ml-3 mr-3"
           color="primary"
           @click="login"
           :loading="loading">{{ $t('app.login') }}</v-btn>
