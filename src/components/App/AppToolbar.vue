@@ -12,11 +12,6 @@
     <v-spacer></v-spacer>
 
     <v-btn
-        flat>
-      你已登录 {{loginTime}} 分钟
-    </v-btn>
-
-    <v-btn
         icon
         @click="$router.push('/home')">
       <v-icon>home</v-icon>

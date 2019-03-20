@@ -40,11 +40,12 @@
     "node_modules/vue-tsx-support/enable-check.d.ts",
     "src/**/*.ts",
     "src/**/*.vue",
-    "tests/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "src/**/*.tsx",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "tests/**/*.js"
   ]
 }

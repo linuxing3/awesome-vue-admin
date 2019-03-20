@@ -8,9 +8,9 @@ import ProjectType from '@/models/CoreModel/Project/ProjectType'
 export function getBarOption () {
   let dataSet = modelStatistic({
     models,
-    fieldsDefModel: 'projectType',
-    fieldDef: 'title',
-    queryModel: 'project',
+    lookupModelName: 'projectType',
+    lookupFieldName: 'title',
+    queryModelName: 'project',
     queryFieldName: 'type'
   })
   let source = []

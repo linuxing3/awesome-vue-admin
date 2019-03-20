@@ -10,6 +10,7 @@
       "exclude": [
         "**/*.spec.ts",
         "**/*.json",
+        "./tests/**/*.js",
         "*/node_modules/**/*"
       ]
   },

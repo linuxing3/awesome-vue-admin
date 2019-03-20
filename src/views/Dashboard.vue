@@ -2,7 +2,7 @@
   <DefaultLayout>
     <DashboardSocialCard />
     <DashboardMonitor />
-    <DashboardProject />
+    <DashboardKanban />
   </DefaultLayout>
 </template>
 
@@ -11,15 +11,24 @@ import DefaultLayout from '@/layout/default.vue'
 import DashboardModelStatistic from '@/components/Dashboard/DashboardModelStatistic.vue'
 import DashboardSocialCard from '@/components/Dashboard/DashboardSocialCard.vue'
 import DashboardMonitor from '@/components/Dashboard/DashboardMonitor.vue'
-import DashboardProject from '@/components/Dashboard/DashboardProject.vue'
+import DashboardKanban from '@/components/Dashboard/DashboardKanban.vue'
 
 export default {
+  data () {
+    return {
+      items: ['project', 'projectType', 'document', 'documentType']
+    }
+  },
   components: {
     DefaultLayout,
     DashboardModelStatistic,
     DashboardSocialCard,
     DashboardMonitor,
-    DashboardProject
+    DashboardKanban
+  },
+  beforeCreate () {
+    // 必须先载入持久数据
+    this.asyncFetch(this.items)
   }
 }
 </script>

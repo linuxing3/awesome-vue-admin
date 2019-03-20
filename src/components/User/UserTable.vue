@@ -1,11 +1,4 @@
----
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Table.vue'
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><template>
+<template>
   <v-card class="mt-5">
     <v-card-title>
       <v-dialog
@@ -81,12 +74,12 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
       <!-- 导出多个，将item属性设置为items数组 -->
       <v-spacer></v-spacer>
       <v-text-field
-        class="mr-3"
-        v-model='filter.search'
-        append-icon='search'
-        label="模糊查询，不分大小写"
-        single-line
-      ></v-text-field>
+          class="mr-3"
+          v-model='filter.search'
+          append-icon='search'
+          label="模糊查询，不分大小写"
+          single-line
+        ></v-text-field>
       <ExportDialog
           buttonText="导出/打印"
           :items="items"
@@ -190,7 +183,7 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data () {
     return {
-      modelName: '<%= modelName.toLowerCase() %>',
+      modelName: 'user',
       dialog: false,
       pagination: {
         sortBy: '_id',
@@ -198,7 +191,7 @@ export default {
         descending: true
       },
       selected: [],
-      modal: false,
+      modal: false
     }
   },
   watch: {
@@ -211,7 +204,7 @@ export default {
   },
   mixins: [ exportMixin, crudMixin ],
   created () {
-    window.<%= modelTableName %> = this
+    window.UserTable = this
   },
   methods: {
     editItem (item) {

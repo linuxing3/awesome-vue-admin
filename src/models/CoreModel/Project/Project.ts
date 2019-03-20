@@ -6,7 +6,7 @@ import ProjectUser from './ProjectUser'
 
 export interface IProject {
   _id: string
-  name: string
+  title: string
   type: string
   status: string
   isActive: string
@@ -34,7 +34,7 @@ export default class Project extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      name: this.string('dev'),
+      title: this.string('dev'),
       type: this.string('type'),
       status: this.string('status'),
       isActive: this.string('isActive'),

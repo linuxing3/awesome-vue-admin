@@ -2,6 +2,13 @@
 const mainMenu = [
   { header: '开始' },
   {
+    title: '人员用户',
+    name: 'user',
+    group: 'apps',
+    icon: 'star',
+    color: 'purple'
+  },
+  {
     title: '功能中心',
     name: 'home',
     group: 'apps',

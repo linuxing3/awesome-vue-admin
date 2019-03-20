@@ -23,7 +23,7 @@
       <v-flex
           v-for="(model, index) in models"
           :key="index"
-          @click="crud({ blueprint: model.entity })"
+          @click="$router.push({ name: model.entity})"
           xs12
           md4
           sm4

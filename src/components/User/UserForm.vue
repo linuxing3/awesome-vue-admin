@@ -1,10 +1,4 @@
----
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue'
----
-<%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-%><template>
+<template>
   <v-card>
     <v-toolbar
         card
@@ -55,15 +49,15 @@ to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.c
 </template>
 
 <script>
-import <%= modelName %> from '@/models/<%= modelName %>'
+import User from '@/models/User'
 
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
-  data() {
+  data () {
     return {
-      modelName: '<%= modelName.toLowerCase() %>'
+      modelName: 'user'
     }
   },
   watch: {
@@ -72,11 +66,11 @@ export default {
         console.log(newItem)
       },
       immediate: true
-    },
+    }
   },
   mixins: [ crudMixin, exportMixin ],
-  created() {
-    window.<%= modelFormName %> = this
+  created () {
+    window.UserForm = this
   }
 }
 </script>

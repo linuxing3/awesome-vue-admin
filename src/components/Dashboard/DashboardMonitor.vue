@@ -80,15 +80,12 @@ export default {
   data () {
     return {
       projectDataSet: {},
-      documentDataSet: {},
-      items: ['project', 'projectType', 'document', 'documentType']
+      documentDataSet: {}
     }
   },
   mounted () {
-    // 必须先载入持久数据
-    this.asyncFetch(this.items)
     // 设置数据集
-    this.pullDataSet(this.items)
+    this.pullDataSet()
   },
   methods: {
     asyncFetch (items) {
@@ -134,6 +131,7 @@ export default {
           left: 'left',
           data: legendData
         },
+        roseType: 'radius',
         series: [
           {
             name: '访问来源',
@@ -160,13 +158,10 @@ export default {
       })
 
       return {
-        legend: {},
-        tooltip: {},
         dataset: {
           source
         },
         xAxis: { type: 'category' },
-        yAxis: {},
         series
       }
     }
