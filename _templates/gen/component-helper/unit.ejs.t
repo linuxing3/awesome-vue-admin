@@ -1,8 +1,8 @@
 ---
-to: 'src/components/__tests__/<%= h.capitalize(h.inflection.singularize(model)) %>.spec.ts'
+to: 'src/components/__tests__/<%= model %>.spec.ts'
 ---
 <%
-  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelName = model
 %>import { shallowMount } from '@vue/test-utils'
 import <%= modelName %> from '@/components/helpers/<%= modelName %>.vue'
 

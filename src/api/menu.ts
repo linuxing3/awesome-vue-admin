@@ -2,13 +2,6 @@
 const mainMenu = [
   { header: '开始' },
   {
-    title: '人员用户',
-    name: 'user',
-    group: 'apps',
-    icon: 'star',
-    color: 'purple'
-  },
-  {
     title: '功能中心',
     name: 'home',
     group: 'apps',
@@ -23,7 +16,7 @@ const mainMenu = [
     color: 'black'
   },
   {
-    title: '调研',
+    title: '调研新闻',
     group: 'apps',
     icon: 'search',
     name: 'research',
@@ -32,14 +25,14 @@ const mainMenu = [
   // injected
   { header: '系统' },
   {
-    title: '数据',
+    title: '数据标签',
     group: 'apps',
     icon: 'table_chart',
     name: 'database',
     color: 'black'
   },
   {
-    title: '图库',
+    title: '展示图库',
     group: 'apps',
     icon: 'fastfood',
     name: 'play',

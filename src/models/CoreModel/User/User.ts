@@ -30,7 +30,7 @@ export default class User extends BaseModel {
       conyugeEntity: this.string('n/a'),
       conyugeBonus: this.string('n/a'),
       memo: this.string('n/a'),
-      protocolId: this.number(101),
+      protocolId: this.string(''),
       isActive: this.string('n/a'),
       militant: this.hasOne(UserMilitant, 'user_id'),
       appraisals: this.hasMany(UserAppraisal, 'user_id'),

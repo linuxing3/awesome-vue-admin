@@ -22,6 +22,7 @@
               v-model="filter.search" />
         </v-flex>
         <v-flex
+            class="pr-5 pl-5"
             xs12
             md12
             sm12>
@@ -67,7 +68,7 @@ export default {
   },
   created () {
     this.$on('SELECT_MODEL', modelName => {
-      // go to
+      // go to crud component
       this.crud({ blueprint: modelName })
     })
     window.databaseManager = this

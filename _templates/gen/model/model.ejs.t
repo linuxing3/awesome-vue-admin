@@ -1,8 +1,8 @@
 ---
-to: "src/models/CoreModel/<%= model) %>/<%= model) %>.ts"
+to: "src/models/CoreModel/<%= model %>/<%= model %>.ts"
 ---
 <%
-const ModelName = model)
+const ModelName = model
 const EntityName = model.toLowerCase()
 %>import { BaseModel} from "../../BaseModel";
 

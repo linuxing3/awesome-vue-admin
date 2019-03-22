@@ -6,9 +6,10 @@ export default class Document extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
+      year: this.string('2019'),
+      date: this.string('2019-02-25'),
       classiLevel: this.string('internal'),
       category: this.string('internal'),
-      year: this.string('2019'),
       inOrOut: this.string('output'),
       sendingCode: this.string('Vue'),
       orderedNumber: this.string('001'),
@@ -16,7 +17,6 @@ export default class Document extends BaseModel {
       content: this.string('Vue with electron'),
       toEntity: this.string('Vue'),
       copyEntity: this.string('Electron'),
-      date: this.string('2019-02-25'),
       attachment: this.string(''),
       keyword: this.string(''),
       workEntity: this.string('Code'),

@@ -132,7 +132,7 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data () {
     return {
-      modelName: 'userMilitant',
+      modelName: 'projectTask',
       dialog: false,
       pagination: {
         sortBy: '_id',
@@ -153,7 +153,7 @@ export default {
   },
   mixins: [ exportMixin, crudMixin ],
   created () {
-    window.UserMilitantTable = this
+    window.ProjectTaskTable = this
     this.$on('toggle-form', (v) => {
       this.dialog = v
     })
@@ -161,7 +161,7 @@ export default {
   methods: {
     editItem (item) {
       this.setEditedItem(item)
-      window.UserMilitantForm.setEditedItem(item)
+      window.ProjectTaskForm.setEditedItem(item)
       this.dialog = true
     },
 

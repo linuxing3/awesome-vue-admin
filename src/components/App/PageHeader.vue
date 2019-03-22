@@ -13,9 +13,9 @@
         </v-icon>
       </v-breadcrumbs-item>
       <v-breadcrumbs-item
-          :to="'/crud/' + subRoute">
+          :to="'/' + $route.name">
         <h1 class="title text-capitalize font-weight-light">
-          {{subRoute}}
+          {{$route.name}}
         </h1>
       </v-breadcrumbs-item>
     </v-breadcrumbs>
@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     subRoute: function () {
-      return this.$route.params.blueprint
+      return this.$route.params.blueprint || this.$route.name
     }
   },
   methods: {

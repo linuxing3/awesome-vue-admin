@@ -1,10 +1,15 @@
-import { ActionContext } from 'vuex'
+---
+to: "src/store/modules/<%= model %>.ts"
+---
+<%
+const ModelName = model
+%>import { ActionContext } from 'vuex'
 import { make } from 'vuex-pathify'
 
 const state = {
-  name: 'user',
+  name: '<%= ModelName.toLowerCase() %>',
   items: [],
-  defaultUser: {}
+  default<%= ModelName %>: {}
 }
 
 const mutations: any = {
@@ -17,7 +22,7 @@ const actions: any = {
   init (ctx: ActionContext<any, any>) {}
 }
 
-const getters: any = {
+const getters: any = { 
   ...make.getters(state)
 }
 

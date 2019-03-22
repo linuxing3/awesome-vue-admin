@@ -3,7 +3,7 @@ to: src/models/__tests__/<%= model %>.spec.ts
 ---
 <%
   const modelName = model
-%>import <%= modelName %> from '../<%= modelName %>/<%= modelName %>'
+%>import <%= modelName %> from '../CoreModel/<%= modelName %>/<%= modelName %>'
 
 describe('@/models/CoreModel/<%= modelName %>/<%= modelName %>', () => {
 

@@ -147,7 +147,7 @@ export default {
         descending: true
       },
       selected: [],
-      modal: false,
+      modal: false
     }
   },
   watch: {

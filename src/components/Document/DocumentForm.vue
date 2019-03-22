@@ -33,6 +33,49 @@
             <!-- generate form from schema  -->
             <v-flex
                 xs12
+                md6>
+              <v-menu
+                  ref="datePicker"
+                  v-model="datePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['date']"
+                    :label=" tryT('date')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['date']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="birthdayPicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="50"
+                  v-model="editedItem['year']"
+                  :label=" tryT('year') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
                 md12
                 class="pa-2 pr-2">
               <v-text-field
@@ -76,79 +119,88 @@
                 md6
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
                   :counter="10"
                   v-model="editedItem['sendignCode']"
                   :label=" tryT('sendingCode') "></v-text-field>
-              <v-flex
-                  xs12
-                  md6
-                  class="pa-2 pr-2">
-                <v-text-field
-                    :rules="rules.nameRules"
-                    :counter="10"
-                    v-model="editedItem['orderedNumber']"
-                    :label=" tryT('orderedNumber') "></v-text-field>
-              </v-flex>
-              <v-flex
-                  xs12
-                  md6
-                  class="pa-2 pr-2">
-                <v-text-field
-                    :rules="rules.nameRules"
-                    :counter="50"
-                    v-model="editedItem['title']"
-                    :label=" tryT('title') "></v-text-field>
-              </v-flex>
-              <v-flex
-                  xs12
-                  md6
-                  class="pa-2 pr-2">
-                <v-textarea
-                    :rules="rules.nameRules"
-                    :counter="50"
-                    v-model="editedItem['toEntity']"
-                    :label=" tryT('toEntity') "></v-textarea>
-              </v-flex>
-              <v-flex
-                  xs12
-                  md6
-                  class="pa-2 pr-2">
-                <v-textarea
-                    :rules="rules.nameRules"
-                    :counter="50"
-                    v-model="editedItem['copyEntity']"
-                    :label=" tryT('copyEntity') "></v-textarea>
-                <v-flex
-                    xs12
-                    md6
-                    class="pa-2 pr-2">
-                  <v-textarea
-                      :rules="rules.nameRules"
-                      :counter="50"
-                      v-model="editedItem['workEntity']"
-                      :label=" tryT('workEntity') "></v-textarea>
-                  <v-flex
-                      xs12
-                      md6
-                      class="pa-2 pr-2">
-                    <v-textarea
-                        :rules="rules.nameRules"
-                        :counter="50"
-                        v-model="editedItem['keyword']"
-                        :label=" tryT('keyword') "></v-textarea>
-                  </v-flex>
-                  <v-flex
-                      xs12
-                      md6
-                      class="pa-2 pr-2">
-                    <v-textarea
-                        :rules="rules.nameRules"
-                        :counter="10"
-                        v-model="editedItem['author']"
-                        :label=" tryT('author') "></v-textarea>
-                  </v-flex>
-                  <!-- end form from schema  -->
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['orderedNumber']"
+                  :label=" tryT('orderedNumber') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="50"
+                  v-model="editedItem['title']"
+                  :label=" tryT('title') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-textarea
+                  :counter="500"
+                  v-model="editedItem['content']"
+                  :label=" tryT('content') "></v-textarea>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="50"
+                  v-model="editedItem['toEntity']"
+                  :label=" tryT('toEntity') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :counter="50"
+                  v-model="editedItem['copyEntity']"
+                  :label=" tryT('copyEntity') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="50"
+                  v-model="editedItem['workEntity']"
+                  :label=" tryT('workEntity') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :counter="50"
+                  v-model="editedItem['keyword']"
+                  :label=" tryT('keyword') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['author']"
+                  :label=" tryT('author') "></v-text-field>
+            </v-flex>
+            <!-- end form from schema  -->
           </v-layout>
         </v-container>
       </v-form>
@@ -180,10 +232,11 @@ export default {
           v => v.length <= 50 || 'Name must be less than 10 characters'
         ],
         emailRules: [
-          v => !!v || 'E-mail is required',
           v => /.+@.+/.test(v) || 'E-mail must be valid'
         ]
-      }
+      },
+      datePicker: false,
+      yearPicker: false
     }
   },
   watch: {
