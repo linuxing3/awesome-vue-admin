@@ -21,7 +21,9 @@
     "test:uw": "vue-cli-service test:unit --watch",
     "play:debug": "node --nolazy --inspect-brk=9229 ./tests/play/util/bin/fp.js",
     "play:watch": "tsc -p ./tests/play/util --watch",
-    "play:debug:ts": "ts-node ./tests/play/util/ftp.ts"
+    "play:debug:ts": "ts-node ./tests/play/util/ftp.ts",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@vuex-orm/core": "^0.31.4",
@@ -88,7 +90,14 @@
     "vue-template-compiler": "2.6.8",
     "vue-tsx-support": "^2.2.2",
     "vuetify-loader": "^1.0.5",
-    "vuetify-tsx": "^0.24.0"
+    "vuetify-tsx": "^0.24.0",
+    "@storybook/vue": "^5.0.3",
+    "@storybook/addon-actions": "^5.0.3",
+    "@storybook/addon-links": "^5.0.3",
+    "@storybook/addons": "^5.0.3",
+    "babel-preset-vue": "^2.0.2",
+    "@babel/core": "^7.4.0",
+    "babel-loader": "^8.0.5"
   },
   "main": "background.js"
 }
