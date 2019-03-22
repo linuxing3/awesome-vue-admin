@@ -1,8 +1,8 @@
 ---
-to: 'src/components/helpers/<%= h.capitalize(h.inflection.singularize(model)) %>.vue'
+to: 'src/components/helpers/<%= model %>.vue'
 ---
 <%
-  const modelName = h.capitalize(h.inflection.singularize(model))
+  const modelName = model
 %><template>
   <div><%= modelName %></div>
 </template>

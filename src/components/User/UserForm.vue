@@ -21,7 +21,9 @@
     </v-card-title>
     <!-- activator in slot -->
     <v-card-text>
-      <v-form ref="form" v-model="valid">
+      <v-form
+          ref="form"
+          v-model="valid">
         <v-container
             fluid
             grid-list-xl>
@@ -57,9 +59,9 @@
                 sm6
                 class="pa-2 pr-2">
               <v-select
-                :label=" tryT('gender')"
-                :items="['Male', 'Female']"
-                v-model="editedItem['gender']">
+                  :label=" tryT('gender')"
+                  :items="['Male', 'Female']"
+                  v-model="editedItem['gender']">
               </v-select>
             </v-flex>
             <v-flex
@@ -68,12 +70,145 @@
                 sm6
                 class="pa-2 pr-2">
               <v-select
-                :label=" tryT('etnia')"
-                :items="['', 'Female']"
-                v-model="editedItem['etnia']">
+                  :label=" tryT('etnia')"
+                  :items="['Male', 'Female']"
+                  v-model="editedItem['etnia']">
               </v-select>
             </v-flex>
-            <!-- end form from schema  -->
+            <v-flex
+                xs12
+                md6
+                sm6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['academicBackground']"
+                  :label=" tryT('academicBackground') "></v-text-field>
+              <v-flex
+                  xs12
+                  md6
+                  sm6
+                  class="pa-2 pr-2">
+                <v-text-field
+                    :rules="rules.nameRules"
+                    :counter="10"
+                    v-model="editedItem['positionAndRank']"
+                    :label=" tryT('positionAndRank') "></v-text-field>
+                <v-flex
+                    xs12
+                    md6
+                    sm6
+                    class="pa-2 pr-2">
+                  <v-select
+                      :label=" tryT('politicalRole')"
+                      :items="[ tryT('militant'), tryT('youth') ]"
+                      v-model="editedItem['politicalRole']">
+                  </v-select>
+                </v-flex>
+                <v-flex
+                    xs12
+                    md6
+                    sm6
+                    class="pa-2 pr-2">
+                  <v-select
+                      :label=" tryT('militantRole')"
+                      :items="[ tryT('militant'), tryT('youth') ]"
+                      v-model="editedItem['militantRole']">
+                  </v-select>
+                </v-flex>
+                <v-flex
+                    xs12
+                    md6
+                    sm6
+                    class="pa-2 pr-2">
+                  <v-text-field
+                      :rules="rules.nameRules"
+                      :counter="10"
+                      v-model="editedItem['duty']"
+                      :label=" tryT('duty') "></v-text-field>
+                  <v-flex
+                      xs12
+                      md6
+                      sm6
+                      class="pa-2 pr-2">
+                    <v-text-field
+                        :rules="rules.nameRules"
+                        :counter="10"
+                        v-model="editedItem['fromEntity']"
+                        :label=" tryT('fromEntity') "></v-text-field>
+                    <v-divider></v-divider>
+                    <v-flex
+                        xs12
+                        md6
+                        sm6
+                        class="pa-2 pr-2">
+                      <v-text-field
+                          :rules="rules.nameRules"
+                          :counter="10"
+                          v-model="editedItem['sendingEntity']"
+                          :label=" tryT('sendingEntity') "></v-text-field>
+                      <v-flex
+                          xs12
+                          md6
+                          sm6
+                          class="pa-2 pr-2">
+                        <v-text-field
+                            :rules="rules.nameRules"
+                            :counter="10"
+                            v-model="editedItem['conyugeName']"
+                            :label=" tryT('conyugeName') "></v-text-field>
+                        <v-flex
+                            xs12
+                            md6
+                            sm6
+                            class="pa-2 pr-2">
+                          <v-text-field
+                              :rules="rules.nameRules"
+                              :counter="10"
+                              v-model="editedItem['conyugeEntity']"
+                              :label=" tryT('conyugeEntity') "></v-text-field>
+                          <v-flex
+                              xs12
+                              md6
+                              sm6
+                              class="pa-2 pr-2">
+                            <v-text-field
+                                :rules="rules.nameRules"
+                                :counter="10"
+                                v-model="editedItem['conyugeBonus']"
+                                :label=" tryT('conyugeBonus') "></v-text-field>
+                            <v-flex
+                                xs12
+                                md12
+                                sm12
+                                class="pa-2 pr-2">
+                              <v-text-field
+                                  :rules="rules.nameRules"
+                                  :counter="50"
+                                  v-model="editedItem['memo']"
+                                  :label=" tryT('memo') "></v-text-field>
+                              <v-flex
+                                  xs12
+                                  md2
+                                  sm2
+                                  class="pa-2 pr-2">
+                                <v-text-field
+                                    :rules="rules.nameRules"
+                                    :counter="10"
+                                    v-model="editedItem['protocolId']"
+                                    :label=" tryT('protocolId') "></v-text-field>
+                                <v-flex
+                                    xs12
+                                    md2
+                                    sm2
+                                    class="pa-2 pr-2">
+                                  <v-select
+                                      :rules="rules.nameRules"
+                                      :counter="10"
+                                      v-model="editedItem['isActive']"
+                                      :label=" tryT('isActive') "></v-select>
+                                      <!-- end form from schema  -->
           </v-layout>
         </v-container>
       </v-form>
@@ -117,7 +252,7 @@ export default {
         console.log(newItem)
       },
       immediate: true
-    },
+    }
   },
   mixins: [ crudMixin, exportMixin ],
   created () {

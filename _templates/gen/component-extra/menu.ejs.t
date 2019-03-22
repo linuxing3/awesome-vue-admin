@@ -4,7 +4,7 @@ to: "src/api/menu.ts"
 after: injected
 ---
 <%
-const pathName = h.inflection.singularize(model).toLowerCase()
+const pathName = model.toLowerCase()
 %>  {
     title: '<%= pathName %> title',
     group: 'apps',

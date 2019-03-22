@@ -132,7 +132,7 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data () {
     return {
-      modelName: 'document',
+      modelName: 'usermilitant',
       dialog: false,
       pagination: {
         sortBy: '_id',
@@ -153,7 +153,7 @@ export default {
   },
   mixins: [ exportMixin, crudMixin ],
   created () {
-    window.DocumentTable = this
+    window.UserMilitantTable = this
     this.$on('toggle-form', (v) => {
       this.dialog = v
     })
@@ -161,7 +161,7 @@ export default {
   methods: {
     editItem (item) {
       this.setEditedItem(item)
-      window.DocumentForm.setEditedItem(item)
+      window.UserMilitantForm.setEditedItem(item)
       this.dialog = true
     },
 

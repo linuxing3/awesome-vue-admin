@@ -1,10 +1,10 @@
 ---
-to: "src/router/<%= h.capitalize(model) %>.ts"
+to: "src/router/<%= model %>.ts"
 ---
 <%
 const routeName = model.toLowerCase()
 const routePath = model.toLowerCase()
-const viewName = h.capitalize(model)
+const viewName = model
 %>export default  {
     path: '/<%= routePath %>',
     name: '<%= routeName %>',

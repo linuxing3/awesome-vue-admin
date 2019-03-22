@@ -46,8 +46,13 @@
     </v-card-title>
 
     <v-card-text>
-      <v-layout row wrap>
-        <v-flex xs12 sm6 md6>
+      <v-layout
+          row
+          wrap>
+        <v-flex
+            xs12
+            sm6
+            md6>
           <v-text-field
               class="ml-5 mr-5"
               v-model="model.name"
@@ -58,7 +63,10 @@
               required
             ></v-text-field>
         </v-flex>
-        <v-flex xs12 sm6 md6>
+        <v-flex
+            xs12
+            sm6
+            md6>
           <v-text-field
               class="ml-5 mr-5"
               v-model="model.password"

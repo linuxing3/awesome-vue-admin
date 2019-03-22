@@ -1,10 +1,10 @@
 ---
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Form.vue'
+to: 'src/components/<%= model %>/<%= model %>Form.vue'
 ---
 <%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
+  const modelName = model
+  const modelFormName = model + 'Form'
+  const modelTableName = model + 'Table'
 %><template>
   <v-card>
     <v-card-title
@@ -90,7 +90,7 @@ export default {
         console.log(newItem)
       },
       immediate: true
-    },
+    }
   },
   mixins: [ crudMixin, exportMixin ],
   created () {

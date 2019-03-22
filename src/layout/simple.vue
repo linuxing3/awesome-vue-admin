@@ -11,7 +11,7 @@
               xs12
               sm8
               md6>
-              <slot />
+            <slot />
           </v-flex>
         </v-layout>
       </v-container>

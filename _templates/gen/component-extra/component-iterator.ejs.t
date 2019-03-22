@@ -1,10 +1,10 @@
 ---
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>Iterator.vue'
+to: 'src/components/<%= model %>/<%= model %>Iterator.vue'
 ---
 <%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelIteratorName = h.capitalize(h.inflection.singularize(model)) + 'Iterator'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+  const modelName = model
+  const modelIteratorName = model + 'Iterator'
+  const modelFormName = model + 'Form'
 %><template>
   <v-layout row wrap class="justify-center">
     <v-flex

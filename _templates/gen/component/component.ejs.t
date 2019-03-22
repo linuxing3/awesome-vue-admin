@@ -1,10 +1,10 @@
 ---
-to: 'src/components/<%= h.capitalize(h.inflection.singularize(model)) %>/<%= h.capitalize(h.inflection.singularize(model)) %>.vue'
+to: 'src/components/<%= model %>/<%= model %>.vue'
 ---
 <%
-  const modelName = h.capitalize(h.inflection.singularize(model))
-  const modelTableName = h.capitalize(h.inflection.singularize(model)) + 'Table'
-  const modelFormName = h.capitalize(h.inflection.singularize(model)) + 'Form'
+  const modelName = model
+  const modelTableName = model + 'Table'
+  const modelFormName = model + 'Form'
 %><template>
   <<%= modelTableName %>>
     <<%= modelFormName %> />

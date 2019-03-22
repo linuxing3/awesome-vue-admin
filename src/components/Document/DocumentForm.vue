@@ -22,8 +22,8 @@
     <!-- activator in slot -->
     <v-card-text>
       <v-form
-ref="form"
-              v-model="valid">
+          ref="form"
+          v-model="valid">
         <v-container
             fluid
             grid-list-xl>
@@ -71,7 +71,84 @@ ref="form"
                   :label="tryT('inOrOut')"
                 ></v-select>
             </v-flex>
-            <!-- end form from schema  -->
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['sendignCode']"
+                  :label=" tryT('sendingCode') "></v-text-field>
+              <v-flex
+                  xs12
+                  md6
+                  class="pa-2 pr-2">
+                <v-text-field
+                    :rules="rules.nameRules"
+                    :counter="10"
+                    v-model="editedItem['orderedNumber']"
+                    :label=" tryT('orderedNumber') "></v-text-field>
+              </v-flex>
+              <v-flex
+                  xs12
+                  md6
+                  class="pa-2 pr-2">
+                <v-text-field
+                    :rules="rules.nameRules"
+                    :counter="50"
+                    v-model="editedItem['title']"
+                    :label=" tryT('title') "></v-text-field>
+              </v-flex>
+              <v-flex
+                  xs12
+                  md6
+                  class="pa-2 pr-2">
+                <v-textarea
+                    :rules="rules.nameRules"
+                    :counter="50"
+                    v-model="editedItem['toEntity']"
+                    :label=" tryT('toEntity') "></v-textarea>
+              </v-flex>
+              <v-flex
+                  xs12
+                  md6
+                  class="pa-2 pr-2">
+                <v-textarea
+                    :rules="rules.nameRules"
+                    :counter="50"
+                    v-model="editedItem['copyEntity']"
+                    :label=" tryT('copyEntity') "></v-textarea>
+                <v-flex
+                    xs12
+                    md6
+                    class="pa-2 pr-2">
+                  <v-textarea
+                      :rules="rules.nameRules"
+                      :counter="50"
+                      v-model="editedItem['workEntity']"
+                      :label=" tryT('workEntity') "></v-textarea>
+                  <v-flex
+                      xs12
+                      md6
+                      class="pa-2 pr-2">
+                    <v-textarea
+                        :rules="rules.nameRules"
+                        :counter="50"
+                        v-model="editedItem['keyword']"
+                        :label=" tryT('keyword') "></v-textarea>
+                  </v-flex>
+                  <v-flex
+                      xs12
+                      md6
+                      class="pa-2 pr-2">
+                    <v-textarea
+                        :rules="rules.nameRules"
+                        :counter="10"
+                        v-model="editedItem['author']"
+                        :label=" tryT('author') "></v-textarea>
+                  </v-flex>
+                  <!-- end form from schema  -->
           </v-layout>
         </v-container>
       </v-form>
