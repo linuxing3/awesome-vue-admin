@@ -19,22 +19,11 @@
     "strictFunctionTypes": false,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env",
-      "jest",
-      "webpack"
-    ],
+    "types": ["webpack-env", "jest", "vuetify", "webpack"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": [
     "node_modules/vue-tsx-support/enable-check.d.ts",
@@ -42,10 +31,5 @@
     "src/**/*.vue",
     "tests/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "src/**/*.tsx",
-    "tests/**/*.tsx",
-    "tests/**/*.js"
-  ]
+  "exclude": ["node_modules", "src/**/*.tsx", "tests/**/*.tsx", "tests/**/*.js"]
 }

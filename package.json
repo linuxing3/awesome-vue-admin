@@ -11,10 +11,9 @@
     "tslint": "tslint -p . --fix",
     "dev": "vue-cli-service electron:serve",
     "dist": "cross-env NODE_ENV=production vue-cli-service electron:build",
-    "electron:build": "vue-cli-service electron:build",
     "electron:serve": "vue-cli-service electron:serve",
+    "electron:build": "vue-cli-service electron:build",
     "gen": "hygen gen",
-    "new": "hygen new",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "test:unit": "vue-cli-service test:unit",
@@ -22,8 +21,9 @@
     "play:debug": "node --nolazy --inspect-brk=9229 ./tests/play/util/bin/fp.js",
     "play:watch": "tsc -p ./tests/play/util --watch",
     "play:debug:ts": "ts-node ./tests/play/util/ftp.ts",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:serve": "start-storybook -p 6006",
+    "storybook:build": "build-storybook",
+    "story:inspect": "SET STORYBOOK=true & vue inspect > ./.storybook/webpack.config.inspect.js"
   },
   "dependencies": {
     "@vuex-orm/core": "^0.31.4",
@@ -57,6 +57,12 @@
     "xlsx": "^0.14.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@storybook/addon-actions": "^5.0.3",
+    "@storybook/addon-links": "^5.0.3",
+    "@storybook/addon-storyshots": "^5.0.3",
+    "@storybook/addons": "^5.0.3",
+    "@storybook/vue": "^5.0.3",
     "@types/jest": "^23.1.4",
     "@types/lodash": "^4.14.122",
     "@types/webpack": "^4.4.0",
@@ -70,6 +76,9 @@
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-require-context-hook": "^1.0.0",
+    "babel-preset-vue": "^2.0.2",
     "cross-env": "^5.2.0",
     "electron": "^3.0.0",
     "eslint": "^5.8.0",
@@ -90,14 +99,7 @@
     "vue-template-compiler": "2.6.8",
     "vue-tsx-support": "^2.2.2",
     "vuetify-loader": "^1.0.5",
-    "vuetify-tsx": "^0.24.0",
-    "@storybook/vue": "^5.0.3",
-    "@storybook/addon-actions": "^5.0.3",
-    "@storybook/addon-links": "^5.0.3",
-    "@storybook/addons": "^5.0.3",
-    "babel-preset-vue": "^2.0.2",
-    "@babel/core": "^7.4.0",
-    "babel-loader": "^8.0.5"
+    "vuetify-tsx": "^0.24.0"
   },
   "main": "background.js"
 }

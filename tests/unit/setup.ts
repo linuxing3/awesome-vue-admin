@@ -7,6 +7,12 @@ import fs from 'fs'
 import path from 'path'
 
 /**
+ * Storybook config uses require.context to collect all the sources; that
+ * function is provided by webpack and we need to use
+ * babel-plugin-require-context-hook to substitute it in Jest.
+ */
+import registerRequireContextHook from 'babel-plugin-require-context-hook/register'
+/**
  * 工具函数
  */
 
@@ -14,6 +20,7 @@ import path from 'path'
 import vueTestUtils, { createLocalVue } from '@vue/test-utils'
 // https://lodash.com/
 import _, { cloneDeep } from 'lodash'
+registerRequireContextHook()
 _.mixin({
   pascalCase: _.flow(
     _.camelCase,
@@ -75,7 +82,6 @@ Object.defineProperty(window, 'localStorage', {
  * createVuexModule
  * createFullComponent
  */
-
 ;(global as any).mount = vueTestUtils.mount
 
 // https://vue-test-utils.vuejs.org/api/#shallowmount
