@@ -1,4 +1,4 @@
-import { CombinedVueInstance } from 'vue/types/vue'
+
 import { shallowMount, mount, Wrapper } from '@vue/test-utils'
 import DateDialogAndMenu from '@/components/examples/date-pickers/dateDialogAndMenu.vue'
 
