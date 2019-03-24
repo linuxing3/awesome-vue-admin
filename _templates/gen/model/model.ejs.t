@@ -3,7 +3,7 @@ to: "src/models/CoreModel/<%= model %>/<%= model %>.ts"
 ---
 <%
 const ModelName = model
-const EntityName = model.toLowerCase()
+const EntityName = model.charAt(0).toLowerCase() + model.slice(1)
 %>import { BaseModel} from "../../BaseModel";
 
 export interface I<%= ModelName %> {

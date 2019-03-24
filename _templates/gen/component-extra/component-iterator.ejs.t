@@ -3,6 +3,7 @@ to: 'src/components/<%= model %>/<%= model %>Iterator.vue'
 ---
 <%
   const modelName = model
+  const modelNameLowerFirst = model.charAt(0).toLowerCase() + model.slice(1)
   const modelIteratorName = model + 'Iterator'
   const modelFormName = model + 'Form'
 %><template>
@@ -85,7 +86,7 @@ export default {
   },
   data() {
     return {
-      modelName: '<%= modelName.toLowerCase() %>'
+      modelName: '<%= modelNameLowerFirst %>'
     }
   },
   mixins: [ exportMixin, crudMixin ],

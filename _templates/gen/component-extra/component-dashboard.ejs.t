@@ -4,6 +4,7 @@ to: 'src/components/<%= model %>/<%= model %>Dashboard.vue'
 <%
   const modelName = model
   const modelTableName = model + 'Table'
+  const modelNameLowerFirst = model.charAt(0).toLowerCase() + model.slice(1)
   const modelFormName = model + 'Form'
 %><script>
 import exportMixin from '@/mixins/exportMixin'
@@ -21,7 +22,7 @@ const gradients = [
 export default {
   data() {
     return {
-      modelName: '<%= modelName.toLowerCase() %>',
+      modelName: '<%= modelNameLowerFirst %>',
       gradient: gradients[4],
       gradients,
       padding: 16,

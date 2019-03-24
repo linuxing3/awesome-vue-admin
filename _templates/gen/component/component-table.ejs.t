@@ -3,6 +3,7 @@ to: 'src/components/<%= model %>/<%= model %>Table.vue'
 ---
 <%
   const modelName = model
+  const modelNameLowerFirst = model.charAt(0).toLowerCase() + model.slice(1)
   const modelTableName = model + 'Table'
   const modelFormName = model + 'Form'
 %><template>
@@ -139,7 +140,7 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data () {
     return {
-      modelName: '<%= modelName.toLowerCase() %>',
+      modelName: '<%= modelNameLowerFirst %>',
       dialog: false,
       pagination: {
         sortBy: '_id',

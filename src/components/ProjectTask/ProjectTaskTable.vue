@@ -23,12 +23,12 @@
       <!-- 导出多个，将item属性设置为items数组 -->
       <v-spacer></v-spacer>
       <v-text-field
-          class="mr-3"
-          v-model='filter.search'
-          append-icon='search'
-          label="模糊查询，不分大小写"
-          single-line
-        ></v-text-field>
+        class="mr-3"
+        v-model='filter.search'
+        append-icon='search'
+        label="模糊查询，不分大小写"
+        single-line
+      ></v-text-field>
       <ExportDialog
           buttonText="导出/打印"
           :items="items"
@@ -154,7 +154,7 @@ export default {
   mixins: [ exportMixin, crudMixin ],
   created () {
     window.ProjectTaskTable = this
-    this.$on('toggle-form', (v) => {
+    this.$on('toggle-form', (v) => { 
       this.dialog = v
     })
   },

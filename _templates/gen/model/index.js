@@ -6,12 +6,12 @@ module.exports = {
     const questions = [{
       type: 'input',
       name: 'model',
-      message: 'Name of model (ex: User)'
+      message: 'Name of model (ex: UserBook)'
     },
     {
       type: 'input',
       name: 'fieldNames',
-      message: 'input Fields?(separate by comma: "age, gender, title")'
+      message: 'Field Name(separate by comma: "age, gender, title")'
     }
     ]
 

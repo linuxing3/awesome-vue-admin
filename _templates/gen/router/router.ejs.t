@@ -2,8 +2,8 @@
 to: "src/router/<%= model %>.ts"
 ---
 <%
-const routeName = model.toLowerCase()
-const routePath = model.toLowerCase()
+const routePath = model.charAt(0).toLowerCase() + model.slice(1)
+const routeName = model.charAt(0).toLowerCase() + model.slice(1)
 const viewName = model
 %>export default  {
     path: '/<%= routePath %>',

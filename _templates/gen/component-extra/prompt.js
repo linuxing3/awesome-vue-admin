@@ -2,6 +2,6 @@ module.exports = [
   {
     type: 'input',
     name: 'model',
-    message: 'Model Name: (i.e. User)'
+    message: 'Model Name: (i.e. UserBook)'
   }
 ]

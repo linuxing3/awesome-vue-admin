@@ -3,6 +3,7 @@ to: 'src/components/<%= model %>/<%= model %>Form.vue'
 ---
 <%
   const modelName = model
+  const modelNameLowerFirst = model.charAt(0).toLowerCase() + model.slice(1)
   const modelFormName = model + 'Form'
   const modelTableName = model + 'Table'
 %><template>
@@ -71,7 +72,7 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      modelName: '<%= modelName.toLowerCase() %>',
+      modelName: '<%= modelNameLowerFirst %>',
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
