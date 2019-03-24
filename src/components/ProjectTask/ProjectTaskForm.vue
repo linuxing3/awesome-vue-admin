@@ -21,7 +21,9 @@
     </v-card-title>
     <!-- activator in slot -->
     <v-card-text>
-      <v-form ref="form" v-model="valid">
+      <v-form
+          ref="form"
+          v-model="valid">
         <v-container
             fluid
             grid-list-xl>
@@ -92,7 +94,7 @@ export default {
     })
     window.ProjectTaskForm = this
   },
-  methods: { 
+  methods: {
     validate () {
       if (this.$refs.form.validate()) {
         this.saveItem(this.editedItem)
