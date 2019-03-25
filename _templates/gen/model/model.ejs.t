@@ -1,9 +1,9 @@
 ---
-to: "src/models/CoreModel/<%= model %>/<%= model %>.ts"
+to: "src/models/CoreModel/<%= h.changeCase.pascal(model) %>/<%= h.changeCase.pascal(model) %>.ts"
 ---
 <%
-const EntityName = h.changeCase.camel(model, true)
-const ModelName = h.changeCase.ucFirst(EntityName)
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
 %>import { BaseModel} from "../../BaseModel";
 
 export interface I<%= ModelName %> {

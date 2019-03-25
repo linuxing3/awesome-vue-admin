@@ -2,9 +2,9 @@ import { ActionContext } from 'vuex'
 import { make } from 'vuex-pathify'
 
 const state = {
-  name: 'test',
+  name: 'testBook',
   items: [],
-  defaultTest: {}
+  defaultTestBook: {}
 }
 
 const mutations: any = {

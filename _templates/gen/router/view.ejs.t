@@ -1,23 +1,23 @@
 ---
-to: "src/views/<%= model %>.vue"
+to: "src/views/<%= h.changeCase.pascal(model) %>.vue"
 ---
 <%
-  const modelName = model
-  const componentName = model
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
 %><template>
   <DefaultLayout>
-    <<%= componentName %> />
+    <<%= ModelName %> />
   </DefaultLayout>
 </template>
 
 <script lang="js">
 import DefaultLayout from '@/layout/default.vue'
-import <%= componentName %> from '@/components/<%= modelName %>/<%= componentName %>.vue'
+import <%= ModelName %> from '@/components/<%= ModelName %>/<%= ModelName %>.vue'
 
 export default {
   components: {
     DefaultLayout,
-    <%= componentName %>
+    <%= ModelName %>
   }
 }
 </script>

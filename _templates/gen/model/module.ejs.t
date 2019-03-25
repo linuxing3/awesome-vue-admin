@@ -1,9 +1,9 @@
 ---
-to: "src/store/modules/<%= model %>.ts"
+to: "src/store/modules/<%= h.changeCase.pascal(model) %>.ts"
 ---
 <%
-const ModelName = model
-const EntityName = model.charAt(0).toLowerCase() + model.slice(1)
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
 %>import { ActionContext } from 'vuex'
 import { make } from 'vuex-pathify'
 

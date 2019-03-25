@@ -4,11 +4,12 @@ to: "src/api/menu.ts"
 after: injected
 ---
 <%
-const pathName = model.toLowerCase()
+const EntityName = h.changeCase.camel(model)
+const EntityTitle = h.changeCase.title(EntityName)
 %>  {
-    title: '<%= pathName %> title',
+    title: '<%= EntityTitle %> title',
     group: 'apps',
     icon: 'star',
-    name: '<%= pathName %>',
+    name: '<%= EntityName %>',
     color: 'black'
   },

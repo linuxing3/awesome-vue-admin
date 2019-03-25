@@ -1,8 +1,9 @@
 ---
-to: 'src/components/helpers/<%= model %>.vue'
+to: 'src/components/helpers/<%= h.changeCase.pascal(model) %>.vue'
 ---
 <%
-  const modelName = model
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
 %><template>
   <div><%= modelName %></div>
 </template>
@@ -11,11 +12,11 @@ to: 'src/components/helpers/<%= model %>.vue'
 export default {
   data () {
     return {
-      <%= modelName.toLowerCase() %>: '<%= modelName.toLowerCase() %>'
+      <%= EntityName %>: '<%= EntityName %>'
     }
   },
   watch: {
-    <%= modelName.toLowerCase() %>: {
+    <%= EntityName %>: {
       handler (newValue) {
         this.handler(newValue)
       },

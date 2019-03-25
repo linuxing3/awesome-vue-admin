@@ -1,14 +1,13 @@
 ---
-to: "src/router/<%= model %>.ts"
+to: "src/router/<%= h.changeCase.pascal(model) %>.ts"
 ---
 <%
-const routePath = model.charAt(0).toLowerCase() + model.slice(1)
-const routeName = model.charAt(0).toLowerCase() + model.slice(1)
-const viewName = model
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
 %>export default  {
-    path: '/<%= routePath %>',
-    name: '<%= routeName %>',
+    path: '/<%= EntityName %>',
+    name: '<%= EntityName %>',
     meta: { breadcrumb: true },
     component: () =>
-        import(/* webpackChunkName: "routes" */ `@/views/<%= viewName %>.vue`)
+        import(/* webpackChunkName: "routes" */ `@/views/<%= ModelName %>.vue`)
 }

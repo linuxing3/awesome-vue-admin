@@ -12,7 +12,6 @@ import path from 'path'
  * babel-plugin-require-context-hook to substitute it in Jest.
  */
 import registerRequireContextHook from 'babel-plugin-require-context-hook/register'
-registerRequireContextHook()
 /**
  * 工具函数
  */
@@ -21,6 +20,7 @@ registerRequireContextHook()
 import vueTestUtils, { createLocalVue } from '@vue/test-utils'
 // https://lodash.com/
 import _, { cloneDeep } from 'lodash'
+registerRequireContextHook()
 registerRequireContextHook()
 registerRequireContextHook()
 _.mixin({

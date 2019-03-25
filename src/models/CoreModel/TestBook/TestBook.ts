@@ -1,14 +1,14 @@
 import { BaseModel } from '../../BaseModel'
 
-export interface ITest {
+export interface ITestBook {
    _id: string
    name: string
    active: string
 
 }
 
-export default class Test extends BaseModel {
-  static entity = 'test';
+export default class TestBook extends BaseModel {
+  static entity = 'testBook';
 
   static fields () {
     return {

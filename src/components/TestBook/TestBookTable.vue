@@ -1,12 +1,4 @@
----
-to: 'src/components/<%= h.changeCase.pascal(model) %>/<%= h.changeCase.pascal(model) %>Table.vue'
----
-<%
-const EntityName = h.changeCase.camel(model)
-const ModelName = h.changeCase.pascal(model)
-const modelTableName = ModelName + 'Table'
-const modelFormName = ModelName + 'Form'
-%><template>
+<template>
   <v-card class="mt-5">
     <v-card-title>
       <v-dialog
@@ -31,12 +23,12 @@ const modelFormName = ModelName + 'Form'
       <!-- 导出多个，将item属性设置为items数组 -->
       <v-spacer></v-spacer>
       <v-text-field
-        class="mr-3"
-        v-model='filter.search'
-        append-icon='search'
-        label="模糊查询，不分大小写"
-        single-line
-      ></v-text-field>
+          class="mr-3"
+          v-model='filter.search'
+          append-icon='search'
+          label="模糊查询，不分大小写"
+          single-line
+        ></v-text-field>
       <ExportDialog
           buttonText="导出/打印"
           :items="items"
@@ -140,7 +132,7 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data () {
     return {
-      modelName: '<%= EntityName %>',
+      modelName: 'testBook',
       dialog: false,
       pagination: {
         sortBy: '_id',
@@ -161,15 +153,15 @@ export default {
   },
   mixins: [ exportMixin, crudMixin ],
   created () {
-    window.<%= modelTableName %> = this
-    this.$on('toggle-form', (v) => { 
+    window.TestBookTable = this
+    this.$on('toggle-form', (v) => {
       this.dialog = v
     })
   },
   methods: {
     editItem (item) {
       this.setEditedItem(item)
-      window.<%= modelFormName %>.setEditedItem(item)
+      window.TestBookForm.setEditedItem(item)
       this.dialog = true
     },
 

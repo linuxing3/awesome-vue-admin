@@ -1,11 +1,11 @@
 ---
-to: 'src/components/<%= model %>/<%= model %>Iterator.vue'
+to: 'src/components/<%= h.changeCase.pascal(model) %>/<%= h.changeCase.pascal(model) %>Iterator.vue'
 ---
 <%
-  const modelName = model
-  const modelNameLowerFirst = model.charAt(0).toLowerCase() + model.slice(1)
-  const modelIteratorName = model + 'Iterator'
-  const modelFormName = model + 'Form'
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
+const modelIteratorName = ModelName + 'Iterator'
+const modelFormName = ModelName + 'Form'
 %><template>
   <v-layout row wrap class="justify-center">
     <v-flex
@@ -86,7 +86,7 @@ export default {
   },
   data() {
     return {
-      modelName: '<%= modelNameLowerFirst %>'
+      modelName: '<%= EntityName %>'
     }
   },
   mixins: [ exportMixin, crudMixin ],

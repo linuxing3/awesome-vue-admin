@@ -1,18 +1,19 @@
 ---
-to: 'src/components/__tests__/<%= model %>.spec.ts'
+to: 'src/components/__tests__/<%= h.changeCase.pascal(model) %>.spec.ts'
 ---
 <%
-  const modelName = model
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
 %>import { shallowMount } from '@vue/test-utils'
-import <%= modelName %> from '@/components/helpers/<%= modelName %>.vue'
+import <%= ModelName %> from '@/components/helpers/<%= ModelName %>.vue'
 
 let options = (global as any).createVuetifyComponent()
 
-describe('Test @/components/helpers/<%= modelName %>.vue', () => {
+describe('Test @/components/helpers/<%= ModelName %>.vue', () => {
   let wrapper
 
   beforeEach(() => {
-    wrapper = shallowMount(<%= modelName %> , options)
+    wrapper = shallowMount(<%= ModelName %> , options)
   })
 
   it('Test is Vue instance', () => {
@@ -20,7 +21,7 @@ describe('Test @/components/helpers/<%= modelName %>.vue', () => {
   })
 
   it('Test is Vue instance', () => {
-    expect(wrapper.text()).toBe('<%= modelName %>')
+    expect(wrapper.text()).toBe('<%= ModelName %>')
   })
 
 })

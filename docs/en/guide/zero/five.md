@@ -1,16 +1,25 @@
 # Linting & formatting
 
-- [Languages](#languages)
-- [Scripts](#scripts)
-  - [Terminal](#terminal)
-  - [Pre-commit](#pre-commit)
-  - [Editor](#editor)
-  - [Generator](#generator)
-- [Configuration](#configuration)
-- [FAQ](#faq)
+- [Linting & formatting](#linting--formatting)
+  - [Languages](#languages)
+  - [Scripts](#scripts)
+    - [Terminal](#terminal)
+    - [Pre-commit](#pre-commit)
+    - [Editor](#editor)
+    - [Generator](#generator)
+      - [Features](#features)
+      - [Templates helpers](#templates-helpers)
+        - [inflection.js](#inflectionjs)
+        - [change-case.js](#change-casejs)
+  - [Configuration](#configuration)
+  - [Configuration Eslint with standard](#configuration-eslint-with-standard)
+    - [Install](#install)
+    - [Usage](#usage)
+  - [FAQ](#faq)
 
 This project uses ESLint and Prettier to catch errors and avoid bikeshedding by enforcing a common code style.
 Of course if you prefer Stylelint, Markdownlint, you may install them.
+
 ## Languages
 
 - **JavaScript** is linted by ESLint and formatted by Prettier
@@ -29,6 +38,7 @@ There are a few different contexts in which the linters run.
 ```bash
 # Lint all files, fixing many violations automatically
 yarn lint
+yarn lint:ts
 ```
 
 See `package.json` to update.
@@ -45,7 +55,7 @@ In supported editors, all files will be linted and formatted on-save.
 
 ### Generator
 
-__NOTE__: Hygen 2.0 is our fastest release yet! Migrating from inquirer to enquirer yields 5x performance improvement. This comes at the cost of breaking compatibility for prompts (unless you use the new compat layer). 
+**NOTE**: Hygen 2.0 is our fastest release yet! Migrating from inquirer to enquirer yields 5x performance improvement. This comes at the cost of breaking compatibility for prompts (unless you use the new compat layer).
 
 #### Features
 
@@ -58,18 +68,58 @@ __NOTE__: Hygen 2.0 is our fastest release yet! Migrating from inquirer to enqui
 ✅ Adding new files  
 ✅ Injecting into existing files  
 ✅ Running shell commands  
-✅ Super fast, constantly optimized for speed  
-
-#### What's Next?
+✅ Super fast, constantly optimized for speed
 
 Go to the [documentation](http://www.hygen.io/quick-start) to get to know the rest of Hygen and generators.
 
 If you're in a hurry:
 
-* To learn how to edit generator templates, [look here](http://www.hygen.io/templates)
-* To see how to use generators [look here](http://www.hygen.io/generators)
-* Take a look at the [ecosystem](http://www.hygen.io/packages) and tooling built around Hygen.
+- To learn how to edit generator templates, [look here](http://www.hygen.io/templates)
+- To see how to use generators [look here](http://www.hygen.io/generators)
+- Take a look at the [ecosystem](http://www.hygen.io/packages) and tooling built around Hygen.
 
+#### Templates helpers
+
+##### inflection.js
+
+- inflection.indexOf( arr, item, from_index, compare_func );
+- inflection.pluralize( 'Hat' ); // === 'Hats'
+- inflection.singularize( 'Hats' ); // === 'Hat'
+- inflection.inflect( str, count, singular, plural );
+- inflection.camelize( 'message_properties' ); // === 'MssageProperties'
+- inflection.underscore( 'messageProperties' ); // === 'mssage_properties'
+- inflection.humanize( 'message_properties' ); // === 'Message prperties'
+- inflection.capitalize( 'message_properties' ); // === 'Mssage_properties'
+- inflection.capitalize( 'message properties', true ); // === 'Mssage properties'
+- inflection.dasherize( 'Message Properties' ); // === 'Mssage-Properties'
+- inflection.titleize( 'message_properties' ); // === 'Message Prperties'
+- inflection.demodulize( 'Message::Bus::Properties' ); // === 'Poperties'
+- inflection.tableize( 'MessageBusProperty' ); // === 'mssage_bus_properties'
+- inflection.classify( 'message_bus_properties' ); // === 'MssageBusProperty'
+- inflection.foreign_key( 'MessageBusProperty' ); // === 'mssage_bus_property_id'
+- inflection.ordinalize( 'the 1 pitch' ); // === 'the 1st pitch'
+- inflection.transform( 'all job', [ 'pluralize', 'capitalize', 'dasherize' ]); // === 'All-jobs'
+
+##### change-case.js
+
+- [`camel`](#camelCase) //=> "testString"
+- [`pascal`](#PascalCase) //=> "TestString"
+- [`param`](#param-case) //=> "test-string"
+- [`snake`](#snake_case) //=> "test_string"
+- [`constant`](#CONSTANT_CASE) //=> "TEST_STRING"
+- [`title`](#Title Case) //=> "A Simple Test"
+- [`sentence`](#sentence case) //=> "Test string"
+- [`dot`](#dot.case) //=> "test.string"
+- [`header`](#Header-Case) //=> "Test-String"
+- [`path`](#path/case) //=> "test/string"
+- [`swap`](#swapcase) // Test String => "tEST sTRING"
+- [`ucFirst`](#Uppercasefirst) //=> "Test"
+- [`lcFirst`](#lOWERCASEFIRST) //=> "tEST"
+- [`upper`](#UPPERCASE) //=> "TEST STRING"
+- [`lower`](#lowercase) //=> "test string"
+- [`isUpper`](#isuppercase)
+- [`isLower`](#islowercase)
+- [`no`](#nocase) //=> "test string"
 
 ## Configuration
 
@@ -131,10 +181,59 @@ Then, add this to your `.eslintrc` file:
 }
 ```
 
-*Note: We omitted the `eslint-config-` prefix since it is automatically assumed by ESLint.*
+_Note: We omitted the `eslint-config-` prefix since it is automatically assumed by ESLint._
 
 You can override settings from the shareable config by adding them directly into your
 `.eslintrc` file.
+
+```javascript
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+    browser: true
+  },
+  extends: ['plugin:vue/essential', '@vue/standard', '@vue/typescript'],
+  rules: {
+    'no-console': 'off',
+    'no-debugger': 'off',
+    'no-unreachable': 'off',
+    'no-empty': 'warn',
+    'no-trailing-spaces': 'error',
+    'vue/no-use-v-if-with-v-for': 'off',
+    'vue/valid-v-on': 'off',
+    'vue/require-valid-default-prop': 'off',
+    'vue/require-prop-type-constructor': 'off',
+    'vue/no-unused-components': 'off',
+    'vue/return-in-computed-property': 'off',
+    'vue/html-indent': [
+      'warn',
+      2,
+      {
+        attribute: 2,
+        closeBracket: 1,
+        alignAttributesVertically: true,
+        ignores: []
+      }
+    ],
+    'vue/max-attributes-per-line': [
+      'warn',
+      2,
+      {
+        singleline: 1,
+        multiline: {
+          max: 1,
+          allowFirstLine: false
+        }
+      }
+    ],
+    'vue/no-side-effects-in-computed-properties': 'off'
+  },
+  parserOptions: {
+    parser: '@typescript-eslint/parser'
+  }
+}
+```
 
 ## FAQ
 

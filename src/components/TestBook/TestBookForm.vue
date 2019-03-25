@@ -1,12 +1,4 @@
----
-to: 'src/components/<%= h.changeCase.pascal(model) %>/<%= h.changeCase.pascal(model) %>Form.vue'
----
-<%
-const EntityName = h.changeCase.camel(model)
-const ModelName = h.changeCase.pascal(model)
-const modelTableName = ModelName + 'Table'
-const modelFormName = ModelName + 'Form'
-%><template>
+<template>
   <v-card>
     <v-card-title
         :class="editing ? 'success darken-1' : 'red darken-1'"
@@ -29,7 +21,9 @@ const modelFormName = ModelName + 'Form'
     </v-card-title>
     <!-- activator in slot -->
     <v-card-text>
-      <v-form ref="form" v-model="valid">
+      <v-form
+          ref="form"
+          v-model="valid">
         <v-container
             fluid
             grid-list-xl>
@@ -72,7 +66,7 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      modelName: '<%= EntityName %>',
+      modelName: 'testBook',
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
@@ -98,19 +92,19 @@ export default {
     this.$on('set-edit-item', (item) => {
       this.setEditedItem(item)
     })
-    window.<%= modelFormName %> = this
+    window.TestBookForm = this
   },
-  methods: { 
+  methods: {
     validate () {
       if (this.$refs.form.validate()) {
         this.saveItem(this.editedItem)
-        window.<%= modelTableName %>.$emit('toggle-form', false)
+        window.TestBookTable.$emit('toggle-form', false)
         this.reset()
       }
     },
     resetValidation () {
       this.$refs.form.resetValidation()
-      window.<%= modelTableName %>.$emit('toggle-form', false)
+      window.TestBookTable.$emit('toggle-form', false)
       this.reset()
     }
   }

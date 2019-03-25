@@ -1,10 +1,11 @@
 ---
-to: 'src/components/<%= model %>/<%= model %>.vue'
+to: 'src/components/<%= h.changeCase.pascal(model) %>/<%= h.changeCase.pascal(model) %>.vue'
 ---
 <%
-  const modelName = model
-  const modelTableName = model + 'Table'
-  const modelFormName = model + 'Form'
+const EntityName = h.changeCase.camel(model)
+const ModelName = h.changeCase.pascal(model)
+const modelTableName = ModelName + 'Table'
+const modelFormName = ModelName + 'Form'
 %><template>
   <<%= modelTableName %>>
     <<%= modelFormName %> />
