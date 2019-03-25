@@ -19,13 +19,119 @@ export const sections = [
   'stock'
 ]
 
+export const infrastructure = {
+  name: 've',
+  models: [
+    {
+      name: 'Account',
+      section: 'Account',
+      modelName: 'Account'
+    },
+    {
+      name: 'Asset',
+      section: 'Asset',
+      modelName: 'Asset'
+    },
+    {
+      name: 'AssetMaintenance',
+      section: 'Asset',
+      modelName: 'AssetMaintenance'
+    },
+    {
+      name: 'AssetMovement',
+      section: 'Asset',
+      modelName: 'AssetMovement'
+    },
+    {
+      name: 'AssetUser',
+      section: 'Asset',
+      modelName: 'AssetUser'
+    },
+    {
+      name: 'Department',
+      section: 'Department',
+      modelName: 'Department'
+    },
+    {
+      name: 'Document',
+      section: 'Document',
+      modelName: 'Document'
+    },
+    {
+      name: 'DocumentType',
+      section: 'Document',
+      modelName: 'DocumentType'
+    },
+    {
+      name: 'Bookmark',
+      section: 'Document',
+      modelName: 'Bookmark'
+    },
+    {
+      name: 'File',
+      section: 'Document',
+      modelName: 'File'
+    },
+    {
+      name: 'Employee',
+      section: 'Employee',
+      modelName: 'Employee'
+    },
+    {
+      name: 'EmployeePromotion',
+      section: 'Employee',
+      modelName: 'EmployeePromotion'
+    },
+    {
+      name: 'User',
+      section: 'User',
+      modelName: 'User'
+    },
+    {
+      name: 'UserAppraisal',
+      section: 'User',
+      modelName: 'UserAppraisal'
+    },
+    {
+      name: 'UserAppraisalGoal',
+      section: 'User',
+      modelName: 'UserAppraisalGoal'
+    },
+    {
+      name: 'UserDesignation',
+      section: 'User',
+      modelName: 'UserDesignation'
+    },
+    {
+      name: 'UserMilitant',
+      section: 'User',
+      modelName: 'UserMilitant'
+    },
+    {
+      name: 'UserPromotion',
+      section: 'User',
+      modelName: 'UserPromotion'
+    },
+    {
+      name: 'Project',
+      section: 'Project',
+      modelName: 'Project'
+    },
+    {
+      name: 'ProjectTask',
+      section: 'Project',
+      modelName: 'ProjectTask'
+    }
+  ]
+}
+
 export const genERPModels = (models, section) => {
   return pickBy(models, model => {
     return model.meta.section === section
   })
 }
 
-export const genCoreModels = (models) => {
+export const genCoreModels = models => {
   return pickBy(models, model => {
     return model.meta.section === 'core'
   })
