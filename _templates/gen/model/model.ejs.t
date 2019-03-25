@@ -2,8 +2,8 @@
 to: "src/models/CoreModel/<%= model %>/<%= model %>.ts"
 ---
 <%
-const ModelName = model
-const EntityName = model.charAt(0).toLowerCase() + model.slice(1)
+const EntityName = h.changeCase.camel(model, true)
+const ModelName = h.changeCase.ucFirst(EntityName)
 %>import { BaseModel} from "../../BaseModel";
 
 export interface I<%= ModelName %> {
@@ -18,7 +18,7 @@ export default class <%= ModelName %> extends BaseModel {
   static fields() {
     return {
       _id: this.increment(),
-      <% fieldNames.split(",").map(field => { %><%= field %>: this.attr("<%= field %>"),
+      <% fieldNames.split(",").map(field => { %><%= field.trim() %>: this.attr("<%= field %>"),
       <% }) %>
     };
   }

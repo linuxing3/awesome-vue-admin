@@ -12,6 +12,7 @@ import path from 'path'
  * babel-plugin-require-context-hook to substitute it in Jest.
  */
 import registerRequireContextHook from 'babel-plugin-require-context-hook/register'
+registerRequireContextHook()
 /**
  * 工具函数
  */

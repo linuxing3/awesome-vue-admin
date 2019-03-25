@@ -65,7 +65,7 @@ function genSidebarConfig(title) {
     {
       title,
       collapsable: false,
-      children: [``, `one`, `two`, `three`, `four`, `five`],
+      children: [``, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`, `ten`],
     },
   ];
 }
