@@ -3,21 +3,24 @@
     <v-card-title
         :class="editing ? 'success darken-1' : 'red darken-1'"
         dark>
-      <span class="display-1 text-capitalize white--text font-weight-thin">{{ formTitle }} - {{ modelName }}  {{editedIndex !== -1 ? '-' + editedIndex : ''}}</span>
-      <v-spacer />
+      <span
+          class="display-1 text-capitalize white--text font-weight-thin"
+        >{{ formTitle }} - {{ modelName }} {{editedIndex !== -1 ? '-' + editedIndex : ''}}</span>
+      <v-spacer/>
       <v-btn
           v-if="editedIndex !== -1"
           fab
           small
           color="red darken-2 white--text"
           @click="exportDocx(editedItem)"
-          icon>
+          icon
+        >
         <v-icon>attach_file</v-icon>
       </v-btn>
       <ExportDialog
           buttonText="导出/打印"
           :items="[ editedItem ]"
-          :modelName="modelName" ></ExportDialog>
+          :modelName="modelName"></ExportDialog>
     </v-card-title>
     <!-- activator in slot -->
     <v-card-text>
@@ -72,7 +75,8 @@
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['year']"
-                  :label=" tryT('year') "></v-text-field>
+                  :label=" tryT('year') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -82,7 +86,8 @@
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['title']"
-                  :label=" tryT('title') "></v-text-field>
+                  :label=" tryT('title') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -100,7 +105,7 @@
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['category']"
-                  :items="['letter', 'note']"
+                  :items="['letter', 'note', 'fawen']"
                   :label="tryT('category')"
                 ></v-select>
             </v-flex>
@@ -121,7 +126,8 @@
               <v-text-field
                   :counter="10"
                   v-model="editedItem['sendignCode']"
-                  :label=" tryT('sendingCode') "></v-text-field>
+                  :label=" tryT('sendingCode') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -131,7 +137,8 @@
                   :rules="rules.nameRules"
                   :counter="10"
                   v-model="editedItem['orderedNumber']"
-                  :label=" tryT('orderedNumber') "></v-text-field>
+                  :label=" tryT('orderedNumber') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -141,7 +148,8 @@
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['title']"
-                  :label=" tryT('title') "></v-text-field>
+                  :label=" tryT('title') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -160,7 +168,8 @@
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['toEntity']"
-                  :label=" tryT('toEntity') "></v-text-field>
+                  :label=" tryT('toEntity') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -169,7 +178,8 @@
               <v-text-field
                   :counter="50"
                   v-model="editedItem['copyEntity']"
-                  :label=" tryT('copyEntity') "></v-text-field>
+                  :label=" tryT('copyEntity') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -179,7 +189,8 @@
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['workEntity']"
-                  :label=" tryT('workEntity') "></v-text-field>
+                  :label=" tryT('workEntity') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -188,7 +199,8 @@
               <v-text-field
                   :counter="50"
                   v-model="editedItem['keyword']"
-                  :label=" tryT('keyword') "></v-text-field>
+                  :label=" tryT('keyword') "
+                ></v-text-field>
             </v-flex>
             <v-flex
                 xs12
@@ -198,7 +210,8 @@
                   :rules="rules.nameRules"
                   :counter="10"
                   v-model="editedItem['author']"
-                  :label=" tryT('author') "></v-text-field>
+                  :label=" tryT('author') "
+                ></v-text-field>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -210,7 +223,8 @@
       <v-spacer></v-spacer>
       <v-btn
           :class="editing ? 'success white--text' : 'red white--text'"
-          @click="validate">{{ editing ? '编辑': '新增'}}</v-btn>
+          @click="validate"
+        >{{ editing ? '编辑': '新增'}}</v-btn>
       <v-btn
           class="gray"
           @click="resetValidation">取消</v-btn>
@@ -231,12 +245,11 @@ export default {
           v => !!v || 'Name is required',
           v => v.length <= 50 || 'Name must be less than 10 characters'
         ],
-        emailRules: [
-          v => /.+@.+/.test(v) || 'E-mail must be valid'
-        ]
+        emailRules: [v => /.+@.+/.test(v) || 'E-mail must be valid']
       },
       datePicker: false,
-      yearPicker: false
+      yearPicker: false,
+      valid: true
     }
   },
   watch: {
@@ -247,9 +260,9 @@ export default {
       immediate: true
     }
   },
-  mixins: [ crudMixin, exportMixin ],
+  mixins: [crudMixin, exportMixin],
   created () {
-    this.$on('set-edit-item', (item) => {
+    this.$on('set-edit-item', item => {
       this.setEditedItem(item)
     })
     window.DocumentForm = this
