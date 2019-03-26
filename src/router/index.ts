@@ -11,15 +11,15 @@ Vue.use(Router)
  */
 let requiredRoute: RequireContext = require.context('.', false, /\.ts$/)
 
-requiredRoute.keys().forEach(route => {
-  let routeConfig = requiredRoute(route)
+requiredRoute.keys().forEach((route: string) => {
+  let routeConfig = requiredRoute(route).default
   if (route === './index.ts' || route === './path.ts') return
-  if (Array.isArray(routeConfig.default)) {
-    routeConfig.default.forEach(subRoute => {
+  if (Array.isArray(routeConfig)) {
+    routeConfig.forEach(subRoute => {
       path.push(subRoute)
     })
   } else {
-    path.push(routeConfig.default)
+    path.push(routeConfig)
   }
 })
 
