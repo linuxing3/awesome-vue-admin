@@ -281,7 +281,8 @@ export default {
           v => /.+@.+/.test(v) || 'E-mail must be valid'
         ]
       },
-      birthdayPicker: false
+      birthdayPicker: false,
+      valid: true
     }
   },
   watch: {

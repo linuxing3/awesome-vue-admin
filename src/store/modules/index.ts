@@ -5,15 +5,20 @@
  *   "user" : [user: User extends Model]
  * }
  */
+import * as Vuex from 'vuex'
+
 import { toLower } from 'lodash'
+export interface Modules {
+  [name: string]: Vuex.Module<any, any>
+}
 
 let requiredModules: RequireContext = require.context('.', false, /\.ts$/)
-let Modules = {}
+let modules: Modules = {}
 
 requiredModules.keys().forEach(key => {
   if (key === './index.ts') return
   let modelName = toLower(key.replace(/(\.\/|\.ts)/g, ''))
-  Modules[modelName] = requiredModules(key).default || requiredModules(key)
+  modules[modelName] = requiredModules(key).default || requiredModules(key)
 })
 
-export default Modules
+export default modules

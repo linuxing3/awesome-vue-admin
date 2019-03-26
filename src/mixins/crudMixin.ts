@@ -1,9 +1,49 @@
+/**
+ * CRUD MIXINS
+ *
+ * Used as a component scope mixin to inject functions
+ * of create, update, read, delete
+ * Several options to choose
+ *
+ * 1. ORM localforage Methods
+ *    All date will persist in Vuex and indexDB
+ *    - Model.$insert()
+ *    - Model.$create()
+ *    - Model.$update()
+ *    - Model.$delete()
+ *    - Model.$fetch()
+ *
+ * 2. Model Static Methods
+ *    All date will persist in Vuex but not in indexDB
+ *
+ *    - Model.insert()
+ *    - Model.create()
+ *    - Model.update()
+ *    - Model.delete()
+ *    - Model.find()
+ *
+ * 3. Model Instance Methods
+ *    All date will persist in Vuex but not in indexDB
+ *    - model.$insert()
+ *    - model.$create()
+ *    - model.$update()
+ *    - model.$delete()
+ *    - model.$find()
+ *
+ * 4. Query instance Methods
+ *    All date will persist in Vuex but not in indexDB
+ *    - query.insert()
+ *    - query.create()
+ *    - query.update()
+ *    - query.delete()
+ *    - query.find()
+ */
 import { keyBy } from 'lodash'
 import { Model } from '@vuex-orm/core'
 import models from '@/models'
 import { baseFilter } from '@/util'
 import { Location } from 'vue-router'
-import { genFormData, genTableHeaders } from '@/util/genFormData'
+import { genTableHeaders } from '@/util/genFormData'
 
 interface ICrudHelper {
   editedItem?: any
@@ -214,8 +254,6 @@ export default {
       } else {
         console.log('Found no item to delete!')
       }
-      // ORM默认方法
-      // this.Model.delete(this.editedItem._id);
       this.reset()
     },
     /**
@@ -243,8 +281,6 @@ export default {
       }).then(entities => {
         console.log(entities)
       })
-      // ORM默认方法
-      // this.Model.update(this.model);
     },
     /**
      * 创建
@@ -257,10 +293,6 @@ export default {
       }).then(entities => {
         console.log(entities)
       })
-      // ORM默认方法
-      // this.Model.insert({
-      //   data: this.editedItem,
-      // });
     },
     /**
      * 尝试进行国际化翻译

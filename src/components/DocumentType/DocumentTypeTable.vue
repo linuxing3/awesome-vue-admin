@@ -1,9 +1,8 @@
 <template>
   <v-card class="mt-5">
     <v-card-title>
-      <v-dialog
-          v-model="dialog"
-          max-width="60%">
+      <v-dialog v-model="dialog"
+max-width="60%">
         <v-btn
             slot="activator"
             class="offset-mt-5"
@@ -27,13 +26,10 @@
           label="模糊查询，不分大小写"
           single-line
         ></v-text-field>
-      <ExportDialog
-          buttonText="导出/打印"
-          :items="items"
-          :modelName="modelName"></ExportDialog>
-      <ImportDialog
-          buttonText="导入/整理"
-          :modelName="modelName"></ImportDialog>
+      <ExportDialog buttonText="导出/打印"
+:items="items" :modelName="modelName"></ExportDialog>
+      <ImportDialog buttonText="导入/整理"
+:modelName="modelName"></ImportDialog>
     </v-card-title>
     <v-data-table
         v-model="selected"
@@ -76,21 +72,16 @@
       <template v-slot:items="props">
         <tr :active="props.selected">
           <td>
-            <v-checkbox
-                v-model="props.selected"
-                primary
-                hide-details></v-checkbox>
+            <v-checkbox v-model="props.selected"
+primary hide-details></v-checkbox>
           </td>
           <td class="layout row justify-center align-center">
-            <v-icon
-                color="green"
-                @click="editItem(props.item)">edit</v-icon>
-            <v-icon
-                color="red"
-                @click="deleteItem(props.item)">delete</v-icon>
-            <v-icon
-                color="primary"
-                @click="addDocumentFromType(props.item)">delete</v-icon>
+            <v-icon color="green"
+@click="editItem(props.item)">edit</v-icon>
+            <v-icon color="red"
+@click="deleteItem(props.item)">delete</v-icon>
+            <v-icon color="primary"
+@click="addDocumentFromType(props.item)">delete</v-icon>
           </td>
           <td
               class="text-truncate"
@@ -183,10 +174,11 @@ export default {
       this.$router.push({ name: 'document' })
 
       setTimeout(() => {
-        // openDocumentForm
+        // open DocumentForm
         window.DocumentTable.$emit('toggle-form', true)
         // set the category to title
-        window.DocumentForm.$data['editedItem']['category'] = item['title']
+        let { editedItem } = window.DocumentForm.$data
+        editedItem['category'] = item['title']
       }, 500)
     }
   }

@@ -6,11 +6,16 @@
  * }
  */
 import { lowerFirst, tail, last } from 'lodash'
+import { Model } from '@vuex-orm/core'
+
+export interface Models {
+  [name: string]: typeof Model
+}
 
 // import erpModels from './ERPModel'
 
 let requiredModels: RequireContext = require.context('./CoreModel', true, /\.ts$/)
-let models = {}
+let models: Models = {}
 
 requiredModels.keys().forEach((fileName: string) => {
   const fileNameMeta = last(tail(fileName.split('/')))
@@ -18,6 +23,4 @@ requiredModels.keys().forEach((fileName: string) => {
   models[modelName] = requiredModels(fileName).default
 })
 
-export default {
-  ...models
-}
+export default models

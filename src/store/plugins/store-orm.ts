@@ -1,35 +1,36 @@
 /**
  * Lowdb插件将vuex状态持久化
  */
-import { join } from 'path'
-import { pathExistsSync, mkdirpSync } from 'fs-extra'
-import { remote, app } from 'electron'
-
-import VuexORM, { Database } from '@vuex-orm/core'
+import * as Vuex from 'vuex'
+import VuexORM, { Database, Model } from '@vuex-orm/core'
 // import VuexORMLowdbPlugin from 'vuex-orm-lowdb'
 import localForagePlugin from 'vuex-orm-localforage'
 
 // 获取模型和模块
-import models from '@/models'
+import models, { Models } from '@/models'
 
-import modules from '@/store/modules'
-
-// 获取文件路径
-
-let electronApp = process.type === 'renderer' ? remote.app : app
-const dbPath = join(electronApp.getPath('userData'), 'data') || '/public/data'
-
-if (!pathExistsSync(dbPath)) mkdirpSync(dbPath)
+import modules, { Modules } from '@/store/modules'
+export interface Entity {
+  name: string
+  model: typeof Model
+  module: Vuex.Module<any, any>
+}
 
 /**
  * 在数据库中注册模型和模块
  */
-export const registerDatabase = (models: any, modules: any): Database => {
+export const registerDatabase = (models: Models, modules: Modules): Database => {
   const database = new Database()
   // base models
-  Object.keys(models).map(key => {
-    console.log(`Registering ORM for ${key} model`)
-    database.register(models[key], modules[key] || {})
+  Object.keys(models).map((modelName: string) => {
+    console.log(`Registering ORM for ${modelName} model`)
+
+    let model = models[modelName]
+    let module = modules[modelName] || {}
+    /**
+     * Register a model and a module to Database.
+     */
+    database.register(model, module)
   })
 
   return database

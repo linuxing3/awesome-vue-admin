@@ -13,7 +13,7 @@ import {
   MorphTo,
   Attribute
 } from '@vuex-orm/core'
-import { keys, pullAll, uniq, mapKeys } from 'lodash'
+import { keys, pullAll, uniq, map, mapKeys } from 'lodash'
 
 export class BaseModel extends Model {
   static primaryKey = '_id'
@@ -69,14 +69,14 @@ export class BaseModel extends Model {
   }
 
   /**
- * 使用lodash获取某模型中某一字段的全部值组成的数组
- * @param Model 模型
- * @param fieldDef 字段名
- * @returns 某一字段的全部值组成的数组
- */
-  static findUniqueValuesOfField (fieldName: string) {
+   * 使用lodash获取某模型中某一字段的全部值组成的数组
+   * @param Model 模型
+   * @param fieldDef 字段名
+   * @returns 某一字段的全部值组成的数组
+   */
+  static uniqueValuesOfField (fieldName: string): string[] {
     let records: any[] = this.query().get()
-    return (uniq(keys(mapKeys(records, record => record[fieldName]))))
+    return uniq(keys(mapKeys(records, record => record[fieldName])))
   }
 
   /**
@@ -118,5 +118,15 @@ export class BaseModel extends Model {
       field instanceof MorphOne ||
       field instanceof MorphMany
     )
+  }
+
+  /**
+   * Find unique value of a field
+   * As the max, min, sum in Query
+   * @param fieldName string
+   */
+  $uniqueValuesOfField (fieldName: string): any[] {
+    let records: any[] = this.$query().get()
+    return uniq(map(records, fieldName))
   }
 }
