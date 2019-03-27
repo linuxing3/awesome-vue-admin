@@ -21,6 +21,10 @@ module.exports = async function({ config }) {
     loaders: ['style-loader', 'css-loader', 'less-loader']
   })
   config.module.rules.push({
+    test: /\.css$/,
+    loaders: ['style-loader', 'css-loader']
+  })
+  config.module.rules.push({
     test: /\.styl$/,
     loader: 'style-loader!css-loader!stylus-loader'
   })

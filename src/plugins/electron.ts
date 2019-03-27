@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { pathExistsSync, mkdirpSync } from 'fs-extra'
 import Vue, { VueConstructor } from 'vue'
-import { remote, shell } from 'electron'
+import { remote, shell, app } from 'electron'
 
 const VueElectron = {
   install (Vue: VueConstructor, args?) {

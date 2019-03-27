@@ -41,7 +41,7 @@ export default {
     }
   },
   computed: {
-    Model (): Model {
+    Model (): typeof Model {
       return models[this.modelName]
     },
     keysDef: () => keysDef, // 翻译定义

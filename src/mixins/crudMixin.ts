@@ -46,6 +46,7 @@ import { Location } from 'vue-router'
 import { genTableHeaders } from '@/util/genFormData'
 
 interface ICrudHelper {
+  modelName?: string
   editedItem?: any
   editedIndex?: number
   selectedItems?: any
@@ -75,31 +76,31 @@ export default {
       return this.editedIndex !== -1 // is in edit state
     },
     // 数据对象的定义模型
-    Model (): Model {
-      return models[this.modelName]
+    Model (): typeof Model {
+      return models[this.modelName as string]
     },
-    defaultItem (): any {
-      return new this.Model() // always a fresh new item
+    defaultItem (): Model {
+      return new models[this.modelName as string]() // always a fresh new item
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    all (): any[] {
-      return this.Model.query().get()
+    all (): Model[] {
+      return this.Model.query().get() as Model[]
     },
-    count (): any[] {
+    count (): number {
       return this.Model.query().count()
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    withAll (): any[] {
+    withAll (): Model[] {
       return this.Model.query()
         .withAll()
-        .get()
+        .get() as Model[]
     },
     // 数据对象的实例数组
-    items (): any[] {
+    items (): Model[] {
       let { search, sort } = this.filter
-      if (search === '') return this.withAll
+      if (search === '') return this.withAll as Model[]
       // in filtered case, may different from editedIndex
-      return baseFilter({ sort, search }, this.withAll)
+      return baseFilter({ sort, search }, this.withAll as Model[])
     },
     // 数据键值的数组
     fields (): string[] {

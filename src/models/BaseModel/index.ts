@@ -5,6 +5,7 @@ import {
   Number,
   Boolean,
   BelongsTo,
+  BelongsToMany,
   Increment,
   HasMany,
   HasOne,
@@ -76,7 +77,8 @@ export class BaseModel extends Model {
    */
   static uniqueValuesOfField (fieldName: string): string[] {
     let records: any[] = this.query().get()
-    return uniq(keys(mapKeys(records, record => record[fieldName])))
+    return uniq(map(records, fieldName))
+    // return uniq(keys(mapKeys(records, record => record[fieldName])))
   }
 
   /**
@@ -112,6 +114,7 @@ export class BaseModel extends Model {
   static isFieldRelation (field: Attribute): boolean {
     return (
       field instanceof BelongsTo ||
+      field instanceof BelongsToMany ||
       field instanceof HasOne ||
       field instanceof HasMany ||
       field instanceof MorphTo ||

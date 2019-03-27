@@ -76,7 +76,7 @@ export default {
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
-          v => v.length <= 10 || 'Name must be less than 10 characters'
+          v => v.length <= 25 || 'Name must be less than 25 characters'
         ],
         emailRules: [
           v => !!v || 'E-mail is required',

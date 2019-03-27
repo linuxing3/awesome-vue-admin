@@ -105,7 +105,7 @@
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['category']"
-                  :items="['letter', 'note', 'fawen']"
+                  :items="documentTypes"
                   :label="tryT('category')"
                 ></v-select>
             </v-flex>
@@ -233,8 +233,11 @@
 </template>
 
 <script>
+import models from '@/models'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
+
+let DocumentType = models['documentType']
 
 export default {
   data () {
@@ -250,6 +253,11 @@ export default {
       datePicker: false,
       yearPicker: false,
       valid: true
+    }
+  },
+  computed: {
+    documentTypes () {
+      return DocumentType.uniqueValuesOfField('title')
     }
   },
   watch: {

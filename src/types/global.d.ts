@@ -92,40 +92,6 @@ declare var PRODUCTION: boolean
 
 declare type RequireContext = __WebpackModuleApi.RequireContext
 
-declare namespace VuexORM {
-  class Model {
-    /**
-     * Create a record, but persist to indexDB
-     */
-    static $create(this: any, payload: any): Promise<any>;
-    /**
-     * Delete a record, but persist to indexDB
-     */
-    static $delete(this: any, payload: any): Promise<any>;
-    /**
-     * update a record, but persist to indexDB
-     */
-    static $update(this: any, payload: any): Promise<any>;
-  }
-}
-
-declare namespace localForagePlugin {
-  class Model {
-    /**
-     * Create a record, but persist to indexDB
-     */
-    static $create(this: any, payload: any): Promise<any>
-    /**
-     * Delete a record, but persist to indexDB
-     */
-    static $delete(this: any, payload: any): Promise<any>
-    /**
-     * update a record, but persist to indexDB
-     */
-    static $update(this: any, payload: any): Promise<any>
-  }
-}
-
 declare interface Window {
   $app: any
   $shell: any
