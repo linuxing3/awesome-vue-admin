@@ -38,9 +38,11 @@
  *    - query.delete()
  *    - query.find()
  */
+import { ComponentOptions } from 'vue'
 import { keyBy } from 'lodash'
-import { Model } from '@vuex-orm/core'
 import models from '@/models'
+import { Model } from '@vuex-orm/core'
+import { BaseModel } from '@/models/BaseModel'
 import { baseFilter } from '@/util'
 import { Location } from 'vue-router'
 import { genTableHeaders } from '@/util/genFormData'
@@ -56,7 +58,7 @@ interface ICrudHelper {
   }
 }
 
-export default {
+const CrudMixin: ComponentOptions<any> = {
   data (): ICrudHelper {
     return {
       editedItem: {}, // currently item to be edited
@@ -76,31 +78,31 @@ export default {
       return this.editedIndex !== -1 // is in edit state
     },
     // 数据对象的定义模型
-    Model (): typeof Model {
-      return models[this.modelName as string]
+    Model (): typeof BaseModel {
+      return models[this.modelName as string] as typeof BaseModel
     },
-    defaultItem (): Model {
-      return new models[this.modelName as string]() // always a fresh new item
+    defaultItem(): BaseModel {
+      return new models[this.modelName as string]() as BaseModel// always a fresh new item
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    all (): Model[] {
-      return this.Model.query().get() as Model[]
+    all (): BaseModel[] {
+      return this.Model.query().get()
     },
     count (): number {
       return this.Model.query().count()
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    withAll (): Model[] {
+    withAll (): BaseModel[] {
       return this.Model.query()
         .withAll()
-        .get() as Model[]
+        .get() as BaseModel[]
     },
     // 数据对象的实例数组
-    items (): Model[] {
+    items(): BaseModel[] {
       let { search, sort } = this.filter
-      if (search === '') return this.withAll as Model[]
+      if (search === '') return this.withAll as BaseModel[]
       // in filtered case, may different from editedIndex
-      return baseFilter({ sort, search }, this.withAll as Model[])
+      return baseFilter({ sort, search }, this.withAll as BaseModel[])
     },
     // 数据键值的数组
     fields (): string[] {
@@ -163,10 +165,6 @@ export default {
     },
     editedIndex (val) {
       console.log(`Editing item ${val}`)
-    },
-    $route: {
-      handler: 'fetch',
-      immediate: true
     }
   },
   async mounted () {
@@ -308,3 +306,5 @@ export default {
     }
   }
 }
+
+export default CrudMixin

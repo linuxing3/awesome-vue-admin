@@ -1,9 +1,62 @@
 import { ActionContext } from 'vuex'
 import { make } from 'vuex-pathify'
 import bcrypt from 'bcryptjs'
-import Account from '@/models/CoreModel/Account/Account'
+import Account, { IAccount } from '@/models/CoreModel/Account/Account'
 
-const state = {
+export interface IAccountState {
+  name: string
+  items: any[]
+  cached: any[]
+  defaultAccount: IAccount
+  currentItem: IAccount
+  loggedIn: boolean
+  filter: {
+    search: string
+    sort: string
+  }
+  token: {
+    secret: string
+    simpleToken: string
+    netlifyToken: string
+    firebaseToken: string
+  },
+  entity?: string
+  $entity?: string
+  data?: any[]
+}
+export interface IAccountGetters {
+  // [name: string]: (state: IAccountState) => any
+  isAuthenticated(state: IAccountState): boolean
+}
+
+export interface IAccountMutations {
+  // [name: string]: (state: IAccountState, payload: any) => any
+  CACHE_ITEMS(state: IAccountState, newAccount: IAccount): void
+  SET_ACCESS_TOKEN(state: IAccountState, accessToken: string): void
+  SET_REFRESH_TOKEN(state: IAccountState, refreshToken: string): void
+}
+
+export interface IAccountActions {
+  init(context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
+  signup(context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
+  setLoginStatus(context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
+  clearCache(context: ActionContext<IAccountState, any>, data?: any): Promise<any>
+  createToken?(context: ActionContext<IAccountState, any>, data: IAuthRequest): Promise<any>
+  refreshToken?(context: ActionContext<IAccountState, any>): Promise<any>
+  revokeToken?(context: ActionContext<IAccountState, any>): Promise<any>
+}
+
+export interface IAuthResponse {
+  access_token: string
+  refresh_token: string
+}
+
+export interface IAuthRequest {
+  username: string
+  password: string
+}
+
+const state: IAccountState = {
   name: 'account',
   items: [],
   cached: [],
@@ -15,7 +68,10 @@ const state = {
     role: 'manager',
     avatar: 'avatar/man_1.jpg'
   },
-  currentItem: {},
+  currentItem: {
+    name: '',
+    password: ''
+  },
   loggedIn: false,
   filter: {
     search: '',
@@ -29,27 +85,29 @@ const state = {
   }
 }
 
-const mutations: any = {
+const mutations: IAccountMutations = {
   ...make.mutations(state),
-  CACHE_ITEMS (state, newAccount) {
+  CACHE_ITEMS (state, newAccount: IAccount) {
     state.cached.push(newAccount)
   }
 }
 
-const AccountActions = {
+const AccountActions: IAccountActions = {
   // 创建初始化用户
-  async init (ctx: ActionContext<any, any>) {
+  async init (ctx) {
     let { name, password, email, role, avatar } = ctx.state.defaultAccount
 
     console.log('检查默认账户是否存在')
+    // TODO Fetch from localforage to vuex
     await (Account as any).$fetch()
+
     let accounts = ctx.state.data
 
     if (accounts === undefined) {
       console.log('默认账户不存在')
       let hash = await bcrypt.hash(password, 10)
 
-      let accountInfo = {
+      let accountInfo: IAccount = {
         name,
         password,
         email,
@@ -57,14 +115,14 @@ const AccountActions = {
         hash,
         avatar
       }
-
+      // Create new account and save to localforage
       await (Account as any).$create({ data: accountInfo })
       console.log('创建默认账户')
     }
     console.log('存在默认账户')
   },
   // 注册用户
-  async signup (ctx: ActionContext<any, any>, signupData) {
+  async signup (ctx, signupData) {
     // 按姓名查找账户
     let authedAccount = Account.query()
       .where('name', signupData.name)
@@ -77,7 +135,7 @@ const AccountActions = {
         // 1 加密密码
         let hash = await bcrypt.hash(signupData.password, 10)
 
-        let accountInfo = {
+        let accountInfo: IAccount = {
           ...signupData,
           hash,
           role: 'user'
@@ -95,7 +153,7 @@ const AccountActions = {
     } else {
       console.log('账户已注册，请登录')
       // 检查用户名和密码
-      let { hash } = authedAccount as any
+      let hash = authedAccount['hash']
       let password = signupData.password
       let valid = await bcrypt.compare(password, hash)
       if (valid) {
@@ -108,7 +166,7 @@ const AccountActions = {
     }
   },
   // 设置登录状态
-  async setLoginStatus (ctx: ActionContext<any, any>, authData) {
+  async setLoginStatus (ctx, authData) {
     // 登录状态为真
     ctx.commit('SET_LOGGED_IN', true)
     // 缓存用户数据
@@ -123,7 +181,7 @@ const AccountActions = {
     })
   },
   // Logs out the current user.
-  clearCache ({ commit }) {
+  async clearCache ({ commit }) {
     // 登录状态为假
     commit('SET_LOGGED_IN', false)
     // 删除缓存用户数据
@@ -132,12 +190,18 @@ const AccountActions = {
   }
 }
 
-const actions: any = {
+const actions: IAccountActions = {
   ...make.actions(state),
   ...AccountActions
 }
 
-const getters: any = { ...make.getters(state) }
+const getters: IAccountGetters = {
+  ...make.getters(state),
+  isAuthenticated (state) {
+    let { cached, currentItem } = state
+    return cached.filter(item => item.name === currentItem.name)
+  }
+}
 
 export default {
   namespaced: true,

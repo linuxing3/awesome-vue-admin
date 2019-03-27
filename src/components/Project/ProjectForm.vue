@@ -64,12 +64,10 @@
   </v-card>
 </template>
 
-<script>
-import models from '@/models'
+<script lang='ts'>
+import ProjectType from '@/models/CoreModel/Project/ProjectType'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
-
-const ProjectType = models['projectType']
 
 export default {
   data () {

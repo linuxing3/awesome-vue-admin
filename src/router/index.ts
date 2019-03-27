@@ -1,8 +1,9 @@
 /* eslint-disable */
 import Vue from 'vue'
-import Router, { RouteConfig } from 'vue-router'
+import Router, { RouteConfig, RouteRecord } from 'vue-router'
 
 import path from './path'
+import store from '../store'
 
 Vue.use(Router)
 
@@ -31,7 +32,16 @@ const router = new Router({
 router.beforeEach((to: any, from: any, next: any) => {
   console.log('Going From ' + from.path + ' to ' + to.path)
   // validate user
-  // check if to edit or add
+  // if (to.matched.some((record: RouteRecord) => !record.meta.public)) {
+  // const isAuthenticated = store.getters['account/isAuthenticated']
+  //   if (!isAuthenticated) {
+  //     next({ path: '/', query: { redirect: to.fullPath } });
+  //   } else {
+  //     next();
+  //   }
+  // } else {
+  //   next();
+  // }
   next()
 })
 

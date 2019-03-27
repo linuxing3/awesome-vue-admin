@@ -199,68 +199,33 @@ The `src/store/modules` directory is where all shared application state lives. A
 
 Read more in the [Vuex modules](https://vuex.vuejs.org/en/modules.html) docs.
 
-If you use the `vuex-nedb-module-generator`, you may have modules defined like
-following pattern.
+
+I prefer to use `vuex-pathify` to automatically `make` mutations, actions and getters from state. Cheers!
 
 ```javascript
-import { ActionContext } from "vuex";
 import { make } from "vuex-pathify";
-import bcrypt from "bcryptjs";
-
-import { LowdbForElectron } from "@/api/lowdb";
-const DB: LowdbForElectron = new LowdbForElectron("account");
 
 const state = {
   name: "account",
   items: [],
-  cached: [],
   currentItem: {},
-  status: false,
   filter: {
     search: "",
     sort: "",
-  },
-  token: {
-    secret: "daniel",
-    simpleToken: "",
-    netlifyToken: "",
-    firebaseToken: "",
-  },
+  }
 };
 
 const mutations: any = {
-  ...make.mutations(state),
-  CACHE_ACCOUNT(state, newAccount) {
-    state.cached.push(newAccount);
-  },
-};
-
-const AccountActions = {
-  async signup(ctx: ActionContext<any, any>, signupData) {
-    // if exists, return
-    }
-  },
-  async signin(ctx: ActionContext<any, any>, authData) {
-    ctx.commit("SET_STATUS", true);
-    ctx.commit("SET_TOKEN", {
-      ...ctx.state.token,
-      ...{
-        simpleToken: authData.id,
-      },
-    });
-  },
-  // Logs out the current user.
-  logout({ commit }) {
-    commit("SET_CURRENT_ITEM", null);
-  },
+  ...make.mutations(state)
 };
 
 const actions: any = {
-  ...make.actions(state),
-  ...AccountActions,
+  ...make.actions(state)
 };
 
-const getters: any = { ...make.getters(state) };
+const getters: any = { 
+  ...make.getters(state) 
+};
 
 export default {
   namespaced: true,
@@ -294,6 +259,214 @@ export default modules;
 ## plugins
 
 ### ormplugins
+
+#### Vuex ORM Plugin: LocalForage
+
+##### Installation
+
+- General usage
+
+``` js
+import VuexORM from '@vuex-orm/core'
+import VuexORMLocalForage from 'vuex-orm-localforage'
+import database from './database'
+
+// datebase.register(some model, some module)
+VuexORM.use(VuexORMLocalForage, {
+  database
+})
+
+export default () => new Vuex.Store({
+  namespaced: true,
+  plugins: [VuexORM.install(database)]
+})
+```
+
+- Core concepts
+
+```js
+import Context from './common/context';
+import Action from './actions/Action'
+import Fetch from './actions/Fetch'
+import Persist from './actions/Persist'
+import Get from './actions/Get'
+import Destroy from './actions/Destroy'
+
+export default class VuexOrmLocalForage {
+  /**
+   * @constructor
+   * @param {Components} components The Vuex-ORM Components collection
+   * @param {Options} options The options passed to VuexORM.install
+   */
+  constructor(components, options) {
+    Context.setup(components, options);
+    this.setupActions();
+    this.setupModels();
+    this.setupLifecycles();
+  }
+
+  /**
+   * This method will setup following Vuex actions: $fetch, $get
+   */
+  setupActions() {
+    const context = Context.getInstance();
+
+    context.components.Actions.$get = Get.call.bind(Get);
+    context.components.Actions.$fetch = Fetch.call.bind(Fetch);
+    context.components.Actions.$create = Persist.create.bind(Persist);
+    context.components.Actions.$update = Persist.update.bind(Persist);
+    context.components.Actions.$delete = Destroy.call.bind(Destroy);
+  }
+
+  /**
+   * This method will setup following model methods: Model.$fetch, Model.$get, Model.$create,
+   * Model.$update, Model.$delete
+   */
+  setupModels() {
+    const context = Context.getInstance();
+
+    /**
+     * Transform Model and Modules
+     */
+    _.map(context.database.entities, entity => {
+      entity.model = Action.transformModel(entity.model);
+      return entity;
+    });
+
+    context.components.Model.$fetch = function (config = {}) {
+      return this.dispatch('$fetch', config);
+    };
+
+    context.components.Model.$get = function (config = {}) {
+      return this.dispatch('$get', config);
+    };
+
+    context.components.Model.$create = function (config = {}) {
+      return this.dispatch('$create', config);
+    };
+
+    context.components.Model.$update = function (config = {}) {
+      return this.dispatch('$update', config);
+    };
+
+    context.components.Model.$delete = function (config = {}) {
+      return this.dispatch('$delete', config);
+    };
+  }
+
+  setupLifecycles() {
+    const context = Context.getInstance();
+
+    if (context.options.beforeCreate) {
+      context.components.Query.on('beforeCreate', context.options.beforeCreate);
+    }
+  }
+}
+```
+
+Actions in `vuex-orm-localforage` is defined as following, basiclly just add `localforage` instance to `model`
+
+```js
+import localforage from 'localforage';
+import _ from 'lodash';
+import Context from '../common/context';
+
+export default class Action {
+  /**
+   * Transform Model to include ModelConfig
+   * @param {object} model
+   */
+  static transformModel(model) {
+    // skipping... 
+    const context = Context.getInstance();
+    // Here use localforage and attach to model
+    model.$localStore = localforage.createInstance({
+      name: Context.getInstance().options.name,
+      storeName: model.entity,
+    });
+
+    return model;
+  }
+}
+```
+
+Implement the `$localStore` methods like `Fetch`
+
+```js
+import Action from './Action';
+import Context from '../common/context';
+
+export default class Fetch extends Action {
+  /**
+   * Call $fetch method
+   * @param {object} store
+   * @param {object} params
+   */
+  static async call({ state, dispatch }) {
+    const context = Context.getInstance();
+    const model = context.getModelFromState(state);
+
+    const records = [];
+
+    return model.$localStore.iterate((record) => { // added ==> iterate all item
+      records.push(record); // added ==> added to records as temprary array
+    }).then(() => dispatch('insertOrUpdate', { // added ==> load records into vuex
+      data: records,
+    }));
+  }
+}
+```
+
+
+
+Implement the `$localStore` methods like `persist`
+
+```js
+import Action from './Action';
+import Model from '../orm/Model';
+import Context from '../common/context';
+
+export default class Persist extends Action {
+  /**
+   * Is called when an item is inserted or updated in the store
+   *
+   * @param {object} store
+   * @param {object} payload
+   */
+  static async call({ dispatch }, payload, action = 'insertOrUpdate') {
+    return dispatch(action, payload).then((result) => {
+      const promises = []; // promise queue
+      const context = Context.getInstance();
+
+      // Iterate results from model when running the `insertOrUpdate` hook
+      Object.keys(result).forEach((entity) => {
+        result[entity].forEach((record) => {
+          const model = context.getModelByEntity(entity);
+          const key = this.getRecordKey(record);
+          const data = Model.getPersistableFields(model).reduce((entry, field) => {
+            entry[field] = record[field]; // set entry key to record key
+            return entry;
+          }, {});
+
+          promises.push(model.$localStore.setItem(key, data)); // added setItem in promises queue
+        });
+      });
+
+      return Promise.all(promises).then(() => result); // run promises and return result
+    });
+  }
+
+  static create(context, payload) {
+    return this.call(context, payload); // return result from call create and update
+  }
+
+  static update(context, payload) {
+    return this.call(context, payload, 'update');
+  }
+}
+```
+
+- Lowdb Plugin
 
 Since I use `vuex/orm`, I feed that it's easier to keep all persistence logic in
 the query hooks, which when create, delete, update any `model`, the hook will
@@ -844,22 +1017,52 @@ Cookies or localStorage.
 
 #### Table of Contents
 
-- [vuex-persist](#vuex-persist)
+- [State management](#state-management)
+  - [config](#config)
+  - [modules](#modules)
+  - [plugins](#plugins)
+    - [ormplugins](#ormplugins)
+      - [Vuex ORM Plugin: LocalForage](#vuex-orm-plugin-localforage)
+        - [Installation](#installation)
+    - [lowdb plugins](#lowdb-plugins)
+  - [index file](#index-file)
+  - [Documentation](#documentation)
+  - [Questions & Discussions](#questions--discussions)
+  - [Examples](#examples)
+  - [Quick Start](#quick-start)
+    - [Install Vuex ORM](#install-vuex-orm)
+    - [Create Models](#create-models)
+    - [Register Models to the Vuex Store](#register-models-to-the-vuex-store)
+    - [Inserting Records to the Vuex Store](#inserting-records-to-the-vuex-store)
+    - [Accessing the Data](#accessing-the-data)
+  - [Plugins](#plugins)
+  - [Resources](#resources)
+  - [Contribution](#contribution)
+    - [Development](#development)
+  - [Vuex Pathify](#vuex-pathify)
+  - [Vuex comparison](#vuex-comparison)
+  - [Summary](#summary)
+    - [Next steps](#next-steps)
+  - [vuex-class](#vuex-class)
+  - [Dependencies](#dependencies)
+  - [Installation](#installation-1)
+  - [Example](#example)
+  - [vuex-persist](#vuex-persist)
       - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Compatibility](#compatibility)
-  - [Installation](#installation)
+  - [Installation](#installation-2)
     - [Vue CLI Build Setup (using Webpack or some bundler)](#vue-cli-build-setup-using-webpack-or-some-bundler)
     - [Transpile for `target: es5`](#transpile-for-target-es5)
     - [Directly in Browser](#directly-in-browser)
     - [Tips for NUXT](#tips-for-nuxt)
   - [Usage](#usage)
     - [Steps](#steps)
-    - [Constructor Parameters -](#constructor-parameters--)
+    - [Constructor Parameters -](#constructor-parameters)
     - [Usage Notes](#usage-notes)
       - [Reducer](#reducer)
       - [Circular States](#circular-states)
-  - [Examples](#examples)
+  - [Examples](#examples-1)
     - [Simple](#simple)
     - [Detailed](#detailed)
     - [Support Strict Mode](#support-strict-mode)

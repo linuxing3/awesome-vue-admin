@@ -7,14 +7,18 @@ import {
   BelongsTo,
   BelongsToMany,
   Increment,
-  HasMany,
   HasOne,
+  HasMany,
   MorphOne,
-  MorphMany,
   MorphTo,
+  MorphMany,
+  HasManyBy,
+  MorphToMany,
+  MorphedByMany,
+  HasManyThrough,
   Attribute
 } from '@vuex-orm/core'
-import { keys, pullAll, uniq, map, mapKeys } from 'lodash'
+import { keys, pullAll, uniq, map } from 'lodash'
 
 export class BaseModel extends Model {
   static primaryKey = '_id'
@@ -56,10 +60,10 @@ export class BaseModel extends Model {
   /**
    * 关系型数据键值中包括_id的
    */
-
   static relationFieldsWithId (): string[] {
     return this.relationFields().filter(r => r.match(/.*_id/))
   }
+
   // 关系型数据键值中不包括_id的
   static nonRelationFieldsNoId (): string[] {
     return this.relationFields().filter(r => !r.match(/.*_id/))
@@ -113,13 +117,17 @@ export class BaseModel extends Model {
    */
   static isFieldRelation (field: Attribute): boolean {
     return (
-      field instanceof BelongsTo ||
-      field instanceof BelongsToMany ||
       field instanceof HasOne ||
       field instanceof HasMany ||
+      field instanceof HasManyBy ||
+      field instanceof HasManyThrough ||
+      field instanceof BelongsTo ||
+      field instanceof BelongsToMany ||
       field instanceof MorphTo ||
       field instanceof MorphOne ||
-      field instanceof MorphMany
+      field instanceof MorphMany ||
+      field instanceof MorphToMany ||
+      field instanceof MorphedByMany
     )
   }
 

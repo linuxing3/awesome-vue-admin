@@ -7,9 +7,13 @@
  */
 import { lowerFirst, tail, last } from 'lodash'
 import { Model } from '@vuex-orm/core'
+import { BaseModel } from '@/models/BaseModel'
 
+// export interface Models {
+//   [name: string]: typeof Model
+// }
 export interface Models {
-  [name: string]: typeof Model
+  [name: string]: typeof BaseModel | typeof Model
 }
 
 // import erpModels from './ERPModel'

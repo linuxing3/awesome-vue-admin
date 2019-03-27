@@ -93,6 +93,7 @@ declare var PRODUCTION: boolean
 declare type RequireContext = __WebpackModuleApi.RequireContext
 
 declare interface Window {
+  [propName: string]: any
   $app: any
   $shell: any
   store: any

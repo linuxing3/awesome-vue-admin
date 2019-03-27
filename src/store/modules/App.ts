@@ -1,15 +1,37 @@
 import { make } from 'vuex-pathify'
-import models from '@/models'
-const App = models['app']
 
-const state: any = {
+export interface IAppState {
+  name: string
+  models: any
+  currentModel: any
+  filter: {
+    search: string
+    sort: string
+  }
+  config: {
+    name: string
+    title: string
+    description: string
+    locale: string
+    defaultMessages: any
+  }
+}
+
+const state: IAppState = {
   name: 'app',
   models: {},
   currentModel: {},
+  config: {
+    name: '',
+    title: '',
+    description: '',
+    locale: '',
+    defaultMessages: {}
+  },
   filter: {
     search: '',
     sort: ''
-  }
+  },
 }
 
 const mutations: any = {
@@ -18,12 +40,10 @@ const mutations: any = {
    */
   init ({ state }) {
     // 设置当前模型的名称
-    state.model = {
-      name: 'awesome-vue-manager',
-      title: 'Awesome Vue Manager',
-      description: 'Awesome Vue Manager with General use purpose'
-    }
-    App.$create({ data: state.model })
+    state.config.name = 'awesome-vue-manager'
+    state.config.title = 'Awesome Vue Manager'
+    state.config.description = 'Awesome Vue Manager with General use purpose'
+    state.config.localed = 'cn'
   },
   ...make.mutations(state)
 }

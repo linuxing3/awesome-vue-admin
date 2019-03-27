@@ -180,7 +180,7 @@ export default class ReactiveResearch extends Vue {
 
   async addToBookmark (item) {
     console.log(item)
-    let BookMark = models['bookmark']
+    let BookMark = models['bookmark'] as any
     let newBookmarks = await BookMark.$create({ data: item })
     console.log(newBookmarks)
   }
