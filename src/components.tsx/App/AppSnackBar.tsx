@@ -5,12 +5,12 @@ import { VCard, VCardText, VBtn, VIcon } from 'vuetify-tsx'
 import { VSnackbar } from 'vuetify/lib'
 
 interface Data {
-  model: any;
+  model: any
 }
 
 interface Events {
-  onOk: void;
-  onError: { code: number; detail: string };
+  onOk: void
+  onError: { code: number; detail: string }
 }
 
 const AppSnackBar = componentFactoryOf<Events>().create({

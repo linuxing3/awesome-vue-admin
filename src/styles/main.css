@@ -2,8 +2,8 @@
   --sidebar-width: 200px;
 }
 body {
-  font-family: roboto, "Fira Code", Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC",
-    "Microsoft YaHei", "WenQuanYi Micro Hei" sans-serif;
+  font-family: roboto, 'Fira Code', Helvetica, Tahoma, Arial, 'PingFang SC', 'Hiragino Sans GB',
+    'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei' sans-serif;
 }
 
 .content {

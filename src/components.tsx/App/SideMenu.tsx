@@ -20,17 +20,17 @@ import {
 import mainMenu from '../../api/menu'
 
 interface Item {
-  title?: string;
-  name?: string;
-  group?: string;
-  icon?: string;
-  header?: string;
-  items?: Item[];
+  title?: string
+  name?: string
+  group?: string
+  icon?: string
+  header?: string
+  items?: Item[]
 }
 
 interface ISideMenuData {
-  drawer: boolean;
-  items: Item[];
+  drawer: boolean
+  items: Item[]
 }
 
 const SideMenu = tsx.componentFactoryOf<ISideMenuData>().create({
@@ -45,8 +45,8 @@ const SideMenu = tsx.componentFactoryOf<ISideMenuData>().create({
     logoUrl: () => join(process.env.BASE_URL, 'icon/keep.png')
   },
   created () {
-    this.$on('APP_DRAWER_TOGGLED', () => (this.drawer = !this.drawer));
-    (window as any).SideMenu = this
+    this.$on('APP_DRAWER_TOGGLED', () => (this.drawer = !this.drawer))
+    ;(window as any).SideMenu = this
   },
   render (): VNode {
     const { items, drawer } = this
@@ -64,19 +64,14 @@ const SideMenu = tsx.componentFactoryOf<ISideMenuData>().create({
     return (
       <VNavigationDrawer>
         <VToolbar>
-          <VToolbarTitle>
-            综合管理系统
-          </VToolbarTitle>
+          <VToolbarTitle>综合管理系统</VToolbarTitle>
         </VToolbar>
         <VList>
           {items.map((item: Item) => {
             return (
-              <VListGroup
-              >
+              <VListGroup>
                 {/* generate mainMenu */}
-                <VListTile
-
-                >
+                <VListTile>
                   <VListTileContent>
                     <VListTileTitle>{item.title}</VListTileTitle>
                   </VListTileContent>

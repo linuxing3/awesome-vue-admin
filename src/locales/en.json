@@ -115,8 +115,7 @@
   "flightTicket": "Flight Ticket Type",
   "hotelRoom": "Accomodation Type",
   "transport": "Transportation Type",
-  "App.core.description":
-    "A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices",
+  "App.core.description": "A flexible, scalable, opinionated boilerplate for production-ready PWAs with focus on performance, development speed, and best practices",
   "App.nav.components": "Components",
   "App.nav.counter": "Counter",
   "App.nav.docs": "Documentation",
@@ -131,8 +130,7 @@
   "components.calendar.wednesday.short": "W",
   "components.dataTable.noResults": "No results found!",
   "components.formExample.zipCode.error": "Please enter a Number",
-  "components.markdown":
-    "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
+  "components.markdown": "### Markdown support\n - build on top of marked\n - server side rendering!!!\n - `github style` markdown",
   "components.pagination.next": "Next",
   "components.pagination.previous": "Previous",
   "components.register.cancellationText": "Cancel",

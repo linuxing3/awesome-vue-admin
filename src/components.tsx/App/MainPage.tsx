@@ -1,15 +1,7 @@
 import { VNode } from 'vue'
 import { component } from 'vue-tsx-support'
 
-import {
-  VCard,
-  VCardTitle,
-  VLayout,
-  VFlex,
-  VBtn,
-  VCardText,
-  VCardActions
-} from 'vuetify-tsx'
+import { VCard, VCardTitle, VLayout, VFlex, VBtn, VCardText, VCardActions } from 'vuetify-tsx'
 
 const MainPage = component({
   name: 'MainPage',

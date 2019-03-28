@@ -19,9 +19,7 @@ const AboutComponent = component({
       <VLayout>
         <VFlex>
           <VCard>
-            <VCardTitle>
-              关于
-            </VCardTitle>
+            <VCardTitle>关于</VCardTitle>
             <VCardText>Vuetify is awesome material desing</VCardText>
             <VCardActions>
               <VBtn>

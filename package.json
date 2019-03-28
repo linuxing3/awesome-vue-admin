@@ -110,13 +110,20 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,css,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{ts,tsx,vue}": [
-      "eslint --fix --ext .{ts,tsx,vue}",
-      "git add"
+    "linters": {
+      "*.{json,css,md,yml}": [
+        "yarn run prettier --write",
+        "git add"
+      ],
+      "*.{js,jsx,ts,tsx,vue}": [
+        "yarn lint",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/dist/*",
+      "**/dist_electron/*",
+      "**/node_modules/**/*"
     ]
   }
 }

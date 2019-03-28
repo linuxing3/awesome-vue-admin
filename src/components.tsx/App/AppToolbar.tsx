@@ -18,8 +18,8 @@ import {
 } from 'vuetify-tsx'
 
 interface IAppToolbarEvents {
-  handleDrawerToggle: (e: any) => void;
-  goHomeRoute: (e: any) => void;
+  handleDrawerToggle: (e: any) => void
+  goHomeRoute: (e: any) => void
 }
 
 const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
@@ -31,7 +31,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
         href: '#',
         title: '设置',
         click (e) {
-          (window as any).getApp.$emit('APP_ACCOUNT_SETTING')
+          ;(window as any).getApp.$emit('APP_ACCOUNT_SETTING')
         }
       },
       {
@@ -39,7 +39,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
         href: '#',
         title: '登出',
         click (e) {
-          (window as any).getApp.$emit('APP_LOGOUT')
+          ;(window as any).getApp.$emit('APP_LOGOUT')
         }
       }
     ]
@@ -52,7 +52,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
   },
   methods: {
     handleDrawerToggle (e) {
-      (window as any).SideMenu.$emit('APP_DRAWER_TOGGLED')
+      ;(window as any).SideMenu.$emit('APP_DRAWER_TOGGLED')
     },
     goHomeRoute (e) {
       this.$router.push('/home')
@@ -84,12 +84,7 @@ const AppToolbar = tsx.componentFactoryOf<IAppToolbarEvents>().create({
           <VIcon>fab fa-github</VIcon>
         </VBtn>
 
-        <VMenu
-          nudgeBottom={10}
-          offsetY
-          origin="center center"
-          transition={'scale-transition'}
-        >
+        <VMenu nudgeBottom={10} offsetY origin="center center" transition={'scale-transition'}>
           <VAvatar size={30} slot={'activator'}>
             <img src={this.computeAvatar} alt="Avatar Image" />
           </VAvatar>
