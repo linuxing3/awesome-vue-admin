@@ -72,7 +72,7 @@
   </v-container>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import models from '@/models'
 import { modelStatistic } from '@/util/statistic'
 
