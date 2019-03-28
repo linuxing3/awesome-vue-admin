@@ -1,18 +1,9 @@
 {
-   "defaultSeverity": "warn",
-   "extends": [
-      "tslint-config-standard"
-   ],
-   "linterOptions": {
-      "include": [
-        "./src/**/*.ts"
-      ],
-      "exclude": [
-        "**/*.spec.ts",
-        "**/*.json",
-        "./tests/**/*.js",
-        "*/node_modules/**/*"
-      ]
+  "defaultSeverity": "warn",
+  "extends": ["tslint-config-standard"],
+  "linterOptions": {
+    "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+    "exclude": ["**/*.spec.ts", "**/*.json", "./tests/**/*.js", "*/node_modules/**/*"]
   },
   "jsRules": {},
   "rules": {
