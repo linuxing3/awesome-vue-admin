@@ -83,7 +83,9 @@
     "electron": "^3.0.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "husky": "^1.3.1",
     "hygen": "^2.1.2",
+    "lint-staged": "^8.1.5",
     "material-design-icons-iconfont": "^4.0.3",
     "normalizr": "^3.3.0",
     "roboto-fontface": "^0.10.0",
@@ -101,5 +103,20 @@
     "vuetify-loader": "^1.0.5",
     "vuetify-tsx": "^0.24.0"
   },
-  "main": "background.js"
+  "main": "background.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,tsx,vue}": [
+      "eslint --fix --ext .{ts,tsx,vue}",
+      "git add"
+    ]
+  }
 }
