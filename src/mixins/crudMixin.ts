@@ -81,7 +81,7 @@ const CrudMixin: ComponentOptions<any> = {
     Model (): typeof BaseModel {
       return models[this.modelName as string] as typeof BaseModel
     },
-    defaultItem(): BaseModel {
+    defaultItem (): BaseModel {
       return new models[this.modelName as string]() as BaseModel// always a fresh new item
     },
     // 数据对象的实例数组，包含有关系的其他数据
@@ -98,7 +98,7 @@ const CrudMixin: ComponentOptions<any> = {
         .get() as BaseModel[]
     },
     // 数据对象的实例数组
-    items(): BaseModel[] {
+    items (): BaseModel[] {
       let { search, sort } = this.filter
       if (search === '') return this.withAll as BaseModel[]
       // in filtered case, may different from editedIndex

@@ -1,6 +1,6 @@
 import { ActionContext, Module, MutationTree, ActionTree, GetterTree } from 'vuex'
 import { make } from 'vuex-pathify'
-import { IUser } from "@/models/CoreModel/User/User";
+import { IUser } from '@/models/CoreModel/User/User'
 
 interface IUserState {
   name: string
@@ -9,15 +9,15 @@ interface IUserState {
 }
 
 export interface IUserGetters {
-  defaultGetter(state: IUserState): boolean
+  defaultGetter (state: IUserState): boolean
 }
 
 export interface IUserMutations {
-  defaultMutation(state: IUserState, payload: IUser): void
+  defaultMutation (state: IUserState, payload: IUser): void
 }
 
 export interface IUserActions {
-  defaultAction(context: ActionContext<IUserState, any>, payload: IUser): Promise<any>
+  defaultAction (context: ActionContext<IUserState, any>, payload: IUser): Promise<any>
 }
 
 const state: IUserState = {
@@ -29,11 +29,11 @@ const state: IUserState = {
 }
 
 const mutations: MutationTree<IUserState> = {
-  ...make.mutations(state),
+  ...make.mutations(state)
 }
 
 const actions: ActionTree<IUserState, any> = {
-  ...make.actions(state),
+  ...make.actions(state)
 }
 
 const getters: GetterTree<IUserState, any > = {

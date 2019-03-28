@@ -26,24 +26,24 @@ export interface IAccountState {
 }
 export interface IAccountGetters {
   // [name: string]: (state: IAccountState) => any
-  isAuthenticated(state: IAccountState): boolean
+  isAuthenticated (state: IAccountState): boolean
 }
 
 export interface IAccountMutations {
   // [name: string]: (state: IAccountState, payload: any) => any
-  CACHE_ITEMS(state: IAccountState, newAccount: IAccount): void
-  SET_ACCESS_TOKEN(state: IAccountState, accessToken: string): void
-  SET_REFRESH_TOKEN(state: IAccountState, refreshToken: string): void
+  CACHE_ITEMS (state: IAccountState, newAccount: IAccount): void
+  SET_ACCESS_TOKEN (state: IAccountState, accessToken: string): void
+  SET_REFRESH_TOKEN (state: IAccountState, refreshToken: string): void
 }
 
 export interface IAccountActions {
-  init(context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
-  signup(context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
-  setLoginStatus(context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
-  clearCache(context: ActionContext<IAccountState, any>, data?: any): Promise<any>
-  createToken?(context: ActionContext<IAccountState, any>, data: IAuthRequest): Promise<any>
-  refreshToken?(context: ActionContext<IAccountState, any>): Promise<any>
-  revokeToken?(context: ActionContext<IAccountState, any>): Promise<any>
+  init (context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
+  signup (context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
+  setLoginStatus (context: ActionContext<IAccountState, any>, data: IAccount): Promise<any>
+  clearCache (context: ActionContext<IAccountState, any>, data?: any): Promise<any>
+  createToken? (context: ActionContext<IAccountState, any>, data: IAuthRequest): Promise<any>
+  refreshToken? (context: ActionContext<IAccountState, any>): Promise<any>
+  revokeToken? (context: ActionContext<IAccountState, any>): Promise<any>
 }
 
 export interface IAuthResponse {

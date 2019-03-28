@@ -9,15 +9,15 @@ interface IDocumentState {
 }
 
 export interface IDocumentGetters {
-  defaultGetter(state: IDocumentState): boolean
+  defaultGetter (state: IDocumentState): boolean
 }
 
 export interface IDocumentMutations {
-  defaultMutation(state: IDocumentState, payload: IDocument): void
+  defaultMutation (state: IDocumentState, payload: IDocument): void
 }
 
 export interface IDocumentActions {
-  defaultAction(context: ActionContext<IDocumentState, any>, payload: IDocument): Promise<any>
+  defaultAction (context: ActionContext<IDocumentState, any>, payload: IDocument): Promise<any>
 }
 
 const state: IDocumentState = {
@@ -29,11 +29,11 @@ const state: IDocumentState = {
 }
 
 const mutations: MutationTree<IDocumentState> = {
-  ...make.mutations(state),
+  ...make.mutations(state)
 }
 
 const actions: ActionTree<IDocumentState, any> = {
-  ...make.actions(state),
+  ...make.actions(state)
 }
 
 const getters: GetterTree<IDocumentState, any > = {

@@ -31,7 +31,7 @@ const state: IAppState = {
   filter: {
     search: '',
     sort: ''
-  },
+  }
 }
 
 const mutations: any = {
