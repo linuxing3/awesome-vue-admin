@@ -62,6 +62,7 @@ const events: Event[] = [
         text: '成功登出！'
       }
       this.$router.replace({ path: '/login' })
+      this.$store.dispatch('entities/account/clearCache')
     }
   },
   {

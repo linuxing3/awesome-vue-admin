@@ -191,12 +191,10 @@ export default {
         this.$emit('APP_LOGIN_FAILED')
       }
     },
-    logout () {
+    async logout () {
+      this.$router.push('/login')
+      await this.clearCache()
       mapValues(this.model, (o) => '')
-      setTimeout(() => {
-        this.clearCache()
-        this.$router.push('/login')
-      }, 1000)
     },
     chooseAvatar (avatar) {
       // choose avatar from photo gallery

@@ -2,7 +2,6 @@ import { words, truncate } from 'lodash'
 import { get } from 'vuex-pathify'
 
 import { interval } from 'rxjs'
-import { pluck, map } from 'rxjs/operators'
 
 import Account from '@/models/CoreModel/Account/Account'
 import { entities } from '@/api/globals'
@@ -10,7 +9,8 @@ import { entities } from '@/api/globals'
 export const validateMixin = {
   data () {
     return {
-      currentEntity: 'user'
+      currentEntity: 'user',
+      entities
     }
   },
   computed: {
@@ -22,8 +22,7 @@ export const validateMixin = {
           return model.isAdmin()
         })
         .get()
-    },
-    entities: () => entities
+    }
   },
   methods: {
     isAdmin () {

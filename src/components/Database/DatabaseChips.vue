@@ -20,8 +20,9 @@
     </v-chip>
   </v-flex>
 </template>
-<script>
 
+<script>
+import { map } from 'lodash'
 export default {
   props: [ 'items' ],
   methods: {
@@ -35,7 +36,8 @@ export default {
       }
     },
     hasRoute (item) {
-      return this.$router.routes.filter(route => route.name === item) !== 0
+      let { routes } = this.$router.options
+      return routes.filter(route => route.name === item) !== 0
     }
   }
 }
