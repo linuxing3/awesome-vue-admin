@@ -1,4 +1,4 @@
-image: 
+image:
   - Visual Studio 2017
 
 platform:
@@ -28,22 +28,21 @@ install:
 matrix:
   fast_finish: true
 
+skip_tags: true
+
 shallow_clone: true
 
 test_script:
   - yarn test:unit
 
-cache:
-  - node_modules
-  - "%LOCALAPPDATA%\\Yarn"
-  - '%APPDATA%\npm-cache'
-
 build_script:
-  - yarn lint
   - yarn electron:build
-
-skip_tags: true
 
 artifacts:
   - path: dist_electron\*.exe
     name: bin
+
+cache:
+  - node_modules
+  - "%LOCALAPPDATA%\\Yarn"
+  - '%APPDATA%\npm-cache'
