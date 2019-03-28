@@ -17,8 +17,6 @@ export interface IDocument {
   keyword?: string
   workEntity?: string
   author?: string
-  archive_id?: string
-  type_id?: string
 }
 
 export default class Document extends BaseModel {
