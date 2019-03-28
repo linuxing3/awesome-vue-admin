@@ -1,4 +1,4 @@
-import { ActionContext } from 'vuex'
+import { ActionContext, Module, MutationTree, ActionTree, GetterTree } from 'vuex'
 import { make } from 'vuex-pathify'
 import bcrypt from 'bcryptjs'
 import Account, { IAccount } from '@/models/CoreModel/Account/Account'
@@ -85,7 +85,7 @@ const state: IAccountState = {
   }
 }
 
-const mutations: IAccountMutations = {
+const mutations: MutationTree<IAccountState> = {
   ...make.mutations(state),
   CACHE_ITEMS (state, newAccount: IAccount) {
     state.cached.push(newAccount)
@@ -190,12 +190,12 @@ const AccountActions: IAccountActions = {
   }
 }
 
-const actions: IAccountActions = {
+const actions: ActionTree<IAccountState, any> = {
   ...make.actions(state),
   ...AccountActions
 }
 
-const getters: IAccountGetters = {
+const getters: GetterTree<IAccountState, any> = {
   ...make.getters(state),
   isAuthenticated (state) {
     let { cached, currentItem } = state
@@ -203,10 +203,12 @@ const getters: IAccountGetters = {
   }
 }
 
-export default {
+const AccountModule: Module<IAccountState, any> = {
   namespaced: true,
   state,
   mutations,
   actions,
   getters
 }
+
+export default AccountModule

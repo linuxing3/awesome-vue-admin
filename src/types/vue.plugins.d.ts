@@ -14,3 +14,4 @@ declare module 'vue-router/types/router' {
     };
   }
 }
+

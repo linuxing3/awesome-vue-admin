@@ -6,11 +6,6 @@ import Vue from 'vue'
 import fs from 'fs'
 import path from 'path'
 
-/**
- * we use require.context to collect all the sources; that
- * function is provided by webpack and we need to use
- * babel-plugin-require-context-hook to substitute it in Jest.
- */
 import registerRequireContextHook from 'babel-plugin-require-context-hook/register'
 /**
  * 工具函数
@@ -20,9 +15,17 @@ import registerRequireContextHook from 'babel-plugin-require-context-hook/regist
 import vueTestUtils, { createLocalVue } from '@vue/test-utils'
 // https://lodash.com/
 import _, { cloneDeep } from 'lodash'
+
+/**
+ * we use require.context to collect all the sources; that
+ * function is provided by webpack and we need to use
+ * babel-plugin-require-context-hook to substitute it in Jest.
+ */
 registerRequireContextHook()
-registerRequireContextHook()
-registerRequireContextHook()
+
+/**
+ * lodash Mixins
+ */
 _.mixin({
   pascalCase: _.flow(
     _.camelCase,

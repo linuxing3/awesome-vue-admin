@@ -13,12 +13,4 @@ describe('@/models/CoreModel/<%= ModelName %>/<%= ModelName %>', () => {
     expect(model).toBeInstanceOf(<%= ModelName %>)
   })
 
-  it('expect to json', ()=> {
-    const model = new <%= ModelName %>()
-    const json = model.$toJson()
-    const expected = {
-      _id: 1
-    }
-    expect(json._id).toEqual(expected._id)
-  })
 })

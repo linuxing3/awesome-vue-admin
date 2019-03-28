@@ -7,8 +7,8 @@ const ModelName = h.changeCase.pascal(model)
 %>import { BaseModel} from "../../BaseModel";
 
 export interface I<%= ModelName %> {
-   _id: string
-   <% fieldNames.split(",").map(field => { %><%= field %>: string
+   _id?: string
+   <% fieldNames.split(",").map(field => { %><%= field %>?: string
    <% }) %>
 }
 

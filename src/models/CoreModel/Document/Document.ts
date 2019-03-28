@@ -1,5 +1,26 @@
 import { BaseModel } from '../../BaseModel'
 
+export interface IDocument {
+  _id?: string
+  year?: string
+  date?: string
+  classiLevel?: string
+  category?: string
+  inOrOut?: string
+  sendingCode?: string
+  orderedNumber?: string
+  title: string
+  content?: string
+  toEntity?: string
+  copyEntity?: string
+  attachment?: string
+  keyword?: string
+  workEntity?: string
+  author?: string
+  archive_id?: string
+  type_id?: string
+}
+
 export default class Document extends BaseModel {
   static entity = 'document'
 

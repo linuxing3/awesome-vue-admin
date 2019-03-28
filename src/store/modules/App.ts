@@ -2,18 +2,18 @@ import { make } from 'vuex-pathify'
 
 export interface IAppState {
   name: string
-  models: any
-  currentModel: any
-  filter: {
-    search: string
-    sort: string
-  }
   config: {
     name: string
     title: string
     description: string
     locale: string
     defaultMessages: any
+  },
+  models?: any
+  currentModel?: any
+  filter?: {
+    search: string
+    sort: string
   }
 }
 

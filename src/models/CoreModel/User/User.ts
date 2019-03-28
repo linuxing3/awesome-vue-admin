@@ -5,6 +5,35 @@ import Project from '../Project/Project'
 import ProjectUser from '../Project/ProjectUser'
 import UserDesignation from './UserDesignation'
 
+export interface IUser {
+  _id?: string
+  department?: string
+  name: string
+  gender?: string
+  birthday?: string
+  etnia?: string
+  academicBackground?: string
+  foreignLanguage?: string
+  politicalRole?: string
+  positionAndRank?: string
+  militantRole?: string
+  duty?: string
+  fromEntity?: string
+  arrivingDate?: string
+  rotatingDate?: string
+  sendingEntity?: string
+  conyugeName?: string
+  conyugeEntity?: string
+  conyugeBonus?: string
+  memo?: string
+  protocolId?: string
+  isActive?: string | boolean
+  militant?: string
+  appraisals?: string[] | any[]
+  designations?: string[] | any[]
+  projects?: string[] | any[]
+}
+
 export default class User extends BaseModel {
   static entity = 'user'
 

@@ -1,30 +1,50 @@
-import { ActionContext } from 'vuex'
+import { ActionContext, Module, MutationTree, ActionTree, GetterTree } from 'vuex'
 import { make } from 'vuex-pathify'
+import { IUser } from "@/models/CoreModel/User/User";
 
-const state = {
+interface IUserState {
+  name: string
+  items: IUser[],
+  defaultUser: IUser
+}
+
+export interface IUserGetters {
+  defaultGetter(state: IUserState): boolean
+}
+
+export interface IUserMutations {
+  defaultMutation(state: IUserState, payload: IUser): void
+}
+
+export interface IUserActions {
+  defaultAction(context: ActionContext<IUserState, any>, payload: IUser): Promise<any>
+}
+
+const state: IUserState = {
   name: 'user',
   items: [],
-  defaultUser: {}
+  defaultUser: {
+    name: ''
+  }
 }
 
-const mutations: any = {
+const mutations: MutationTree<IUserState> = {
   ...make.mutations(state),
-  init (ctx: ActionContext<any, any>) {}
 }
 
-const actions: any = {
+const actions: ActionTree<IUserState, any> = {
   ...make.actions(state),
-  init (ctx: ActionContext<any, any>) {}
 }
 
-const getters: any = {
+const getters: GetterTree<IUserState, any > = {
   ...make.getters(state)
 }
 
-export default {
+const UserModule: Module<IUserState, any> = {
   namespaced: true,
   state,
   mutations,
   actions,
   getters
 }
+export default UserModule

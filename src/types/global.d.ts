@@ -33,26 +33,7 @@ declare namespace NodeJS {
     /**
      * Create a options while mocking component
      * can be used with `mount` and `shalloMount`
-     *
      * @param {Object} mountOptions as {store, router, style, mocks, stubs}
-     *
-     * 1. Store
-     * Converts a `store` option shaped like:
-     * store: {
-     *   someModuleName: {
-     *     state: { ... },
-     *     getters: { ... },
-     *     actions: { ... },
-     *   },
-     *   anotherModuleName: {
-     *     getters: { ... },
-     *   },
-     * },
-     * to a store instance, with each module namespaced by
-     * default, just like in our app.
-     * 2. Router
-     * If using `router: true`, we'll automatically stub out
-     * components from Vue Router.
      */
     createComponentMocks(mountOptions: any): any
 
