@@ -1,5 +1,5 @@
 ---
-to: "src/router/<%= h.changeCase.pascal(model) %>.ts"
+to: "src/pages/<%= h.changeCase.pascal(model) %>/IndexRoute.ts"
 ---
 <%
 const EntityName = h.changeCase.camel(model)
@@ -9,5 +9,5 @@ const ModelName = h.changeCase.pascal(model)
     name: '<%= EntityName %>',
     meta: { breadcrumb: true },
     component: () =>
-        import(/* webpackChunkName: "routes" */ `@/views/<%= ModelName %>.vue`)
+        import(/* webpackChunkName: "routes" */ `./IndexRoute.vue`)
 }

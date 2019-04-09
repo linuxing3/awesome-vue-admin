@@ -10,7 +10,7 @@ Vue.use(Router)
 /**
  * 动态路由
  */
-let requiredRoute: RequireContext = require.context('.', false, /\.ts$/)
+let requiredRoute: RequireContext = require.context('@/pages', true, /Route\.ts$/)
 
 requiredRoute.keys().forEach((route: string) => {
   let routeConfig = requiredRoute(route).default
