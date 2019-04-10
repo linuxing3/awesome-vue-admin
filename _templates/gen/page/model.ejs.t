@@ -1,5 +1,5 @@
 ---
-to: "src/pages/<%= h.changeCase.pascal(model) %>/models/<%= h.changeCase.pascal(model) %>Model.ts"
+to: "src/pages/<%= h.changeCase.pascal(model) %>/models/<%= h.changeCase.pascal(model) %>.ts"
 ---
 <%
 const EntityName = h.changeCase.camel(model)

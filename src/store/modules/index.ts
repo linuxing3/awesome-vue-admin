@@ -7,7 +7,7 @@
  */
 import * as Vuex from 'vuex'
 
-import { toLower } from 'lodash'
+import { lowerFirst, tail, last } from 'lodash'
 export interface Modules {
   [name: string]: Vuex.Module<any, any>
 }
@@ -15,10 +15,11 @@ export interface Modules {
 let requiredModules: RequireContext = require.context('.', false, /\.ts$/)
 let modules: Modules = {}
 
-requiredModules.keys().forEach(key => {
-  if (key === './index.ts') return
-  let modelName = toLower(key.replace(/(\.\/|\.ts)/g, ''))
-  modules[modelName] = requiredModules(key).default || requiredModules(key)
+requiredModules.keys().forEach(fileName => {
+  const fileNameMeta = last(tail(fileName.split('/')))
+  if (fileName === './index.ts') return
+  let modelName = lowerFirst(fileName.replace(/(\.\/|\.ts)/g, ''))
+  modules[modelName] = requiredModules(fileName).default
 })
 
 export default modules

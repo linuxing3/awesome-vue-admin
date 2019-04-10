@@ -20,29 +20,32 @@ export interface Models {
   [name: string]: typeof BaseModel | typeof Model
 }
 
-let requiredModels: RequireContext = require.context('@/pages', true, /Model\.ts$/)
+let requiredModels: RequireContext = require.context('@/pages', true, /.*\/models\/.*\.ts$/)
 let models: Models = {}
 
 requiredModels.keys().forEach((fileName: string) => {
   const fileNameMeta = last(tail(fileName.split('/')))
-  let modelName = lowerFirst(fileNameMeta.replace(/(Model|\.\/|\.ts)/g, ''))
+  let modelName = lowerFirst(fileNameMeta.replace(/(\.\/|\.ts)/g, ''))
   models[modelName] = requiredModels(fileName).default
 })
+
+console.log(models)
 
 // 获取模块
 export interface Modules {
   [name: string]: Vuex.Module<any, any>
 }
 
-let requiredModules: RequireContext = require.context('@/pages', true, /Module\.ts$/)
+let requiredModules: RequireContext = require.context('@/pages', true, /.*\/modules\/.*\.ts$/)
 let modules: Modules = {}
 
 requiredModules.keys().forEach((fileName: string) => {
   const fileNameMeta = last(tail(fileName.split('/')))
-  let modelName = lowerFirst(fileNameMeta.replace(/(Module|\.\/|\.ts)/g, ''))
+  let modelName = lowerFirst(fileNameMeta.replace(/(\.\/|\.ts)/g, ''))
   modules[modelName] = requiredModules(fileName).default
 })
 
+console.log(modules)
 /**
  * 在数据库中注册模型和模块
  */

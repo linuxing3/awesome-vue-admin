@@ -3,5 +3,5 @@ export default {
   name: 'user',
   meta: { breadcrumb: true },
   component: () =>
-        import(/* webpackChunkName: "routes" */ `./IndexRoute.vue`)
+        import(/* webpackChunkName: "routes" */ `./IndexView.vue`)
 }

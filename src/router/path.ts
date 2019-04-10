@@ -1,18 +1,14 @@
-import Home from '@/views/Home.vue'
-import PlayView from '@/views/Play.vue'
-import CrudView from '@/views/Crud.vue'
-import InfoView from '@/views/Info.vue'
-import Research from '@/views/Research.vue'
+import CrudPage from '@/pages/Crud.vue'
+import InfoPage from '@/pages/Info.vue'
 
 export default [
   {
-    name: 'home',
-    path: '/home',
-    component: Home
-  },
-  {
     path: '/',
     redirect: '/login'
+  },
+  {
+    path: '*',
+    redirect: '/404'
   },
   {
     path: '/404',
@@ -22,7 +18,7 @@ export default [
     name: 'NotFound',
     component: () =>
       import(/* webpackChunkName: "routes" */
-        `@/views/NotFound.vue`)
+        `@/pages/NotFound.vue`)
   },
   {
     path: '/403',
@@ -32,7 +28,7 @@ export default [
     name: 'AccessDenied',
     component: () =>
       import(/* webpackChunkName: "routes" */
-        `@/views/Deny.vue`)
+        `@/pages/Deny.vue`)
   },
   {
     path: '/500',
@@ -42,17 +38,7 @@ export default [
     name: 'ServerError',
     component: () =>
       import(/* webpackChunkName: "routes" */
-        `@/views/Error.vue`)
-  },
-  {
-    path: '/play',
-    name: 'play',
-    component: PlayView
-  },
-  {
-    path: '/research',
-    name: 'research',
-    component: Research
+        `@/pages/Error.vue`)
   },
   {
     path: '/crud/:blueprint',
@@ -64,7 +50,7 @@ export default [
       color: 'primary',
       breadcrumb: true
     },
-    component: CrudView
+    component: CrudPage
   },
   {
     path: '/info/:blueprint/:id',
@@ -76,6 +62,6 @@ export default [
       color: 'primary',
       breadcrumb: true
     },
-    component: InfoView
+    component: InfoPage
   }
 ]

@@ -15,6 +15,13 @@ const mainMenu = [
     color: 'black'
   },
   {
+    title: '日历',
+    group: 'apps',
+    icon: 'event',
+    name: 'calendar',
+    color: 'black'
+  },
+  {
     title: '调研新闻',
     group: 'apps',
     icon: 'search',

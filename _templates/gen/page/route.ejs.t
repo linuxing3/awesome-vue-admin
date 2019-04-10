@@ -9,5 +9,5 @@ const ModelName = h.changeCase.pascal(model)
     name: '<%= EntityName %>',
     meta: { breadcrumb: true },
     component: () =>
-        import(/* webpackChunkName: "routes" */ `./IndexRoute.vue`)
+        import(/* webpackChunkName: "routes" */ `./IndexView.vue`)
 }

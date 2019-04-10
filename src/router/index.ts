@@ -1,9 +1,8 @@
 /* eslint-disable */
 import Vue from 'vue'
-import Router, { RouteConfig, RouteRecord } from 'vue-router'
+import Router, { RouteConfig } from 'vue-router'
 
 import path from './path'
-import store from '../store'
 
 Vue.use(Router)
 
@@ -14,7 +13,6 @@ let requiredRoute: RequireContext = require.context('@/pages', true, /Route\.ts$
 
 requiredRoute.keys().forEach((route: string) => {
   let routeConfig = requiredRoute(route).default
-  if (route === './index.ts' || route === './path.ts') return
   if (Array.isArray(routeConfig)) {
     routeConfig.forEach(subRoute => {
       path.push(subRoute)

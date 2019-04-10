@@ -1,12 +1,12 @@
 ---
-to: "src/pages/<%= h.changeCase.pascal(model) %>/models/<%= h.changeCase.pascal(model) %>Module.ts"
+to: "src/pages/<%= h.changeCase.pascal(model) %>/modules/<%= h.changeCase.pascal(model) %>.ts"
 ---
 <%
 const EntityName = h.changeCase.camel(model)
 const ModelName = h.changeCase.pascal(model)
 %>import { ActionContext, Module, MutationTree, ActionTree, GetterTree } from 'vuex'
 import { make } from 'vuex-pathify'
-import { I<%= ModelName %> } from './<%= ModelName %>Model'
+import { I<%= ModelName %> } from '../models/<%= ModelName %>'
 
 interface I<%= ModelName %>State {
   name: string
