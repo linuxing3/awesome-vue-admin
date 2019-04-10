@@ -20,12 +20,12 @@ export interface Models {
   [name: string]: typeof BaseModel | typeof Model
 }
 
-let requiredModels: RequireContext = require.context('@/pages', true, /.*\/models\/.*\.ts$/)
-let models: Models = {}
+const requiredModels: RequireContext = require.context('@/pages', true, /.*\/models\/.*\.ts$/)
+export const models: Models = {}
 
 requiredModels.keys().forEach((fileName: string) => {
   const fileNameMeta = last(tail(fileName.split('/')))
-  let modelName = lowerFirst(fileNameMeta.replace(/(\.\/|\.ts)/g, ''))
+  const modelName = lowerFirst(fileNameMeta.replace(/(\.\/|\.ts)/g, ''))
   models[modelName] = requiredModels(fileName).default
 })
 
@@ -36,8 +36,8 @@ export interface Modules {
   [name: string]: Vuex.Module<any, any>
 }
 
-let requiredModules: RequireContext = require.context('@/pages', true, /.*\/modules\/.*\.ts$/)
-let modules: Modules = {}
+const requiredModules: RequireContext = require.context('@/pages', true, /.*\/modules\/.*\.ts$/)
+export const modules: Modules = {}
 
 requiredModules.keys().forEach((fileName: string) => {
   const fileNameMeta = last(tail(fileName.split('/')))

@@ -5,6 +5,8 @@ dist
 node_modules
 **/node_modules
 
+**/play/**/*.js
+
 # local env files
 .env.local
 .env.*.local
@@ -25,3 +27,5 @@ yarn-error.log*
 
 #Electron-builder output
 /dist_electron
+/electron_build
+/electron_dist
