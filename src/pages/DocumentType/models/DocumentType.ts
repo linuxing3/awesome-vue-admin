@@ -3,7 +3,7 @@ import Document from '@/pages/Document/models/Document'
 
 export interface IDocumentType {
   _id?: string
-  title?: string
+  title: string
 }
 
 export default class DocumentType extends BaseModel {

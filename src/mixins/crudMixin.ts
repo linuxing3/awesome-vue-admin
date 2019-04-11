@@ -82,7 +82,7 @@ const CrudMixin: ComponentOptions<any> = {
       return models[this.modelName as string] as typeof BaseModel
     },
     defaultItem (): BaseModel {
-      return new models[this.modelName as string]() as BaseModel// always a fresh new item
+      return new models[this.modelName as string]() as BaseModel // always a fresh new item
     },
     // 数据对象的实例数组，包含有关系的其他数据
     all (): BaseModel[] {
@@ -157,10 +157,9 @@ const CrudMixin: ComponentOptions<any> = {
       }
     }
   },
-  // watch modelName for refetch and update
   watch: {
+    // watch modelName for refetch and update
     async modelName (val) {
-      // refetch data for current model
       await this.fetch()
     },
     editedIndex (val) {
@@ -169,7 +168,6 @@ const CrudMixin: ComponentOptions<any> = {
   },
   async mounted () {
     this.reset()
-    // For update, should call fetch again
     await this.fetch()
   },
   created () {
@@ -188,21 +186,7 @@ const CrudMixin: ComponentOptions<any> = {
       if (this.Model.$fetch !== undefined) {
         await this.Model.$fetch()
       } else {
-        this.loadFromDb()
-      }
-    },
-    /**
-     * 如果存在db，直接从lowdb中获取数据
-     */
-    loadFromDb () {
-      if (!this.entityDb) return
-      let data = this.entityDb.all(this.modelName)
-      if (Array.isArray(data)) {
-        console.log(`有数据，开始导入...`)
-        this.Model.commit(state => (state.data = keyBy(data, o => o['_id'])))
-      } else {
-        console.log(`无数据...`)
-        this.Model.commit(state => (state.data = []))
+        console.log('No persisted data loaded!')
       }
     },
     /**
@@ -225,9 +209,16 @@ const CrudMixin: ComponentOptions<any> = {
       if (this.$route.params.type === 'edit') {
         this.setEditedItem(this.$route.params.editedItem)
       } else {
-        this.editedIndex = -1
-        this.editedItem = new this.Model()
+        this.setDefaultItem()
       }
+    },
+    /**
+     * 设置当前编辑项的索引和数据备用
+     * @param item
+     */
+    setDefaultItem () {
+      this.editedItem = new this.Model()
+      this.editedIndex = -1
     },
     /**
      * 设置当前编辑项的索引和数据备用
@@ -247,9 +238,10 @@ const CrudMixin: ComponentOptions<any> = {
       this.setEditedItem(item)
       // ORM Localforage插件方法
       if (this.editedIndex > -1) {
-        this.Model.$delete(this.editedItem._id).then(entities => {
-          console.log(entities)
-        })
+        this.Model.$delete(this.editedItem._id)
+          .then(entities => {
+            console.log(entities)
+          })
       } else {
         console.log('Found no item to delete!')
       }
@@ -260,23 +252,22 @@ const CrudMixin: ComponentOptions<any> = {
      * should call after setEditedItem is called and editedIndex is set
      * @param {object} item 要删除的项目，包含id字段
      */
-    saveItem (item: object) {
+    saveItem (item?: object) {
       if (this.editedIndex > -1) {
         this.updateItem(item)
       } else {
         this.createItem(item)
       }
-      this.editedIndex = -1
-      this.editedItem = new this.Model()
+      this.setDefaultItem()
     },
     /**
      * 更新
      * @param {object} item 要删除的项目，包含id字段
      */
-    updateItem () {
+    updateItem (data: object) {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.Model.$update({
-        data: this.editedItem
+        data
       }).then(entities => {
         console.log(entities)
       })
@@ -285,10 +276,10 @@ const CrudMixin: ComponentOptions<any> = {
      * 创建
      * @param {object} item 要创建的项目数据，不包含id字段
      */
-    createItem () {
+    createItem (data: object) {
       // 设置[编辑]为假，[数据模型]为传入项目
       this.Model.$create({
-        data: this.editedItem
+        data
       }).then(entities => {
         console.log(entities)
       })

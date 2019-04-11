@@ -240,6 +240,7 @@
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['isActive']"
+                  :items="['在馆', '离馆']"
                   :label=" tryT('isActive') "></v-select>
             </v-flex>
             <!-- end form from schema  -->

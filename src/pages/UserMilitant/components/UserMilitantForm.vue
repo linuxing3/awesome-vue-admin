@@ -33,13 +33,314 @@
             <!-- generate form from schema  -->
             <v-flex
                 xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['name']"
+                  :label=" tryT('name') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['gender']"
+                  :label=" tryT('gender') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['etnia']"
+                  :label=" tryT('etnia') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="birthdayPicker"
+                  v-model="birthdayPicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['birthday']"
+                    :label=" tryT('birthday')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['birthday']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="birthdayPicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
                 md12
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="10"
-                  v-model="editedItem['name']"
-                  :label=" tryT('name') "></v-text-field>
+                  :counter="25"
+                  v-model="editedItem['idNumber']"
+                  :label=" tryT('idNumber') "></v-text-field>
+            </v-flex>
+
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['academicBackground']"
+                  :label=" tryT('academicBackground') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['hrCategory']"
+                  :label=" tryT('hrCategory') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['department']"
+                  :label=" tryT('department') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['workPosition']"
+                  :label=" tryT('workPosition') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['positionAndRank']"
+                  :label=" tryT('positionAndRank') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['militantComission']"
+                  :label=" tryT('militantComission') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['militantRole']"
+                  :label=" tryT('militantRole') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="admissionDatePicker"
+                  v-model="admissionDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['militantAdmissionDate']"
+                    :label=" tryT('militantAdmissionDate')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['militantAdmissionDate']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="admissionDatePicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="formalizationDatePicker"
+                  v-model="formalizationDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['militantFormalizationDate']"
+                    :label=" tryT('militantFormalizationDate')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['militantFormalizationDate']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="formalizationDatePicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['militanceStatus']"
+                  :label=" tryT('militanceStatus') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['telephone']"
+                  :label=" tryT('telephone') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['homeAddress']"
+                  :label=" tryT('homeAddress') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="registerDate"
+                  v-model="registerDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['registerDate']"
+                    :label=" tryT('registerDate')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['registerDate']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="registerDatePicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="transferDate"
+                  v-model="transferDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['transferDate']"
+                    :label=" tryT('transferDate')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['transferDate']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="transferDatePicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -77,7 +378,10 @@ export default {
           v => /.+@.+/.test(v) || 'E-mail must be valid'
         ]
       },
-      valid: true
+      registerDatePicker: false,
+      transferDatePicker: false,
+      admissionDatePicker: false,
+      formalizationDatePicker: false
     }
   },
   watch: {

@@ -32,14 +32,64 @@
               wrap>
             <!-- generate form from schema  -->
             <v-flex
-                xs12
-                md12
+                xs6
+                md6
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="10"
-                  v-model="editedItem['title']"
-                  :label=" tryT('title') "></v-text-field>
+                  :counter="25"
+                  v-model="editedItem['department']"
+                  :label=" tryT('department') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs6
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['parentDepartment']"
+                  :label=" tryT('parentDepartment') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs6
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['LeaveApprovers']"
+                  :label=" tryT('LeaveApprovers') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs6
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['expenseApprovers']"
+                  :label=" tryT('expenseApprovers') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs6
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['departmentApprovers']"
+                  :label=" tryT('departmentApprovers') "></v-text-field>
+            </v-flex>
+            <v-flex
+                xs6
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="25"
+                  v-model="editedItem['oldParentDepartment']"
+                  :label=" tryT('oldParentDepartment') "></v-text-field>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -66,7 +116,7 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      modelName: 'documentType',
+      modelName: 'department',
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
@@ -93,19 +143,19 @@ export default {
     this.$on('set-edit-item', (item) => {
       this.setEditedItem(item)
     })
-    window.DocumentTypeForm = this
+    window.DepartmentForm = this
   },
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
         this.saveItem(this.editedItem)
-        window.DocumentTypeTable.$emit('toggle-form', false)
+        window.DepartmentTable.$emit('toggle-form', false)
         this.reset()
       }
     },
     resetValidation () {
       this.$refs.form.resetValidation()
-      window.DocumentTypeTable.$emit('toggle-form', false)
+      window.DepartmentTable.$emit('toggle-form', false)
       this.reset()
     }
   }

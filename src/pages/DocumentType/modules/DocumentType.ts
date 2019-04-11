@@ -23,7 +23,9 @@ export interface IDocumentTypeActions {
 const state: IDocumentTypeState = {
   name: 'documentType',
   items: [],
-  defaultDocumentType: {}
+  defaultDocumentType: {
+    title: ''
+  }
 }
 
 const mutations: MutationTree<IDocumentTypeState> = {
