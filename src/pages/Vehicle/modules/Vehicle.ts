@@ -23,7 +23,9 @@ export interface IVehicleActions {
 const state: IVehicleState = {
   name: 'vehicle',
   items: [],
-  defaultVehicle: {}
+  defaultVehicle: {
+    mark: ''
+  }
 }
 
 const mutations: MutationTree<IVehicleState> = {

@@ -12,6 +12,12 @@ const fs = require('fs');
 const path = require('path');
 const axios = require('axios');
 const jsonFormat = require('json-format');
+const changeCase =  require('change-case');
+const last = require('lodash/last');
+const tail = require('lodash/tail');
+const lowerFirst = require('lodash/lowerFirst');
+
+const prefix = '../../../../src'
 
 const languages = [
   {
@@ -31,13 +37,14 @@ const languages = [
   }
 ]
 
-const defaultLanguage = 'cn'
+const defaultLanguage = 'en'
 
 const locales = {}
 
-languages.forEach(item => {
-  locales[item.key] = require(`../../../../src/locales/${item.key}.json`)
+languages.forEach(language => {
+  locales[language.key] = require(`${prefix}/locales/locales/${language.key}.json`)
 })
+
 
 const youdao = ({ q, from, to }) =>
   new Promise((resolve, reject) => {
@@ -77,12 +84,15 @@ const transform = async ({ from, to, locales, outputPath }) => {
         const reg = '{([^{}]*)}'
         const tasks = key
           .match(new RegExp(`${reg}|((?<=(${reg}|^)).*?(?=(${reg}|$)))`, 'g'))
+          // TODO
           .map(item => {
             if (new RegExp(reg).test(item)) {
               return Promise.resolve(item)
             }
+            let sentence = item.replace(/\./, ' ')
+            sentence = changeCase.sentenceCase(sentence)
             return youdao({
-              q: item,
+              q: sentence,
               from,
               to
             })
@@ -109,7 +119,8 @@ const transform = async ({ from, to, locales, outputPath }) => {
     })
   )
 }
-;(async () => {
+
+async function translate() {
   const tasks = languages
     .map(item => ({
       from: defaultLanguage,
@@ -123,10 +134,13 @@ const transform = async ({ from, to, locales, outputPath }) => {
       from: item.from,
       to: item.to,
       locales,
-      outputPath: `../../../../src/locales/${item.to}.json`
+      outputPath: `${prefix}/locales/${item.to}.youdao.json`
     })
     console.log(`completed: ${item.from} -> ${item.to}`)
   }
 
   console.log('All translations have been completed.')
-})()
+}
+
+// Automatically run
+;(async () => await translate())()

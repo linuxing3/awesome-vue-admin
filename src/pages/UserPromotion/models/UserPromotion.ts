@@ -1,11 +1,11 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IUserPromotion {
-  _id: string
-  name: string
-  department: string
-  promotionDate: string
-  promotionDetails: string
+  _id?: string
+  name?: string
+  department?: string
+  promotionDate?: string
+  promotionDetails?: string
 
 }
 

@@ -1,5 +1,10 @@
 import { BaseModel } from '@/models/BaseModel'
 
+export interface IUserAppraisalGoal {
+  _id?: string
+  kra?: string
+}
+
 export default class UserAppraisalGoal extends BaseModel {
   static entity = 'userAppraisalGoal'
 

@@ -1,5 +1,10 @@
 import { BaseModel } from '@/models/BaseModel'
 
+export interface IUserDesignation {
+  _id?: string
+  designation?: string
+}
+
 export default class UserDesignation extends BaseModel {
   static entity = 'userDesignation'
 

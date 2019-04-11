@@ -23,7 +23,9 @@ export interface IAssetActions {
 const state: IAssetState = {
   name: 'asset',
   items: [],
-  defaultAsset: {}
+  defaultAsset: {
+    assetName: ''
+  }
 }
 
 const mutations: MutationTree<IAssetState> = {

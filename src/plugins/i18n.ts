@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueI18n, { LocaleMessages } from 'vue-i18n'
-import { ERPMessages } from '@/models/ERPModel'
 
 Vue.use(VueI18n)
 

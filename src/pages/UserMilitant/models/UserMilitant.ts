@@ -1,12 +1,12 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IUserMilitant {
-  _id: string
-  name: string
-  admistionDate: string
-  formalizationDate: string
-  registerDate: string
-  transferDate: string
+  _id?: string
+  name?: string
+  admistionDate?: string
+  formalizationDate?: string
+  registerDate?: string
+  transferDate?: string
 }
 
 export default class UserMilitant extends BaseModel {

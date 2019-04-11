@@ -1,4 +1,10 @@
 import { BaseModel } from '@/models/BaseModel'
+
+export interface IBookmark {
+  _id?: string
+  title?: string
+}
+
 export default class Bookmark extends BaseModel {
   static entity = 'bookmark'
 

@@ -1,6 +1,11 @@
 import { BaseModel } from '../../BaseModel'
 import Document from './Document'
 
+export interface IArchive {
+  _id?: string
+  type: string
+}
+
 export default class Archive extends BaseModel {
   static entity = 'archive'
 

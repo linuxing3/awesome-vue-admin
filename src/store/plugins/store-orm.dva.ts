@@ -20,7 +20,7 @@ export interface Models {
   [name: string]: typeof BaseModel | typeof Model
 }
 
-const requiredModels: RequireContext = require.context('@/pages', true, /.*\/models\/.*\.ts$/)
+const requiredModels: RequireContext = require.context('../../pages', true, /.*\/models\/.*\.ts$/)
 export const models: Models = {}
 
 requiredModels.keys().forEach((fileName: string) => {
@@ -36,7 +36,7 @@ export interface Modules {
   [name: string]: Vuex.Module<any, any>
 }
 
-const requiredModules: RequireContext = require.context('@/pages', true, /.*\/modules\/.*\.ts$/)
+const requiredModules: RequireContext = require.context('../../pages', true, /.*\/modules\/.*\.ts$/)
 export const modules: Modules = {}
 
 requiredModules.keys().forEach((fileName: string) => {

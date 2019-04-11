@@ -23,7 +23,9 @@ export interface IUserMilitantActions {
 const state: IUserMilitantState = {
   name: 'userMilitant',
   items: [],
-  defaultUserMilitant: {}
+  defaultUserMilitant: {
+    name: ''
+  }
 }
 
 const mutations: MutationTree<IUserMilitantState> = {
