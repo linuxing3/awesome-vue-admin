@@ -1,11 +1,19 @@
 .DS_Store
 dist
+build
+
 **/dist
+**/build
 
 node_modules
 **/node_modules
 
-**/play/**/*.js
+**/scripts/**/*.js
+**/scripts/**/*.js.map
+**/scripts/**/*.d.ts
+
+**/*.youdao.json
+**/*.test.json
 
 # local env files
 .env.local
@@ -18,7 +26,6 @@ yarn-error.log*
 
 # Editor directories and files
 .idea
-.vscode
 *.suo
 *.ntvs*
 *.njsproj

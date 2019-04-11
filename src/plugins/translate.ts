@@ -29,7 +29,7 @@ const defaultLanguage = 'en'
 const locales = {}
 
 languages.forEach(language => {
-  // locales[language.key] = require(`@/locales/${language.key}.json`)
+  locales[language.key] = require(`@/locales/${language.key}.json`)
   // iterate models
   Object.keys(models).forEach(model => {
     const fieldsArray = models[model].fields()

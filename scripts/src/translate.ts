@@ -47,7 +47,7 @@ languages.forEach(language => {
 
 
 const youdao = ({ q, from, to }) =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _) => {
     {
       const appid = '055c2d71f9a05214'
       const appse = 'ZcpuQxQW3NkQeKVkqrXIKQYXH57g2KuN'

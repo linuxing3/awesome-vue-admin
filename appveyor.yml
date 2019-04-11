@@ -23,7 +23,7 @@ install:
   - npm install -g npm@latest
   - npm install -g yarn
   - set PATH=%APPDATA%\npm;%PATH%
-  - npm install
+  - yarn install
 
 matrix:
   fast_finish: true
@@ -31,9 +31,6 @@ matrix:
 skip_tags: true
 
 shallow_clone: true
-
-test_script:
-  - yarn test:unit
 
 build_script:
   - yarn electron:build
