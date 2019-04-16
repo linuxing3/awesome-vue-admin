@@ -76,6 +76,11 @@
 import models from '@/models'
 import { modelStatistic } from '@/util/statistic'
 
+let Document = models['document']
+let DocumentType = models['documentType']
+let Project = models['project']
+let ProjectType = models['projectType']
+
 export default {
   data () {
     return {
@@ -83,29 +88,48 @@ export default {
       documentDataSet: {}
     }
   },
-  mounted () {
+  async mounted () {
     // 设置数据集
-    this.pullDataSet()
+    await this.asyncFetch()
+    await this.pullDataSet()
+  },
+  computed: {
+    documentTypes () {
+      return DocumentType.uniqueValuesOfField('title')
+    },
+    projectTypes () {
+      return ProjectType.uniqueValuesOfField('title')
+    },
+    projectBar () {
+      return this.drawBarChart(this.projectDataSet)
+    },
+    documentBar () {
+      return this.drawBarChart(this.documentDataSet)
+    },
+    projectPie () {
+      return this.drawPieChart(this.projectDataSet)
+    },
+    documentPie () {
+      return this.drawPieChart(this.documentDataSet)
+    }
   },
   methods: {
-    asyncFetch (items) {
-      items.forEach(model => {
-        models[model].$fetch()
-      })
+    async asyncFetch () {
+      console.log('Fetching data to charts...')
+      await Document.$fetch()
+      await DocumentType.$fetch()
+      await Project.$fetch()
+      await ProjectType.$fetch()
     },
-    pullDataSet () {
+    async pullDataSet () {
       this.projectDataSet = modelStatistic({
-        models,
-        lookupModelName: 'projectType',
-        lookupFieldName: 'title',
-        queryModelName: 'project',
+        Model: Project,
+        fieldNameArray: this.projectTypes,
         queryFieldName: 'type'
       })
       this.documentDataSet = modelStatistic({
-        models,
-        lookupModelName: 'documentType',
-        lookupFieldName: 'title',
-        queryModelName: 'document',
+        Model: Document,
+        fieldNameArray: this.documentTypes,
         queryFieldName: 'category'
       })
     },
@@ -164,20 +188,6 @@ export default {
         xAxis: { type: 'category' },
         series
       }
-    }
-  },
-  computed: {
-    projectBar () {
-      return this.drawBarChart(this.projectDataSet)
-    },
-    documentBar () {
-      return this.drawBarChart(this.documentDataSet)
-    },
-    projectPie () {
-      return this.drawPieChart(this.projectDataSet)
-    },
-    documentPie () {
-      return this.drawPieChart(this.documentDataSet)
     }
   }
 }

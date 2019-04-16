@@ -7,14 +7,7 @@ import VuexORM, { Database, Model } from '@vuex-orm/core'
 import localForagePlugin from 'vuex-orm-localforage'
 
 // 获取模型和模块
-import models, { Models } from '@/models'
-
-import modules, { Modules } from '@/store/modules'
-export interface Entity {
-  name: string
-  model: typeof Model
-  module: Vuex.Module<any, any>
-}
+import { models, modules, Models, Modules, Entity } from './store-orm.dva'
 
 /**
  * 在数据库中注册模型和模块

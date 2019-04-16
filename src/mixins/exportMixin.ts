@@ -176,13 +176,18 @@ export default {
      * 根据文件格式，尝试导出数据
      */
     attemptExport (item) {
+      let data = this.checkItem(item)
       if (this.fileFormat === 'csv') {
-        this.exportCSV(item)
+        this.exportCSV(data)
       } else if (this.fileFormat === 'xls' || this.fileFormat === 'xlsx') {
-        this.exportExcel()
+        this.exportExcel(data)
       } else if (this.fileFormat === 'docx') {
         this.exportDocx()
       }
+    },
+    checkItem (item) {
+      if (Array.isArray(item)) return item
+      return [item]
     },
     /**
      * 导出数据项目，可以选择是否保留原来的标题行，或者需要翻译
@@ -271,13 +276,12 @@ export default {
       /* show a file-open dialog and read the first selected file */
       let workbook = this.workbook
       let filename = this.importFileMeta.path
-      let data = Array.isArray(item) ? item : [item]
       let sheetName = 'data'
       try {
         this.writeExcelFile({
           workbook,
           filename,
-          data,
+          data: item,
           sheetName
         })
       } catch (error) {

@@ -57,6 +57,7 @@ export const registerDatabase = (models: Models, modules: Modules): Database => 
 
     let model = models[modelName]
     let module = modules[modelName] || {}
+
     /**
      * Register a model and a module to Database.
      */

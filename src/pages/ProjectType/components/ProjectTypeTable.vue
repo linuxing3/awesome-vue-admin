@@ -31,7 +31,7 @@
         ></v-text-field>
       <ExportDialog
           buttonText="导出/打印"
-          :items="items"
+          :items="selected.length === 0 ? items: selected "
           :modelName="modelName" ></ExportDialog>
       <ImportDialog
           buttonText="导入/整理"
@@ -132,7 +132,7 @@ import crudMixin from '@/mixins/crudMixin'
 export default {
   data () {
     return {
-      modelName: 'projectTask',
+      modelName: 'projectType',
       dialog: false,
       pagination: {
         sortBy: '_id',
@@ -153,7 +153,7 @@ export default {
   },
   mixins: [ exportMixin, crudMixin ],
   created () {
-    window.ProjectTaskTable = this
+    window.ProjectTypeTable = this
     this.$on('toggle-form', (v) => {
       this.dialog = v
     })
@@ -161,7 +161,7 @@ export default {
   methods: {
     editItem (item) {
       this.setEditedItem(item)
-      window.ProjectTaskForm.setEditedItem(item)
+      window.ProjectTypeForm.setEditedItem(item)
       this.dialog = true
     },
 

@@ -1,23 +1,23 @@
+import IndexView from './IndexView.vue'
+import ProjectType from './components/ProjectType.vue'
+import ProjectTask from './components/ProjectTask.vue'
 export default [
   {
     path: '/project',
     name: 'project',
     meta: { breadcrumb: true },
-    component: () =>
-        import(/* webpackChunkName: "routes" */ `./IndexView.vue`)
+    component: IndexView
   },
   {
     path: '/projectType',
     name: 'projectType',
     meta: { breadcrumb: true },
-    component: () =>
-        import(/* webpackChunkName: "routes" */ `./components/ProjectType.vue`)
+    component: ProjectType
   },
   {
     path: '/projectTask',
     name: 'projectTask',
     meta: { breadcrumb: true },
-    component: () =>
-        import(/* webpackChunkName: "routes" */ `./components/ProjectTask.vue`)
+    component: ProjectTask
   }
 ]

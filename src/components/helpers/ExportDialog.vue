@@ -36,7 +36,7 @@
         <v-btn
             class="ml-3 mr-3"
             color="primary"
-            @click='exportToCSV'>
+            @click='exportToDataSource'>
           <v-icon class="pr-2">edit</v-icon>
           {{ $t('export') }}数据表</v-btn>
         <span
@@ -92,7 +92,7 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   props: {
     items: {
-      type: Array,
+      type: Array | Object,
       default: []
     },
     modelName: {
@@ -131,7 +131,7 @@ export default {
       this.fileFormat = 'docx'
       this.mergeWordApp()
     },
-    exportToCSV () {
+    exportToDataSource () {
       this.fileFormat = 'csv'
       this.text = '导出成功!。文件位置' + this.modelDatasource
       this.attemptExport(this.items)

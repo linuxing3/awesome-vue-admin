@@ -31,7 +31,7 @@
         ></v-text-field>
       <ExportDialog
           buttonText="导出/打印"
-          :items="items"
+          :items="selected.length === 0 ? items: selected "
           :modelName="modelName" ></ExportDialog>
       <ImportDialog
           buttonText="导入/整理"

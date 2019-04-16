@@ -14,7 +14,9 @@
             top
             color="red darken-1"
           >
-          <v-icon dark>add</v-icon>
+          <v-icon dark>
+            add
+          </v-icon>
         </v-btn>
         <slot></slot>
       </v-dialog>
@@ -22,15 +24,15 @@
       <v-spacer></v-spacer>
       <v-text-field
           class="mr-3"
-          v-model="filter.search"
-          append-icon="search"
+          v-model='filter.search'
+          append-icon='search'
           label="模糊查询，不分大小写"
           single-line
         ></v-text-field>
       <ExportDialog
           buttonText="导出/打印"
-          :items="items"
-          :modelName="modelName"></ExportDialog>
+          :items="selected.length === 0 ? items: selected "
+          :modelName="modelName" ></ExportDialog>
       <ImportDialog
           buttonText="导入/整理"
           :modelName="modelName"></ImportDialog>
@@ -44,13 +46,19 @@
         select-all
         class="elevation-1"
       >
-      <template v-slot:header-cell="props">
+      <template
+          v-slot:header-cell="props">
         <v-tooltip bottom>
-          <span slot="activator">{{ props.header.text }}</span>
-          <span>{{ props.header.text }}</span>
+          <span slot="activator">
+            {{ props.header.text }}
+          </span>
+          <span>
+            {{ props.header.text }}
+          </span>
         </v-tooltip>
       </template>
-      <template v-slot:headers="props">
+      <template
+          v-slot:headers="props">
         <tr>
           <th>
             <v-checkbox
@@ -73,24 +81,30 @@
           </th>
         </tr>
       </template>
-      <template v-slot:items="props">
-        <tr :active="props.selected">
+      <template
+          v-slot:items="props">
+        <tr
+            :active="props.selected">
           <td>
             <v-checkbox
                 v-model="props.selected"
                 primary
-                hide-details></v-checkbox>
+                hide-details
+              ></v-checkbox>
           </td>
           <td class="layout row justify-center align-center">
             <v-icon
                 color="green"
-                @click="editItem(props.item)">edit</v-icon>
+                @click="editItem(props.item)"
+              >
+              edit
+            </v-icon>
             <v-icon
                 color="red"
-                @click="deleteItem(props.item)">delete</v-icon>
-            <v-icon
-                color="primary"
-                @click="addDocumentFromType(props.item)">delete</v-icon>
+                @click="deleteItem(props.item)"
+              >
+              delete
+            </v-icon>
           </td>
           <td
               class="text-truncate"
@@ -104,9 +118,7 @@
       </template>
       <template v-slot:footer>
         <td :colspan="headers.length">
-          共有
-          <span class="heading1 red--text">{{ count }}</span>项记录。选中
-          <span class="heading1 red--text">{{ selected.length }}</span>项记录。
+          共有<span class="heading1 red--text">{{ count }}</span>项记录。选中<span class="heading1 red--text">{{ selected.length }}</span>项记录。
         </td>
       </template>
     </v-data-table>
@@ -114,16 +126,13 @@
 </template>
 
 <script>
-import models from '@/models'
 import exportMixin from '@/mixins/exportMixin'
 import crudMixin from '@/mixins/crudMixin'
-
-const Document = models['document']
 
 export default {
   data () {
     return {
-      modelName: 'documentType',
+      modelName: 'projectTask',
       dialog: false,
       pagination: {
         sortBy: '_id',
@@ -142,17 +151,17 @@ export default {
       immediate: true
     }
   },
-  mixins: [exportMixin, crudMixin],
+  mixins: [ exportMixin, crudMixin ],
   created () {
-    window.DocumentTypeTable = this
-    this.$on('toggle-form', v => {
+    window.ProjectTaskTable = this
+    this.$on('toggle-form', (v) => {
       this.dialog = v
     })
   },
   methods: {
     editItem (item) {
       this.setEditedItem(item)
-      window.DocumentTypeForm.setEditedItem(item)
+      window.ProjectTaskForm.setEditedItem(item)
       this.dialog = true
     },
 
@@ -177,18 +186,6 @@ export default {
         id: item._id
       }
       this.info(params)
-    },
-
-    addDocumentFromType (item) {
-      this.$router.push({ name: 'document' })
-
-      setTimeout(() => {
-        // open DocumentForm
-        window.DocumentTable.$emit('toggle-form', true)
-        // set the category to title
-        let { editedItem } = window.DocumentForm.$data
-        editedItem['category'] = item['title']
-      }, 500)
     }
   }
 }

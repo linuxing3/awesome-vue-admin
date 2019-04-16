@@ -36,13 +36,45 @@
             <!-- generate form from schema  -->
             <v-flex
                 xs12
-                md12
+                md6
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
                   :counter="10"
-                  v-model="editedItem['name']"
-                  :label=" tryT('name') "
+                  v-model="editedItem['title']"
+                  :label=" tryT('title') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  v-model="editedItem['type']"
+                  :items="projectTypes"
+                  :label="tryT('type')"
+                ></v-select>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['status']"
+                  :label=" tryT('status') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['percentComplete']"
+                  :label=" tryT('percentComplete') "
                 ></v-text-field>
             </v-flex>
             <!-- end form from schema  -->
@@ -65,9 +97,11 @@
 </template>
 
 <script lang='ts'>
-import ProjectType from '@/models/CoreModel/Project/ProjectType'
+import models from '@/models'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
+
+let ProjectType = models['projectType']
 
 export default {
   data () {

@@ -71,7 +71,7 @@ import exportMixin from '@/mixins/exportMixin'
 export default {
   data () {
     return {
-      modelName: 'documentType',
+      modelName: 'projectType',
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
@@ -98,19 +98,19 @@ export default {
     this.$on('set-edit-item', item => {
       this.setEditedItem(item)
     })
-    window.DocumentTypeForm = this
+    window.ProjectTypeForm = this
   },
   methods: {
     validate () {
       if (this.$refs.form.validate()) {
         this.saveItem(this.editedItem)
-        window.DocumentTypeTable.$emit('toggle-form', false)
+        window.ProjectTypeTable.$emit('toggle-form', false)
         this.reset()
       }
     },
     resetValidation () {
       this.$refs.form.resetValidation()
-      window.DocumentTypeTable.$emit('toggle-form', false)
+      window.ProjectTypeTable.$emit('toggle-form', false)
       this.reset()
     }
   }

@@ -1,17 +1,17 @@
 import { randomize, randomizeCircle } from '@/util'
 import { modelStatistic } from '@/util/statistic'
 
-import Project from '@/models/CoreModel/Project/Project'
 import models from '@/models'
-import ProjectType from '@/models/CoreModel/Project/ProjectType'
+const Project = models['project']
+const ProjectType = models['projectType']
+
+const projectTypes = (ProjectType as any).uniqueValuesOfField('title')
 
 export function getBarOption () {
   let dataSet = modelStatistic({
-    models,
-    lookupModelName: 'projectType',
-    lookupFieldName: 'title',
-    queryModelName: 'project',
-    queryFieldName: 'type'
+    Model: Project,
+    fieldNameArray: projectTypes,
+    queryFieldName: 'title'
   })
   let source = []
   source.push(['Product', '2015'])

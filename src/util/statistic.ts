@@ -8,46 +8,30 @@ interface IStatisticDataSet {
 }
 
 interface IStatisticQuery {
-  fields?: string[]
-  models: any
-  lookupModelName: string
-  lookupFieldName: string
+  Model?: any
+  models?: any
+  fieldNameArray?: string[]
+  lookupModelName?: string
+  lookupFieldName?: string
   queryModelName?: string
   queryFieldName?: string
 }
 
 /**
  * 使用一个模型的字段作为另一个模型特定字段的查阅向导，进行相关计数统计
- * @param fields?         [Array] 定义了查询字段数组
- * @param models         [object] 定义了模型集合
- * @param lookupModelName [string] 定义了查询字段的关系模型
- * @param lookupFieldName [string] 定义了查询字段的关系模型
- * @param queryModel     [string] 将查询的模型
+ * @param fields         [Array] 定义了查询字段数组
+ * @param Model         [object] 定义了模型
  * @param queryFieldName [string] 将查询的字段
  * @returns [object] 包含名称和统计量的对象, { type1: 10, type2: 10 }
  */
 export const modelStatistic = ({
-  fields,
-  models,
-  lookupModelName,
-  lookupFieldName,
-  queryModelName,
+  Model,
+  fieldNameArray,
   queryFieldName
 }: IStatisticQuery) => {
-  let lookupFields: string[] = []
-  if (fields) {
-    lookupFields = fields
-  } else {
-    lookupFields = validLookupFields({
-      models,
-      lookupModelName,
-      lookupFieldName
-    })
-  }
-
   try {
-    return lookupFields.reduce(function (dataSet, fieldName) {
-      let fieldCount = models[queryModelName]
+    return fieldNameArray.reduce(function (dataSet, fieldName) {
+      let fieldCount = Model
         .query()
         .where(queryFieldName, fieldName)
         .count()

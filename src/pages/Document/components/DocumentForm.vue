@@ -243,13 +243,6 @@ export default {
   data () {
     return {
       modelName: 'document',
-      rules: {
-        nameRules: [
-          v => !!v || 'Name is required',
-          v => v.length <= 50 || 'Name must be less than 10 characters'
-        ],
-        emailRules: [v => /.+@.+/.test(v) || 'E-mail must be valid']
-      },
       datePicker: false,
       yearPicker: false,
       valid: true

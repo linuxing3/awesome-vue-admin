@@ -41,3 +41,17 @@ export function validateAlphabets (str) {
 //   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 //   return re.test(email);
 // }
+
+export const rules = {
+  nameRules: [
+    v => !!v || 'Required',
+    v => v.length <= 25 || 'Must be less than 25 characters'
+  ],
+  textRules: [
+    v => v.length <= 50 || 'Must be less than 50 characters'
+  ],
+  emailRules: [
+    v => !!v || 'E-mail is required',
+    v => /.+@.+/.test(v) || 'E-mail must be valid'
+  ]
+}

@@ -46,6 +46,7 @@ import { BaseModel } from '@/models/BaseModel'
 import { baseFilter } from '@/util'
 import { Location } from 'vue-router'
 import { genTableHeaders } from '@/util/genFormData'
+import { rules } from '@/util/validate'
 
 interface ICrudHelper {
   modelName?: string
@@ -55,7 +56,8 @@ interface ICrudHelper {
   filter?: {
     search: string
     sort: string
-  }
+  },
+  rules?: any
 }
 
 const CrudMixin: ComponentOptions<any> = {
@@ -67,7 +69,8 @@ const CrudMixin: ComponentOptions<any> = {
       filter: {
         search: '',
         sort: '_id'
-      }
+      },
+      rules
     }
   },
   computed: {

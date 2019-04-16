@@ -48,7 +48,8 @@ interface ICrudHelper {
   filter?: {
     search: string
     sort: string
-  }
+  },
+  rules?: any
 }
 
 const CrudMixin: ComponentOptions<any> = {
@@ -60,6 +61,19 @@ const CrudMixin: ComponentOptions<any> = {
       filter: {
         search: '',
         sort: '_id'
+      },
+      rules: {
+        nameRules: [
+          v => !!v || 'Required',
+          v => v.length <= 25 || 'Must be less than 25 characters'
+        ],
+        textRules: [
+          v => v.length <= 50 || 'Must be less than 50 characters'
+        ],
+        emailRules: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+/.test(v) || 'E-mail must be valid'
+        ]
       }
     }
   },

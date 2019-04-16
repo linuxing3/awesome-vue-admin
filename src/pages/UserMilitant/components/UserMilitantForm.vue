@@ -368,16 +368,7 @@ export default {
   data () {
     return {
       modelName: 'userMilitant',
-      rules: {
-        nameRules: [
-          v => !!v || 'Name is required',
-          v => v.length <= 25 || 'Name must be less than 25 characters'
-        ],
-        emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+/.test(v) || 'E-mail must be valid'
-        ]
-      },
+
       registerDatePicker: false,
       transferDatePicker: false,
       admissionDatePicker: false,

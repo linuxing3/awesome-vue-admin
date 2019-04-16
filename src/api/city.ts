@@ -4037,7 +4037,8 @@ let DICT_FIXED = (function () {
   for (let id in DICT) {
     if ({}.hasOwnProperty.call(DICT, id)) {
       let pid
-      const tmpObj = { id, value: DICT[id], label: DICT[id] }
+      let tmpObj: any
+      tmpObj = { id, value: DICT[id], label: DICT[id] }
       if (id.slice(2, 6) !== '0000') {
         pid =
           id.slice(4, 6) === '00'

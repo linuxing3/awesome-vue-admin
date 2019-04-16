@@ -23,10 +23,6 @@ export default {
     DashboardSocialCard,
     DashboardMonitor,
     DashboardKanban
-  },
-  beforeCreate () {
-    // 必须先载入持久数据
-    this.asyncFetch(this.items)
   }
 }
 </script>

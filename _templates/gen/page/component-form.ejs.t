@@ -73,16 +73,7 @@ export default {
   data () {
     return {
       modelName: '<%= EntityName %>',
-      rules: {
-        nameRules: [
-          v => !!v || 'Name is required',
-          v => v.length <= 25 || 'Name must be less than 25 characters'
-        ],
-        emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+/.test(v) || 'E-mail must be valid'
-        ]
-      },
+
       valid: true
     }
   },
