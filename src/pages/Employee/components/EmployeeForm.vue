@@ -33,13 +33,100 @@
             <!-- generate form from schema  -->
             <v-flex
                 xs12
-                md12
+                md6
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
                   :counter="10"
-                  v-model="editedItem['name']"
-                  :label=" tryT('name') "></v-text-field>
+                  v-model="editedItem['firstName']"
+                  :label=" tryT('firstName') ">
+              </v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['lastName']"
+                  :label=" tryT('lastName') ">
+              </v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  :items="Object.keys(genders)"
+                  v-model="editedItem['gender']"
+                  :label=" tryT('gender') ">
+              </v-select>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  :items="Object.keys(maritalStatus)"
+                  v-model="editedItem['maritalStatus']"
+                  :label=" tryT('maritalStatus') ">
+              </v-select>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['department']"
+                  :label=" tryT('department') ">
+              </v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="20"
+                  v-model="editedItem['department']"
+                  :label=" tryT('department') ">
+              </v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="20"
+                  v-model="editedItem['currentAddress']"
+                  :label=" tryT('currentAddress') ">
+              </v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="20"
+                  v-model="editedItem['passportNumber']"
+                  :label=" tryT('passportNumber') ">
+              </v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="20"
+                  v-model="editedItem['salaryMode']"
+                  :label=" tryT('salaryMode') ">
+              </v-text-field>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -62,6 +149,7 @@
 <script>
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
+import { genders, maritalStatus } from '@/api/gender'
 
 export default {
   data () {

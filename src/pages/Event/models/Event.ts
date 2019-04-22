@@ -5,7 +5,11 @@ export interface IEvent {
 }
 
 export default class Event extends BaseModel {
-  static entity = 'event';
+  static entity = 'event'
+
+  static meta = {
+    section: 'core'
+  }
 
   static fields () {
     return {

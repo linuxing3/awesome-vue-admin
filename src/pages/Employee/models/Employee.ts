@@ -59,7 +59,6 @@ export interface IEmployee {
   resiged?: string
   reasonForResignation?: string
   feedback?: string
-
 }
 
 export default class Employee extends BaseModel {

@@ -9,6 +9,10 @@ export interface IDepartment {
 export default class Department extends BaseModel {
   static entity = 'department'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),

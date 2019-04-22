@@ -68,6 +68,26 @@
             </v-flex>
             <v-flex
                 xs12
+                md12
+                class="pa-2 pr-2">
+              <v-textarea
+                  :counter="500"
+                  v-model="editedItem['notes']"
+                  :label=" tryT('notes') "
+                ></v-textarea>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-select
+                  v-model="editedItem['priority']"
+                  :label=" tryT('priority') "
+                  :items=" [ 'high', 'median', 'low' ] "
+                ></v-select>
+            </v-flex>
+            <v-flex
+                xs12
                 md6
                 class="pa-2 pr-2">
               <v-text-field
@@ -76,6 +96,74 @@
                   v-model="editedItem['percentComplete']"
                   :label=" tryT('percentComplete') "
                 ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="expectedStartDatePicker"
+                  v-model="expectedStartDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['expectedStartDate']"
+                    :label=" tryT('expectedStartDate')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['expectedStartDate']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="expectedStartDatePicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                sm6
+                md4>
+              <v-menu
+                  ref="expectedEndDatePicker"
+                  v-model="expectedEndDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['expectedEndDate']"
+                    :label=" tryT('expectedEndDate')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['expectedEndDate']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="expectedEndDatePicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -96,7 +184,7 @@
   </v-card>
 </template>
 
-<script lang='ts'>
+<script lang='js'>
 import models from '@/models'
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
@@ -117,7 +205,9 @@ export default {
           v => /.+@.+/.test(v) || 'E-mail must be valid'
         ]
       },
-      valid: true
+      valid: true,
+      expectedStartDatePicker: true,
+      expectedEndDatePicker: true
     }
   },
   computed: {

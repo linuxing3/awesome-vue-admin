@@ -9,6 +9,10 @@ export interface IDocumentType {
 export default class DocumentType extends BaseModel {
   static entity = 'documentType'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),

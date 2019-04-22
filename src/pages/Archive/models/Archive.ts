@@ -9,6 +9,10 @@ export interface IArchive {
 export default class Archive extends BaseModel {
   static entity = 'archive'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),

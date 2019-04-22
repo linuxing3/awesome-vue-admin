@@ -13,6 +13,7 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'vue/no-use-v-if-with-v-for': 'off',
     'vue/valid-v-on': 'off',
+    'vue/no-unused-vars': 'off',
     'vue/require-valid-default-prop': 'off',
     'vue/require-prop-type-constructor': 'off',
     'vue/no-unused-components': 'off',

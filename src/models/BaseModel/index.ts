@@ -24,10 +24,7 @@ export class BaseModel extends Model {
   static primaryKey = '_id'
 
   static meta = {
-    icon: 'edit',
-    size: 36,
-    color: 'success',
-    section: 'core'
+    section: 'dev'
   }
 
   static fieldsKeys (): string[] {

@@ -3,7 +3,7 @@ import { VApp, VContent } from 'vuetify/lib' // <-- add the import
 
 import LoveButton from './LoveButton.vue'
 
-import DatePickerDate from '../components/examples/date-pickers/datePickerDate.vue'
+import DatePickerDate from '../components/examples/vuetify/date-pickers/datePickerDate.vue'
 
 // add the decorator
 const appDecorator = () => {

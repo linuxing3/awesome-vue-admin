@@ -15,6 +15,10 @@ export interface IAccount {
 export default class Account extends BaseModel {
   static entity = 'account'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),

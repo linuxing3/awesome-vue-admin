@@ -22,6 +22,10 @@ export interface IDocument {
 export default class Document extends BaseModel {
   static entity = 'document'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),

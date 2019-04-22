@@ -1,0 +1,7 @@
+src/components/examples/**/*
+src/components/examples/vuetify/**/*
+src/components/examples/ant-design-vue/**/*
+dist_electron/*
+build/*
+dist/*
+docs/**/*

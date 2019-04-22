@@ -1,21 +1,21 @@
 <template>
   <DefaultLayout>
-    <ProjectTaskTable>
-      <ProjectTaskForm />
-    </ProjectTaskTable>
+    <ProjectTypeTable>
+      <ProjectTypeForm />
+    </ProjectTypeTable>
   </DefaultLayout>
 </template>
 
 <script lang="js">
 import DefaultLayout from '@/layout/default.vue'
-import ProjectTaskTable from './ProjectTaskTable.vue'
-import ProjectTaskForm from './ProjectTaskForm.vue'
+import ProjectTypeTable from './ProjectTypeTable.vue'
+import ProjectTypeForm from './ProjectTypeForm.vue'
 
 export default {
   components: {
     DefaultLayout,
-    ProjectTaskTable,
-    ProjectTaskForm
+    ProjectTypeTable,
+    ProjectTypeForm
   }
 }
 </script>

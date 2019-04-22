@@ -37,6 +37,10 @@ export interface IUser {
 export default class User extends BaseModel {
   static entity = 'user'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),
