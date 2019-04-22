@@ -21,7 +21,7 @@
         </v-img>
       </v-flex>
       <v-flex
-          v-for="(model, index) in models"
+          v-for="(model, index) in coreModels"
           :key="index"
           @click="$router.push({ name: model.entity})"
           xs12
@@ -50,6 +50,10 @@ import { sections } from '@/api/globals'
 import models from '@/models'
 import crudMixin from '@/mixins/crudMixin'
 
+const coreModels = pickBy(models, model => {
+  return model.meta.section === 'core'
+})
+
 export default {
   mixins: [ crudMixin ],
   data () {
@@ -60,16 +64,10 @@ export default {
       panel: [true, false],
       sections: [ sections[0] ],
       currentSection: '',
-      models
+      coreModels
     }
   },
   computed: {
-    computeBg1: () => 'bg/1.jpg',
-    computeBg2: () => 'bg/2.jpg',
-    computeBg3: () => 'bg/3.jpg',
-    computeBg4: () => 'bg/4.jpg',
-    computeBg5: () => 'bg/5.jpg',
-    computeBg6: () => 'bg/6.jpg',
     computeBg10: () => 'bg/10.jpg',
     computeAvatarMan4: () => 'avatar/man_4.jpg'
   },
