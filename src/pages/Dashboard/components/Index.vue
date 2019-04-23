@@ -2,7 +2,6 @@
   <div>
     <DashboardSocialCard />
     <DashboardMonitor />
-    <DashboardKanban />
   </div>
 </template>
 

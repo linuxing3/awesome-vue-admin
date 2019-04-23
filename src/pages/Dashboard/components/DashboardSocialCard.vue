@@ -8,7 +8,7 @@
         wrap
       >
       <v-flex
-          v-for="(item, index) in items"
+          v-for="(item, index) in filteredItems"
           :key="index"
           xs12
           md3
@@ -22,14 +22,16 @@
 
           <v-card-title
               class="pt-1 success dark v-sheet--offset">
-            <div class="white--text font-weight-bold">Total</div>
+            <div class="heading white--text font-weight-bold">{{item.entity}}</div>
             <v-spacer />
             <v-icon
+                v-show="false"
                 large
                 color="white">autorenew</v-icon>
           </v-card-title>
 
           <v-card-text
+              v-show="false"
               class="pt-0">
             <v-spacer />
             <span class="display-1 text-capitalize font-weight-bold mb-2 mr-3">200</span>
@@ -54,6 +56,10 @@
 import { pickBy, mapKeys } from 'lodash'
 import models from '@/models'
 
+const coreModels = pickBy(models, model => {
+  return model.meta.section === 'core'
+})
+
 const gradients = [
   ['#222'],
   ['#42b3f4'],
@@ -70,7 +76,6 @@ export default {
     gradients,
     padding: 8,
     radius: 10,
-    items: [1, 2, 3, 4],
     labels: [
       'first',
       'last'
@@ -78,9 +83,17 @@ export default {
     value: [
       0,
       10
-    ]
+    ],
+    filter: {
+      search: '',
+      sort: ''
+    }
   }),
-  methods: {}
+  computed: {
+    filteredItems () {
+      return coreModels
+    }
+  }
 }
 </script>
 

@@ -16,7 +16,7 @@ export default class DocumentType extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      title: this.string('internal'),
+      title: this.string('内部'),
       documents: this.hasMany(Document, 'type_id')
     }
   }

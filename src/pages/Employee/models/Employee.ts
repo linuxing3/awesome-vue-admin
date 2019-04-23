@@ -64,6 +64,10 @@ export interface IEmployee {
 export default class Employee extends BaseModel {
   static entity = 'employee'
 
+  static meta = {
+    section: 'core'
+  }
+
   static fields () {
     return {
       _id: this.increment(),

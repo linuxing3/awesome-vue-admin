@@ -3,7 +3,7 @@ import User from '../../User/models/User'
 
 export interface IDepartment {
    _id?: string
-   department: string
+   name: string
 }
 
 export default class Department extends BaseModel {
@@ -16,12 +16,7 @@ export default class Department extends BaseModel {
   static fields () {
     return {
       _id: this.increment(),
-      department: this.string('Business'),
-      parentDepartment: this.string('Business'),
-      LeaveApprovers: this.string('LeaveApprovers'),
-      expenseApprovers: this.string('expenseApprovers'),
-      departmentApprovers: this.string('departmentApprovers'),
-      oldParentDepartment: this.string('oldParentDepartment'),
+      name: this.string('XX处'),
       users: this.hasMany(User, 'department_id')
     }
   }

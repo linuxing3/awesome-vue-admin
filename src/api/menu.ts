@@ -8,18 +8,11 @@ const mainMenu = [
     color: 'purple'
   },
   {
-    title: '数据标签',
+    title: '仪表盘',
     group: 'apps',
-    icon: 'table_chart',
-    name: 'database',
+    icon: 'view_quilt',
+    name: 'dashboard',
     color: 'black'
-  },
-  {
-    title: '展示图库',
-    group: 'apps',
-    icon: 'fastfood',
-    name: 'play',
-    color: 'grey'
   },
   { header: '在线' },
   {
@@ -77,6 +70,20 @@ const extraMenu = [
     icon: 'view_quilt',
     name: 'dashboard',
     color: 'black'
+  },
+  {
+    title: '数据标签',
+    group: 'apps',
+    icon: 'table_chart',
+    name: 'database',
+    color: 'black'
+  },
+  {
+    title: '展示图库',
+    group: 'apps',
+    icon: 'fastfood',
+    name: 'play',
+    color: 'grey'
   },
   {
     title: '日历',

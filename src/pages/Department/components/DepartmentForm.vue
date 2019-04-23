@@ -32,64 +32,12 @@
               wrap>
             <!-- generate form from schema  -->
             <v-flex
-                xs6
-                md6
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
                   :counter="25"
-                  v-model="editedItem['department']"
+                  v-model="editedItem['name']"
                   :label=" tryT('department') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs6
-                md6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
-                  v-model="editedItem['parentDepartment']"
-                  :label=" tryT('parentDepartment') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs6
-                md6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
-                  v-model="editedItem['LeaveApprovers']"
-                  :label=" tryT('LeaveApprovers') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs6
-                md6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
-                  v-model="editedItem['expenseApprovers']"
-                  :label=" tryT('expenseApprovers') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs6
-                md6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
-                  v-model="editedItem['departmentApprovers']"
-                  :label=" tryT('departmentApprovers') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs6
-                md6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
-                  v-model="editedItem['oldParentDepartment']"
-                  :label=" tryT('oldParentDepartment') "></v-text-field>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>

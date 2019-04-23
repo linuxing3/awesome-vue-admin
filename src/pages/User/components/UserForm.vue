@@ -26,7 +26,7 @@
           v-model="valid">
         <v-container
             fluid
-            grid-list-xl>
+            v-bind="{ [`grid-list-${size}`]: true }">
           <v-layout
               row
               wrap>
@@ -82,8 +82,11 @@
                 sm6
                 class="pa-2 pr-2">
               <v-select
+                  clearable
                   :label=" tryT('gender')"
-                  :items="[ tryT('male'), tryT('female')]"
+                  :items="genders"
+                  item-text="name"
+                  item-value="name"
                   v-model="editedItem['gender']">
               </v-select>
             </v-flex>
@@ -94,7 +97,10 @@
                 class="pa-2 pr-2">
               <v-select
                   :label=" tryT('etnia')"
-                  :items="['male', 'female']"
+                  :items="etnias"
+                  clearable
+                  item-text="name"
+                  item-value="name"
                   v-model="editedItem['etnia']">
               </v-select>
             </v-flex>
@@ -225,8 +231,8 @@
             <v-spacer />
             <v-flex
                 xs12
-                md2
-                sm2
+                md6
+                sm6
                 class="pa-2 pr-2">
               <v-text-field
                   :counter="10"
@@ -235,8 +241,8 @@
             </v-flex>
             <v-flex
                 xs12
-                md2
-                sm2
+                md6
+                sm6
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['isActive']"
@@ -264,13 +270,16 @@
 <script>
 import crudMixin from '@/mixins/crudMixin'
 import exportMixin from '@/mixins/exportMixin'
+import etnias from '@/api/etnia'
+import { genders, maritalStatus } from '@/api/gender'
 
 export default {
   data () {
     return {
       modelName: 'user',
       birthdayPicker: false,
-      valid: true
+      valid: true,
+      size: 'xl'
     }
   },
   watch: {

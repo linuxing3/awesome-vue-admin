@@ -75,6 +75,7 @@
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['year']"
+                  :placeholder="editedItem['year']"
                   :label=" tryT('year') "
                 ></v-text-field>
             </v-flex>
@@ -85,6 +86,7 @@
               <v-text-field
                   :rules="rules.nameRules"
                   :counter="50"
+                  placeholder="报XXX事"
                   v-model="editedItem['title']"
                   :label=" tryT('title') "
                 ></v-text-field>
@@ -95,13 +97,14 @@
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['classiLevel']"
-                  :items="['internal', 'classified']"
+                  :items="['内部', '秘密']"
+                  placeholder="内部"
                   :label="tryT('classiLevel')"
                 ></v-select>
             </v-flex>
             <v-flex
                 xs12
-                md6
+                md4
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['category']"
@@ -110,12 +113,27 @@
                 ></v-select>
             </v-flex>
             <v-flex
+                xs2
+                md2
+                class="pa-2">
+              <v-btn
+                  fab
+                  small
+                  color="green white--text"
+                  @click=" $router.push({ name: 'documentType'}) "
+                  icon
+                >
+                <v-icon>add</v-icon>
+              </v-btn>
+            </v-flex>
+            <v-flex
                 xs12
                 md6
                 class="pa-2 pr-2">
               <v-select
                   v-model="editedItem['inOrOut']"
-                  :items="['out', 'in']"
+                  :items="['发', '收']"
+                  placeholder="发"
                   :label="tryT('inOrOut')"
                 ></v-select>
             </v-flex>
@@ -145,26 +163,7 @@
                 md6
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="50"
-                  v-model="editedItem['title']"
-                  :label=" tryT('title') "
-                ></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md12
-                class="pa-2 pr-2">
-              <v-textarea
-                  :counter="500"
-                  v-model="editedItem['content']"
-                  :label=" tryT('content') "></v-textarea>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                class="pa-2 pr-2">
-              <v-text-field
+                  placeholder="XX部XX司"
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['toEntity']"
@@ -176,6 +175,7 @@
                 md6
                 class="pa-2 pr-2">
               <v-text-field
+                  placeholder="XX部XX司"
                   :counter="50"
                   v-model="editedItem['copyEntity']"
                   :label=" tryT('copyEntity') "
@@ -186,10 +186,24 @@
                 md6
                 class="pa-2 pr-2">
               <v-text-field
+                  placeholder="XXX单位"
                   :rules="rules.nameRules"
                   :counter="50"
                   v-model="editedItem['workEntity']"
                   :label=" tryT('workEntity') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  placeholder="XX处"
+                  :rules="rules.nameRules"
+                  :counter="50"
+                  v-model="editedItem['department']"
+                  :label=" tryT('department') "
+                  @dblclick="$router.push({ name: 'department'})"
                 ></v-text-field>
             </v-flex>
             <v-flex
@@ -212,6 +226,15 @@
                   v-model="editedItem['author']"
                   :label=" tryT('author') "
                 ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-textarea
+                  :counter="500"
+                  v-model="editedItem['content']"
+                  :label=" tryT('content') "></v-textarea>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -267,6 +290,8 @@ export default {
       this.setEditedItem(item)
     })
     window.DocumentForm = this
+    // Update v-select items
+    DocumentType.$fetch()
   },
   methods: {
     validate () {

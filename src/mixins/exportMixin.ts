@@ -353,17 +353,17 @@ export default {
       if (rABS) reader.readAsBinaryString(this.importFileMeta.path)
       else reader.readAsArrayBuffer(this.importFileMeta.path)
     },
-    /**
-     * 自动生成附件
-     * @param data string 写入附件的内容
-     */
-    exportDocx (content) {
+    ensureAttachFile () {
       let uuid = uniqueId(`${this.modelName}_attach_`)
 
       let fileIdRef = this.editedItem._id.toString() || uniqueId().toString()
-      let moduleAttachDir = join(this.attachDir, this.modelName, fileIdRef)
+      let moduleAttachDir = join(this.attachDir, this.modelName)
+      let moduleAttachDirWithId = join(this.attachDir, this.modelName, fileIdRef)
       if (!existsSync(moduleAttachDir)) {
         mkdirSync(moduleAttachDir)
+      }
+      if (!existsSync(moduleAttachDirWithId)) {
+        mkdirSync(moduleAttachDirWithId)
       }
 
       if (this.importFileMeta.path !== undefined) {
@@ -372,6 +372,13 @@ export default {
         this.attachFile = join(moduleAttachDir, `${uuid}.docx`)
       }
       console.log(this.attachFile)
+    },
+    /**
+     * 自动生成附件
+     * @param data string 写入附件的内容
+     */
+    exportDocx (content) {
+      this.ensureAttachFile()
 
       try {
         // 创建新的文档或使用默认文档

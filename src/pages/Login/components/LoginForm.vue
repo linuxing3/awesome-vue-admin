@@ -1,6 +1,6 @@
 <template>
   <v-card
-      max-width="750px"
+      max-width="950px"
       class="elevation-1 pa-3 mt-5">
     <v-card-title>
       <div
@@ -13,7 +13,7 @@
           <v-dialog
               v-model="dialog"
               persistent
-              max-width="400">
+              max-width="500">
             <v-avatar
                 slot="activator"
                 size="256"
@@ -47,6 +47,7 @@
 
     <v-card-text>
       <v-layout
+          justify-center
           row
           wrap>
         <v-flex
@@ -62,11 +63,6 @@
               prepend-icon="contacts"
               required
             ></v-text-field>
-        </v-flex>
-        <v-flex
-            xs12
-            sm6
-            md6>
           <v-text-field
               class="ml-5 mr-5"
               v-model="model.password"

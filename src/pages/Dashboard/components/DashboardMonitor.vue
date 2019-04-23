@@ -1,69 +1,43 @@
 <template>
-  <v-container
-      fluid
-      grid-list-xl
-    >
+  <v-container>
     <v-layout
+        justify-center
         row
         wrap
       >
       <v-flex
-          xs12
-          md6
-          sm6
-          lg6
+          sm4
         >
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">项目开支</div>
+            <div class="caption text-capitalize primary--text font-weight-bold mb-2">文种统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="projectPie" />
+            <v-chart :options="documentTypePie" />
           </v-card-text>
         </v-card>
       </v-flex>
       <v-flex
-          xs12
-          md6
-          sm6
-          lg6
+          sm4
         >
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">文书种类</div>
+            <div class="caption text-capitalize primary--text font-weight-bold mb-2">部门统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="documentPie" />
+            <v-chart :options="documentDepartmentPie" />
           </v-card-text>
         </v-card>
       </v-flex>
       <v-flex
-          xs12
-          md6
-          sm6
-          lg6
+          sm4
         >
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">部门雇员统计</div>
+            <div class="caption text-capitalize primary--text font-weight-bold mb-2">年度统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="DeparmentEmployeeBar" />
-          </v-card-text>
-        </v-card>
-      </v-flex>
-      <v-flex
-          xs12
-          md6
-          sm6
-          lg6
-        >
-        <v-card>
-          <v-card-text
-              class="pt-3">
-            <div class="display-1 text-capitalize primary--text font-weight-bold mb-2">加班统计</div>
-            <v-divider class="my-2"></v-divider>
-            <v-chart :options="EmployeeGenderBar" />
+            <v-chart :options="documentYearPie" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -87,9 +61,26 @@ export default {
   data () {
     return {
       projectDataSet: {},
-      documentDataSet: {},
+      documentTypeDataSet: {},
+      documentDepartmentDataSet: {},
       departmentDataSet: {},
-      employeeGenderDataSet: {}
+      employeeGenderDataSet: {},
+      pieChartConfig: {
+        title: {
+          text: '饼图程序',
+          x: 'center'
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)'
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: null
+        },
+        roseType: 'radius'
+      }
     }
   },
   async mounted () {
@@ -101,11 +92,11 @@ export default {
     documentTypes () {
       return DocumentType.uniqueValuesOfField('title')
     },
+    departmentTypes () {
+      return Department.uniqueValuesOfField('name')
+    },
     projectTypes () {
       return ProjectType.uniqueValuesOfField('title')
-    },
-    departmentTypes () {
-      return ProjectType.uniqueValuesOfField('department')
     },
     employeeTypes () {
       return ProjectType.uniqueValuesOfField('maritalStatus')
@@ -119,8 +110,14 @@ export default {
     projectPie () {
       return this.drawPieChart(this.projectDataSet)
     },
-    documentPie () {
-      return this.drawPieChart(this.documentDataSet)
+    documentYearPie () {
+      return this.drawDocumentByYearPieChart(this.documentYearDataSet)
+    },
+    documentTypePie () {
+      return this.drawDocumentByTypePieChart(this.documentTypeDataSet)
+    },
+    documentDepartmentPie () {
+      return this.drawDocumentByDepartmentPieChart(this.documentDepartmentDataSet)
     }
   },
   methods: {
@@ -134,28 +131,38 @@ export default {
       await Department.$fetch()
     },
     async pullDataSet () {
+      this.documentTypeDataSet = modelStatistic({
+        Model: Document,
+        queryFieldName: 'category',
+        fieldNameArray: this.documentTypes
+      })
+      this.documentDepartmentDataSet = modelStatistic({
+        Model: Document,
+        queryFieldName: 'department',
+        fieldNameArray: this.departmentTypes
+      })
+      this.documentYearDataSet = modelStatistic({
+        Model: Document,
+        queryFieldName: 'year',
+        fieldNameArray: ['2019', '2020', '2021']
+      })
       this.projectDataSet = modelStatistic({
         Model: Project,
-        fieldNameArray: this.projectTypes,
-        queryFieldName: 'type'
-      })
-      this.documentDataSet = modelStatistic({
-        Model: Document,
-        fieldNameArray: this.documentTypes,
-        queryFieldName: 'category'
+        queryFieldName: 'type',
+        fieldNameArray: this.projectTypes
       })
       this.departmentDataSet = modelStatistic({
         Model: Employee,
-        fieldNameArray: this.departmentTypes,
-        queryFieldName: 'department'
+        queryFieldName: 'department',
+        fieldNameArray: this.departmentTypes
       })
       this.employeeGenderDataSet = modelStatistic({
         Model: Employee,
-        fieldNameArray: Object.keys(genders),
-        queryFieldName: 'gender'
+        queryFieldName: 'gender',
+        fieldNameArray: Object.keys(genders)
       })
     },
-    drawPieChart (dataSet) {
+    drawDocumentByTypePieChart (dataSet) {
       let serieData = []
       let legendData = []
       Object.keys(dataSet).forEach(key => {
@@ -164,20 +171,78 @@ export default {
       })
 
       return {
-        title: {
-          text: '饼图程序',
-          x: 'center'
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
+        ...this.pieChartConfig,
         legend: {
           orient: 'vertical',
           left: 'left',
           data: legendData
         },
-        roseType: 'radius',
+        series: [
+          {
+            name: '数据源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: serieData,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+    },
+    drawDocumentByDepartmentPieChart (dataSet) {
+      let serieData = []
+      let legendData = []
+      Object.keys(dataSet).forEach(key => {
+        serieData.push({ value: dataSet[key], name: key })
+        legendData.push(key)
+      })
+
+      return {
+        ...this.pieChartConfig,
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: legendData
+        },
+        series: [
+          {
+            name: '数据源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '60%'],
+            data: serieData,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
+            }
+          }
+        ]
+      }
+    },
+    drawDocumentByYearPieChart (dataSet) {
+      let serieData = []
+      let legendData = []
+      Object.keys(dataSet).forEach(key => {
+        serieData.push({ value: dataSet[key], name: key })
+        legendData.push(key)
+      })
+
+      return {
+        ...this.pieChartConfig,
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: legendData
+        },
         series: [
           {
             name: '数据源',

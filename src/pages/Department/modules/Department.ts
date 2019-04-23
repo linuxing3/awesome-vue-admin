@@ -24,7 +24,7 @@ const state: IDepartmentState = {
   name: 'department',
   items: [],
   defaultDepartment: {
-    department: ''
+    name: ''
   }
 }
 

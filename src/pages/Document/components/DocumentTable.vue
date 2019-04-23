@@ -105,6 +105,12 @@
               >
               delete
             </v-icon>
+            <v-icon
+                color="blue"
+                @click="archiveItem(props.item)"
+              >
+              clip_folder
+            </v-icon>
           </td>
           <td
               class="text-truncate"
@@ -113,7 +119,9 @@
             >{{ truncateText(props.item[field.value]) }}</td>
         </tr>
       </template>
-      <template v-slot:no-data>
+      <template
+          v-show="false"
+          v-slot:no-data>
         <span class="heading">还没有信息，请点击右上角的按钮添加新的记录</span>
       </template>
       <template v-slot:footer>
@@ -163,6 +171,14 @@ export default {
       this.setEditedItem(item)
       window.DocumentForm.setEditedItem(item)
       this.dialog = true
+    },
+
+    archiveItem (item) {
+      this.setEditedItem(item)
+      this.$router.push({
+        name: 'archive',
+        params: item
+      })
     },
 
     toggleAll () {
