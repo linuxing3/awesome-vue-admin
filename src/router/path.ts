@@ -8,17 +8,7 @@ export default [
   },
   {
     path: '*',
-    redirect: '/404'
-  },
-  {
-    path: '/404',
-    meta: {
-      public: true
-    },
-    name: 'NotFound',
-    component: () =>
-      import(/* webpackChunkName: "routes" */
-        `@/pages/NotFound.vue`)
+    redirect: '/500'
   },
   {
     path: '/403',
