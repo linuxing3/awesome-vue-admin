@@ -56,10 +56,6 @@
 import { pickBy, mapKeys } from 'lodash'
 import models from '@/models'
 
-const coreModels = pickBy(models, model => {
-  return model.meta.section === 'core'
-})
-
 const gradients = [
   ['#222'],
   ['#42b3f4'],
@@ -91,7 +87,9 @@ export default {
   }),
   computed: {
     filteredItems () {
-      return coreModels
+      return pickBy(models, model => {
+        return model.meta.section === 'core'
+      })
     }
   }
 }

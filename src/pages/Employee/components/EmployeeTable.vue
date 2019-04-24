@@ -3,7 +3,7 @@
     <v-card-title>
       <v-dialog
           v-model="dialog"
-          max-width="60%">
+          max-width="80%">
         <v-btn
             slot="activator"
             class="offset-mt-5"

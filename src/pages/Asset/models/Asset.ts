@@ -1,6 +1,4 @@
 import { BaseModel } from '@/models/BaseModel'
-import User from '@/pages/User/models/User'
-import AssetUser from '@/pages/Asset/models/AssetUser'
 
 export interface IAsset {
   _id?: string
@@ -17,6 +15,10 @@ export interface IAsset {
 
 export default class Asset extends BaseModel {
   static entity = 'asset'
+
+  static meta = {
+    section: 'core'
+  }
 
   static fields () {
     return {
@@ -37,8 +39,7 @@ export default class Asset extends BaseModel {
       barCode: this.string('barCode'),
       supplier: this.string('supplier'),
       location: this.string('location'),
-      custodian: this.string('custodian'),
-      users: this.belongsToMany(User, AssetUser, 'asset_id', 'user_id')
+      custodian: this.string('custodian')
     }
   }
 }

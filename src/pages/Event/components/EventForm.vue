@@ -38,8 +38,194 @@
               <v-text-field
                   :rules="rules.nameRules"
                   :counter="10"
-                  v-model="editedItem['name']"
-                  :label=" tryT('name') "></v-text-field>
+                  v-model="editedItem['title']"
+                  :label=" tryT('title') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['applicant']"
+                  :label=" tryT('applicant') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6>
+              <v-menu
+                  ref="datePicker"
+                  v-model="datePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['date']"
+                    :label=" tryT('date')"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['date']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="birthdayPicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['startTime']"
+                  :label=" tryT('startTime') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  v-model="editedItem['duration']"
+                  :label=" tryT('duration') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['participants']"
+                  :label=" tryT('participants') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md6
+                class="pa-2 pr-2">
+              <v-text-field
+                  :rules="rules.nameRules"
+                  :counter="10"
+                  v-model="editedItem['guests']"
+                  :label=" tryT('guests') "
+                ></v-text-field>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-textarea
+                  :rules="rules.textRules"
+                  :counter="100"
+                  v-model="editedItem['content']"
+                  :label=" tryT('event.content') "
+                ></v-textarea>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-textarea
+                  :rules="rules.textRules"
+                  :counter="100"
+                  v-model="editedItem['reportContent']"
+                  :label=" tryT('reportContent') "
+                ></v-textarea>
+            </v-flex>
+            <v-flex
+                xs12
+                md6>
+              <v-menu
+                  ref="reportDatePicker"
+                  v-model="reportDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['date']"
+                    label="报告日期"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['date']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="birthdayPicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
+            </v-flex>
+            <v-flex
+                xs12
+                md12
+                class="pa-2 pr-2">
+              <v-textarea
+                  :rules="rules.textRules"
+                  :counter="100"
+                  v-model="editedItem['instruction']"
+                  :label=" tryT('instruction') "
+                ></v-textarea>
+            </v-flex>
+            <v-flex
+                xs12
+                md6>
+              <v-menu
+                  ref="instructionDatePicker"
+                  v-model="instructionDatePicker"
+                  false-on-content-click="false"
+                  :nudge-right="40"
+                  lazy
+                  transition="scale-transition"
+                  offset-y
+                  full-width
+                  min-width="290px"
+                >
+                <v-text-field
+                    slot="activator"
+                    v-model="editedItem['date']"
+                    label="批示日期"
+                    append-icon="event"
+                    readonly
+                  ></v-text-field>
+                <v-date-picker
+                    v-model="editedItem['date']"
+                    no-title
+                    scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                      flat
+                      color="primary"
+                      @click="birthdayPicker = false">{{ tryT('cancel')}}</v-btn>
+                </v-date-picker>
+              </v-menu>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -67,14 +253,16 @@ export default {
   data () {
     return {
       modelName: 'event',
+      datePicker: false,
+      reportDatePicker: false,
+      instructionDatePicker: false,
       rules: {
         nameRules: [
           v => !!v || 'Name is required',
           v => v.length <= 10 || 'Name must be less than 10 characters'
         ],
-        emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+/.test(v) || 'E-mail must be valid'
+        textRules: [
+          v => v.length <= 100 || 'Name must be less than 100 characters'
         ]
       },
       valid: true

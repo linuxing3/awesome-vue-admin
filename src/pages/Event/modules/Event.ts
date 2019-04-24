@@ -23,7 +23,9 @@ export interface IEventActions {
 const state: IEventState = {
   name: 'event',
   items: [],
-  defaultEvent: {}
+  defaultEvent: {
+    title: ''
+  }
 }
 
 const mutations: MutationTree<IEventState> = {

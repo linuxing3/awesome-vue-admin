@@ -20,7 +20,7 @@
 
     <v-card-actions>
       <span
-          class="pa-3 grey--text font-weight-light">Model Name: {{ subSection }}</span>
+          class="pa-3 grey--text font-weight-light">表名: {{ subSection }}</span>
     </v-card-actions>
   </v-card>
 </template>
