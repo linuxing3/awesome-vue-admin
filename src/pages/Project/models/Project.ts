@@ -1,8 +1,6 @@
 import { BaseModel } from '@/models/BaseModel'
-import ProjectTask from '@/pages/Project/models/ProjectTask'
+import ProjectTask from '@/pages/ProjectTask/models/ProjectTask'
 import Event from '@/pages/Event/models/Event'
-import User from '@/pages/User/models/User'
-import ProjectUser from '@/pages/Project/models/ProjectUser'
 
 export interface IProject {
   _id?: string
@@ -55,8 +53,7 @@ export default class Project extends BaseModel {
       toTime: this.string('toTime'),
       tasks: this.hasMany(ProjectTask, 'project_id'),
       events: this.hasMany(Event, 'project_id'),
-      board_id: this.attr(null),
-      participants: this.belongsToMany(User, ProjectUser, 'project_id', 'user_id')
+      board_id: this.attr(null)
     }
   }
 }

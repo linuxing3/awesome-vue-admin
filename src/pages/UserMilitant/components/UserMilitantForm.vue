@@ -37,7 +37,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['name']"
                   :label=" tryT('name') "></v-text-field>
             </v-flex>
@@ -47,7 +47,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['gender']"
                   :label=" tryT('gender') "></v-text-field>
             </v-flex>
@@ -57,7 +57,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['etnia']"
                   :label=" tryT('etnia') "></v-text-field>
             </v-flex>
@@ -101,7 +101,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['idNumber']"
                   :label=" tryT('idNumber') "></v-text-field>
             </v-flex>
@@ -112,7 +112,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['academicBackground']"
                   :label=" tryT('academicBackground') "></v-text-field>
             </v-flex>
@@ -122,7 +122,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['hrCategory']"
                   :label=" tryT('hrCategory') "></v-text-field>
             </v-flex>
@@ -131,8 +131,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['department']"
                   :label=" tryT('department') "></v-text-field>
             </v-flex>
@@ -141,8 +141,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['workPosition']"
                   :label=" tryT('workPosition') "></v-text-field>
             </v-flex>
@@ -151,8 +151,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['positionAndRank']"
                   :label=" tryT('positionAndRank') "></v-text-field>
             </v-flex>
@@ -161,8 +161,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['militantComission']"
                   :label=" tryT('militantComission') "></v-text-field>
             </v-flex>
@@ -171,8 +171,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['militantRole']"
                   :label=" tryT('militantRole') "></v-text-field>
             </v-flex>
@@ -250,7 +250,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="25"
+                  :counter="10"
                   v-model="editedItem['militanceStatus']"
                   :label=" tryT('militanceStatus') "></v-text-field>
             </v-flex>
@@ -259,8 +259,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['telephone']"
                   :label=" tryT('telephone') "></v-text-field>
             </v-flex>
@@ -269,8 +269,8 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
+                  :rules="rules.titleRules"
+                  :counter="50"
                   v-model="editedItem['homeAddress']"
                   :label=" tryT('homeAddress') "></v-text-field>
             </v-flex>

@@ -6,14 +6,20 @@
         wrap
       >
       <v-flex
+          sm12
+          md12
+        >
+        <div class="display-1 font-weight-bold mb-2">人员情况统计</div>
+      </v-flex>
+      <v-flex
           sm4
         >
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="caption text-capitalize primary--text font-weight-bold mb-2">文种统计</div>
+            <div class="caption text-capitalize primary--text font-weight-bold mb-2">性别统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="documentTypePie" />
+            <v-chart :options="userGenderPie" />
           </v-card-text>
         </v-card>
       </v-flex>
@@ -23,23 +29,17 @@
         <v-card>
           <v-card-text
               class="pt-3">
-            <div class="caption text-capitalize primary--text font-weight-bold mb-2">部门统计</div>
+            <div class="caption text-capitalize primary--text font-weight-bold mb-2">级别统计</div>
             <v-divider class="my-2"></v-divider>
-            <v-chart :options="documentDepartmentPie" />
+            <v-chart :options="userRankPie" />
           </v-card-text>
         </v-card>
       </v-flex>
       <v-flex
-          sm4
+          sm12
+          md12
         >
-        <v-card>
-          <v-card-text
-              class="pt-3">
-            <div class="caption text-capitalize primary--text font-weight-bold mb-2">年度统计</div>
-            <v-divider class="my-2"></v-divider>
-            <v-chart :options="documentYearPie" />
-          </v-card-text>
-        </v-card>
+        <UserTable />
       </v-flex>
     </v-layout>
   </v-container>
@@ -49,22 +49,23 @@
 import models from '@/models'
 import { modelStatistic } from '@/util/statistic'
 import { genders, maritalStatus } from '@/api/gender'
+import UserTable from '@/pages/User/components/UserTable.vue'
 
-let Document = models['document']
-let DocumentType = models['documentType']
-let Project = models['project']
-let ProjectType = models['projectType']
+let User = models['user']
 let Employee = models['employee']
 let Department = models['department']
 
 export default {
+  components: {
+    UserTable
+  },
   data () {
     return {
-      projectDataSet: {},
-      documentTypeDataSet: {},
-      documentDepartmentDataSet: {},
-      departmentDataSet: {},
+      userDataSet: {},
+      userGenderDataSet: {},
       employeeGenderDataSet: {},
+      userDepartmentDataSet: {},
+      departmentDataSet: {},
       pieChartConfig: {
         title: {
           text: '饼图程序',
@@ -89,14 +90,11 @@ export default {
     await this.pullDataSet()
   },
   computed: {
-    documentTypes () {
+    userTypes () {
       return DocumentType.uniqueValuesOfField('title')
     },
     departmentTypes () {
       return Department.uniqueValuesOfField('name')
-    },
-    projectTypes () {
-      return ProjectType.uniqueValuesOfField('title')
     },
     employeeTypes () {
       return ProjectType.uniqueValuesOfField('maritalStatus')
@@ -107,62 +105,33 @@ export default {
     EmployeeGenderBar () {
       return this.drawBarChart(this.employeeGenderDataSet)
     },
-    projectPie () {
-      return this.drawPieChart(this.projectDataSet)
+    userGenderPie () {
+      return this.drawUserByGenderPieChart(this.userGenderDataSet)
     },
-    documentYearPie () {
-      return this.drawDocumentByYearPieChart(this.documentYearDataSet)
-    },
-    documentTypePie () {
-      return this.drawDocumentByTypePieChart(this.documentTypeDataSet)
-    },
-    documentDepartmentPie () {
-      return this.drawDocumentByDepartmentPieChart(this.documentDepartmentDataSet)
+    userRankPie () {
+      return this.drawUserByRankPieChart(this.userRankDataSet)
     }
   },
   methods: {
     async asyncFetch () {
       console.log('Fetching data to charts...')
-      await Document.$fetch()
-      await DocumentType.$fetch()
-      await Project.$fetch()
-      await ProjectType.$fetch()
+      await User.$fetch()
       await Employee.$fetch()
       await Department.$fetch()
     },
     async pullDataSet () {
-      this.documentTypeDataSet = modelStatistic({
-        Model: Document,
-        queryFieldName: 'category',
-        fieldNameArray: this.documentTypes
-      })
-      this.documentDepartmentDataSet = modelStatistic({
-        Model: Document,
-        queryFieldName: 'department',
-        fieldNameArray: this.departmentTypes
-      })
-      this.documentYearDataSet = modelStatistic({
-        Model: Document,
-        queryFieldName: 'year',
-        fieldNameArray: ['2019', '2020', '2021']
-      })
-      this.projectDataSet = modelStatistic({
-        Model: Project,
-        queryFieldName: 'type',
-        fieldNameArray: this.projectTypes
-      })
-      this.departmentDataSet = modelStatistic({
-        Model: Employee,
-        queryFieldName: 'department',
-        fieldNameArray: this.departmentTypes
-      })
-      this.employeeGenderDataSet = modelStatistic({
-        Model: Employee,
+      this.userGenderDataSet = modelStatistic({
+        Model: User,
         queryFieldName: 'gender',
-        fieldNameArray: Object.keys(genders)
+        fieldNameArray: ['male', 'female']
+      })
+      this.userRankDataSet = modelStatistic({
+        Model: User,
+        queryFieldName: 'positionAndRank',
+        fieldNameArray: ['Directorial', 'Secretary']
       })
     },
-    drawDocumentByTypePieChart (dataSet) {
+    drawUserByGenderPieChart (dataSet) {
       let serieData = []
       let legendData = []
       Object.keys(dataSet).forEach(key => {
@@ -195,40 +164,7 @@ export default {
         ]
       }
     },
-    drawDocumentByDepartmentPieChart (dataSet) {
-      let serieData = []
-      let legendData = []
-      Object.keys(dataSet).forEach(key => {
-        serieData.push({ value: dataSet[key], name: key })
-        legendData.push(key)
-      })
-
-      return {
-        ...this.pieChartConfig,
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: legendData
-        },
-        series: [
-          {
-            name: '数据源',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            data: serieData,
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
-          }
-        ]
-      }
-    },
-    drawDocumentByYearPieChart (dataSet) {
+    drawUserByRankPieChart (dataSet) {
       let serieData = []
       let legendData = []
       Object.keys(dataSet).forEach(key => {

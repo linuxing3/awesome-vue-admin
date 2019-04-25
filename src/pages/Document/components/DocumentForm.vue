@@ -73,7 +73,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
-                  :counter="50"
+                  :counter="10"
                   v-model="editedItem['year']"
                   :placeholder="editedItem['year']"
                   :label=" tryT('year') "
@@ -84,7 +84,7 @@
                 md12
                 class="pa-2 pr-2">
               <v-text-field
-                  :rules="rules.nameRules"
+                  :rules="rules.titleRules"
                   :counter="50"
                   placeholder="报XXX事"
                   v-model="editedItem['title']"
@@ -142,8 +142,9 @@
                 md6
                 class="pa-2 pr-2">
               <v-text-field
+                  :rules="rules.nameRules"
                   :counter="10"
-                  v-model="editedItem['sendignCode']"
+                  v-model="editedItem['sendingCode']"
                   :label=" tryT('sendingCode') "
                 ></v-text-field>
             </v-flex>
@@ -164,7 +165,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   placeholder="XX部XX司"
-                  :rules="rules.nameRules"
+                  :rules="rules.titleRules"
                   :counter="50"
                   v-model="editedItem['toEntity']"
                   :label=" tryT('toEntity') "
@@ -176,6 +177,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   placeholder="XX部XX司"
+                  :rules="rules.titleRules"
                   :counter="50"
                   v-model="editedItem['copyEntity']"
                   :label=" tryT('copyEntity') "
@@ -187,7 +189,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   placeholder="XXX单位"
-                  :rules="rules.nameRules"
+                  :rules="rules.titleRules"
                   :counter="50"
                   v-model="editedItem['workEntity']"
                   :label=" tryT('workEntity') "
@@ -199,7 +201,7 @@
                 class="pa-2 pr-2">
               <v-text-field
                   placeholder="XX处"
-                  :rules="rules.nameRules"
+                  :rules="rules.titleRules"
                   :counter="50"
                   v-model="editedItem['department']"
                   :label=" tryT('department') "
@@ -211,6 +213,7 @@
                 md6
                 class="pa-2 pr-2">
               <v-text-field
+                  :rules="rules.titleRules"
                   :counter="50"
                   v-model="editedItem['keyword']"
                   :label=" tryT('keyword') "
@@ -234,7 +237,8 @@
               <v-textarea
                   :counter="500"
                   v-model="editedItem['content']"
-                  :label=" tryT('content') "></v-textarea>
+                  :label=" tryT('content') ">
+              </v-textarea>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>

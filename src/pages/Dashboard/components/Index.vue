@@ -1,14 +1,15 @@
 <template>
   <div>
-    <DashboardSocialCard />
-    <DashboardMonitor />
+    <DashboardMonitorDocument />
+    <DashboardMonitorUser />
   </div>
 </template>
 
 <script lang="js">
 import DashboardModelStatistic from './DashboardModelStatistic.vue'
 import DashboardSocialCard from './DashboardSocialCard.vue'
-import DashboardMonitor from './DashboardMonitor.vue'
+import DashboardMonitorDocument from './DashboardMonitor.document.vue'
+import DashboardMonitorUser from './DashboardMonitor.user.vue'
 import DashboardKanban from './DashboardKanban.vue'
 
 export default {
@@ -20,7 +21,8 @@ export default {
   components: {
     DashboardModelStatistic,
     DashboardSocialCard,
-    DashboardMonitor,
+    DashboardMonitorDocument,
+    DashboardMonitorUser,
     DashboardKanban
   }
 }

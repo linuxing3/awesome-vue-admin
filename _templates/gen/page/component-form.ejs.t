@@ -38,14 +38,15 @@ const modelFormName = ModelName + 'Form'
               wrap>
             <!-- generate form from schema  -->
             <v-flex
-                xs12
-                md12
+                md6
+                sm6
                 class="pa-2 pr-2">
               <v-text-field
                   :rules="rules.nameRules"
                   :counter="10"
                   v-model="editedItem['name']"
-                  :label=" tryT('name') "></v-text-field>
+                  :label=" tryT('name') ">
+              </v-text-field>
             </v-flex>
             <!-- end form from schema  -->
           </v-layout>
@@ -73,7 +74,6 @@ export default {
   data () {
     return {
       modelName: '<%= EntityName %>',
-
       valid: true
     }
   },

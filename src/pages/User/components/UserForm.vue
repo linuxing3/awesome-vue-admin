@@ -279,7 +279,10 @@ export default {
       modelName: 'user',
       birthdayPicker: false,
       valid: true,
-      size: 'xl'
+      size: 'xl',
+      genders,
+      maritalStatus,
+      etnias
     }
   },
   watch: {

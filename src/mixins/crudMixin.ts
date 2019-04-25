@@ -193,16 +193,58 @@ const CrudMixin: ComponentOptions<any> = {
       }
     },
     /**
-     * 重置组件状态
+     * 删除
+     * @param {object} item 要删除的项目
      */
-    initialize () {
-      // If previous route want to edit
-      if (this.$route.params.type === 'edit') {
-        this.setEditedItem(this.$route.params.model)
+    deleteItem (item: object) {
+      // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
+      this.setEditedItem(item)
+      // ORM Localforage插件方法
+      if (this.editedIndex > -1) {
+        this.Model.$delete(this.editedItem._id).then(entities => {
+          console.log(entities)
+        })
       } else {
-        this.editing = false
-        this.editedItem = new this.Model()
+        console.log('Found no item to delete!')
       }
+      this.reset()
+    },
+    /**
+     * 更新
+     * @param {object} item 要删除的项目，包含id字段
+     */
+    updateItem (data: object) {
+      // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
+      this.Model.$update({
+        data
+      }).then(entities => {
+        console.log(entities)
+      })
+    },
+    /**
+     * 创建
+     * @param {object} item 要创建的项目数据，不包含id字段
+     */
+    createItem (data: object) {
+      // 设置[编辑]为假，[数据模型]为传入项目
+      this.Model.$create({
+        data
+      }).then(entities => {
+        console.log(entities)
+      })
+    },
+    /**
+     * 保存，通过创建或更新(InsertOrUpdate)
+     * should call after setEditedItem is called and editedIndex is set
+     * @param {object} item 要删除的项目，包含id字段
+     */
+    saveItem (item?: object) {
+      if (this.editedIndex > -1) {
+        this.updateItem(item)
+      } else {
+        this.createItem(item)
+      }
+      this.setDefaultItem()
     },
     /**
      * 重置组件状态
@@ -232,61 +274,6 @@ const CrudMixin: ComponentOptions<any> = {
       this.editedIndex = this.editedItem._id
     },
 
-    /**
-     * 删除
-     * @param {object} item 要删除的项目
-     */
-    deleteItem (item: object) {
-      // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
-      this.setEditedItem(item)
-      // ORM Localforage插件方法
-      if (this.editedIndex > -1) {
-        this.Model.$delete(this.editedItem._id)
-          .then(entities => {
-            console.log(entities)
-          })
-      } else {
-        console.log('Found no item to delete!')
-      }
-      this.reset()
-    },
-    /**
-     * 保存，通过创建或更新(InsertOrUpdate)
-     * should call after setEditedItem is called and editedIndex is set
-     * @param {object} item 要删除的项目，包含id字段
-     */
-    saveItem (item?: object) {
-      if (this.editedIndex > -1) {
-        this.updateItem(item)
-      } else {
-        this.createItem(item)
-      }
-      this.setDefaultItem()
-    },
-    /**
-     * 更新
-     * @param {object} item 要删除的项目，包含id字段
-     */
-    updateItem (data: object) {
-      // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
-      this.Model.$update({
-        data
-      }).then(entities => {
-        console.log(entities)
-      })
-    },
-    /**
-     * 创建
-     * @param {object} item 要创建的项目数据，不包含id字段
-     */
-    createItem (data: object) {
-      // 设置[编辑]为假，[数据模型]为传入项目
-      this.Model.$create({
-        data
-      }).then(entities => {
-        console.log(entities)
-      })
-    },
     /**
      * 尝试进行国际化翻译
      * @param text 需要翻译的文字

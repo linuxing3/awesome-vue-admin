@@ -2,7 +2,6 @@ import { BaseModel } from '@/models/BaseModel'
 import UserMilitant from '@/pages/UserMilitant/models/UserMilitant'
 import UserAppraisal from '@/pages/UserAppraisal/models/UserAppraisal'
 import Project from '@/pages/Project/models/Project'
-import ProjectUser from '@/pages/Project/models/ProjectUser'
 import UserDesignation from '@/pages/UserDesignation/models/UserDesignation'
 
 export interface IUser {
@@ -67,8 +66,7 @@ export default class User extends BaseModel {
       isActive: this.string('n/a'),
       militant: this.hasOne(UserMilitant, 'user_id'),
       appraisals: this.hasMany(UserAppraisal, 'user_id'),
-      designations: this.hasMany(UserDesignation, 'user_id'),
-      projects: this.belongsToMany(Project, ProjectUser, 'project_id', 'user_id')
+      designations: this.hasMany(UserDesignation, 'user_id')
     }
   }
 }

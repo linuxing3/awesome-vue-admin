@@ -6,25 +6,27 @@ import { REQUEST_METHODS_TYPES } from '@/api/constant'
  * @param {string} url
  * @param {any} data
  */
-export async function request (url: string, data: any) {
+export async function request (url: string, data?: any) {
   let result: any = null
   let Model: any = null
 
-  const [method = 'get', path] = url.split(' ')
-  const [namespace] = path.split('/')
+  let [method = 'get', path] = url.split(' ')
+  let [namespace] = path.split('/')
   Model = models[namespace]
 
-  if (REQUEST_METHODS_TYPES.mutation.includes(method.toLowerCase())) {
+  method = method.toLowerCase()
+
+  if (REQUEST_METHODS_TYPES.mutation.includes(method)) {
     console.log('Mutating ...')
-    if (method.toLowerCase() === 'post') {
+    if (method === 'post') {
       result = Model.$create({ data })
-    } else if (method.toLowerCase() === 'patch') {
+    } else if (method === 'patch') {
       result = Model.$update({ data })
-    } else if (method.toLowerCase() === 'delete') {
+    } else if (method === 'delete') {
       result = Model.delete(data._id)
     }
   }
-  if (REQUEST_METHODS_TYPES.query.includes(method.toLowerCase())) {
+  if (REQUEST_METHODS_TYPES.query.includes(method)) {
     console.log('Quering ...')
     if (data) {
       result = Model.query()
