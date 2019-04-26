@@ -1,4 +1,6 @@
-import { request } from '@/util/request'
+import XingRequest from '@/util/request.vuex.orm'
+
+const axios = new XingRequest()
 
 export const api = {
   queryUserInfo: 'GET /user',
@@ -37,7 +39,7 @@ export const api = {
  */
 const gen = url => {
   return function (data) {
-    return request(url, data)
+    return axios.request(url, data)
   }
 }
 

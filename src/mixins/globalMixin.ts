@@ -48,6 +48,17 @@ export const validateMixin = {
     },
     countWords (text) {
       return words(text)
+    },
+    /**
+     * 尝试进行国际化翻译
+     * @param text 需要翻译的文字
+     */
+    tryT (text: string) {
+      if (this.$t !== undefined) {
+        return this.$t(text)
+      } else {
+        return text
+      }
     }
   },
   mounted () {

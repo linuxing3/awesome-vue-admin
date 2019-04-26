@@ -8,14 +8,23 @@
  */
 import { ComponentOptions } from 'vue'
 import { genTableHeaders } from '@/util/genFormData'
-import { request } from '@/util/request'
+import { baseFilter } from '@/util'
+import XingRequest from '@/util/request.vuex.orm'
+import { rules } from '@/util/validate'
+
+const axios = new XingRequest()
 
 interface ICrudHelper {
   modelName: string
   editedItem: any
   editedIndex: number
-  items?: [],
+  data?: [],
   defaultItem: any
+  filter?: {
+    search: string
+    sort: string
+  },
+  rules?: any
 }
 
 const CrudMixin: ComponentOptions<any> = {
@@ -24,8 +33,13 @@ const CrudMixin: ComponentOptions<any> = {
       modelName: '',
       editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
-      items: [],
-      defaultItem: {}
+      data: [],
+      defaultItem: {},
+      filter: {
+        search: '',
+        sort: '_id'
+      },
+      rules
     }
   },
   computed: {
@@ -35,11 +49,16 @@ const CrudMixin: ComponentOptions<any> = {
     editing (): boolean {
       return this.editedIndex !== -1 // is in edit state
     },
-    fields (): string[] {
-      return Object.keys(this.defaultItem)
+    items (): any[] {
+      let { data, filter: { search, sort } } = this
+      if (search === '') return data
+      return baseFilter({ sort, search }, data)
     },
     headers (): any[] {
       return genTableHeaders(this.fields)
+    },
+    count (): number {
+      return this.items ? this.items.length : 0
     }
   },
   watch: {
@@ -52,7 +71,7 @@ const CrudMixin: ComponentOptions<any> = {
     }
   },
   async mounted () {
-    this.reset()
+    this.setEditedItem()
     await this.fetch()
   },
   created () {
@@ -63,20 +82,23 @@ const CrudMixin: ComponentOptions<any> = {
   },
   methods: {
     async fetch () {
-      this.items = await request(`get /${this.modelName}`)
+      const {
+        data,
+        meta: { fields }
+      } = await axios.request(`get /${this.modelName}`)
+      this.data = data
+      this.fields = fields
     },
     async deleteItem (data: object) {
       this.setEditedItem(data)
-      await request(`delete /${this.modelName}`, data)
+      await axios.request(`delete /${this.modelName}`, data)
       await this.fetch()
     },
     async updateItem (data: object) {
-      await request(`patch /${this.modelName}`, data)
-      await this.fetch()
+      await axios.request(`patch /${this.modelName}`, data)
     },
     async createItem (data: object) {
-      await request(`post /${this.modelName}`, data)
-      await this.fetch()
+      await axios.request(`post /${this.modelName}`, data)
     },
     async saveItem (data?: object) {
       if (this.editedIndex > -1) {
@@ -84,22 +106,16 @@ const CrudMixin: ComponentOptions<any> = {
       } else {
         await this.createItem(data)
       }
-      this.setDefaultItem()
-    },
-    setDefaultItem () {
-      this.editedItem = {}
-      this.editedIndex = -1
+      // this.setEditedItem()
+      await this.fetch()
     },
     setEditedItem (data) {
-      this.editedItem = Object.assign({}, data) // Deep copy
-      this.editedIndex = this.editedItem._id
-    },
-    reset () {
-      // If previous route want to edit
-      if (this.$route.params.type === 'edit') {
-        this.setEditedItem(this.$route.params.editedItem)
+      if (data !== undefined) {
+        this.editedItem = Object.assign({}, data)
+        this.editedIndex = this.editedItem._id
       } else {
-        this.setDefaultItem()
+        this.editedItem = {}
+        this.editedIndex = -1
       }
     }
   }
