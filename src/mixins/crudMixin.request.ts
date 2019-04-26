@@ -18,7 +18,7 @@ interface ICrudHelper {
   modelName: string
   editedItem: any
   editedIndex: number
-  data?: [],
+  model?: any
   defaultItem: any
   filter?: {
     search: string
@@ -33,7 +33,7 @@ const CrudMixin: ComponentOptions<any> = {
       modelName: '',
       editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
-      data: [],
+      model: null,
       defaultItem: {},
       filter: {
         search: '',
@@ -50,7 +50,8 @@ const CrudMixin: ComponentOptions<any> = {
       return this.editedIndex !== -1 // is in edit state
     },
     items (): any[] {
-      let { data, filter: { search, sort } } = this
+      let { filter: { search, sort } } = this
+      let data = this.model.query().all()
       if (search === '') return data
       return baseFilter({ sort, search }, data)
     },
@@ -83,11 +84,11 @@ const CrudMixin: ComponentOptions<any> = {
   methods: {
     async fetch () {
       const {
-        data,
-        meta: { fields }
+        result: { fields, model }
       } = await axios.request(`get /${this.modelName}`)
-      this.data = data
       this.fields = fields
+      this.model = model
+      await this.model.$fetch()
     },
     async deleteItem (data: object) {
       this.setEditedItem(data)
@@ -95,10 +96,14 @@ const CrudMixin: ComponentOptions<any> = {
       await this.fetch()
     },
     async updateItem (data: object) {
+      this.setEditedItem(data)
       await axios.request(`patch /${this.modelName}`, data)
+      await this.fetch()
     },
     async createItem (data: object) {
+      this.setEditedItem()
       await axios.request(`post /${this.modelName}`, data)
+      await this.fetch()
     },
     async saveItem (data?: object) {
       if (this.editedIndex > -1) {
@@ -106,13 +111,11 @@ const CrudMixin: ComponentOptions<any> = {
       } else {
         await this.createItem(data)
       }
-      // this.setEditedItem()
-      await this.fetch()
     },
     setEditedItem (data) {
       if (data !== undefined) {
         this.editedItem = Object.assign({}, data)
-        this.editedIndex = this.editedItem._id
+        this.editedIndex = data._id
       } else {
         this.editedItem = {}
         this.editedIndex = -1

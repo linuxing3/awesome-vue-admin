@@ -2,10 +2,10 @@ import { models } from '@/store/plugins/store-orm.dva'
 import { REQUEST_METHODS_TYPES } from '@/api/constant'
 
 export default class XingRequest {
-  namespace
-  model
-  result
-  fields
+  namespace: string
+  model: any
+  result: any[]
+  fields: any[]
 
   constructor () {
     this.namespace = ''
@@ -39,17 +39,19 @@ export default class XingRequest {
       } else if (method === 'delete') {
         await this.model.$delete(data._id)
       }
+      await this.model.$fetch()
     }
     if (REQUEST_METHODS_TYPES.query.includes(method)) {
       console.log('Quering ...')
       if (data) {
-        await this.model.$get(data._id)
+        this.result = await this.model.$get(data._id)
       }
-      await this.model.$fetch()
+      this.result = this.model.query().all()
     }
+
     return {
-      result: {
-        model: this.model,
+      data: this.result,
+      meta: {
         fields: this.fields
       },
       status: 'Ok' }

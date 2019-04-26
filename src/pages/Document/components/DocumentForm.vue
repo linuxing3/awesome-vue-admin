@@ -261,7 +261,7 @@
 
 <script>
 import models from '@/models'
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 
 let DocumentType = models['documentType']
