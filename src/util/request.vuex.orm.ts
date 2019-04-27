@@ -2,15 +2,13 @@ import { models } from '@/store/plugins/store-orm.dva'
 import { REQUEST_METHODS_TYPES } from '@/api/constant'
 
 export default class XingRequest {
-  namespace
-  model
-  result
-  fields
+  namespace: string
+  model: any
+  fields: any[]
 
   constructor () {
     this.namespace = ''
     this.model = null
-    this.result = []
   }
 
   validateURL (path: string) {
@@ -33,25 +31,65 @@ export default class XingRequest {
     if (REQUEST_METHODS_TYPES.mutation.includes(method)) {
       console.log('Mutating ...')
       if (method === 'post') {
-        await this.model.$create({ data })
+        let createdItems = await this.model.$create({ data })
+        return {
+          result: {
+            data: createdItems,
+            model: this.model,
+            fields: this.fields
+          },
+          method,
+          status: 'Ok'
+        }
       } else if (method === 'patch') {
-        await this.model.$update({ data })
+        let updatedItems = await this.model.$update({ data })
+        return {
+          result: {
+            data: updatedItems,
+            model: this.model,
+            fields: this.fields
+          },
+          method,
+          status: 'Ok'
+        }
       } else if (method === 'delete') {
-        await this.model.$delete(data._id)
+        let deletedItems = await this.model.$delete(data._id)
+        return {
+          result: {
+            data: deletedItems,
+            model: this.model,
+            fields: this.fields
+          },
+          method,
+          status: 'Ok'
+        }
       }
     }
     if (REQUEST_METHODS_TYPES.query.includes(method)) {
       console.log('Quering ...')
       if (data) {
-        await this.model.$get(data._id)
+        let foundItems = await this.model.$get(data._id)
+        return {
+          result: {
+            data: foundItems,
+            model: this.model,
+            fields: this.fields
+          },
+          method,
+          status: 'Ok'
+        }
+      } else {
+        let allItems = await this.model.$fetch()
+        return {
+          result: {
+            data: allItems,
+            model: this.model,
+            fields: this.fields
+          },
+          method,
+          status: 'Ok'
+        }
       }
-      await this.model.$fetch()
     }
-    return {
-      result: {
-        model: this.model,
-        fields: this.fields
-      },
-      status: 'Ok' }
   }
 }

@@ -51,7 +51,7 @@ const CrudMixin: ComponentOptions<any> = {
     },
     items (): any[] {
       let { filter: { search, sort } } = this
-      let data = this.model.query().all()
+      let data = this.model.query().all() || []
       if (search === '') return data
       return baseFilter({ sort, search }, data)
     },
@@ -63,7 +63,6 @@ const CrudMixin: ComponentOptions<any> = {
     }
   },
   watch: {
-    // watch modelName for refetch and update
     async modelName (val) {
       await this.fetch()
     },
@@ -76,7 +75,6 @@ const CrudMixin: ComponentOptions<any> = {
     await this.fetch()
   },
   created () {
-    // 组件自身监听事件，更新[编辑]和[数据模型]的状态
     this.$on('SET_EDITING', function (item: object) {
       this.setEditedItem(item)
     })
@@ -88,38 +86,27 @@ const CrudMixin: ComponentOptions<any> = {
       } = await axios.request(`get /${this.modelName}`)
       this.fields = fields
       this.model = model
-      await this.model.$fetch()
     },
     async deleteItem (data: object) {
-      this.setEditedItem(data)
       await axios.request(`delete /${this.modelName}`, data)
-      await this.fetch()
     },
     async updateItem (data: object) {
-      this.setEditedItem(data)
       await axios.request(`patch /${this.modelName}`, data)
-      await this.fetch()
     },
     async createItem (data: object) {
-      this.setEditedItem()
       await axios.request(`post /${this.modelName}`, data)
-      await this.fetch()
     },
-    async saveItem (data?: object) {
+    async saveItem (data: object) {
+      this.setEditedItem(data)
       if (this.editedIndex > -1) {
-        await this.updateItem(data)
+        await this.updateItem(this.editedItem)
       } else {
-        await this.createItem(data)
+        await this.createItem(this.editedItem)
       }
     },
     setEditedItem (data) {
-      if (data !== undefined) {
-        this.editedItem = Object.assign({}, data)
-        this.editedIndex = data._id
-      } else {
-        this.editedItem = {}
-        this.editedIndex = -1
-      }
+      this.editedIndex = data._id || -1
+      this.editedItem = Object.assign({}, data)
     }
   }
 }
