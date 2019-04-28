@@ -90,6 +90,9 @@ const CrudMixin: ComponentOptions<any> = {
     async deleteItem (data: object) {
       await axios.request(`delete /${this.modelName}`, data)
     },
+    async deleteAll (data: object) {
+      await axios.request(`post /${this.modelName}/delete`, data)
+    },
     async updateItem (data: object) {
       await axios.request(`patch /${this.modelName}`, data)
     },
