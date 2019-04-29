@@ -111,4 +111,5 @@ Vue.use(Drawer)
 Vue.use(Skeleton)
 
 Vue.prototype.$message = message
+Vue.prototype.$notification = notification
 // import 'ant-design-vue/dist/antd.css'
