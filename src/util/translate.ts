@@ -6,12 +6,12 @@
  */
 
 /* eslint-disable */
-import md5 from 'md5';
-import qs from 'qs';
-import fs from 'fs';
-import path from 'path';
-import axios from 'axios';
-import jsonFormat from 'json-format';
+import md5 from 'md5'
+import qs from 'qs'
+import fs from 'fs'
+import path from 'path'
+import axios from 'axios'
+import jsonFormat from 'json-format'
 
 const languages = [
   {
