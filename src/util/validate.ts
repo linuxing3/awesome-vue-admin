@@ -3,31 +3,31 @@
  * Created by Xing Wenju on 16/11/18.
  */
 
-export function isvalidUsername (str) {
+export function isvalidUsername(str) {
   const validMap = ['admin', 'editor', 'root']
   return validMap.indexOf(str.trim()) >= 0
 }
 
 /* 合法uri*/
-export function validateURL (textval) {
+export function validateURL(textval) {
   const urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
   return urlregex.test(textval)
 }
 
 /* 小写字母*/
-export function validateLowerCase (str) {
+export function validateLowerCase(str) {
   const reg = /^[a-z]+$/
   return reg.test(str)
 }
 
 /* 大写字母*/
-export function validateUpperCase (str) {
+export function validateUpperCase(str) {
   const reg = /^[A-Z]+$/
   return reg.test(str)
 }
 
 /* 大小写字母*/
-export function validateAlphabets (str) {
+export function validateAlphabets(str) {
   const reg = /^[A-Za-z]+$/
   return reg.test(str)
 }
@@ -44,17 +44,13 @@ export function validateAlphabets (str) {
 
 export const rules = {
   nameRules: [
-    v => !!v || 'This field is Required',
-    v => v.length <= 25 || 'Must be less than 25 characters'
+    (v: string) => !!v || 'This field is Required',
+    (v: string) => v.length <= 25 || 'Must be less than 25 characters'
   ],
-  titleRules: [
-    v => v.length <= 50 || 'Must be less than 50 characters'
-  ],
-  textRules: [
-    v => v.length <= 500 || 'Must be less than 50 characters'
-  ],
+  titleRules: [(v: string) => v.length <= 50 || 'Must be less than 50 characters'],
+  textRules: [(v: string) => v.length <= 500 || 'Must be less than 50 characters'],
   emailRules: [
-    v => !!v || 'E-mail is required',
-    v => /.+@.+/.test(v) || 'E-mail must be valid'
+    (v: string) => !!v || 'E-mail is required',
+    (v: string) => /.+@.+/.test(v) || 'E-mail must be valid'
   ]
 }

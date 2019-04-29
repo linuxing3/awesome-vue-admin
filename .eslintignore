@@ -5,3 +5,4 @@ dist_electron/*
 build/*
 dist/*
 docs/**/*
+src/mixins/crudMixin.request.ts

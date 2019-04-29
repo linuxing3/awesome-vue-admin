@@ -17,7 +17,7 @@
 
 <script>
 import exportMixin from '@/mixins/exportMixin'
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 
 const CollectionCreateForm = {
   props: ['visible'],

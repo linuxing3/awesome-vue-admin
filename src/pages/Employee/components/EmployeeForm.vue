@@ -147,7 +147,7 @@
 </template>
 
 <script>
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 import { genders, maritalStatus } from '@/api/gender'
 

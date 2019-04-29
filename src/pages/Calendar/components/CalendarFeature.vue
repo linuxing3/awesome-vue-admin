@@ -304,7 +304,7 @@
 </template>
 
 <script>
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 
 const weekdaysDefault = [0, 1, 2, 3, 4, 5, 6]

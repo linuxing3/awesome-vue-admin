@@ -9,7 +9,7 @@ export default class XingRequest {
   fields: any[]
   response: any
 
-  constructor () {
+  constructor() {
     this.namespace = ''
     this.model = null
   }
@@ -17,7 +17,7 @@ export default class XingRequest {
   /**
    * 异常处理程序
    */
-  handleError (error: any) {
+  handleError(error: any) {
     const { response = {} } = error
     const errortext = CODE_MESSAGE[response.status] || response.statusText
     const { status, url } = response
@@ -58,13 +58,13 @@ export default class XingRequest {
         type: '/notFound'
       })
     }
-  };
+  }
 
-  validateURL (url: string) {
+  validateURL(url: string) {
     let [method = 'get', path] = url.split(' ')
 
     this.method = method.toLowerCase()
-    this.namespace = path.split('/')[0]
+    this.namespace = path.replace('/', '')
     this.params = path.split('/')[1]
     this.model = models[this.namespace]
     this.fields = this.model.fieldsKeys()
@@ -74,7 +74,7 @@ export default class XingRequest {
    * @param {string} url
    * @param {any} data
    */
-  async request (url: string, data?: any) {
+  async request(url: string, data?: any) {
     this.validateURL(url)
 
     let result = {
@@ -88,33 +88,35 @@ export default class XingRequest {
 
     if (REQUEST_METHODS_TYPES.mutation.includes(this.method)) {
       console.log('Mutating ...')
-      if (this.method === 'post' && this.params === undefined) {
-        let createdItems = await this.model.$create({ data })
-        if (!createdItems) {
+      if (this.method === 'post') {
+        if (this.params === 'delete') {
+          data.map(async item => {
+            await this.model.$delete(item._id)
+          })
           return {
-            status: 404,
-            message: CODE_MESSAGE[404]
+            result: {
+              ...result,
+              data: []
+            },
+            status: 200,
+            message: CODE_MESSAGE[200]
           }
-        }
-        return {
-          result: {
-            ...result,
-            data: createdItems
-          },
-          status: 200,
-          message: CODE_MESSAGE[200]
-        }
-      } else if (this.method === 'post' && this.params === 'delete') {
-        data.map(async item => {
-          await this.model.$delete(item._id)
-        })
-        return {
-          result: {
-            ...result,
-            data: []
-          },
-          status: 200,
-          message: CODE_MESSAGE[200]
+        } else {
+          let createdItems = await this.model.$create({ data })
+          if (!createdItems) {
+            return {
+              status: 404,
+              message: CODE_MESSAGE[404]
+            }
+          }
+          return {
+            result: {
+              ...result,
+              data: createdItems
+            },
+            status: 200,
+            message: CODE_MESSAGE[200]
+          }
         }
       } else if (this.method === 'patch') {
         let updatedItems = await this.model.$update({ data })

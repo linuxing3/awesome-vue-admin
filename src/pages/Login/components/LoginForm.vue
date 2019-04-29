@@ -108,7 +108,7 @@ import AppEvents from '@/util/event'
 
 import { publicAssets } from '@/api/globals'
 
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 const { avatars } = publicAssets
 

@@ -186,7 +186,7 @@
 
 <script lang='js'>
 import models from '@/models'
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 
 let ProjectType = models['projectType']

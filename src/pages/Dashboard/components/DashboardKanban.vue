@@ -39,7 +39,7 @@
 
 <script>
 import { pickBy, mapKeys, camelCase } from 'lodash'
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 
 import models from '@/models'

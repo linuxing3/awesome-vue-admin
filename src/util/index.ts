@@ -11,25 +11,13 @@ const stringify = require('csv-stringify')
  */
 export const log = {
   suc: (_: any, ...args: any[]) => {
-    console.log(
-      `%c ${_}`,
-      'color: #86d850;font-size:12px;font-weight:bold;',
-      ...args
-    )
+    console.log(`%c ${_}`, 'color: #86d850;font-size:12px;font-weight:bold;', ...args)
   },
   info: (_: any, ...args: any[]) => {
-    console.log(
-      `%c ${_}`,
-      'color: #27a8f2;font-size:12px;font-weight:bold;',
-      ...args
-    )
+    console.log(`%c ${_}`, 'color: #27a8f2;font-size:12px;font-weight:bold;', ...args)
   },
   err: (_: any, ...args: any[]) => {
-    console.log(
-      `%c ${_}`,
-      'color: red;font-size:12px;font-weight:bold;',
-      ...args
-    )
+    console.log(`%c ${_}`, 'color: red;font-size:12px;font-weight:bold;', ...args)
   }
 }
 
@@ -39,7 +27,7 @@ export const log = {
  * @param {String} ext  文件扩展名
  * @return {Array} 无扩展名的文件名数组
  */
-export function getFilesByExtentionInDir ({ path, ext }): string[] {
+export function getFilesByExtentionInDir({ path, ext }): string[] {
   let files = filterByExt({
     files: fs.readdirSync(path, 'utf8'),
     ext
@@ -60,18 +48,17 @@ export function getFilesByExtentionInDir ({ path, ext }): string[] {
   }, [])
 }
 
-export function filterByExt ({ files = [], ext = '' }) {
+export function filterByExt({ files = [], ext = '' }) {
   // FIXED extension name issue
   return files.filter(file => {
     let match = file.split('.').reverse()[0]
-    console.log(file)
     return match === ext
   })
 }
 
-export function deleteExtReg ({ file, ext }) {
+export function deleteExtReg({ file, ext }) {
   // FIXME extension name issue
-  function matchFn () {
+  function matchFn() {
     let mathQuery = `w+.${ext}$`
     return new RegExp(mathQuery)
   }
@@ -84,13 +71,13 @@ export function deleteExtReg ({ file, ext }) {
   return file
 }
 
-export function deleteExt ({ file = '', ext }) {
+export function deleteExt({ file = '', ext }) {
   // FIXME extension name issue
   file = file.replace(/\.csv$/, '').replace(/\.doc$/, '')
   return file
 }
 
-export function getFileMeta (path) {
+export function getFileMeta(path) {
   let fileMetaInfo = fs.lstatSync(path)
   console.table(fileMetaInfo)
   return fileMetaInfo
@@ -124,9 +111,7 @@ export const baseFilter = ({ sort, search }, items = []): any[] => {
  * @param {Array} data 数据
  * @param {Number} order 排序方向
  */
-export const lazySorter = (sortKey: string) => (order: number) => (
-  data: any[]
-) => {
+export const lazySorter = (sortKey: string) => (order: number) => (data: any[]) => {
   return data.slice().sort(compareObjectValues(sortKey)(order))
 }
 
@@ -191,9 +176,7 @@ export const ObjectKeysToArray = (item: any): any[] => {
 /**
  * 将 CSV 文件分割为头和体
  */
-export const splitCSVHeaderBody = (
-  content: string
-): { header: string; body: string[] } => {
+export const splitCSVHeaderBody = (content: string): { header: string; body: string[] } => {
   return pipe(
     (content: string) => content.split('\n'),
     (lines: string[]) => ({ header: head(lines), body: tail(lines) })
@@ -212,11 +195,7 @@ export const splitCSVHeaderBody = (
  * import * as keysDef from "@/locales/cn.json"
  * const keysDef = JSON.parse(fs.readFileSync("cn.json").toString())
  */
-export const translateHeaders = ({
-  data = [],
-  keysDef = {},
-  reverse = false
-}): any[] => {
+export const translateHeaders = ({ data = [], keysDef = {}, reverse = false }): any[] => {
   if (reverse) {
     return data
   } else {
@@ -240,10 +219,7 @@ export const translateHeaders = ({
  * return result;
  * NOTE 实现方法2. reduce methods
  */
-export const translateBody = ({
-  data = [],
-  onlyKeepStringValue = true
-}): any[] => {
+export const translateBody = ({ data = [], onlyKeepStringValue = true }): any[] => {
   if (onlyKeepStringValue) {
     return data.reduce((list, item) => {
       let newItem = mapValues(item, preferValueAsString)
@@ -267,11 +243,7 @@ export const translateBody = ({
  *   age: "年龄"
  * })
  */
-export const changeCSVHeader = ({
-  header = '',
-  keysDef = {},
-  reverse = false
-}): string => {
+export const changeCSVHeader = ({ header = '', keysDef = {}, reverse = false }): string => {
   if (reverse) {
     return pipe(
       (header: string) => header.split(','),
@@ -394,7 +366,7 @@ export const ImportCSV = async ({ file = {}, keysDef = {} }): Promise<any> => {
       header: true,
       dynamicTyping: true,
       skipEmptyLines: true,
-      complete: function (result: any) {
+      complete: function(result: any) {
         resolve(result.data)
       }
     })
@@ -459,13 +431,13 @@ export const preferValueAsString = (value: any) => {
   }
 }
 
-export function randomize () {
+export function randomize() {
   return [0, 0, 0].map(v => {
     return Math.round(300 + Math.random() * 700) / 10
   })
 }
 
-export function randomizeCircle () {
+export function randomizeCircle() {
   let data = []
   for (let index = 0; index < 360; index++) {
     let t = (index / 100) * Math.PI

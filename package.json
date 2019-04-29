@@ -116,12 +116,12 @@
   },
   "lint-staged": {
     "linters": {
-      "*.{json,css,md,yml}": [
+      "*.{json,css,md,yml,js,ts}": [
         "yarn run prettier --write",
         "git add"
       ],
       "*.{js,jsx,ts,tsx,vue}": [
-        "yarn lint",
+        "yarn lint --fix",
         "git add"
       ]
     },

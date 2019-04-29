@@ -58,7 +58,7 @@
 <script>
 import { shell } from 'electron'
 import exportMixin from '@/mixins/exportMixin'
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 
 export default {
   props: {

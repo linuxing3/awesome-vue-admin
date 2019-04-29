@@ -48,7 +48,7 @@ import { pickBy, mapKeys } from 'lodash'
 import { sections } from '@/api/globals'
 
 import models from '@/models'
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 
 const coreModels = pickBy(models, model => {
   return model.meta.section === 'core'

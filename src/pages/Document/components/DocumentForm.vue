@@ -283,7 +283,11 @@ export default {
   watch: {
     editedItem: {
       handler (newItem) {
-        console.log(newItem)
+        if (newItem._id === undefined) {
+          console.log(`Editing item ${newItem._id} changed`)
+        } else {
+          console.log(`New item changed`)
+        }
       },
       immediate: true
     }

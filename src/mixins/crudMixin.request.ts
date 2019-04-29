@@ -18,22 +18,24 @@ interface ICrudHelper {
   modelName: string
   editedItem: any
   editedIndex: number
+  fields: string[]
   model?: any
   defaultItem: any
   filter?: {
     search: string
     sort: string
-  },
+  }
   rules?: any
 }
 
 const CrudMixin: ComponentOptions<any> = {
-  data (): ICrudHelper {
+  data(): ICrudHelper {
     return {
       modelName: '',
       editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
       model: null,
+      fields: [],
       defaultItem: {},
       filter: {
         search: '',
@@ -43,63 +45,67 @@ const CrudMixin: ComponentOptions<any> = {
     }
   },
   computed: {
-    formTitle (): string {
+    formTitle(): string {
       return this.editedIndex === -1 ? '添加' : '编辑'
     },
-    editing (): boolean {
+    editing(): boolean {
       return this.editedIndex !== -1 // is in edit state
     },
-    items (): any[] {
-      let { filter: { search, sort } } = this
-      let data = this.model.query().all() || []
+    items(): any[] {
+      let {
+        filter: { search, sort }
+      } = this
+      let data = this.model ? this.model.query().all() : []
       if (search === '') return data
       return baseFilter({ sort, search }, data)
     },
-    headers (): any[] {
-      return genTableHeaders(this.fields)
+    headers(): any[] {
+      if (this.fields) return genTableHeaders(this.fields)
+      return []
     },
-    count (): number {
+    count(): number {
       return this.items ? this.items.length : 0
     }
   },
   watch: {
-    async modelName (val) {
+    async modelName(val) {
       await this.fetch()
     },
-    editedIndex (val) {
+    editedIndex(val) {
       console.log(`Editing item ${val}`)
     }
   },
-  async mounted () {
-    this.setEditedItem()
+  async beforeMount() {
     await this.fetch()
   },
-  created () {
-    this.$on('SET_EDITING', function (item: object) {
+  created() {
+    this.$on('SET_EDITING', function(item: object) {
       this.setEditedItem(item)
     })
   },
   methods: {
-    async fetch () {
+    async fetch() {
       const {
         result: { fields, model }
       } = await axios.request(`get /${this.modelName}`)
       this.fields = fields
       this.model = model
+      this.setEditedItem(new this.model())
     },
-    async deleteItem (data: object) {
+    async deleteItem(data: object) {
       await axios.request(`delete /${this.modelName}`, data)
     },
-    async deleteAll (data: object) {
+    async deleteAll(data: object) {
       await axios.request(`post /${this.modelName}/delete`, data)
     },
-    async updateItem (data: object) {
+    async updateItem(data: object) {
       await axios.request(`patch /${this.modelName}`, data)
     },
-    async createItem (data: object) {
+    async createItem(data: object) {
+      console.log('Creating')
       await axios.request(`post /${this.modelName}`, data)
     },
-    async saveItem (data: object) {
+    async saveItem(data: object) {
       this.setEditedItem(data)
       if (this.editedIndex > -1) {
         await this.updateItem(this.editedItem)
@@ -107,9 +113,12 @@ const CrudMixin: ComponentOptions<any> = {
         await this.createItem(this.editedItem)
       }
     },
-    setEditedItem (data) {
-      this.editedIndex = data._id || -1
+    setEditedItem(data) {
+      this.editedIndex = data._id ? data._id : -1
       this.editedItem = Object.assign({}, data)
+    },
+    reset() {
+      this.setEditedItem(new this.model())
     }
   }
 }

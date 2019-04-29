@@ -67,7 +67,7 @@ const modelFormName = ModelName + 'Form'
 </template>
 
 <script>
-import crudMixin from '@/mixins/crudMixin'
+import crudMixin from '@/mixins/crudMixin.request'
 import exportMixin from '@/mixins/exportMixin'
 
 export default {
@@ -80,7 +80,11 @@ export default {
   watch: {
     editedItem: {
       handler (newItem) {
-        console.log(newItem)
+        if (newItem._id === undefined) {
+          console.log(`Editing item ${newItem._id} changed`)
+        } else {
+          console.log(`New item changed`)
+        }
       },
       immediate: true
     }
