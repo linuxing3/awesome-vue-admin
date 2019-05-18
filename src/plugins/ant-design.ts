@@ -56,6 +56,7 @@ import {
   Drawer,
   Skeleton
 } from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 
 Vue.use(Affix)
 Vue.use(Anchor)
@@ -112,4 +113,3 @@ Vue.use(Skeleton)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification
-// import 'ant-design-vue/dist/antd.css'

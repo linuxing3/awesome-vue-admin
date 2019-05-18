@@ -1,7 +1,7 @@
 import Vue from 'vue'
-// import App from './App.vue'
-import App from './components.tsx/App/App'
-import router from './router'
+import App from './App.vue'
+// import App from './components.tsx/App/App'
+import router from './router/index.antd'
 import store from './store'
 
 import i18n from './plugins/i18n'

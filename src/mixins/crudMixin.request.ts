@@ -9,16 +9,15 @@
 import { ComponentOptions } from 'vue'
 import { genTableHeaders } from '@/util/genFormData'
 import { baseFilter } from '@/util'
-import XingRequest from '@/util/request.vuex.orm'
+import lfService from '@/util/request.localforage'
 import { rules } from '@/util/validate'
-
-const axios = new XingRequest()
 
 interface ICrudHelper {
   modelName: string
   editedItem: any
   editedIndex: number
   fields: string[]
+  pagination: any
   model?: any
   defaultItem: any
   filter?: {
@@ -31,7 +30,7 @@ interface ICrudHelper {
 const CrudMixin: ComponentOptions<any> = {
   data(): ICrudHelper {
     return {
-      modelName: '',
+      modelName: 'user',
       editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
       model: null,
@@ -40,6 +39,10 @@ const CrudMixin: ComponentOptions<any> = {
       filter: {
         search: '',
         sort: '_id'
+      },
+      pagination: {
+        pageNo: 1,
+        pageSize: 10
       },
       rules
     }
@@ -79,33 +82,56 @@ const CrudMixin: ComponentOptions<any> = {
     await this.fetch()
   },
   created() {
-    this.$on('SET_EDITING', function(item: object) {
+    this.$on('SET_EDITING', function(item: any) {
       this.setEditedItem(item)
     })
   },
   methods: {
     async fetch() {
+      const { pagination } = this
       const {
         result: { fields, model }
-      } = await axios.request(`get /${this.modelName}`)
+      } = await lfService.request({
+        url: `/${this.modelName}`,
+        method: 'get',
+        pagination
+      })
       this.fields = fields
       this.model = model
       this.setEditedItem(new this.model())
     },
-    async deleteItem(data: object) {
-      await axios.request(`delete /${this.modelName}`, data)
+    async deleteItem(data: any) {
+      await lfService.request({
+        url: `/${this.modelName}`,
+        method: 'delete',
+        data
+      })
     },
-    async deleteAll(data: object) {
-      await axios.request(`post /${this.modelName}/delete`, data)
+    async deleteAll(data: any[]) {
+      data.map(async item => {
+        await lfService.request({
+          url: `/${this.modelName}`,
+          method: 'delete',
+          data: item
+        })
+      })
     },
-    async updateItem(data: object) {
-      await axios.request(`patch /${this.modelName}`, data)
+    async updateItem(data: any) {
+      await lfService.request({
+        url: `/${this.modelName}`,
+        method: 'delete',
+        data
+      })
     },
-    async createItem(data: object) {
+    async createItem(data: any) {
       console.log('Creating')
-      await axios.request(`post /${this.modelName}`, data)
+      await lfService.request({
+        url: `/${this.modelName}`,
+        method: 'delete',
+        data
+      })
     },
-    async saveItem(data: object) {
+    async saveItem(data: any) {
       this.setEditedItem(data)
       if (this.editedIndex > -1) {
         await this.updateItem(this.editedItem)
