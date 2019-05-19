@@ -1,65 +1,7 @@
 import store from '@/store'
 import models from '@/models'
-
-const responseBody = {
-  message: '',
-  timestamp: 0,
-  result: null,
-  code: 0,
-  status: null,
-  headers: null
-}
-
-/**
- * 获取数据，包装成axios类似的返回格式
- * @param {any} data Data from request
- * @param {string} message Response messag
- * @param {number} code Response code
- * @param {any} headers Response headers
- */
-export const builder = (data, message, code = 0, headers = {}) => {
-  responseBody.result = data
-  if (message !== undefined && message !== null) {
-    responseBody.message = message
-  }
-  if (code !== undefined && code !== 0) {
-    responseBody.code = code
-    responseBody.status = code
-  }
-  if (headers !== null && typeof headers === 'object' && Object.keys(headers).length > 0) {
-    responseBody.headers = headers
-  }
-  responseBody.timestamp = new Date().getTime()
-  return responseBody
-}
-
-/**
- * 获取url查询参数字符串，包装为json对象
- * @param {any} options Url查询参数字符串
- */
-export const getQueryParameters = options => {
-  const url = options.url
-  const search = url.split('?')[1]
-  if (!search) {
-    return {}
-  }
-  return JSON.parse(
-    '{"' +
-      decodeURIComponent(search)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"') +
-      '"}'
-  )
-}
-
-/**
- * 获取请求体字符串，返回json对象
- * @param {any} options 获取请求体
- */
-export const getBody = options => {
-  return options.body && JSON.parse(options.body)
-}
+import { builder } from '@/util/builder'
+import { AGenTableColumns, VGenTableHeaders } from '@/util/genFormData'
 
 // 创建 axios localforage 实例
 const lfService = {
@@ -89,6 +31,23 @@ const lfService = {
       url,
       prefix,
       action
+    }
+  },
+  genPagination(model, pagination) {
+    const totalCount = model.query().count() || 0
+    const pageNo = (pagination.pageNo && parseInt(pagination.pageNo)) || 1
+    const pageSize = (pagination.pageSize && parseInt(pagination.pageSize)) || 10
+    const totalPage = Math.ceil(totalCount / pageSize) || 0
+    // offset and next
+    const offset = (pageNo - 1) * pageSize || 0
+    const next = (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1
+    return {
+      totalCount,
+      pageNo,
+      pageSize,
+      totalPage,
+      offset,
+      next
     }
   },
   response: async function(params) {
@@ -130,12 +89,22 @@ const lfService = {
     // Using vuex-orm with localforage
     try {
       let requestedData = null
+      // pagination
+      const { offset, pageSize, pageNo, totalCount, totalPage, next } = this.genPagination(
+        model,
+        pagination
+      )
+      // header, columns
+      const columns = AGenTableColumns(model.fieldKeys() || model.fieldKeys)
+      const headers = VGenTableHeaders(model.fieldKeys() || model.fieldKeys)
       // data from localforage
       switch (method) {
         case 'post':
           const createdItems = await model.$create({ data })
           requestedData = {
             model,
+            columns,
+            headers,
             data: createdItems
           }
           break
@@ -143,6 +112,8 @@ const lfService = {
           const deletedItems = await model.$delete(data.id || data)
           requestedData = {
             model,
+            columns,
+            headers,
             data: deletedItems
           }
           break
@@ -150,43 +121,44 @@ const lfService = {
           const updatedItems = await model.$update({ data })
           requestedData = {
             model,
+            columns,
+            headers,
             data: updatedItems
           }
           break
         case 'get':
           if (!data) {
             await model.$fetch()
-            // pagination
-            const totalCount = model.query().count() || 0
-            const pageNo = (pagination.pageNo && parseInt(pagination.pageNo)) || 1
-            const pageSize = (pagination.pageSize && parseInt(pagination.pageSize)) || 10
-            const totalPage = Math.ceil(totalCount / pageSize) || 0
-            // offset and next
-            const offset = (pageNo - 1) * pageSize || 0
-            const next = (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1
-            // query with pagination
-            const paginatedData = model
-              .query()
-              .offset(offset)
-              .limit(pageSize)
-              .get()
+            // query with pagination, header, columns
+            const paginatedData =
+              !offset && !pageSize
+                ? model.query().get()
+                : model
+                    .query()
+                    .offset(offset)
+                    .limit(pageSize)
+                    .get()
             // build data and attach to result
             requestedData = {
               model,
+              data: paginatedData,
               pageSize,
               pageNo,
               totalCount,
               totalPage,
               offset,
               next,
-              data: paginatedData
+              columns,
+              headers
             }
           } else {
             await model.$get(data.id || data)
             const foundItem = model.find(data.id || data) || {}
             requestedData = {
               model,
-              data: foundItem
+              data: foundItem,
+              columns,
+              headers
             }
           }
           break

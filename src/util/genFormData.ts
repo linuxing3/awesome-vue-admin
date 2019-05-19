@@ -6,7 +6,15 @@ const formDataSchema = {
   '*': 'v-text-field'
 }
 
-export interface HeaderConfig {
+export interface ATableColumnConfig {
+  dataIndex: string
+  title: string
+  width?: string
+  sorter?: boolean
+  scopedSlots?: any
+}
+
+export interface VTableHeaderConfig {
   value: string
   text: string
   align?: string
@@ -33,16 +41,35 @@ export const genFormData = (field: string): FormDataConfig => {
   }
 }
 
-export const genTableHeaders = (fields: string[]): HeaderConfig[] => {
-  return fields.reduce((headersConfig: HeaderConfig[], field: string): HeaderConfig[] => {
-    let config: HeaderConfig = {
-      value: field,
-      text: field,
-      align: 'left',
-      sortable: true,
-      ...genFormData(field)
-    }
-    headersConfig.push(config)
-    return headersConfig
-  }, [])
+export const VGenTableHeaders = (fields: string[]): VTableHeaderConfig[] => {
+  return fields.reduce(
+    (headersConfig: VTableHeaderConfig[], field: string): VTableHeaderConfig[] => {
+      let config: VTableHeaderConfig = {
+        value: field,
+        text: field,
+        align: 'left',
+        sortable: true,
+        ...genFormData(field)
+      }
+      headersConfig.push(config)
+      return headersConfig
+    },
+    []
+  )
+}
+
+export const AGenTableColumns = (fields: string[]): ATableColumnConfig[] => {
+  return fields.reduce(
+    (columnsConfig: ATableColumnConfig[], field: string): ATableColumnConfig[] => {
+      let config: ATableColumnConfig = {
+        title: field,
+        dataIndex: field,
+        width: '60px',
+        sorter: true
+      }
+      columnsConfig.push(config)
+      return columnsConfig
+    },
+    []
+  )
 }

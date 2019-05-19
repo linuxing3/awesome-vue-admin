@@ -7,7 +7,7 @@
  *
  */
 import { ComponentOptions } from 'vue'
-import { genTableHeaders } from '@/util/genFormData'
+import { AGenTableColumns, VGenTableHeaders } from '@/util/genFormData'
 import { baseFilter } from '@/util'
 import lfService from '@/util/request.localforage'
 import { rules } from '@/util/validate'
@@ -62,8 +62,12 @@ const CrudMixin: ComponentOptions<any> = {
       if (search === '') return data
       return baseFilter({ sort, search }, data)
     },
+    columns(): any[] {
+      if (this.fields) return AGenTableColumns(this.fields)
+      return []
+    },
     headers(): any[] {
-      if (this.fields) return genTableHeaders(this.fields)
+      if (this.fields) return VGenTableHeaders(this.fields)
       return []
     },
     count(): number {

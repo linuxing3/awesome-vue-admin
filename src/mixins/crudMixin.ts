@@ -45,7 +45,7 @@ import { Model } from '@vuex-orm/core'
 import { BaseModel } from '@/models/BaseModel'
 import { baseFilter } from '@/util'
 import { Location } from 'vue-router'
-import { genTableHeaders } from '@/util/genFormData'
+import { VGenTableHeaders, AGenTableColumns } from '@/util/genFormData'
 import { rules } from '@/util/validate'
 
 interface ICrudHelper {
@@ -56,12 +56,12 @@ interface ICrudHelper {
   filter?: {
     search: string
     sort: string
-  },
+  }
   rules?: any
 }
 
 const CrudMixin: ComponentOptions<any> = {
-  data (): ICrudHelper {
+  data(): ICrudHelper {
     return {
       editedItem: {}, // currently item to be edited
       editedIndex: -1, // when -1, create, else update or delete
@@ -74,71 +74,76 @@ const CrudMixin: ComponentOptions<any> = {
     }
   },
   computed: {
-    formTitle (): string {
+    formTitle(): string {
       return this.editedIndex === -1 ? '添加' : '编辑'
     },
-    editing (): boolean {
+    editing(): boolean {
       return this.editedIndex !== -1 // is in edit state
     },
     // 数据对象的定义模型
-    Model (): typeof BaseModel {
+    Model(): typeof BaseModel {
       return models[this.modelName as string] as typeof BaseModel
     },
-    defaultItem (): BaseModel {
+    defaultItem(): BaseModel {
       return new models[this.modelName as string]() as BaseModel // always a fresh new item
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    all (): BaseModel[] {
+    all(): BaseModel[] {
       return this.Model.query().get()
     },
-    count (): number {
+    count(): number {
       return this.Model.query().count()
     },
     // 数据对象的实例数组，包含有关系的其他数据
-    withAll (): BaseModel[] {
+    withAll(): BaseModel[] {
       return this.Model.query()
         .withAll()
         .get() as BaseModel[]
     },
     // 数据对象的实例数组
-    items (): BaseModel[] {
+    items(): BaseModel[] {
       let { search, sort } = this.filter
       if (search === '') return this.withAll as BaseModel[]
       // in filtered case, may different from editedIndex
       return baseFilter({ sort, search }, this.withAll as BaseModel[])
     },
     // 数据键值的数组
-    fields (): string[] {
+    fields(): string[] {
       return this.Model.fieldsKeys()
     },
     // 数据键值的数组，可用于表格标题行
-    mainHeaders (): string[] {
+    mainHeaders(): string[] {
       return this.headers.splice(2, 10)
     },
-    headers (): any[] {
-      return genTableHeaders(this.fields)
+    headers(): any[] {
+      if (this.fields) return VGenTableHeaders(this.fields)
+      return []
     },
-    allHeaders (): string[] {
+    columns(): any[] {
+      if (this.fields) return AGenTableColumns(this.fields)
+      return []
+    },
+    allHeaders(): string[] {
       return this.Model.fieldsKeys()
     },
     // 关系型数据键值的数组
-    relationFields (): string[] {
+    relationFields(): string[] {
       return this.Model.relationFields()
     },
     // 非关系型数据键值的数组
-    nonRelationFields (): string[] {
+    nonRelationFields(): string[] {
       return this.Model.nonRelationFields()
     },
     // 关系型数据键值中包括_id的
-    relationFieldsWithId (): string[] {
+    relationFieldsWithId(): string[] {
       return this.Model.relationFieldsWithId()
     },
     // 关系型数据键值中不包括_id的
-    nonRelationFieldsNoId (): string[] {
+    nonRelationFieldsNoId(): string[] {
       return this.Model.nonRelationFieldsNoId()
     },
     // The form or info page to edit
-    editRoute (): Location {
+    editRoute(): Location {
       return {
         name: this.modelName + '_id',
         params: {
@@ -149,7 +154,7 @@ const CrudMixin: ComponentOptions<any> = {
       }
     },
     // The form or add
-    addRoute (): Location {
+    addRoute(): Location {
       return {
         name: this.modelName + '_id',
         params: {
@@ -162,20 +167,20 @@ const CrudMixin: ComponentOptions<any> = {
   },
   watch: {
     // watch modelName for refetch and update
-    async modelName (val) {
+    async modelName(val) {
       await this.fetch()
     },
-    editedIndex (val) {
+    editedIndex(val) {
       console.log(`Editing item ${val}`)
     }
   },
-  async mounted () {
+  async mounted() {
     this.reset()
     await this.fetch()
   },
-  created () {
+  created() {
     // 组件自身监听事件，更新[编辑]和[数据模型]的状态
-    this.$on('SET_EDITING', function (item: object) {
+    this.$on('SET_EDITING', function(item: object) {
       this.setEditedItem(item)
     })
   },
@@ -184,7 +189,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 通过ORM插件，获取lowdb数据到组件
      * 如果配合exportMixin混入中定义EntityDb
      */
-    async fetch () {
+    async fetch() {
       // Clear Current State
       if (this.Model.$fetch !== undefined) {
         await this.Model.$fetch()
@@ -196,7 +201,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 删除
      * @param {object} item 要删除的项目
      */
-    deleteItem (item: object) {
+    deleteItem(item: object) {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.setEditedItem(item)
       // ORM Localforage插件方法
@@ -213,7 +218,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 更新
      * @param {object} item 要删除的项目，包含id字段
      */
-    updateItem (data: object) {
+    updateItem(data: object) {
       // 在组件中创建这一方法，设置[编辑]为真，[数据模型]为传入项目
       this.Model.$update({
         data
@@ -225,7 +230,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 创建
      * @param {object} item 要创建的项目数据，不包含id字段
      */
-    createItem (data: object) {
+    createItem(data: object) {
       // 设置[编辑]为假，[数据模型]为传入项目
       this.Model.$create({
         data
@@ -238,7 +243,7 @@ const CrudMixin: ComponentOptions<any> = {
      * should call after setEditedItem is called and editedIndex is set
      * @param {object} item 要删除的项目，包含id字段
      */
-    saveItem (item?: object) {
+    saveItem(item?: object) {
       if (this.editedIndex > -1) {
         this.updateItem(item)
       } else {
@@ -249,7 +254,7 @@ const CrudMixin: ComponentOptions<any> = {
     /**
      * 重置组件状态
      */
-    reset () {
+    reset() {
       // If previous route want to edit
       if (this.$route.params.type === 'edit') {
         this.setEditedItem(this.$route.params.editedItem)
@@ -261,7 +266,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 设置当前编辑项的索引和数据备用
      * @param item
      */
-    setDefaultItem () {
+    setDefaultItem() {
       this.editedItem = new this.Model()
       this.editedIndex = -1
     },
@@ -269,7 +274,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 设置当前编辑项的索引和数据备用
      * @param item
      */
-    setEditedItem (item) {
+    setEditedItem(item) {
       this.editedItem = Object.assign({}, item) // Deep copy
       this.editedIndex = this.editedItem._id
     },
@@ -278,7 +283,7 @@ const CrudMixin: ComponentOptions<any> = {
      * 尝试进行国际化翻译
      * @param text 需要翻译的文字
      */
-    tryT (text: string) {
+    tryT(text: string) {
       if (this.$t !== undefined) {
         return this.$t(text)
       } else {
