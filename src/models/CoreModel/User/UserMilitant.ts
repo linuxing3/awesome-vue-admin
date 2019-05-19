@@ -12,9 +12,9 @@ export interface IUserMilitant {
 export default class UserMilitant extends BaseModel {
   static entity = 'userMilitant'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string('Daniel'),
       gender: this.string('male'),
       etnia: this.string('han'),

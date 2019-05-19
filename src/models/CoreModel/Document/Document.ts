@@ -22,9 +22,9 @@ export interface IDocument {
 export default class Document extends BaseModel {
   static entity = 'document'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       year: this.string('2019'),
       date: this.string('2019-02-25'),
       classiLevel: this.string('internal'),

@@ -16,9 +16,9 @@ export default class UserMilitant extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string('Daniel'),
       gender: this.string('male'),
       etnia: this.string('han'),

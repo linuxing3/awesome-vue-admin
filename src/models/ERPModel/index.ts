@@ -6,7 +6,7 @@ import { resolve } from 'path'
 
 const ERPModels: RequireContext = require.context('.', true, /\.json$/)
 
-function pickFields (fieldConfig = []): any[] {
+function pickFields(fieldConfig = []): any[] {
   return fieldConfig.reduce((result, field) => {
     let newField = pick(field, ['fieldname', 'fieldtype', 'label', 'options'])
     result.push(newField)
@@ -17,7 +17,7 @@ function pickFields (fieldConfig = []): any[] {
 /**
  * 将ERPModels的fields内容重新组合，只取必要字段
  */
-export function genModelConfigJson () {
+export function genModelConfigJson() {
   const rootDir = 'G:\\workspace\\awesome-vue-admin\\src\\models\\TestModels'
 
   ERPModels.keys().forEach((fileName: string) => {
@@ -51,7 +51,7 @@ export function genModelConfigJson () {
 /**
  * 使用新的Fields自动生成Model
  */
-export function createModels () {
+export function createModels() {
   let models = {}
 
   ERPModels.keys().forEach((fileName: string) => {
@@ -83,7 +83,7 @@ export function createModels () {
           ...sectionMeta
         }
 
-        static fields () {
+        static fields() {
           let fields = fieldConfig.reduce((fields, field) => {
             let label = field['label']
             let fieldname = field['fieldname']
@@ -91,7 +91,7 @@ export function createModels () {
             return fields
           }, {})
           return {
-            _id: this.increment(),
+            id: this.increment(),
             ...fields
           }
         }
@@ -105,7 +105,7 @@ export function createModels () {
 /**
  * Using json as i18n messages
  */
-export function createMessages () {
+export function createMessages() {
   const ERPModels: RequireContext = require.context('.', true, /\.json$/)
   let ERPMessages: LocaleMessages = {}
 
@@ -113,13 +113,16 @@ export function createMessages () {
     const fieldConfig = ERPModels(fileName)['fields']
 
     if (fieldConfig !== undefined) {
-      ERPMessages = fieldConfig.reduce((messages, field) => {
-        let label = field['label']
-        let fieldName = field['fieldname']
-        let fieldNameCn = field['fieldname_cn']
-        messages['cn'][fieldName] = fieldNameCn || label
-        return messages
-      }, { cn: {} })
+      ERPMessages = fieldConfig.reduce(
+        (messages, field) => {
+          let label = field['label']
+          let fieldName = field['fieldname']
+          let fieldNameCn = field['fieldname_cn']
+          messages['cn'][fieldName] = fieldNameCn || label
+          return messages
+        },
+        { cn: {} }
+      )
     }
   })
   return ERPMessages

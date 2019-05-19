@@ -1,321 +1,130 @@
 <template>
-  <v-card>
-    <v-card-title
-        :class="editing ? 'success darken-1' : 'red darken-1'"
-        dark>
-      <span class="display-1 text-capitalize white--text font-weight-thin">{{ formTitle }} - {{ modelName }}  {{editedIndex !== -1 ? '-' + editedIndex : ''}}</span>
-      <v-spacer />
-      <v-btn
-          v-if="editedIndex !== -1"
-          fab
-          small
-          color="red darken-2 white--text"
-          @click="exportDocx(editedItem)"
-          icon>
-        <v-icon>attach_file</v-icon>
-      </v-btn>
-      <ExportDialog
-          buttonText="导出/打印"
-          :items="[ editedItem ]"
-          :modelName="modelName" ></ExportDialog>
-    </v-card-title>
-    <!-- activator in slot -->
-    <v-card-text>
-      <v-form
-          ref="form"
-          v-model="valid">
-        <v-container
-            fluid
-            v-bind="{ [`grid-list-${size}`]: true }">
-          <v-layout
-              row
-              wrap>
-            <!-- generate form from schema  -->
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.nameRules"
-                  :counter="25"
-                  v-model="editedItem['name']"
-                  :label=" tryT('name') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                sm6
-                md4>
-              <v-menu
-                  ref="birthday"
-                  v-model="birthdayPicker"
-                  false-on-content-click="false"
-                  :nudge-right="40"
-                  lazy
-                  transition="scale-transition"
-                  offset-y
-                  full-width
-                  min-width="290px"
-                >
-                <v-text-field
-                    slot="activator"
-                    v-model="editedItem['birthday']"
-                    :label=" tryT('birthday')"
-                    append-icon="event"
-                    readonly
-                  ></v-text-field>
-                <v-date-picker
-                    v-model="editedItem['birthday']"
-                    no-title
-                    scrollable>
-                  <v-spacer></v-spacer>
-                  <v-btn
-                      flat
-                      color="primary"
-                      @click="birthdayPicker = false">{{ tryT('cancel')}}</v-btn>
-                </v-date-picker>
-              </v-menu>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-select
-                  clearable
-                  :label=" tryT('gender')"
-                  :items="genders"
-                  item-text="name"
-                  item-value="name"
-                  v-model="editedItem['gender']">
-              </v-select>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-select
-                  :label=" tryT('etnia')"
-                  :items="etnias"
-                  clearable
-                  item-text="name"
-                  item-value="name"
-                  v-model="editedItem['etnia']">
-              </v-select>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['academicBackground']"
-                  :label=" tryT('academicBackground') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['positionAndRank']"
-                  :label=" tryT('positionAndRank') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-select
-                  :label=" tryT('politicalRole')"
-                  :items="[ tryT('militant'), tryT('youth') ]"
-                  v-model="editedItem['politicalRole']">
-              </v-select>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-select
-                  :label=" tryT('militantRole')"
-                  :items="[ tryT('militant'), tryT('youth') ]"
-                  v-model="editedItem['militantRole']">
-              </v-select>
-            </v-flex>
-            <v-flex
-                xs12
-                md12
-                sm12
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['duty']"
-                  :label=" tryT('duty') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['fromEntity']"
-                  :label=" tryT('fromEntity') "></v-text-field>
-            </v-flex>
-            <v-divider></v-divider>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['sendingEntity']"
-                  :label=" tryT('sendingEntity') "></v-text-field>
-            </v-flex>
-            <v-divider />
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="10"
-                  v-model="editedItem['conyugeName']"
-                  :label=" tryT('conyugeName') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['conyugeEntity']"
-                  :label=" tryT('conyugeEntity') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['conyugeBonus']"
-                  :label=" tryT('conyugeBonus') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md12
-                sm12
-                class="pa-2 pr-2">
-              <v-text-field
-                  :rules="rules.textRules"
-                  :counter="50"
-                  v-model="editedItem['memo']"
-                  :label=" tryT('memo') "></v-text-field>
-            </v-flex>
-            <v-divider class="my-2" />
-            <v-spacer />
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-text-field
-                  :counter="10"
-                  v-model="editedItem['protocolId']"
-                  :label=" tryT('protocolId') "></v-text-field>
-            </v-flex>
-            <v-flex
-                xs12
-                md6
-                sm6
-                class="pa-2 pr-2">
-              <v-select
-                  v-model="editedItem['isActive']"
-                  :items="['在馆', '离馆']"
-                  :label=" tryT('isActive') "></v-select>
-            </v-flex>
-            <!-- end form from schema  -->
-          </v-layout>
-        </v-container>
-      </v-form>
-    </v-card-text>
-
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn
-          :class="editing ? 'success white--text' : 'red white--text'"
-          @click="validate">{{ editing ? '编辑': '新增'}}</v-btn>
-      <v-btn
-          class="gray"
-          @click="resetValidation">取消</v-btn>
-    </v-card-actions>
-  </v-card>
+  <a-card
+      :body-style="{padding: '24px 32px'}"
+      :bordered="false">
+    <a-form
+        @submit="handleSubmit"
+        :form="form">
+      <a-form-item
+          label="编号"
+          :labelCol="{lg: {span: 7}, sm: {span: 7}}"
+          :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
+        <a-input
+            v-decorator="[
+              'id',
+              {rules: [{ required: false, message: '自动编号' }]}
+            ]"
+            name="id"
+            disabled />
+      </a-form-item>
+      <a-form-item
+          label="姓名"
+          :labelCol="{lg: {span: 7}, sm: {span: 7}}"
+          :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
+        <a-input
+            v-decorator="[
+              'name',
+              {rules: [{ required: true, message: '请输入姓名' }]}
+            ]"
+            name="name"
+            placeholder="给自己起个名字" />
+      </a-form-item>
+      <a-form-item
+          :wrapperCol="{ span: 24 }"
+          style="text-align: center"
+        >
+        <a-button
+            htmlType="submit"
+            type="primary">提交</a-button>
+        <a-button
+            style="margin-left: 8px"
+            @click="() => handleReset()">取消</a-button>
+      </a-form-item>
+    </a-form>
+  </a-card>
 </template>
 
 <script>
-import crudMixin from '@/mixins/crudMixin.request'
-import exportMixin from '@/mixins/exportMixin'
-import etnias from '@/api/etnia'
-import { genders, maritalStatus } from '@/api/gender'
-
 export default {
+  name: 'UserForm',
   data () {
     return {
       modelName: 'user',
-      birthdayPicker: false,
-      valid: true,
-      size: 'xl',
-      genders,
-      maritalStatus,
-      etnias
+      description: '搜集信息',
+      value: 1,
+      form: this.$form.createForm(this),
+      fields: [ 'name' ]
     }
   },
-  watch: {
-    editedItem: {
-      handler (newItem) {
-        console.log(newItem)
-      },
-      immediate: true
+  computed: {
+    id () {
+      return this.$route.params.id || -1
     }
   },
-  mixins: [ crudMixin, exportMixin ],
-  created () {
-    this.$on('set-edit-item', (item) => {
-      this.setEditedItem(item)
+  mounted () {
+    this.$nextTick(() => {
+      this.handleGetInfo()
     })
-    window.UserForm = this
   },
   methods: {
-    validate () {
-      if (this.$refs.form.validate()) {
-        this.saveItem(this.editedItem)
-        window.UserTable.$emit('toggle-form', false)
-        this.reset()
+    handleSubmit (e) {
+      e.preventDefault()
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(`Received values of ${this.modelName}: `, values)
+          this.handleAddOrEdit(values)
+        }
+      })
+      new Promise((resolve) => {
+        setTimeout(resolve, 500)
+      }).then(() => {
+        this.handleReset()
+      })
+    },
+    handleAddOrEdit (data) {
+      if (this.id === -1) {
+        console.log('Creating...')
+        this.$lf.request({
+          url: `/${this.modelName}`,
+          method: 'post',
+          data
+        })
+      } else {
+        console.log('updating...')
+        this.$lf.request({
+          url: `/${this.modelName}`,
+          method: 'patch',
+          data
+        })
       }
     },
-    resetValidation () {
-      this.$refs.form.resetValidation()
-      window.UserTable.$emit('toggle-form', false)
-      this.reset()
+    async handleGetInfo () {
+      if (this.id === -1) return
+      const { result: { data } } = await this.$lf.request({
+        url: `/${this.modelName}`,
+        method: 'get',
+        data: { id: this.id }
+      })
+      this.loadEditInfo(data)
+    },
+    loadEditInfo (data) {
+      const { form } = this
+      console.log(`编辑记录 ${this.id}`)
+      new Promise((resolve) => {
+        setTimeout(resolve, 500)
+      }).then(() => {
+        console.log('formData:', data)
+        form.setFieldsValue(data)
+      })
+    },
+    handleReset () {
+      this.$router.push({
+        name: 'UserList',
+        params: {
+          needUpdate: true
+        }
+      })
     }
   }
 }
 </script>
-
-<style scoped>
-</style>

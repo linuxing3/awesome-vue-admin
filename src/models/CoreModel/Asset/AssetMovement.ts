@@ -11,15 +11,14 @@ export interface IAssetMovement {
   fromUser: string
   toUser: string
   referenceNo: string
-
 }
 
 export default class AssetMovement extends BaseModel {
   static entity = 'assetMovement'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       asset: this.string('asset'),
       transactionDate: this.string('transactionDate'),
       quantity: this.string('quantity'),

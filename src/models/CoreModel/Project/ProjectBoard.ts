@@ -12,9 +12,9 @@ export interface IProjectBoard {
 export default class ProjectBoard extends BaseModel {
   static entity = 'projectBoard'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string('home'),
       title: this.string('Home Tasks'),
       owner: this.hasOne(User, 'user_id'),

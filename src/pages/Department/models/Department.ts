@@ -2,8 +2,8 @@ import { BaseModel } from '@/models/BaseModel'
 import User from '../../User/models/User'
 
 export interface IDepartment {
-   _id?: string
-   name: string
+  _id?: string
+  name: string
 }
 
 export default class Department extends BaseModel {
@@ -13,9 +13,9 @@ export default class Department extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string('XX处'),
       users: this.hasMany(User, 'department_id')
     }

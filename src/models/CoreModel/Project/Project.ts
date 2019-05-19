@@ -31,9 +31,9 @@ export interface IProject {
 export default class Project extends BaseModel {
   static entity = 'project'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       title: this.string('dev'),
       type: this.string('type'),
       status: this.string('status'),

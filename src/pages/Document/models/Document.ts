@@ -26,9 +26,9 @@ export default class Document extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       year: this.string('2019'),
       date: this.string('2019-02-25'),
       classiLevel: this.string('内部'),

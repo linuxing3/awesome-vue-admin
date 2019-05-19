@@ -20,9 +20,9 @@ export default class Asset extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       assetName: this.string('asset'),
       itemCode: this.string('itemCode'),
       itemName: this.string('itemName'),

@@ -8,9 +8,9 @@ export interface IUserAppraisal {
 export default class UserAppraisal extends BaseModel {
   static entity = 'userAppraisal'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       department: this.string('Business'),
       name: this.string('Daniel'),
       startDate: this.string('male'),

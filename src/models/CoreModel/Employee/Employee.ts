@@ -59,15 +59,14 @@ export interface IEmployee {
   resiged: string
   reasonForResignation: string
   feedback: string
-
 }
 
 export default class Employee extends BaseModel {
   static entity = 'employee'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       salutation: this.string('salutation'),
       firstName: this.string('firstName'),
       middleName: this.string('middleName'),

@@ -13,9 +13,9 @@ export default class Archive extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       type: this.string('XXX'),
       mark: this.string('XXX'),
       classiLevel: this.string('XXX'),

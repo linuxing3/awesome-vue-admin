@@ -68,9 +68,9 @@ export default class Employee extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       salutation: this.string('salutation'),
       firstName: this.string('firstName'),
       middleName: this.string('middleName'),

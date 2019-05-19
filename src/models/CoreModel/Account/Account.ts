@@ -16,9 +16,9 @@ export interface IAccount {
 export default class Account extends BaseModel {
   static entity = 'account'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string(''),
       email: this.string(''),
       password: this.string(''),
@@ -28,7 +28,7 @@ export default class Account extends BaseModel {
     }
   }
 
-  isAdmin () {
+  isAdmin() {
     return this['role'] === 'admin'
   }
 }

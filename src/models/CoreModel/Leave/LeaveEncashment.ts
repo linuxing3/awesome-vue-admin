@@ -6,20 +6,18 @@ export interface ILeaveEncashment {
   encashmentAmount: string
   encashmentDate: string
   additionalSalary: string
-
 }
 
 export default class LeaveEncashment extends BaseModel {
   static entity = 'leaveEncashment'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       leaveBalance: this.string('leaveEncashment'),
       encashmentAmount: this.string('encashmentAmount'),
       encashmentDate: this.string('encashmentDate'),
       additionalSalary: this.string('additionalSalary')
-
     }
   }
 }

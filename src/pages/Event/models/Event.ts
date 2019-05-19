@@ -2,21 +2,21 @@ import { BaseModel } from '@/models/BaseModel'
 
 export interface IEvent {
   _id?: string
-  title: string,
-  date?: string,
-  startTime?: string,
-  duration?: string,
-  applicant?: string,
-  participants?: string,
-  guests?: string,
-  content?: string,
-  currentDate?: string,
-  reportDate?: string,
-  reportContent?: string,
-  instructionDate?: string,
-  instruction?: string,
-  priority?: string,
-  userId?: string,
+  title: string
+  date?: string
+  startTime?: string
+  duration?: string
+  applicant?: string
+  participants?: string
+  guests?: string
+  content?: string
+  currentDate?: string
+  reportDate?: string
+  reportContent?: string
+  instructionDate?: string
+  instruction?: string
+  priority?: string
+  userId?: string
   projectId?: string
 }
 
@@ -27,9 +27,9 @@ export default class Event extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       title: this.string('title'),
       date: this.string('2019-02-23'),
       startTime: this.string('12:00'),

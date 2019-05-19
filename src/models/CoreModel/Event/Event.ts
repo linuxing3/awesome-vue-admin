@@ -3,9 +3,9 @@ import { BaseModel } from '../../BaseModel'
 export default class Event extends BaseModel {
   static entity = 'event'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       date: this.string('2019-02-23'),
       title: this.string('title'),
       time: this.string('12:00'),

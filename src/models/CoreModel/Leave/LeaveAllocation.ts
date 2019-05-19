@@ -12,15 +12,14 @@ export interface ILeaveAllocation {
   unusedLeaves: string
   notes: string
   description: string
-
 }
 
 export default class LeaveAllocation extends BaseModel {
   static entity = 'leaveAllocation'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       applicant: this.string('applicant'),
       department: this.string('department'),
       type: this.string('type'),

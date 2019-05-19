@@ -14,9 +14,9 @@ export interface IProjectTask {
 export default class ProjectTask extends BaseModel {
   static entity = 'projectTask'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       title: this.string('dev'),
       description: this.string('description'),
       status: this.string('status'),

@@ -1,20 +1,20 @@
 const getters = {
-  device: state => state.app.device,
-  theme: state => state.app.theme,
-  color: state => state.app.color,
-  token: state => state.user.token,
-  lfToken: state => state.user.token,
-  avatar: state => state.user.avatar,
-  nickname: state => state.user.name,
-  welcome: state => state.user.welcome,
-  lfWelcome: state => state.entities.user.welcome,
+  device: (state: { app: { device: any } }) => state.app.device,
+  theme: (state: { app: { theme: any } }) => state.app.theme,
+  color: (state: { app: { color: any } }) => state.app.color,
+  token: (state: { user: { token: any } }) => state.user.token,
+  lfToken: (state: { user: { token: any } }) => state.user.token,
+  avatar: (state: { user: { avatar: any } }) => state.user.avatar,
+  nickname: (state: { user: { name: any } }) => state.user.name,
+  welcome: (state: { user: { welcome: any } }) => state.user.welcome,
+  lfWelcome: (state: { entities: { user: { welcome: any } } }) => state.entities.user.welcome,
   // roles
-  roles: state => state.user.roles,
+  roles: (state: { user: { roles: any } }) => state.user.roles,
   // userInfo
-  userInfo: state => state.user.info,
+  userInfo: (state: { user: { info: any } }) => state.user.info,
   // routes for user
-  addRouters: state => state.permission.addRouters,
-  multiTab: state => state.app.multiTab
+  addRouters: (state: { permission: { addRouters: any } }) => state.permission.addRouters,
+  multiTab: (state: { app: { multiTab: any } }) => state.app.multiTab
 }
 
 export default getters

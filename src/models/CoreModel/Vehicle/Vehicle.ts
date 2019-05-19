@@ -21,15 +21,14 @@ export interface IVehicle {
   color: string
   wheels: string
   door: string
-
 }
 
 export default class Vehicle extends BaseModel {
   static entity = 'vehicle'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       licensePlate: this.string('license'),
       mark: this.string('mark'),
       model: this.string('model'),

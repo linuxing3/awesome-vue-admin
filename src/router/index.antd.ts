@@ -34,6 +34,49 @@ const router = new Router({
         import(/* webpackChunkName: "routes" */
         `@/pages/Home.vue`)
     },
+    // insert more route below
+    // user
+    {
+      path: '/user-form',
+      meta: {
+        public: true
+      },
+      name: 'UserForm',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/User/components/UserForm.vue`)
+    },
+    {
+      path: '/user-list',
+      meta: {
+        public: true
+      },
+      name: 'UserList',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/User/components/UserList.vue`)
+    },
+    {
+      path: '/member-form',
+      meta: {
+        public: true
+      },
+      name: 'MemberForm',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/Member/components/MemberForm.vue`)
+    },
+    {
+      path: '/member-list',
+      meta: {
+        public: true
+      },
+      name: 'MemberList',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/Member/components/MemberList.vue`)
+    },
+    // insert more route above
     {
       path: '/500',
       meta: {

@@ -8,9 +8,9 @@ export interface IUserAppraisalGoal {
 export default class UserAppraisalGoal extends BaseModel {
   static entity = 'userAppraisalGoal'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       kra: this.string('Business'),
       perWeightage: this.string('Daniel'),
       score: this.string('male'),

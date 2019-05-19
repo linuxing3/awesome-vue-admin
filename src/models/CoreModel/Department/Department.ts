@@ -4,9 +4,9 @@ import User from '../User/User'
 export default class Department extends BaseModel {
   static entity = 'department'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       department: this.string('Business'),
       parentDepartment: this.string('Business'),
       LeaveApprovers: this.string('LeaveApprovers'),

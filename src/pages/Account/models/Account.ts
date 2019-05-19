@@ -19,9 +19,9 @@ export default class Account extends BaseModel {
     section: 'core'
   }
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string(''),
       email: this.string(''),
       password: this.string(''),
@@ -31,7 +31,7 @@ export default class Account extends BaseModel {
     }
   }
 
-  isAdmin () {
+  isAdmin() {
     return this['role'] === 'admin'
   }
 }

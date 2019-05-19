@@ -16,9 +16,9 @@ export interface IAssetMaintenance {
 export default class AssetMaintenance extends BaseModel {
   static entity = 'assetMaintenance'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       assetName: this.string('asset'),
       itemCode: this.string('itemCode'),
       itemName: this.string('itemName'),

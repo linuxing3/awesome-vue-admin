@@ -7,15 +7,14 @@ export interface ILeave {
   toDate?: string
   isActive?: string
   holidayList?: string
-
 }
 
 export default class Leave extends BaseModel {
   static entity = 'leave'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       applicant: this.string('applicant'),
       fromDate: this.string('2019-03-08'),
       toDate: this.string('2019-03-08'),

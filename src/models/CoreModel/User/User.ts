@@ -37,9 +37,9 @@ export interface IUser {
 export default class User extends BaseModel {
   static entity = 'user'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       department: this.string('Business'),
       name: this.string('Daniel'),
       gender: this.string('male'),

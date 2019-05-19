@@ -7,15 +7,14 @@ export interface IEmployeePromotion {
   department: string
   promotionDate: string
   promotionDetails: string
-
 }
 
 export default class EmployeePromotion extends BaseModel {
   static entity = 'employeePromotion'
 
-  static fields () {
+  static fields() {
     return {
-      _id: this.increment(),
+      id: this.increment(),
       name: this.string('secretary'),
       department: this.string('department'),
       promotionDate: this.string('promotionDate'),

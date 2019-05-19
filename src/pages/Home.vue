@@ -4,20 +4,31 @@
     <div>
       <a-button
           type="primary"
-          @click="Login">Go Login</a-button>
+          @click="Member">Member
+      </a-button>
+    </div>
+    <!-- more menu item -->
+    <!-- user -->
+    <div>
+      <a-button
+          type="primary"
+          @click="() => $router.push({ path: '/user-list' }) ">User
+      </a-button>
     </div>
   </div>
 </template>
 
 <script>
+import AntdLayout from '@/layout/antd'
 import CrudMixin from '@/mixins/crudMixin.request'
 export default {
   components: {
+    AntdLayout
   },
   mixins: [ CrudMixin ],
   methods: {
-    Login () {
-      this.$router.push({ path: '/login' })
+    Member () {
+      this.$router.push({ path: '/member-list' })
     }
   }
 }
