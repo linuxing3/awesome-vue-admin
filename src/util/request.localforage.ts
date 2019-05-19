@@ -3,6 +3,24 @@ import models from '@/models'
 import { builder } from '@/util/builder'
 import { AGenTableColumns, VGenTableHeaders } from '@/util/genFormData'
 
+const genPagination = (model, pagination) => {
+  const totalCount = model.query().count()
+  const pageNo = (pagination.pageNo && parseInt(pagination.pageNo)) || 1
+  const pageSize = (pagination.pageSize && parseInt(pagination.pageSize)) || 10
+  const totalPage = Math.ceil(totalCount / pageSize) || 0
+  // offset and next
+  const offset = (pageNo - 1) * pageSize || 0
+  const next = (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1
+  return {
+    totalCount,
+    pageNo,
+    pageSize,
+    totalPage,
+    offset,
+    next
+  }
+}
+
 // 创建 axios localforage 实例
 const lfService = {
   /**
@@ -31,23 +49,6 @@ const lfService = {
       url,
       prefix,
       action
-    }
-  },
-  genPagination(model, pagination) {
-    const totalCount = model.query().count() || 0
-    const pageNo = (pagination.pageNo && parseInt(pagination.pageNo)) || 1
-    const pageSize = (pagination.pageSize && parseInt(pagination.pageSize)) || 10
-    const totalPage = Math.ceil(totalCount / pageSize) || 0
-    // offset and next
-    const offset = (pageNo - 1) * pageSize || 0
-    const next = (pageNo >= totalPage ? totalCount % pageSize : pageSize) + 1
-    return {
-      totalCount,
-      pageNo,
-      pageSize,
-      totalPage,
-      offset,
-      next
     }
   },
   response: async function(params) {
@@ -89,22 +90,12 @@ const lfService = {
     // Using vuex-orm with localforage
     try {
       let requestedData = null
-      // pagination
-      const { offset, pageSize, pageNo, totalCount, totalPage, next } = this.genPagination(
-        model,
-        pagination
-      )
-      // header, columns
-      const columns = AGenTableColumns(model.fieldKeys() || model.fieldKeys)
-      const headers = VGenTableHeaders(model.fieldKeys() || model.fieldKeys)
       // data from localforage
       switch (method) {
         case 'post':
           const createdItems = await model.$create({ data })
           requestedData = {
             model,
-            columns,
-            headers,
             data: createdItems
           }
           break
@@ -112,8 +103,6 @@ const lfService = {
           const deletedItems = await model.$delete(data.id || data)
           requestedData = {
             model,
-            columns,
-            headers,
             data: deletedItems
           }
           break
@@ -121,23 +110,26 @@ const lfService = {
           const updatedItems = await model.$update({ data })
           requestedData = {
             model,
-            columns,
-            headers,
             data: updatedItems
           }
           break
         case 'get':
           if (!data) {
             await model.$fetch()
+            // pagination
+            const { offset, pageSize, pageNo, totalCount, totalPage, next } = genPagination(
+              model,
+              pagination
+            )
+            // header, columns
+            const columns = AGenTableColumns(model.fieldsKeys())
+            const headers = VGenTableHeaders(model.fieldsKeys())
             // query with pagination, header, columns
-            const paginatedData =
-              !offset && !pageSize
-                ? model.query().get()
-                : model
-                    .query()
-                    .offset(offset)
-                    .limit(pageSize)
-                    .get()
+            const paginatedData = model
+              .query()
+              .offset(offset)
+              .limit(pageSize)
+              .get()
             // build data and attach to result
             requestedData = {
               model,
@@ -154,6 +146,9 @@ const lfService = {
           } else {
             await model.$get(data.id || data)
             const foundItem = model.find(data.id || data) || {}
+            // header, columns
+            const columns = AGenTableColumns(model.fieldsKeys())
+            const headers = VGenTableHeaders(model.fieldsKeys())
             requestedData = {
               model,
               data: foundItem,

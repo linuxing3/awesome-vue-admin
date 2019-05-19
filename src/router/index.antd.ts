@@ -25,6 +25,26 @@ const router = new Router({
         `@/pages/Login/IndexView.vue`)
     },
     {
+      path: '/register',
+      meta: {
+        public: true
+      },
+      name: 'Register',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/Login/components/Register.vue`)
+    },
+    {
+      path: '/recover',
+      meta: {
+        public: true
+      },
+      name: 'Recover',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/Login/components/Register.vue`)
+    },
+    {
       path: '/home',
       meta: {
         public: true

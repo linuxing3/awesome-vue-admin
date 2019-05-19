@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import SimpleLayout from '@/layout/simple.vue'
+import SimpleLayout from '@/layout/antd.vue'
 export default {
   components: {
     SimpleLayout

@@ -6,7 +6,7 @@ import store from './store'
 
 import i18n from './plugins/i18n'
 import './plugins'
-import './components'
+// import './components'
 import './mixins/'
 
 Vue.config.productionTip = false

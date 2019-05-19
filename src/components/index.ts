@@ -3,17 +3,16 @@ import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 import keys from 'lodash/keys'
 
-import Bar from '@/components/Charts/Bar'
-import ChartCard from '@/components/Charts/ChartCard'
-import Liquid from '@/components/Charts/Liquid'
-import MiniArea from '@/components/Charts/MiniArea'
-import MiniSmoothArea from '@/components/Charts/MiniSmoothArea'
-import MiniBar from '@/components/Charts/MiniBar'
-import MiniProgress from '@/components/Charts/MiniProgress'
-import Radar from '@/components/Charts/Radar'
-import RankList from '@/components/Charts/RankList'
-import TransferBar from '@/components/Charts/TransferBar'
-import TagCloud from '@/components/Charts/TagCloud'
+import Bar from '@/components/Charts/Bar.vue'
+import ChartCard from '@/components/Charts/ChartCard.vue'
+import Liquid from '@/components/Charts/Liquid.vue'
+import MiniArea from '@/components/Charts/MiniArea.vue'
+import MiniSmoothArea from '@/components/Charts/MiniSmoothArea.vue'
+import MiniBar from '@/components/Charts/MiniBar.vue'
+import MiniProgress from '@/components/Charts/MiniProgress.vue'
+import Radar from '@/components/Charts/Radar.vue'
+import RankList from '@/components/Charts/RankList.vue'
+import TransferBar from '@/components/Charts/TransferBar.vue'
 
 import Trend from '@/components/Trend'
 import STable from '@/components/Table'
@@ -25,7 +24,7 @@ import IconSelector from '@/components/IconSelector'
 /**
  * Global registerd components
  */
-const requireComponent = require.context('@/components/helpers', true, /\.vue$/)
+const requireComponent = require.context('@/components/tools', true, /\.vue$/)
 
 requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)
@@ -45,13 +44,8 @@ export {
   Radar,
   RankList,
   TransferBar,
-  TagCloud,
   Trend,
-  CountDown,
-  Ellipsis,
-  NumberInfo,
   STable,
   Result,
-  TagSelect,
   StandardFormRow
 }

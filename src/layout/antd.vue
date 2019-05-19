@@ -16,10 +16,7 @@
             @click="$router.push('/home')">Home</a-menu-item>
         <a-menu-item
             key="2"
-            @click="$router.push('/user-list')">User</a-menu-item>
-        <a-menu-item
-            key="3"
-            @click="$router.push('/member-list')">Member</a-menu-item>
+            @click="$router.push('/login')">Login</a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">

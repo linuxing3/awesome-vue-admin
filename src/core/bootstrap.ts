@@ -16,5 +16,5 @@ import {
 import config from '@/defaultSettings'
 
 export default function Initializer() {
-  store.commit('SET_TOKEN', Vue.ls.get(ACCESS_TOKEN))
+  store.commit('SET_TOKEN', (Vue as any).ls.get(ACCESS_TOKEN))
 }

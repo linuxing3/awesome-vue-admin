@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex, { Store } from 'vuex'
 import VuexORM, { Database, Model } from '@vuex-orm/core'
 // import localForagePlugin from 'vuex-orm-localforage'
-import User from '@/models/CoreModel/User/User'
-import Document from '@/models/CoreModel/Document/Document'
+import User from '@/pages/User/models/User'
+import Document from '@/pages/Document/models/Document'
 
 Vue.use(Vuex)
 

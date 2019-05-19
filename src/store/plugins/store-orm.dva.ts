@@ -4,7 +4,6 @@
 import * as Vuex from 'vuex'
 import VuexORM, { Database, Model } from '@vuex-orm/core'
 import localForagePlugin from 'vuex-orm-localforage'
-import { lowerFirst, tail, last } from 'lodash'
 
 import models, { Models } from '@/models'
 import modules, { Modules } from '@/store/modules'

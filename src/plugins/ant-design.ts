@@ -88,7 +88,6 @@ Vue.use(Upload)
 Vue.use(Progress)
 Vue.use(Skeleton)
 Vue.use(Popconfirm)
-Vue.use(notification)
 
 Vue.use(VueCropper)
 Vue.use(Viser)

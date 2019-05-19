@@ -11,10 +11,6 @@ export const validateMixin = {
       fields: ['name']
     }
   },
-  created() {
-    const Model = models[this.modelName]
-    this.fields = Model && Model.fieldKeys().filter(key => key !== 'id')
-  },
   computed: {
     currentItem: get('entities/account/currentItem'),
     cached: get('entities/account/cached')

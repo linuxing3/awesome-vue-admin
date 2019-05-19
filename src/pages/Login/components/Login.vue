@@ -145,6 +145,7 @@
 </template>
 
 <script>
+import bcrypt from 'bcryptjs'
 export default {
   data () {
     return {
@@ -165,7 +166,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['Login', 'Logout']),
     // handler
     handleUsernameOrEmail (rule, value, callback) {
       const { state } = this
@@ -200,10 +200,12 @@ export default {
           const loginParams = { ...values }
           delete loginParams.username
           loginParams[!state.loginType ? 'email' : 'username'] = values.username
-          loginParams.password = md5(values.password)
+          bcrypt.hash(values.password, 10).then(res => {
+            loginParams.password = res
+            console.log('login params', loginParams)
+            this.loginSuccess(loginParams)
+          })
           // Call user module [Login] actions
-          this.loginSuccess(loginParams)
-          state.loginBtn = false
         } else {
           setTimeout(() => {
             state.loginBtn = false
@@ -212,15 +214,8 @@ export default {
       })
     },
     loginSuccess (res) {
-      console.log(res)
-      this.$router.push({ name: '/home' })
-      // 延迟 1 秒显示欢迎信息
-      setTimeout(() => {
-        this.$notification.success({
-          message: '欢迎',
-          description: `${timeFix()}，欢迎回来`
-        })
-      }, 1000)
+      console.log('login success', res)
+      this.$router.push('/home')
     },
     requestFailed (err) {
       this.$notification['error']({

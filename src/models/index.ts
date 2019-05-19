@@ -1,5 +1,8 @@
 // 获取模型
+import * as Vuex from 'vuex'
+import { Model } from '@vuex-orm/core'
 import { BaseModel } from '@/models/BaseModel'
+import { lowerFirst, tail, last } from 'lodash'
 
 // entity interface
 export interface Entity {
@@ -13,7 +16,7 @@ export interface Models {
 }
 
 const requiredModels: RequireContext = require.context('../pages', true, /.*\/models\/.*\.ts$/)
-export const models: Models = {}
+const models: Models = {}
 
 requiredModels.keys().forEach((fileName: string) => {
   const fileNameMeta = last(tail(fileName.split('/')))

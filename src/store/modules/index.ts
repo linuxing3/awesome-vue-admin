@@ -1,3 +1,5 @@
+import * as Vuex from 'vuex'
+import { lowerFirst, tail, last } from 'lodash'
 // 获取模块
 export interface Modules {
   [name: string]: Vuex.Module<any, any>

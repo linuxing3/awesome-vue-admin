@@ -1,4 +1,9 @@
-import { genFormData, genTableHeaders, FormDataConfig, HeaderConfig } from '@/util/genFormData'
+import {
+  genFormData,
+  VGenTableHeaders,
+  FormDataConfig,
+  VTableHeaderConfig
+} from '@/util/genFormData'
 
 describe('Generate form data with field Name', () => {
   it('renders v-textarea when passed', () => {
@@ -19,13 +24,13 @@ describe('Generate form data with field Name', () => {
 
 describe('Generate table headers with fields Name', () => {
   it('renders 3 headers of v-data-table when passed', () => {
-    let fields = [ '_id', 'name', 'date' ]
-    let tableHeaders: HeaderConfig[] = genTableHeaders(fields)
+    let fields = ['_id', 'name', 'date']
+    let tableHeaders: VTableHeaderConfig[] = VGenTableHeaders(fields)
     expect(tableHeaders.length).toBe(3)
   })
   it('renders headers value and type when passed', () => {
-    let fields = [ '_id', 'name', 'date', 'content' ]
-    let tableHeaders: HeaderConfig[] = genTableHeaders(fields)
+    let fields = ['_id', 'name', 'date', 'content']
+    let tableHeaders: VTableHeaderConfig[] = VGenTableHeaders(fields)
     expect(tableHeaders[0]['value']).toBe('_id')
     expect(tableHeaders[1]['type']).toBe('v-text-field')
     expect(tableHeaders[2]['type']).toBe('v-date-picker')
