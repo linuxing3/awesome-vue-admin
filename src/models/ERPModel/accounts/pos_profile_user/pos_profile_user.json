@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"default","fieldtype":"Check","label":"Default"},{"fieldname":"user","fieldtype":"Link","label":"User","options":"User"}]}

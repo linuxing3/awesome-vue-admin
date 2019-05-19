@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"expense_type","fieldtype":"Data","label":"Expense Claim Type"},{"fieldname":"description","fieldtype":"Small Text","label":"Description"},{"fieldname":"accounts","fieldtype":"Table","label":"Accounts","options":"Expense Claim Account"}]}

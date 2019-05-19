@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"time_sheet","fieldtype":"Link","label":"Time Sheet","options":"Timesheet"},{"fieldname":"working_hours","fieldtype":"Float","label":"Working Hours"}]}

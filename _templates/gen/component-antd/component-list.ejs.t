@@ -115,10 +115,23 @@ export default {
       })
     },
     handleRemove (row) {
-      this.handleDelete(row)
-      return new Promise((resolve, reject) => {
-        setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
-      }).catch(() => console.log('Oops errors!'))
+      this.$confirm({
+        title: '警告',
+        content: `真的要删除 ${row.id} 吗?`,
+        okText: '删除',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk: () => {
+          console.log('OK')
+          this.handleDelete(row)
+          return new Promise((resolve, reject) => {
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
+          }).catch(() => console.log('Oops errors!'))
+        },
+        onCancel: () => {
+          console.log('Cancel')
+        }
+      })
     }
   }
 }

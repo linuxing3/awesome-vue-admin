@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"tax_type","fieldtype":"Link","label":"Tax","options":"Account"},{"fieldname":"tax_rate","fieldtype":"Float","label":"Tax Rate"}]}

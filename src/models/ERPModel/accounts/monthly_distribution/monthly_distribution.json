@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"distribution_id","fieldtype":"Data","label":"Distribution Name"},{"fieldname":"fiscal_year","fieldtype":"Link","label":"Fiscal Year","options":"Fiscal Year"},{"fieldname":"percentages","fieldtype":"Table","label":"Monthly Distribution Percentages","options":"Monthly Distribution Percentage"}]}

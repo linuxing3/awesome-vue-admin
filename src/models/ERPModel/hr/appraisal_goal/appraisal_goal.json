@@ -1,8 +1,0 @@
-{
-  "fields": [
-    { "fieldname": "kra", "fieldtype": "Small Text", "label": "Goal" },
-    { "fieldname": "per_weightage", "fieldtype": "Float", "label": "Weightage (%)" },
-    { "fieldname": "score", "fieldtype": "Float", "label": "Score (0-5)", "options": "" },
-    { "fieldname": "score_earned", "fieldtype": "Float", "label": "Score Earned" }
-  ]
-}

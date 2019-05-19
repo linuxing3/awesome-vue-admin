@@ -1,115 +1,103 @@
+/* eslint-disable */
+/**
+ * 该文件是为了按需加载，剔除掉了一些不需要的框架组件。
+ * 减少了编译支持库包大小
+ *
+ * 当需要更多组件依赖时，在该文件加入即可
+ */
 import Vue from 'vue'
-
 import {
-  Affix,
-  Anchor,
-  AutoComplete,
-  Alert,
-  Avatar,
-  BackTop,
-  Badge,
-  Breadcrumb,
-  Button,
-  Calendar,
-  Card,
-  Collapse,
-  Carousel,
-  Cascader,
-  Checkbox,
-  Col,
-  DatePicker,
-  Divider,
-  Dropdown,
-  Form,
-  Icon,
+  LocaleProvider,
+  Layout,
   Input,
   InputNumber,
-  Layout,
-  List,
-  LocaleProvider,
-  Menu,
-  message,
-  Modal,
-  notification,
-  Pagination,
-  Popconfirm,
-  Popover,
-  Progress,
-  Radio,
-  Rate,
-  Row,
-  Select,
-  Slider,
-  Spin,
-  Steps,
+  Button,
   Switch,
+  Radio,
+  Checkbox,
+  Select,
+  Card,
+  Form,
+  Row,
+  Col,
+  Modal,
   Table,
-  Transfer,
-  Tree,
-  TreeSelect,
   Tabs,
-  Tag,
-  TimePicker,
-  Timeline,
-  Tooltip,
-  Upload,
+  Icon,
+  Badge,
+  Popover,
+  Dropdown,
+  List,
+  Avatar,
+  Breadcrumb,
+  Steps,
+  Spin,
+  Menu,
   Drawer,
-  Skeleton
+  Tooltip,
+  Alert,
+  Tag,
+  Divider,
+  DatePicker,
+  TimePicker,
+  Upload,
+  Progress,
+  Skeleton,
+  Popconfirm,
+  message,
+  notification
 } from 'ant-design-vue'
-import 'ant-design-vue/dist/antd.css'
+import VueCropper from 'vue-cropper'
+import Viser from 'viser-vue'
+import VueClipboard from 'vue-clipboard2'
 
-Vue.use(Affix)
-Vue.use(Anchor)
-Vue.use(AutoComplete)
-Vue.use(Alert)
-Vue.use(Avatar)
-Vue.use(BackTop)
-Vue.use(Badge)
-Vue.use(Breadcrumb)
-Vue.use(Button)
-Vue.use(Calendar)
-Vue.use(Card)
-Vue.use(Collapse)
-Vue.use(Carousel)
-Vue.use(Cascader)
-Vue.use(Checkbox)
-Vue.use(Col)
-Vue.use(DatePicker)
-Vue.use(Divider)
-Vue.use(Dropdown)
-Vue.use(Form)
-Vue.use(Icon)
+Vue.use(LocaleProvider)
+Vue.use(Layout)
 Vue.use(Input)
 Vue.use(InputNumber)
-Vue.use(Layout)
-Vue.use(List)
-Vue.use(LocaleProvider)
-Vue.use(Menu)
-Vue.use(Modal)
-Vue.use(Pagination)
-Vue.use(Popconfirm)
-Vue.use(Popover)
-Vue.use(Progress)
-Vue.use(Radio)
-Vue.use(Rate)
-Vue.use(Row)
-Vue.use(Select)
-Vue.use(Slider)
-Vue.use(Spin)
-Vue.use(Steps)
+Vue.use(Button)
 Vue.use(Switch)
+Vue.use(Radio)
+Vue.use(Checkbox)
+Vue.use(Select)
+Vue.use(Card)
+Vue.use(Form)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Modal)
 Vue.use(Table)
-Vue.use(Transfer)
-Vue.use(Tree)
-Vue.use(TreeSelect)
 Vue.use(Tabs)
-Vue.use(Tag)
-Vue.use(TimePicker)
-Vue.use(Timeline)
-Vue.use(Tooltip)
-Vue.use(Upload)
+Vue.use(Icon)
+Vue.use(Badge)
+Vue.use(Popover)
+Vue.use(Dropdown)
+Vue.use(List)
+Vue.use(Avatar)
+Vue.use(Breadcrumb)
+Vue.use(Steps)
+Vue.use(Spin)
+Vue.use(Menu)
 Vue.use(Drawer)
+Vue.use(Tooltip)
+Vue.use(Alert)
+Vue.use(Tag)
+Vue.use(Divider)
+Vue.use(DatePicker)
+Vue.use(TimePicker)
+Vue.use(Upload)
+Vue.use(Progress)
 Vue.use(Skeleton)
+Vue.use(Popconfirm)
+Vue.use(notification)
+
+Vue.use(VueCropper)
+Vue.use(Viser)
+Vue.use(VueClipboard)
 
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification
+Vue.prototype.$confirm = Modal.confirm
+Vue.prototype.$info = Modal.info
+Vue.prototype.$success = Modal.success
+Vue.prototype.$error = Modal.error
+Vue.prototype.$warning = Modal.warning

@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"qty","fieldtype":"Int","label":"Quantity"},{"fieldname":"plan","fieldtype":"Link","label":"Plan","options":"Subscription Plan"}]}

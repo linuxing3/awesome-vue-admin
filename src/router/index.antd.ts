@@ -22,7 +22,7 @@ const router = new Router({
       name: 'Login',
       component: () =>
         import(/* webpackChunkName: "routes" */
-        `@/pages/Home.vue`)
+        `@/pages/Login/IndexView.vue`)
     },
     {
       path: '/home',

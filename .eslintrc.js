@@ -9,6 +9,7 @@ module.exports = {
     'no-console': 'off',
     'no-debugger': 'off',
     'no-unreachable': 'off',
+    'no-mixed-operators': 'off',
     'no-empty': 'warn',
     'no-trailing-spaces': 'off',
     'space-before-function-paren': ['off', 'always'],

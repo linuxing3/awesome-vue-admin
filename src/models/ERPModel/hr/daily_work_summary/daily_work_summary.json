@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"daily_work_summary_group","fieldtype":"Link","label":"Daily Work Summary Group","options":"Daily Work Summary Group"},{"fieldname":"status","fieldtype":"Select","label":"Status","options":"Open\nSent"},{"fieldname":"email_sent_to","fieldtype":"Code","label":"Email Sent To"}]}

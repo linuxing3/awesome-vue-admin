@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"exemption_category","fieldtype":"Link","label":"Tax Exemption Category","options":"Employee Tax Exemption Category"},{"fieldname":"max_amount","fieldtype":"Currency","label":"Max Amount"},{"fieldname":"is_active","fieldtype":"Check","label":"Is Active"}]}

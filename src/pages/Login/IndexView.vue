@@ -1,17 +1,15 @@
 <template>
-  <SimpleLayout>
-    <LoginForm />
-  </SimpleLayout>
+  <div>
+    <Login />
+  </div>
 </template>
 
 <script lang="js">
-import SimpleLayout from '@/layout/simple.vue'
-import LoginForm from './components/LoginForm.vue'
+import Login from './components/Login.vue'
 
 export default {
   components: {
-    SimpleLayout,
-    LoginForm
+    Login
   }
 }
 </script>

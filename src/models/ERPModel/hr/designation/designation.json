@@ -1,6 +1,0 @@
-{
-  "fields": [
-    { "fieldname": "designation_name", "fieldtype": "Data", "label": "Designation" },
-    { "fieldname": "description", "fieldtype": "Text", "label": "Description" }
-  ]
-}

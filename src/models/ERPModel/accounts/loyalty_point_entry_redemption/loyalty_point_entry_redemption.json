@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"sales_invoice","fieldtype":"Data","label":"Sales Invoice"},{"fieldname":"redemption_date","fieldtype":"Date","label":"Redemption Date"},{"fieldname":"redeemed_points","fieldtype":"Int","label":"Redeemed Points"}]}

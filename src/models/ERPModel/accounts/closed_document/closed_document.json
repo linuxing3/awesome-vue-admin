@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"document_type","fieldtype":"Link","label":"Document Type","options":"DocType"},{"fieldname":"closed","fieldtype":"Check","label":"Closed"}]}

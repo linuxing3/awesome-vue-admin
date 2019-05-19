@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"account","fieldtype":"Link","label":"Account","options":"Account"},{"fieldname":"cost_center","fieldtype":"Link","label":"Cost Center","options":"Cost Center"},{"fieldname":"amount","fieldtype":"Currency","label":"Amount"}]}

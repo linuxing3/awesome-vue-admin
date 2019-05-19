@@ -1,1 +1,0 @@
-{"fields":[{"fieldname":"grace_period","fieldtype":"Int","label":"Grace Period"},{"fieldname":"cancel_after_grace","fieldtype":"Check","label":"Cancel Invoice After Grace Period"},{"fieldname":"prorate","fieldtype":"Check","label":"Prorate"}]}
