@@ -1,32 +1,37 @@
----
-to: 'src/pages/<%= h.changeCase.pascal(model) %>/components/<%= h.changeCase.pascal(model) %>List.vue'
----
-<%
-const EntityName = h.changeCase.camel(model)
-const ModelName = h.changeCase.pascal(model)
-const modelListName = ModelName + 'List'
-const modelFormName = ModelName + 'Form'
-%><template>
+<template>
   <div>
     <a-card
-      style="margin-top: 24px"
-      :bordered="false"
-      title="列表">
+        style="margin-top: 24px"
+        :bordered="false"
+        title="列表">
 
       <div class="operate">
-        <a-button type="dashed" style="width: 100%" icon="plus"
-        @click="() => handleCreate()"
-        >添加</a-button>
+        <a-button
+            type="dashed"
+            style="width: 100%"
+            icon="plus"
+            @click="() => handleCreate()"
+          >添加</a-button>
       </div>
 
-      <a-list size="large" :pagination="{showSizeChanger: true, showQuickJumper: true, pageSize: 5, total: 50}">
-        <a-list-item :key="index" v-for="(item, index) in data">
+      <a-list
+          size="large"
+          :pagination="{showSizeChanger: true, showQuickJumper: true, pageSize: 5, total: 50}">
+        <a-list-item
+            :key="index"
+            v-for="(item, index) in data">
           <a-list-item-meta :description="item.id">
-            <a-avatar slot="avatar" size="large" shape="square" :src="item.avatar"/>
-            <a slot="title">{{ item.name }}</a>
+            <a-avatar
+                slot="avatar"
+                size="large"
+                shape="square"
+                :src="item.avatar"/>
+            <a slot="title">{{ item.title }}</a>
           </a-list-item-meta>
           <div slot="actions">
-            <a class="edit" @click="() => handleEdit(item)">编辑</a>
+            <a
+                class="edit"
+                @click="() => handleEdit(item)">编辑</a>
           </div>
           <div slot="actions">
             <a-dropdown>
@@ -39,8 +44,8 @@ const modelFormName = ModelName + 'Form'
           </div>
           <div class="list-content">
             <div class="list-content-item">
-              <span>name</span>
-              <p>{{ item.name }}</p>
+              <span>title</span>
+              <p>{{ item.title }}</p>
             </div>
           </div>
         </a-list-item>
@@ -52,12 +57,12 @@ const modelFormName = ModelName + 'Form'
 
 <script>
 export default {
-  name: '<%= modelListName %>',
+  name: 'DocumentList',
   components: {
   },
   data () {
     return {
-      modelName: '<%= EntityName %>',
+      modelName: 'document',
       data: [],
       pagination: {
         pageSize: 10,
@@ -102,7 +107,7 @@ export default {
     handleEdit (row) {
       console.log('Editing ... ')
       this.$router.push({
-        name: '<%= modelFormName %>',
+        name: 'DocumentForm',
         params: {
           id: row.id
         }
@@ -111,7 +116,7 @@ export default {
     handleCreate () {
       console.log('Creating ... ')
       this.$router.push({
-        name: '<%= modelFormName %>'
+        name: 'DocumentForm'
       })
     },
     handleRemove (row) {

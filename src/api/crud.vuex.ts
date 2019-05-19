@@ -1,4 +1,4 @@
-import { lfService } from '@/util/request.localforage'
+import lfService from '@/util/request.localforage'
 
 /**
  * crud func

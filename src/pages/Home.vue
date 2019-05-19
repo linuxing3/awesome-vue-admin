@@ -1,34 +1,23 @@
 <template>
   <div class="text-md-center">
     <h2 class="my-3 headline ">Home page</h2>
-    <div>
+    <!-- menu item -->
+    <div
+        :key="model.entity"
+        v-for="model in models">
       <a-button
-          type="primary"
-          @click="Member">Member
-      </a-button>
-    </div>
-    <!-- more menu item -->
-    <!-- user -->
-    <div>
-      <a-button
-          type="primary"
-          @click="() => $router.push({ path: '/user-list' }) ">User
+          @click="() => $router.push({ path: `/${model.entity}-list` }) ">{{model.entity}}
       </a-button>
     </div>
   </div>
 </template>
 
 <script>
-import AntdLayout from '@/layout/antd'
-import CrudMixin from '@/mixins/crudMixin.request'
+import models from '@/models'
 export default {
-  components: {
-    AntdLayout
-  },
-  mixins: [ CrudMixin ],
-  methods: {
-    Member () {
-      this.$router.push({ path: '/member-list' })
+  data () {
+    return {
+      models
     }
   }
 }

@@ -18,40 +18,18 @@
             disabled />
       </a-form-item>
       <a-form-item
-          label="姓名"
+          v-for="(field, index) in fields"
+          :key="index"
+          :label="field"
           :labelCol="{lg: {span: 7}, sm: {span: 7}}"
           :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
         <a-input
             v-decorator="[
-              'name',
-              {rules: [{ required: true, message: '请输入姓名' }]}
+              field,
+              {rules: [{ required: true, message: '请输入' }]}
             ]"
-            name="name"
-            placeholder="给自己起个名字" />
-      </a-form-item>
-      <a-form-item
-          label="用户名"
-          :labelCol="{lg: {span: 7}, sm: {span: 7}}"
-          :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
-        <a-input
-            v-decorator="[
-              'username',
-              {rules: [{ required: true, message: '请输入用户名' }]}
-            ]"
-            name="username"
-            placeholder="给自己起个用户名字" />
-      </a-form-item>
-      <a-form-item
-          label="电话"
-          :labelCol="{lg: {span: 7}, sm: {span: 7}}"
-          :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
-        <a-input
-            v-decorator="[
-              'telephone',
-              {rules: [{ required: true, message: '请输入电话' }]}
-            ]"
-            name="telephone"
-            placeholder="给自己起个用户名字" />
+            :name="field"
+            :placeholder="field" />
       </a-form-item>
       <a-form-item
           :wrapperCol="{ span: 24 }"
@@ -78,7 +56,7 @@ export default {
       value: 1,
       // form
       form: this.$form.createForm(this),
-      fields: [ 'name' ]
+      fields: [ 'name', 'username', 'password', 'avatar', 'status', 'telephone' ]
     }
   },
   computed: {
@@ -128,15 +106,26 @@ export default {
     },
     async handleGetInfo () {
       // if no id, do not get
-      if (this.id === -1) return
+      if (this.id === -1) {
+        return
+      }
       // if has id, get info to edit
       // ajax
-      const { result: { data } } = await this.$lf.request({
+      const { result: { data, model } } = await this.$lf.request({
         url: `/${this.modelName}`,
         method: 'get',
         data: { id: this.id }
       })
       this.loadEditInfo(data)
+    },
+    async handleGetFields () {
+      const { result: { model } } = await this.$lf.request({
+        url: `/${this.modelName}`,
+        method: 'get'
+      })
+      const fields = Object.keys(model.fields) 
+      console.log(fields)
+      this.fields = fields
     },
     loadEditInfo (data) {
       const { form } = this

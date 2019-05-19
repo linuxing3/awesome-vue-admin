@@ -35,6 +35,27 @@ const router = new Router({
         `@/pages/Home.vue`)
     },
     // insert more route below
+    // document
+    {
+      path: '/document-form',
+      meta: {
+        public: true
+      },
+      name: 'DocumentForm',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/Document/components/DocumentForm.vue`)
+    },
+    {
+      path: '/document-list',
+      meta: {
+        public: true
+      },
+      name: 'DocumentList',
+      component: () =>
+        import(/* webpackChunkName: "routes" */
+        `@/pages/Document/components/DocumentList.vue`)
+    },
     // user
     {
       path: '/user-form',

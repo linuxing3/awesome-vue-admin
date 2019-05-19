@@ -3,7 +3,6 @@
  */
 import * as Vuex from 'vuex'
 import VuexORM, { Database, Model } from '@vuex-orm/core'
-// import VuexORMLowdbPlugin from 'vuex-orm-lowdb'
 import localForagePlugin from 'vuex-orm-localforage'
 import { lowerFirst, tail, last } from 'lodash'
 
@@ -53,7 +52,7 @@ export const registerDatabase = (models: Models, modules: Modules): Database => 
   const database = new Database()
   // base models
   Object.keys(models).map((modelName: string) => {
-    console.log(`Registering ORM for ${modelName} model`)
+    console.log(`Registering ORM Model -> [${modelName}]`)
 
     let model = models[modelName]
     let module = modules[modelName] || {}

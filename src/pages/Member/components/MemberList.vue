@@ -3,8 +3,7 @@
     <a-card
         style="margin-top: 24px"
         :bordered="false"
-        title="用户列表">
-
+        title="列表">
       <div slot="extra">
         <a-radio-group>
           <a-radio-button>管理员</a-radio-button>
