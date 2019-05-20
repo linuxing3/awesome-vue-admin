@@ -133,7 +133,7 @@ const MemberActions: IMemberActions = {
     } else {
       console.log('账户已注册，请登录')
       // 检查用户名和密码
-      let hash = authedMember.hash
+      let hash = authedMember[0].hash
       let password = loginParams.password
       let valid = await bcrypt.compare(password, hash)
       if (valid) {
@@ -170,9 +170,6 @@ const MemberActions: IMemberActions = {
   async clearCache({ commit }) {
     // 登录状态为假
     commit('SET_LOGGED_IN', false)
-    // 删除缓存用户数据
-    commit('SET_CACHED', [])
-    commit('SET_CURRENT_ITEM', {})
   }
 }
 
