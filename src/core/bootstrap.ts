@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import store from '@/store/'
+import store from '@/store'
 import {
   ACCESS_TOKEN,
   DEFAULT_COLOR,
@@ -16,5 +16,5 @@ import {
 import config from '@/defaultSettings'
 
 export default function Initializer() {
-  store.commit('SET_TOKEN', (Vue as any).ls.get(ACCESS_TOKEN))
+  store.commit('/entities/member/SET_TOKEN', (Vue as any).ls.get(ACCESS_TOKEN))
 }
