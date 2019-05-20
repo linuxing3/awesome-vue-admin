@@ -52,4 +52,4 @@ function fetchItems({ url, data }) {
   })
 }
 
-export { crud, createItem, deleteItem, updateItem, fetchItem, fetchItems }
+export { crud as axios, createItem, deleteItem, updateItem, fetchItem, fetchItems }
