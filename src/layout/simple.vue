@@ -5,8 +5,7 @@
         <slot />
       </div>
     </a-layout-content>
-    <a-layout-footer :style="{ textAlign: 'center' }">
-      <GlobalFooter />
+    <a-layout-footer :style="{ textAlign: 'center' }" >
     </a-layout-footer>
   </a-layout>
 </template>
