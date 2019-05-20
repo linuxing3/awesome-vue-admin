@@ -2,7 +2,7 @@ import { BaseModel } from '@/models/BaseModel'
 import Document from '@/pages/Document/models/Document'
 
 export interface IArchive {
-  _id?: string
+  id?: string
   type?: string
 }
 

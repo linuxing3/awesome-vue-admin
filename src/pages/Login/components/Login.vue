@@ -1,5 +1,5 @@
 <template>
-  <simple-layout class="main">
+  <div class="main">
     <a-form
         id="formLogin"
         class="user-layout-login"
@@ -141,7 +141,7 @@
       </div>
     </a-form>
 
-  </simple-layout>
+  </div>
 </template>
 
 <script>

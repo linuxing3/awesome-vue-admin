@@ -1,13 +1,13 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IProjectType {
-   _id?: string
+  id?: string
 }
 
 export default class ProjectType extends BaseModel {
-  static entity = 'projectType';
+  static entity = 'projectType'
 
-  static fields () {
+  static fields() {
     return {
       _id: this.increment()
     }

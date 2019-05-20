@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IUserAppraisal {
-  _id?: string
+  id?: string
   name?: string
 }
 

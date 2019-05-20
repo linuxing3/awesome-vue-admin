@@ -3,7 +3,7 @@ import EmployeePromotion from '@/pages/Employee/models/EmployeePromotion'
 import Leave from '@/pages/Leave/models/Leave'
 
 export interface IEmployee {
-  _id?: string
+  id?: string
   salutation?: string
   firstName: string
   middleName?: string

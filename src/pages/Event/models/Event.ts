@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IEvent {
-  _id?: string
+  id?: string
   title: string
   date?: string
   startTime?: string

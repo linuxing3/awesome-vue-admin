@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IUserPromotion {
-  _id?: string
+  id?: string
   name?: string
   department?: string
   promotionDate?: string

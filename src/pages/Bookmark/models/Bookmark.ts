@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IBookmark {
-  _id?: string
+  id?: string
   title?: string
 }
 

@@ -2,7 +2,7 @@ import { BaseModel } from '@/models/BaseModel'
 import Document from '@/pages/Document/models/Document'
 
 export interface IDocumentType {
-  _id?: string
+  id?: string
   title: string
 }
 

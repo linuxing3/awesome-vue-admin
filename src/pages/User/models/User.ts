@@ -5,7 +5,7 @@ import Project from '@/pages/Project/models/Project'
 import UserDesignation from '@/pages/UserDesignation/models/UserDesignation'
 
 export interface IUser {
-  _id?: string
+  id?: string
   department?: string
   name: string
   gender?: string

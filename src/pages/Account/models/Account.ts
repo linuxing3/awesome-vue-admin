@@ -2,7 +2,6 @@ import { BaseModel } from '@/models/BaseModel'
 
 export interface IAccount {
   id?: string
-  _id?: string
   $id?: string
   name: string
   email?: string

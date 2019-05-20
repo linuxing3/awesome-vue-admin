@@ -20,7 +20,7 @@
 <script>
 import Logo from '@/components/tools/Logo'
 import SMenu from './index'
-import { mixin, mixinDevice } from '@/utils/mixin'
+import { mixin, mixinDevice } from '@/util/mixin'
 
 export default {
   name: 'SideMenu',

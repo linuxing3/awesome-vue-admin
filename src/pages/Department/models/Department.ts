@@ -2,7 +2,7 @@ import { BaseModel } from '@/models/BaseModel'
 import User from '../../User/models/User'
 
 export interface IDepartment {
-  _id?: string
+  id?: string
   name: string
 }
 

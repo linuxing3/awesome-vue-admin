@@ -6,7 +6,7 @@
         :key="model.entity"
         v-for="model in models">
       <a-button
-          @click="() => $router.push({ path: `/${model.entity}-list` }) ">{{model.entity}}
+          @click="() => $router.push({ path: `/${model.entity}` }) ">{{model.entity}}
       </a-button>
     </div>
   </div>

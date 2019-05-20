@@ -3,7 +3,7 @@ import ProjectTask from '@/pages/ProjectTask/models/ProjectTask'
 import Event from '@/pages/Event/models/Event'
 
 export interface IProject {
-  _id?: string
+  id?: string
   title: string
   type?: string
   status?: string

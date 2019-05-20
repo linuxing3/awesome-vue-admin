@@ -9,11 +9,17 @@ import './plugins'
 // import './components'
 import './mixins/'
 
+import bootstrap from './core/bootstrap'
+// import './permission' // permission control
+
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
   i18n,
+  created() {
+    bootstrap()
+  },
   render: h => h(App)
 }).$mount('#app')

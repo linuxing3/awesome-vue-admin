@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IVehicleService {
-  _id?: string
+  id?: string
   serviceItem: string
   type?: string
   frequency?: string

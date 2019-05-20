@@ -7,7 +7,7 @@ const ModelName = h.changeCase.pascal(model)
 %>import { BaseModel } from "@/models/BaseModel";
 
 export interface I<%= ModelName %> {
-   _id?: string
+   id?: string
 }
 
 export default class <%= ModelName %> extends BaseModel {

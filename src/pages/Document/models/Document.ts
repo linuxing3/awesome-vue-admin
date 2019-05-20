@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IDocument {
-  _id?: string
+  id?: string
   year?: string
   date?: string
   classiLevel?: string

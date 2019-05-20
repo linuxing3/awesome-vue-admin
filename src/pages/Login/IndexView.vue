@@ -1,7 +1,7 @@
 <template>
-  <simple-layout>
+  <div>
     <Login />
-  </simple-layout>
+  </div>
 </template>
 
 <script lang="js">

@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IUserDesignation {
-  _id?: string
+  id?: string
   designation?: string
 }
 

@@ -2,7 +2,7 @@
   <div class="user-wrapper">
     <div class="content-box">
       <a
-          href="https://pro.loacg.com/docs/getting-started"
+          href="https://github.com/linuxing3"
           target="_blank">
         <span class="action">
           <a-icon type="question-circle-o"></a-icon>
@@ -72,14 +72,15 @@ export default {
         title: '提示',
         content: '真的要注销登录吗 ?',
         onOk () {
-          return that.Logout({}).then(() => {
-            window.location.reload()
-          }).catch(err => {
-            that.$message.error({
-              title: '错误',
-              description: err.message
-            })
-          })
+          this.$router.push('/login')
+          // return that.Logout({}).then(() => {
+          //   window.location.reload()
+          // }).catch(err => {
+          //   that.$message.error({
+          //     title: '错误',
+          //     description: err.message
+          //   })
+          // })
         },
         onCancel () {
         }

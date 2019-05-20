@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IVehicle {
-  _id?: string
+  id?: string
   licensePlate?: string
   mark: string
   model?: string

@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IAsset {
-  _id?: string
+  id?: string
   assetName: string
   itemCode?: string
   itemName?: string

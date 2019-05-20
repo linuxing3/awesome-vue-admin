@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface ILeave {
-  _id?: string
+  id?: string
   applicant: string
   fromDate?: string
   toDate?: string

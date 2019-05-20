@@ -1,7 +1,7 @@
 import { BaseModel } from '@/models/BaseModel'
 
 export interface IUserMilitant {
-  _id?: string
+  id?: string
   name?: string
   admistionDate?: string
   formalizationDate?: string

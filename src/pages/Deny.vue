@@ -1,5 +1,5 @@
 <template>
-  <simple-layout>
+  <div>
     <div class="text-md-center">
       <h1>404</h1>
       <h2 class="my-3 headline ">Sorry, You don't have access to this page</h2>
@@ -9,7 +9,7 @@
             @click="goHome">Go Home</v-btn>
       </div>
     </div>
-  </simple-layout>
+  </div>
 </template>
 
 <script>
