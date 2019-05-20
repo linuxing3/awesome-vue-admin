@@ -43,6 +43,6 @@ VuexORM.use(localForagePlugin, { database })
 /**
  * 安装localForage ORM databse
  */
-const lowdbPlugin = VuexORM.install(database)
+const lfPlugin = VuexORM.install(database)
 
-export default lowdbPlugin
+export default lfPlugin
