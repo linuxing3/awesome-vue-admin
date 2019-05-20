@@ -35,7 +35,7 @@ export const registerDatabase = (models: Models, modules: Modules): Database => 
 export const database = registerDatabase(models, modules)
 
 /**
- * 载入Lowdb插件
+ * 载入插件
  */
 // VuexORM.use(VuexORMLowdbPlugin, { database, dbPath })
 VuexORM.use(localForagePlugin, { database })
