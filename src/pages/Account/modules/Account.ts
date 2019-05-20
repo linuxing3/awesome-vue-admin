@@ -1,7 +1,8 @@
 import { ActionContext, Module, MutationTree, ActionTree, GetterTree } from 'vuex'
 import { make } from 'vuex-pathify'
 import bcrypt from 'bcryptjs'
-import Account, { IAccount } from '../models/Account'
+import lfService from '@/util/request.localforage'
+import { IAccount } from '../models/Account'
 
 export interface IAccountState {
   name: string
@@ -87,19 +88,22 @@ const state: IAccountState = {
 
 const mutations: MutationTree<IAccountState> = {
   ...make.mutations(state),
-  CACHE_ITEMS (state, newAccount: IAccount) {
+  CACHE_ITEMS(state, newAccount: IAccount) {
     state.cached.push(newAccount)
   }
 }
 
 const AccountActions: IAccountActions = {
   // 创建初始化用户
-  async init (ctx) {
+  async init(ctx) {
     let { name, password, email, role, avatar } = ctx.state.defaultAccount
 
     console.log('检查默认账户是否存在')
     // TODO Fetch from localforage to vuex
-    await (Account as any).$fetch()
+    await lfService.request({
+      url: 'account',
+      method: 'get'
+    })
 
     let accounts = ctx.state.data
 
@@ -116,17 +120,26 @@ const AccountActions: IAccountActions = {
         avatar
       }
       // Create new account and save to localforage
-      await (Account as any).$create({ data: accountInfo })
+      await lfService.request({
+        url: 'account',
+        method: 'post',
+        data: accountInfo
+      })
       console.log('创建默认账户')
     }
     console.log('存在默认账户')
   },
   // 注册用户
-  async signup (ctx, signupData) {
+  async signup(ctx, signupData) {
     // 按姓名查找账户
-    let authedAccount = Account.query()
-      .where('name', signupData.name)
-      .get()[0]
+    const {
+      result: { data }
+    } = await lfService.request({
+      url: 'account',
+      method: 'get'
+    })
+
+    const authedAccount = data.find(item => item.name === signupData.name)
 
     if (authedAccount === undefined) {
       try {
@@ -142,7 +155,11 @@ const AccountActions: IAccountActions = {
         }
 
         // 2 保存用户名和加密密码
-        await (Account as any).$create({ data: accountInfo })
+        await lfService.request({
+          url: 'account',
+          method: 'post',
+          data: accountInfo
+        })
         console.log('保存用户名和加密密码')
 
         // 3 使用创建后账户，再次尝试登录
@@ -166,7 +183,7 @@ const AccountActions: IAccountActions = {
     }
   },
   // 设置登录状态
-  async setLoginStatus (ctx, authData) {
+  async setLoginStatus(ctx, authData) {
     // 登录状态为真
     ctx.commit('SET_LOGGED_IN', true)
     // 缓存用户数据
@@ -181,7 +198,7 @@ const AccountActions: IAccountActions = {
     })
   },
   // Logs out the current user.
-  async clearCache ({ commit }) {
+  async clearCache({ commit }) {
     // 登录状态为假
     commit('SET_LOGGED_IN', false)
     // 删除缓存用户数据
@@ -197,7 +214,7 @@ const actions: ActionTree<IAccountState, any> = {
 
 const getters: GetterTree<IAccountState, any> = {
   ...make.getters(state),
-  isAuthenticated (state) {
+  isAuthenticated(state) {
     let { cached, currentItem } = state
     return cached.filter(item => item.name === currentItem.name)
   }

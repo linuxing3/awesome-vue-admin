@@ -1,3 +1,15 @@
+export const defaultMember = {
+  name: 'Emacser',
+  username: 'admin',
+  password: 'admin',
+  email: 'admin@mfa.gov.cn',
+  telephone: '18500087347',
+  status: '50',
+  hash: '',
+  role: 'admin',
+  avatar: 'avatar/man_1.jpg'
+}
+
 export const REQUEST_METHODS = ['post', 'get', 'delete', 'patch', 'put']
 
 export const REQUEST_METHODS_TYPES = {
@@ -31,11 +43,11 @@ export const CODE_MESSAGE = {
 
 export const CANCEL_REQUEST_MESSAGE = 'cancle request'
 
-export function randomNumber (min, max) {
+export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min)
 }
 
-export function randomAvatar () {
+export function randomAvatar() {
   // https://uifaces.co
   const avatarList = [
     'https://randomuser.me/api/portraits/men/32.jpg',

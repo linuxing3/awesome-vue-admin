@@ -23,10 +23,10 @@
           :wrapperCol="{lg: {span: 10}, sm: {span: 17} }">
         <a-input
             v-decorator="[
-              'title',
+              'name',
               {rules: [{ required: true, message: '请输入姓名' }]}
             ]"
-            name="title"
+            name="name"
             placeholder="给自己起个名字" />
       </a-form-item>
       <a-form-item
@@ -53,7 +53,7 @@ export default {
       description: '搜集信息',
       value: 1,
       form: this.$form.createForm(this),
-      fields: [ 'title' ]
+      fields: [ 'name' ]
     }
   },
   computed: {

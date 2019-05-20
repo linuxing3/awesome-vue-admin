@@ -13,9 +13,12 @@ export default class Member extends BaseModel {
       name: this.string('Emacser'),
       username: this.string('admin'),
       password: this.string(''),
-      avatar: this.string('/avatar2.jpg'),
-      status: this.number(1),
-      telephone: this.string('')
+      email: this.string(''),
+      telephone: this.string(''),
+      status: this.number('50'),
+      hash: this.string(''),
+      role: this.attr(null),
+      avatar: this.string('/avatar2.jpg')
     }
   }
 }

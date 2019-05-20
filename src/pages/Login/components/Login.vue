@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <simple-layout class="main">
     <a-form
         id="formLogin"
         class="user-layout-login"
@@ -141,14 +141,20 @@
       </div>
     </a-form>
 
-  </div>
+  </simple-layout>
 </template>
 
 <script>
+import SimpleLayout from '@/layout/simple.vue'
 import bcrypt from 'bcryptjs'
+import { call, get } from 'vuex-pathify'
 export default {
+  components: {
+    SimpleLayout
+  },
   data () {
     return {
+      modelName: 'member',
       customActiveKey: 'tab1',
       loginBtn: false,
       // login type: 0 email, 1 username, 2 telephone
@@ -165,7 +171,15 @@ export default {
       }
     }
   },
+  computed: {
+    token: get('entities/member/token')
+  },
+  async created () {
+    await this.init()
+  },
   methods: {
+    signup: call('entities/member/signup'),
+    init: call('entities/member/init'),
     // handler
     handleUsernameOrEmail (rule, value, callback) {
       const { state } = this
@@ -181,7 +195,7 @@ export default {
       this.customActiveKey = key
       // this.form.resetFields()
     },
-    handleSubmit (e) {
+    async handleSubmit (e) {
       e.preventDefault()
       const {
         form: { validateFields },
@@ -194,17 +208,19 @@ export default {
 
       const validateFieldsKey = customActiveKey === 'tab1' ? ['username', 'password'] : ['mobile', 'captcha']
 
-      validateFields(validateFieldsKey, { force: true }, (err, values) => {
+      validateFields(validateFieldsKey, { force: true }, async (err, values) => {
         if (!err) {
           console.log('login form', values)
           const loginParams = { ...values }
-          delete loginParams.username
-          loginParams[!state.loginType ? 'email' : 'username'] = values.username
-          bcrypt.hash(values.password, 10).then(res => {
-            loginParams.password = res
-            console.log('login params', loginParams)
-            this.loginSuccess(loginParams)
-          })
+          // email
+          if (state.loginType === 0) loginParams['email'] = values.username
+          // hash
+          loginParams.hash = await bcrypt.hash(values.password, 10)
+          console.log('login params', loginParams)
+          // signup
+          await this.signup(loginParams)
+          // check token and login
+          await this.loginSuccess(this.token)
           // Call user module [Login] actions
         } else {
           setTimeout(() => {
@@ -223,6 +239,7 @@ export default {
         description: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试',
         duration: 4
       })
+      this.$router.push('/login')
     }
   }
 }

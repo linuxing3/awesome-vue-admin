@@ -1,37 +1,24 @@
 <template>
   <div>
     <a-card
-        style="margin-top: 24px"
-        :bordered="false"
-        title="列表">
+      style="margin-top: 24px"
+      :bordered="false"
+      title="列表">
 
       <div class="operate">
-        <a-button
-            type="dashed"
-            style="width: 100%"
-            icon="plus"
-            @click="() => handleCreate()"
-          >添加</a-button>
+        <a-button type="dashed" style="width: 100%" icon="plus"
+        @click="() => handleCreate()"
+        >添加</a-button>
       </div>
 
-      <a-list
-          size="large"
-          :pagination="{showSizeChanger: true, showQuickJumper: true, pageSize: 5, total: 50}">
-        <a-list-item
-            :key="index"
-            v-for="(item, index) in data">
+      <a-list size="large" :pagination="{showSizeChanger: true, showQuickJumper: true, pageSize: 5, total: 50}">
+        <a-list-item :key="index" v-for="(item, index) in data">
           <a-list-item-meta :description="item.id">
-            <a-avatar
-                slot="avatar"
-                size="large"
-                shape="square"
-                :src="item.avatar"/>
+            <a-avatar slot="avatar" size="large" shape="square" :src="item.avatar"/>
             <a slot="title">{{ item.name }}</a>
           </a-list-item-meta>
           <div slot="actions">
-            <a
-                class="edit"
-                @click="() => handleEdit(item)">编辑</a>
+            <a class="edit" @click="() => handleEdit(item)">编辑</a>
           </div>
           <div slot="actions">
             <a-dropdown>

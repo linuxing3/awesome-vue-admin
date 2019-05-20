@@ -26,7 +26,7 @@
                 size="large"
                 shape="square"
                 :src="item.avatar"/>
-            <a slot="title">{{ item.title }}</a>
+            <a slot="title">{{ item.name }}</a>
           </a-list-item-meta>
           <div slot="actions">
             <a
@@ -44,8 +44,8 @@
           </div>
           <div class="list-content">
             <div class="list-content-item">
-              <span>title</span>
-              <p>{{ item.title }}</p>
+              <span>name</span>
+              <p>{{ item.name }}</p>
             </div>
           </div>
         </a-list-item>
@@ -120,10 +120,23 @@ export default {
       })
     },
     handleRemove (row) {
-      this.handleDelete(row)
-      return new Promise((resolve, reject) => {
-        setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
-      }).catch(() => console.log('Oops errors!'))
+      this.$confirm({
+        title: '警告',
+        content: `真的要删除 ${row.id} 吗?`,
+        okText: '删除',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk: () => {
+          console.log('OK')
+          this.handleDelete(row)
+          return new Promise((resolve, reject) => {
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000)
+          }).catch(() => console.log('Oops errors!'))
+        },
+        onCancel: () => {
+          console.log('Cancel')
+        }
+      })
     }
   }
 }

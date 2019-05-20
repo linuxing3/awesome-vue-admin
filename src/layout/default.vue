@@ -2,7 +2,7 @@
   <a-layout id="components-layout-demo-fixed">
     <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
       <div
-          class="logo" 
+          class="logo"
           @click="$router.push('/home')">
       </div>
       <a-menu
@@ -30,15 +30,12 @@
       </div>
     </a-layout-content>
     <a-layout-footer :style="{ textAlign: 'center' }">
-      <GlobalFooter />
     </a-layout-footer>
   </a-layout>
 </template>
 <script>
-import GlobalFooter from '@/components/GlobalFooter'
 export default {
   components: {
-    GlobalFooter
   }
 }
 </script>
