@@ -1,5 +1,5 @@
 /**
- * Lowdb插件将vuex状态持久化
+ * ORM插件将vuex状态持久化
  */
 import * as Vuex from 'vuex'
 import VuexORM, { Database, Model } from '@vuex-orm/core'
