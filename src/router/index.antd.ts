@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Vue from 'vue'
 import Router from 'vue-router'
-import { BasicLayout, PageView, UserLayout, BlankLayout } from '@/layout'
+import { UserLayout, BasicLayout, RouteView, BlankLayout, PageView } from '@/layout'
 
 Vue.use(Router)
 
@@ -13,7 +13,7 @@ export const constantRouterMap = [
   {
     path: '/user',
     name: 'user',
-    component: BlankLayout,
+    component: UserLayout,
     redirect: '/user/login',
     hidden: true,
     meta: {
@@ -22,7 +22,7 @@ export const constantRouterMap = [
     children: [
       {
         path: '*',
-        redirect: '/500'
+        redirect: '/404'
       },
       {
         path: '/user/login',
@@ -47,15 +47,7 @@ export const constantRouterMap = [
   },
   {
     path: '/404',
-    name: 'NotFound',
-    component: () => import(/* webpackChunkName: "fail" */ '@/pages/Error.vue')
-  },
-  {
-    path: '/500',
-    name: 'ServerError',
-    component: () =>
-      import(/* webpackChunkName: "routes" */
-      `@/pages/Error.vue`)
+    component: () => import(/* webpackChunkName: "fail" */ '@/pages/Exception/404.vue')
   }
 ]
 
@@ -64,7 +56,7 @@ export const asyncRouterMap = [
     path: '/',
     name: 'index',
     component: BasicLayout,
-    redirect: '/user',
+    redirect: '/member/member-list',
     children: [
       // dashboard
       // {
@@ -137,8 +129,36 @@ export const asyncRouterMap = [
             meta: { title: '成员列表', keepAlive: true, permission: ['form'] }
           }
         ]
-      }
+      },
       // insert more route above
+      // Exception
+      {
+        path: '/exception',
+        name: 'exception',
+        component: RouteView,
+        redirect: '/exception/403',
+        meta: { title: '异常页', icon: 'warning', permission: ['exception'] },
+        children: [
+          {
+            path: '/exception/403',
+            name: 'Exception403',
+            component: () => import(/* webpackChunkName: "fail" */ '@/pages/Exception/403.vue'),
+            meta: { title: '403', permission: ['exception'] }
+          },
+          {
+            path: '/exception/404',
+            name: 'Exception404',
+            component: () => import(/* webpackChunkName: "fail" */ '@/pages/Exception/404.vue'),
+            meta: { title: '404', permission: ['exception'] }
+          },
+          {
+            path: '/exception/500',
+            name: 'Exception500',
+            component: () => import(/* webpackChunkName: "fail" */ '@/pages/Exception/500.vue'),
+            meta: { title: '500', permission: ['exception'] }
+          }
+        ]
+      }
     ]
   },
   {
@@ -149,7 +169,7 @@ export const asyncRouterMap = [
 ]
 
 const router = new Router({
-  routes: [...constantRouterMap, ...asyncRouterMap]
+  routes: [...constantRouterMap]
 })
 
 export default router

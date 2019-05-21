@@ -44,7 +44,8 @@ const app = {
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {
-      state.sidebar = type(Vue as any).ls.set(SIDEBAR_TYPE, type)
+      state.sidebar = type
+      ;(Vue as any).ls.set(SIDEBAR_TYPE, type)
     },
     CLOSE_SIDEBAR: state => {
       ;(Vue as any).ls.set(SIDEBAR_TYPE, true)

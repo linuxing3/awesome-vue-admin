@@ -2,7 +2,7 @@ import { ActionContext, Module, MutationTree, ActionTree, GetterTree } from 'vue
 import { make } from 'vuex-pathify'
 import bcrypt from 'bcryptjs'
 import lfService from '@/util/request.localforage'
-import { defaultMember } from '@/api/constant'
+import { defaultMember, roleOfUser } from '@/api/constant'
 
 export interface IMemberState {
   name: string
@@ -59,7 +59,7 @@ const state: IMemberState = {
   cached: [],
   defaultMember,
   token: '',
-  roles: [],
+  roles: [roleOfUser],
   loggedIn: false,
   filter: {
     search: '',

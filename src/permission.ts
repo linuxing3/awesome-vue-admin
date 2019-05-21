@@ -1,43 +1,48 @@
+import Vue from 'vue'
 import router from './router/index.antd'
 import store from './store'
-import notification from 'ant-design-vue/es/notification' // no redirect
 
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
 
-const whiteList = ['Login', 'register', 'registerResult'] // progress bar style
+const whiteList = ['login', 'register', 'registerResult'] // progress bar style
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 router.beforeEach((to, from, next) => {
+  console.log('Running app...')
   NProgress.start() // start progress bar
-  if (to.path === '/login') {
-    next()
-    NProgress.done()
-  } else {
-    const roles = store.getters.roles
-    if (roles.length === 0) {
-      store.dispatch('permission/GenerateRoutes', { roles }).then(() => {
-        // 根据roles权限生成可访问的路由表
-        // 动态添加可访问路由表
-        router.addRoutes(store.getters.addRouters)
-        const redirect = decodeURIComponent(from.query.redirect[0] || to.path)
-        if (to.path === redirect) {
-          // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record
-          next({ ...to, replace: true })
-        } else {
-          // 跳转到目的路由
-          next({ path: redirect })
-        }
-      })
+  if ((Vue as any).ls.get(ACCESS_TOKEN)) {
+    console.log('Getting Token app...')
+    if (to.path === '/user/login') {
+      next({ path: '/test/home' })
+      NProgress.done()
     } else {
-      if (whiteList.includes(to.name)) {
-        // 在免登录白名单，直接进入
-        next()
+      const roles = store.getters.roles
+      console.log(roles)
+      if (roles.length === 0) {
+        // 根据roles权限生成可访问的路由表
+        store.dispatch('GenerateRoutes', { roles }).then(() => {
+          // 动态添加可访问路由表
+          router.addRoutes(store.getters.addRouters)
+          const redirect = decodeURIComponent(from.query.redirect[0] || to.path)
+          if (to.path === redirect) {
+            next({ ...to, replace: true })
+          } else {
+            next({ path: redirect })
+          }
+        })
       } else {
-        next({ path: '/user/login', query: { redirect: to.fullPath } })
-        NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
+        next()
       }
+    }
+  } else {
+    if (whiteList.includes(to.name)) {
+      next()
+    } else {
+      next({ path: '/user/login', query: { redirect: to.fullPath } })
+      NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
     }
   }
 })

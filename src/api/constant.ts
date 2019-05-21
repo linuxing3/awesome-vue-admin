@@ -1,4 +1,4 @@
-export const roleObj = {
+export const roleOfAdmin = {
   id: 'admin',
   name: '管理员',
   describe: '拥有所有权限',
@@ -404,7 +404,7 @@ export const defaultMember = {
   telephone: '18500087347',
   status: '50',
   hash: '',
-  role: roleObj,
+  role: roleOfAdmin,
   avatar: 'avatar/man_1.jpg'
 }
 
@@ -467,8 +467,139 @@ export function randomAvatar() {
   return avatarList[randomNumber(0, avatarList.length - 1)]
 }
 
-const EnumRoleType = {
+export const EnumRoleType = {
   ADMIN: 'admin',
-  DEFAULT: 'guest',
+  DEFAULT: 'user',
   DEVELOPER: 'developer'
+}
+
+export const roleOfUser = {
+  id: 'user',
+  name: '普通会员',
+  describe: '普通用户，只能查询',
+  status: 1,
+  creatorId: 'system',
+  createTime: 1497160610259,
+  deleted: 0,
+  permissions: [
+    {
+      roleId: 'user',
+      permissionId: 'comment',
+      permissionName: '评论管理',
+      actions:
+        '[{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"}]',
+      actionEntitySet: [
+        {
+          action: 'query',
+          describe: '查询',
+          defaultCheck: false
+        },
+        {
+          action: 'get',
+          describe: '详情',
+          defaultCheck: false
+        }
+      ],
+      actionList: null,
+      dataAccess: null
+    },
+    {
+      roleId: 'user',
+      permissionId: 'marketing',
+      permissionName: '营销管理',
+      actions: '[]',
+      actionEntitySet: [],
+      actionList: null,
+      dataAccess: null
+    },
+    {
+      roleId: 'user',
+      permissionId: 'member',
+      permissionName: '会员管理',
+      actions:
+        '[{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"}]',
+      actionEntitySet: [
+        {
+          action: 'query',
+          describe: '查询',
+          defaultCheck: false
+        },
+        {
+          action: 'get',
+          describe: '详情',
+          defaultCheck: false
+        }
+      ],
+      actionList: null,
+      dataAccess: null
+    },
+    {
+      roleId: 'user',
+      permissionId: 'menu',
+      permissionName: '菜单管理',
+      actions: '[]',
+      actionEntitySet: [],
+      actionList: null,
+      dataAccess: null
+    },
+
+    {
+      roleId: 'user',
+      permissionId: 'order',
+      permissionName: '订单管理',
+      actions:
+        '[{"action":"query","defaultCheck":false,"describe":"查询"},{"action":"get","defaultCheck":false,"describe":"详情"}]',
+      actionEntitySet: [
+        {
+          action: 'query',
+          describe: '查询',
+          defaultCheck: false
+        },
+        {
+          action: 'get',
+          describe: '详情',
+          defaultCheck: false
+        }
+      ],
+      actionList: null,
+      dataAccess: null
+    },
+    {
+      roleId: 'user',
+      permissionId: 'permission',
+      permissionName: '权限管理',
+      actions: '[]',
+      actionEntitySet: [],
+      actionList: null,
+      dataAccess: null
+    },
+    {
+      roleId: 'user',
+      permissionId: 'role',
+      permissionName: '角色管理',
+      actions: '[]',
+      actionEntitySet: [],
+      actionList: null,
+      dataAccess: null
+    },
+
+    {
+      roleId: 'user',
+      permissionId: 'test',
+      permissionName: '测试权限',
+      actions: '[]',
+      actionEntitySet: [],
+      actionList: null,
+      dataAccess: null
+    },
+    {
+      roleId: 'user',
+      permissionId: 'user',
+      permissionName: '用户管理',
+      actions: '[]',
+      actionEntitySet: [],
+      actionList: null,
+      dataAccess: null
+    }
+  ]
 }
