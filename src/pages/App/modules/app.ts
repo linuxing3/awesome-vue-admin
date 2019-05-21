@@ -24,13 +24,14 @@ export interface AppConfig {
   color: any
   weak: boolean
   multiTab: boolean
+  welcome: string
 }
 
 const app = {
   state: {
     sidebar: true,
     device: 'desktop',
-    theme: '',
+    theme: 'dark',
     layout: '',
     contentWidth: '',
     fixedHeader: false,
@@ -38,7 +39,8 @@ const app = {
     autoHideHeader: false,
     color: null,
     weak: false,
-    multiTab: true
+    multiTab: true,
+    welcome: 'Welcome using awesome antd vue admin'
   },
   mutations: {
     SET_SIDEBAR_TYPE: (state, type) => {

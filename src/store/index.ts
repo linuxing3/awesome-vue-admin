@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import plugins from '@/store/plugins'
-// import getters from './getters'
+import getters from './getters'
 import app from '@/pages/App/modules/app'
 import permission from '@/pages/Permission/modules/permission'
 
@@ -11,6 +11,6 @@ export default new Vuex.Store({
   modules: {
     app,
     permission
-  }
-  // getters
+  },
+  getters
 })

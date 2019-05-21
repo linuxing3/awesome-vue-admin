@@ -14,7 +14,7 @@ export const constantRouterMap = [
     path: '/user',
     name: 'user',
     component: BlankLayout,
-    redirect: '/login',
+    redirect: '/user/login',
     hidden: true,
     meta: {
       public: true
@@ -25,11 +25,8 @@ export const constantRouterMap = [
         redirect: '/500'
       },
       {
-        path: '/login',
-        meta: {
-          public: true
-        },
-        name: 'Login',
+        path: '/user/login',
+        name: 'login',
         component: () =>
           import(/* webpackChunkName: "routes" */
           `@/pages/Login/components/Login.vue`)
@@ -67,41 +64,8 @@ export const asyncRouterMap = [
     path: '/',
     name: 'index',
     component: BasicLayout,
-    redirect: '/home',
-    meta: {
-      public: true
-    },
+    redirect: '/user',
     children: [
-      {
-        path: '/register',
-        meta: {
-          public: true
-        },
-        name: 'Register',
-        component: () =>
-          import(/* webpackChunkName: "routes" */
-          `@/pages/Login/components/Register.vue`)
-      },
-      {
-        path: '/recover',
-        meta: {
-          public: true
-        },
-        name: 'Recover',
-        component: () =>
-          import(/* webpackChunkName: "routes" */
-          `@/pages/Login/components/Register.vue`)
-      },
-      {
-        path: '/home',
-        meta: {
-          public: true
-        },
-        name: 'Home',
-        component: () =>
-          import(/* webpackChunkName: "routes" */
-          `@/pages/Home.vue`)
-      },
       // dashboard
       // {
       //   path: '/dashboard',

@@ -10,7 +10,7 @@ import './plugins'
 import './mixins/'
 
 import bootstrap from './core/bootstrap'
-// import './permission' // permission control
+import './permission' // permission control
 
 Vue.config.productionTip = false
 

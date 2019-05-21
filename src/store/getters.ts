@@ -1,20 +1,19 @@
 const getters = {
-  device: (state: { app: { device: any } }) => state.app.device,
-  theme: (state: { app: { theme: any } }) => state.app.theme,
-  color: (state: { app: { color: any } }) => state.app.color,
-  token: (state: { user: { token: any } }) => state.user.token,
-  lfToken: (state: { user: { token: any } }) => state.user.token,
-  avatar: (state: { user: { avatar: any } }) => state.user.avatar,
-  nickname: (state: { user: { name: any } }) => state.user.name,
-  welcome: (state: { user: { welcome: any } }) => state.user.welcome,
-  lfWelcome: (state: { entities: { user: { welcome: any } } }) => state.entities.user.welcome,
-  // roles
-  roles: (state: { user: { roles: any } }) => state.user.roles,
-  // userInfo
-  userInfo: (state: { user: { info: any } }) => state.user.info,
+  device: (state: any) => state.app.device,
+  theme: (state: any) => state.app.theme,
+  color: (state: any) => state.app.color,
+  avatar: (state: any) => state.entities.member.avatar,
+  nickname: (state: any) => state.entities.member.name,
+  welcome: (state: any) => state.app.welcome,
+  // token saved in localstorage
+  token: (state: any) => state.entities.member.token,
+  // roles requested from server
+  roles: (state: any) => state.entities.member.roles,
+  // userInfo requested from server
+  userInfo: (state: any) => state.entities.member.defaultMember,
   // routes for user
-  addRouters: (state: { permission: { addRouters: any } }) => state.permission.addRouters,
-  multiTab: (state: { app: { multiTab: any } }) => state.app.multiTab
+  addRouters: (state: any) => state.permission.addRouters,
+  multiTab: (state: any) => state.app.multiTab
 }
 
 export default getters
